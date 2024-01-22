@@ -3,21 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
-import 'package:tourist_tour_app/feature/auth/presentation/screens/login.dart';
-import 'package:tourist_tour_app/feature/auth/presentation/screens/register.dart';
-import 'package:tourist_tour_app/feature/home/pressentation/screens/home.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/bloc/cubit.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:tourist_tour_app/feature/root_pages/root_page.dart';
-import 'package:tourist_tour_app/feature/test.dart';
 import 'core/bloc_observer/bloc_observer.dart';
 import 'core/services/services_locator.dart';
 import 'core/shared_preference/shared_preference.dart';
 
 void main()async {
-
   ServicesLocator().init();
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
@@ -28,7 +22,7 @@ void main()async {
   ]);
   runApp(
       DevicePreview(
-        enabled: true,
+        enabled: false,
         builder: (context) => const TouristTourApp()),);
 }
 class TouristTourApp extends StatelessWidget {
@@ -39,7 +33,6 @@ class TouristTourApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AppOnBoardingCubit()),
-
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -55,7 +48,7 @@ class TouristTourApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home:const RootPages()
+            home:const OnBoardingScreen()
             // onGenerateRoute: AppRouter.generateRoute,
           );
         },

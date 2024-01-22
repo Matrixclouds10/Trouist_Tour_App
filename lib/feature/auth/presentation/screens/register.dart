@@ -157,7 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                     horizontalSpace(10),
                                     Text('I agree the terms & Conditions ',
-                                      style:  TextStyles.font12CustomGray400Weight,
+                                      style:  TextStyles.font12CustomGray400WeightLato,
                                       textAlign: TextAlign.end,
                                     ),
                                   ],

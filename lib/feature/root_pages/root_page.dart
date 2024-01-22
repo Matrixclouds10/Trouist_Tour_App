@@ -7,16 +7,13 @@ import 'package:tourist_tour_app/feature/more/presentation/screens/more_screen.d
 import 'package:tourist_tour_app/feature/search/presentation/screen/search_screen.dart';
 
 class RootPages extends StatefulWidget {
-
-  const RootPages({super.key});
+  final String? check;
+  const RootPages({super.key, this.check});
 
   @override
   State<RootPages> createState() => _RootPagesState();
-
 }
-
 class _RootPagesState extends State<RootPages> {
-
    List<Widget> buildScreens() {
      return const[
         Home(),
@@ -26,6 +23,16 @@ class _RootPagesState extends State<RootPages> {
        MoreScreen(),
      ];
    }
+   @override
+  void initState() {
+     if(widget.check==null){
+       controller.index=0;
+     }else{
+       controller.index=int.parse(widget.check!).toInt();
+     }
+     super.initState();
+  }
+
    PersistentTabController controller= PersistentTabController(initialIndex: 0);
 
   @override
