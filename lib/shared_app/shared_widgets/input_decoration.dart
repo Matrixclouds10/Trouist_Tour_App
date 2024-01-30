@@ -20,6 +20,7 @@ InputDecoration customInputDecoration({
 }) {
   return InputDecoration(
     hintText: hintText,
+
     hintStyle: hintStyle??TextStyle(
       color: hintColor ?? Colors.grey,
       fontSize: fontSize ?? 12.sp,

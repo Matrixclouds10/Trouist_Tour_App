@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 
@@ -38,11 +39,17 @@ class NotificationScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('your Trip Has Been Confirmed ',
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       style: TextStyles.font17Black400WightLato.copyWith(
                         color: AppColorLight.customBlack
                       ),
                       ),
                       Text('5 Min Ago',
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       style: TextStyles.font12CustomGray400WeightLato,
                       ),
                     ],
@@ -70,11 +77,17 @@ class NotificationScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('your Trip Have Been Cancelled ',
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyles.font17Black400WightLato.copyWith(
                             color: AppColorLight.customBlack
                         ),
                       ),
                       Text('10 Min Ago',
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyles.font12CustomGray400WeightLato,
                       ),
                     ],

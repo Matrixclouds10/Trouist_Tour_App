@@ -15,9 +15,11 @@ class CustomCanceledWidget extends StatelessWidget {
         itemBuilder: (context,index){
           return InkWell(
             onTap: (){
-              NavigatePages.persistentNavBarNavigator(const BookingDetailsScreen(type: 'Canceled',), context);
+              NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Canceled',), context);
             },
             child: CustomProgramItem(textButtonText: 'Book Now', onPressed: () {
+
+              NavigatePages.pushToPage(const ProgramDetailsScreen(type: 'Canceled',), context);
 
             },),
           );

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/feature/booking/presentation/widgets/custom_canceled_widget.dart';
 import 'package:tourist_tour_app/feature/booking/presentation/widgets/custom_completed_widget.dart';
 import 'package:tourist_tour_app/feature/booking/presentation/widgets/custom_up_coming_widget.dart';
+import 'package:tourist_tour_app/feature/root_pages/root_page.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 
 class BookingScreen extends StatelessWidget {
@@ -20,7 +22,11 @@ class BookingScreen extends StatelessWidget {
           appBar:
           PreferredSize(
               preferredSize: Size(double.infinity,62.h),
-              child: const CustomAppBar(title:'Bookings', hasBackButton: true,)),
+              child:  CustomAppBar(title:'Bookings', hasBackButton: false,
+                onTap: (){
+                // Navigator.pop(context);
+                  NavigatePages.pushToPage(const RootPages(check:'0',), context);}
+              )),
           body: Column(
             children: [
               TabBar(

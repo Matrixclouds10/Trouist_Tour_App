@@ -12,28 +12,28 @@ class CustomCompleteWidget extends StatelessWidget {
     return Column(children: [
       InkWell(
         onTap: (){
-          NavigatePages.persistentNavBarNavigator(const BookingDetailsScreen(type: 'Completed',), context);
+          NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Completed',), context);
         },
         child: CustomProgramItem(textButtonText: 'Review', onPressed: () {
-          NavigatePages.persistentNavBarNavigator(const RateScreen(), context);
+          NavigatePages.pushToPage(const RateScreen(), context);
 
         },),
       ),
       InkWell(
         onTap: (){
-          NavigatePages.persistentNavBarNavigator(const BookingDetailsScreen(type: 'Completed',), context);
+          NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Completed',), context);
         },
         child: CustomProgramItem(textButtonText: 'Rate Your Program', onPressed: () {
-          NavigatePages.persistentNavBarNavigator(const RateScreen(), context);
+          NavigatePages.pushToPage(const RateScreen(), context);
 
         },),
       ),
       InkWell(
         onTap: (){
-          NavigatePages.persistentNavBarNavigator(const BookingDetailsScreen(type: 'Completed',), context);
+          NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Completed',), context);
         },
         child: CustomProgramItem(textButtonText: 'View Rate', onPressed: () {
-          NavigatePages.persistentNavBarNavigator(const RateScreen(), context);
+          NavigatePages.pushToPage(const RateScreen(), context);
 
         },),
       ),

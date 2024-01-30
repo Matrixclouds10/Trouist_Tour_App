@@ -1,4 +1,3 @@
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,362 +5,199 @@ import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
-import 'package:tourist_tour_app/feature/home/pressentation/screens/notification_screen.dart';
+import 'package:tourist_tour_app/feature/home/pressentation/widgets/custom_to_body_home_widget.dart';
+import 'package:tourist_tour_app/feature/make_program/presentation/screens/custom_program_screen.dart';
 import 'package:tourist_tour_app/feature/offers/presentation/screens/offers_screen.dart';
 import 'package:tourist_tour_app/feature/our_programs/presentation/screens/our_programs_screen.dart';
 import 'package:tourist_tour_app/feature/search/presentation/screen/search_screen.dart';
 import 'package:tourist_tour_app/feature/tourist_places/presentation/screens/tourist_places_details_screen.dart';
 import 'package:tourist_tour_app/feature/tourist_places/presentation/screens/tourist_places_screen.dart';
 import 'package:tourist_tour_app/shared_app/shared_screens/program/screens/program_details.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_horizontal_list_view.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_slider_widget.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_field.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_title_row.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
-  @override
-  State<Home> createState() => _HomeState();
-}
 
-class _HomeState extends State<Home> {
-  TextEditingController controller =TextEditingController();
-  int currentIndex = 0;
-  int currentIndex2 = 0;
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       body: SafeArea(
+        minimum: EdgeInsets.only(top: 30.h),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              verticalSpace(40),
-              SvgPicture.asset(AppImages.logoSvg),
-              verticalSpace(16),
-             Padding(
-               padding: EdgeInsets.only(left: 16.w,right: 16.w),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   SizedBox(
-                     width: 342.w,
-                     child: Row(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       crossAxisAlignment: CrossAxisAlignment.center,
-                       children: [
-                         Icon(Icons.location_on_outlined,
-                           color: Theme.of(context).primaryColor,),
-                         horizontalSpace(4),
-                         Text('king Abdelaziz St',
-                           style: TextStyles.font17Black400WightLato.copyWith(
-                             fontFamily: AppFontsFamily.fontPoppins
-                           ),
-                         ),
-                         const Spacer(),
-                         InkWell(
-                           onTap: (){
-                             NavigatePages.persistentNavBarNavigator(const NotificationScreen(), context);
-                           },
-                           child: const Icon(Icons.notifications_none,
-                             color: AppColorLight.gray2,
-                           ),
-                         )
-                       ],
-                     ),
+          child: Padding(
+            padding: EdgeInsets.only(left: 16.w,right: 16.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                verticalSpace(40),
+                Center(child: SvgPicture.asset(AppImages.logoSvg)),
+                verticalSpace(16),
+                const CustomTopBodyHomeWidget(),
+               InkWell(
+                 onTap: (){
+                   NavigatePages.pushToPage( const SearchScreen(), context);
+                 },
+                 child: CustomTextField(
+                   enabled: false,
+                   borderColor: AppColorLight.customGray,
+                     hintText: 'Search For A Tourist Place',
+                     hintStyle: TextStyles.font14CustomGray400w,
+                     prefixIcon: const Icon(Icons.search,color: AppColorLight.gray2,),
+                     controller: TextEditingController()),
+               ),
+               verticalSpace(25),
+                CustomTitleRow(title: 'Our Programs', onTap: (){
+                  NavigatePages.pushToPage(const OurProgramsScreen(), context);
+                },),
+               verticalSpace(16),
+               SizedBox(
+                 height: 122.h,
+                 child:
+                 CustomHorizontalListView(
+                   image: AppImages.test2, title: 'Religious',
+                     onTap: (){NavigatePages.pushToPage(const ProgramDetailsScreen(), context);},),
                    ),
-                   verticalSpace(16),
-                   Text(" Let's The Fun Begin !",
-                     style: TextStyles.font24CustomBlack700Weight,
-                   ),
-                   verticalSpace(16),
-                   SizedBox(
-                     height: 190.h,
-                     // width: double.infinity,
-                     child: CarouselSlider(
-                         items:[
-                           ClipRRect(
-                                borderRadius:const BorderRadius.all(Radius.circular(10)),
-                               child: Image.asset(AppImages.category,fit: BoxFit.cover,width:MediaQuery.of(context).size.width)),
-                         ],
-                         options: CarouselOptions(
-                           height: 190.h,
-                           aspectRatio: 16/9,
-                           viewportFraction: 1,
-                           initialPage: 0,
-                           enableInfiniteScroll: true,
-                           reverse: false,
-                           autoPlay: true,
-                           autoPlayInterval: const Duration(seconds: 3),
-                           autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                           autoPlayCurve: Curves.easeInOut,
-                           enlargeCenterPage: true,
-                           enlargeFactor: 0.3,
-                           onPageChanged: (index, reason){
-                             setState(() {
-                               // carouselController.nextPage();
-                               currentIndex =index;
-                             });
-                           },
-                           scrollDirection: Axis.horizontal,
-                         ),
-
-                     ),
-                   ),
-                   verticalSpace(8),
-                   Center(
-                     child: DotsIndicator(
-                       dotsCount: 3,
-                       position: currentIndex.toDouble(),
-                     ),
-                   ),
-                   verticalSpace(16),
-                   InkWell(
-                     onTap: (){
-                       // NavigatePages.pushToPage(const SearchScreen(), context);
-                       NavigatePages.persistentNavBarNavigator( const SearchScreen(), context);
-                     },
-                     child: CustomTextField(
-                       enabled: false,
-                       borderColor: AppColorLight.customGray,
-                         hintText: 'Search For A Tourist Place',
-                         hintStyle: TextStyles.font14CustomGray400w,
-                         prefixIcon: const Icon(Icons.search,color: AppColorLight.gray2,),
-                         controller: controller),
-                   ),
-                   verticalSpace(25),
-                   Row(
-                     children: [
-                       Text("Our Programs",
-                         style: TextStyles.font24CustomBlack700Weight.copyWith(fontSize: 17),
-                       ),
-                       const Spacer(),
-                       InkWell(
-                         onTap: (){
-                           NavigatePages.persistentNavBarNavigator(const OurProgramsScreen(), context);
-                         },
-                         child: Text("See All",
-                           style: TextStyles.font12CustomGray400WeightLato.copyWith(
-                               color: const Color(0xffE74646),
-                               fontFamily: AppFontsFamily.fontPoppins,
-                               fontWeight: FontWeight.w700,
-                               ),
-                         ),
-                       ),
-                     ],
-                   ),
-                   verticalSpace(16),
-                   SizedBox(
-                     height: 122.h,
-                     child: ListView.builder(
-                         scrollDirection: Axis.horizontal,
-                         itemCount: 10,
-                         itemBuilder: (context,index){
-                       return InkWell(
-                         onTap: (){
-                           NavigatePages.pushToPage(const ProgramDetailsScreen(), context);
-                         },
-                         child: Padding(
-                           padding:  EdgeInsets.only(right: 8.w),
-                           child: Column(
-                             children: [
-                               Expanded(
-                                 child: Container(
-                                   width: 90.w,
-                                   height: 90.h,
-                                   child: Image.asset(AppImages.program1),
-                                 ),
-                               ),
-                               SizedBox(
-                                   height: 24.h,
-                                   child: Text('Religious',
-                                   style: TextStyles.font17Black400WightLato.copyWith(color: AppColorLight.customBlack),
-                                   )),
-                             ],
-                           ),
-                         ),
-                       );
-                     }),
-                   ),
-                   verticalSpace(25),
-                   Text("Custom Program",
-                     style: TextStyles.font24CustomBlack700Weight.copyWith(fontSize: 17),
-                   ),
-                   verticalSpace(16),
-                   Container(
-                     height:170.h ,
-                     width: 345.w,
-                     decoration: BoxDecoration(
-                       borderRadius: const BorderRadius.all(Radius.circular(10)),
-                       color: AppColorLight.customGray.withOpacity(0.10),
-                     ),
-                     child: Column(
-                       children: [
-                         verticalSpace(16),
-                         SizedBox(
-                           width:315.w,
-                           height: 71.h,
+               verticalSpace(20),
+               Text("Custom Program",
+                 textScaleFactor: ScaleSize.textScaleFactor(context),
+                 maxLines: 1,
+                 overflow: TextOverflow.ellipsis,
+                 style: TextStyles.font24CustomBlack700WeightPoppins.copyWith(fontSize: 17),
+               ),
+               verticalSpace(16),
+               Container(
+                 height:170.h ,
+                 width: 345.w,
+                 decoration: BoxDecoration(
+                   borderRadius: const BorderRadius.all(Radius.circular(10)),
+                   color: AppColorLight.customGray.withOpacity(0.10),
+                 ),
+                 child: Column(
+                   children: [
+                     verticalSpace(16),
+                     FittedBox(
+                       child: SizedBox(
+                         width:315.w,
+                         // height: 71.h,
+                         child: Center(
                            child: Text('Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum .',
-                           style: TextStyles.font17CustomGray400Wight.copyWith(
+                           style: TextStyles.font17CustomGray400WightLato.copyWith(
                              color: const Color(0xff4C5756)
                            ),
+                             textScaleFactor: ScaleSize.textScaleFactor(context),
+                             maxLines: 3,
+                             overflow: TextOverflow.ellipsis,
                              textAlign: TextAlign.center,
                            ),
                          ),
-                         verticalSpace(24),
-                         CustomMaterialButtonWidget(
-                             height: 36,
-                             minWidth: 205.w,
-                             text: 'Make Your Program',
-                             textSize: 14,
-                             onPressed: (){}),
-                       ],
+                       ),
                      ),
+                     verticalSpace(10),
+                     Container(
+                       padding: const EdgeInsets.symmetric(horizontal: 80,vertical: 0),
+                       child: CustomMaterialButtonWidget(
+                           height: 36,
+                           minWidth: 205.w,
+                           text: 'Make Your Program',
+                           textSize: 14,
+                           onPressed: (){
+                             NavigatePages.pushToPage(const CustomProgramScreen(), context);
+
+                           }),
+                     ),
+                     verticalSpace(0),
+
+                   ],
+                 ),
+               ),
+               verticalSpace(15),
+                InkWell(
+                  onTap: (){
+                    NavigatePages.pushToPage(const OffersScreen(), context);
+                  },
+                  child: CustomSliderWidget(
+                    height: 190.h,
+                    isCenterPages: true,
+                    isOffers: true,
+                    isHasRadius: true,
+                    image: const [AppImages.offer,AppImages.offer,AppImages.offer,AppImages.offer,AppImages.offer,AppImages.offer,],),
+                ),
+               verticalSpace(25),
+               Row(
+                 children: [
+                   Text("Tourist Places",
+                     style: TextStyles.font24CustomBlack700WeightPoppins.copyWith(fontSize: 17),
+                     textScaleFactor: ScaleSize.textScaleFactor(context),
+                     maxLines: 1,
+                     overflow: TextOverflow.ellipsis,
                    ),
-                   verticalSpace(15),
-                   SizedBox(
-                     height: 190.h,
-                     child: CarouselSlider(
-                       items:[
-                         InkWell(
-                           onTap: (){
-                             NavigatePages.persistentNavBarNavigator(const OffersScreen(), context);
-                           },
-                           child: ClipRRect(
-                               borderRadius:const BorderRadius.all(Radius.circular(10)),
-                               child: Stack(
-                                 children: [
-                                   Image.asset(AppImages.offer,fit: BoxFit.cover,width: MediaQuery.of(context).size.width,),
-                                   Center(
-                                     child: Container(
-                                       height: 100.h,
-                                       width:222.w,
-                                       color: const Color(0xffC00614),
-                                       child: Padding(
-                                         padding:  EdgeInsets.only(top: 5.h,left: 24.w,right: 24.w,bottom: 8.h),
-                                         child: Column(
-                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                           mainAxisSize: MainAxisSize.min,
-                                           children: [
-                                             SizedBox(
-                                               height: 20.h,
-                                               child: Text('NOW',
-                                                 style: TextStyles.font17CustomGray400Wight.copyWith(color: Colors.white),
-                                               ),
-                                             ),
-                                             Container(
-                                               height: 38.h,
-                                               child: Text('40% OFF',
-                                                 style: TextStyles.font14CustomBlack500w.copyWith(fontSize: 32.sp,color: Colors.white),
-                                               ),
-                                             ),
-                                             Container(
-                                               height: 20.h,
-                                               child: Text('Amazing Offers Here',
-                                                 style: TextStyles.font17CustomGray400Wight.copyWith(color: Colors.white),
-                                               ),
-                                             ),
-                                           ],
-                                         ),
-                                       ),
-                                     ),
-                                   ),
-                                 ],
-                               )),
-                         ),
-                       ],
-                       options: CarouselOptions(
-                         height: 400,
-                         aspectRatio: 16/9,
-                         viewportFraction: 1,
-                         initialPage: 0,
-                         enableInfiniteScroll: true,
-                         reverse: false,
-                         autoPlay: true,
-                         autoPlayInterval: const Duration(seconds: 3),
-                         autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                         autoPlayCurve: Curves.easeInOut,
-                         enlargeCenterPage: true,
-                         enlargeFactor: 0.3,
-                         onPageChanged: (index, reason){
-                           setState(() {
-                             currentIndex2 =index;
-                           });
-                         },
-                         scrollDirection: Axis.horizontal,
+                   const Spacer(),
+                   InkWell(
+                     onTap: (){
+                       NavigatePages.pushToPage(const TouristPlacesScreen(), context);
+                     },
+                     child: Text("See All",
+                       textScaleFactor: ScaleSize.textScaleFactor(context),
+                       maxLines: 1,
+                       overflow: TextOverflow.ellipsis,
+                       style: TextStyles.font12CustomGray400WeightLato.copyWith(
+                         fontFamily: AppFontsFamily.fontPoppins,
+                         color: const Color(0xffE74646),
+                         fontWeight: FontWeight.w700,
                        ),
                      ),
                    ),
-                   verticalSpace(8),
-                   Center(
-                     child: DotsIndicator(
-                       dotsCount: 3,
-                       position: currentIndex2.toDouble(),
-                     ),
-                   ),
-                   verticalSpace(25),
-                   Row(
-                     children: [
-                       Text("Tourist Places",
-                         style: TextStyles.font24CustomBlack700Weight.copyWith(fontSize: 17),
-                       ),
-                       const Spacer(),
-                       InkWell(
-                         onTap: (){
-                           NavigatePages.persistentNavBarNavigator(const TouristPlacesScreen(), context);
-                         },
-                         child: Text("See All",
-                           style: TextStyles.font12CustomGray400WeightLato.copyWith(
-                             fontFamily: AppFontsFamily.fontPoppins,
-                             color: const Color(0xffE74646),
-                             fontWeight: FontWeight.w700,
-                           ),
-                         ),
-                       ),
-                     ],
-                   ),
-                   verticalSpace(16),
-                   GridView.count(
-                     shrinkWrap: true,
-                     physics: const NeverScrollableScrollPhysics(),
-                     crossAxisCount: 2,
-                     crossAxisSpacing: 5,
-                     mainAxisSpacing: 10,
-                     childAspectRatio: 1 / 0.75,
-                     children: List.generate(10, (index) {
-                       return InkWell(
-                         onTap: (){
-                           NavigatePages.pushToPage(const TouristPlaceDetailsScreen(), context);
-                         },
-                         child: SizedBox(
-                           width: 168.w,
-                           child: Column(
-                             children: [
-                               Expanded(
-                                 child: SizedBox(
-                                   height:100.h,
-                                   child: ClipRRect(
-                                     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                     child: Image.asset(AppImages.testImage,fit: BoxFit.cover,width: 168.w,),
-                                   ),
-                                 ),
-                               ),
-                               verticalSpace(8),
-                               const Text('Rijal Almaa Village'),
-                             ],
-                           ),
-                         ),
-                       );
-                     }),
-                   ),
-                   verticalSpace(100),
                  ],
                ),
-             ),
-            ],
+               verticalSpace(16),
+               GridView.count(
+                 shrinkWrap: true,
+                 physics: const NeverScrollableScrollPhysics(),
+                 crossAxisCount: 2,
+                 crossAxisSpacing: 5,
+                 mainAxisSpacing: 10,
+                 childAspectRatio: 1 / 0.75,
+                 children: List.generate(10, (index) {
+                   return InkWell(
+                     onTap: (){
+                       NavigatePages.pushToPage(const TouristPlaceDetailsScreen(), context);
+                     },
+                     child: SizedBox(
+                       width: 168.w,
+                       child: Column(
+                         children: [
+                           Expanded(
+                             child: SizedBox(
+                               height:100.h,
+                               child: ClipRRect(
+                                 borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                 child: Image.asset(AppImages.testImage,fit: BoxFit.cover,width: 168.w,),
+                               ),
+                             ),
+                           ),
+                           verticalSpace(8),
+                            Text('Rijal Almaa Village',
+                             textScaleFactor: ScaleSize.textScaleFactor(context),
+                             maxLines: 1,
+                             overflow: TextOverflow.ellipsis,
+                           ),
+                         ],
+                       ),
+                     ),
+                   );
+                 }),
+               ),
+               verticalSpace(100),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tourist_tour_app/feature/auth/presentation/screens/log_as.dart';
+import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/bloc/states.dart';
 import '../../../../core/services/routeing_page/routing.dart';
 import '../../../../core/shared_preference/shared_preference.dart';
@@ -27,6 +27,11 @@ class AppOnBoardingCubit extends Cubit<AppOnBoardingStates>{
   List<OnBoardingModel> list=[];
   int page =0;
   int currentPage =0;
+  void changeCurrentPage(int x){
+    currentPage=x;
+    emit(ChangeCurrentPageState());
+  }
+
   void changingPageView(context){
     if(page == list.length-1){
       CacheHelper.saveDate(key: 'onBoarding', value: true).then((value) =>
@@ -38,7 +43,8 @@ class AppOnBoardingCubit extends Cubit<AppOnBoardingStates>{
     {
       pageController.nextPage(
           duration: const Duration(milliseconds: 800), curve: Curves.easeInBack);
-      currentPage++;
+      // currentPage++;
+
     }
     emit(AppChangingPageView());
   }

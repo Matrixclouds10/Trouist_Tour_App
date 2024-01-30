@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
-import 'package:tourist_tour_app/feature/auth/presentation/screens/log_as.dart';
+import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import '../../data/models/model.dart';
 
 class CustomPageViewBodyWidget extends StatelessWidget {
@@ -11,14 +12,15 @@ class CustomPageViewBodyWidget extends StatelessWidget {
   final OnBoardingModel onBoardingModel;
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return
+      Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Stack(
             children: [
               SizedBox(
-                height: 452.h,
+                height:455.h,
                 width: 376.w,
                 child: Image.asset(
                   onBoardingModel.image,
@@ -26,7 +28,7 @@ class CustomPageViewBodyWidget extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 452.h,
+                height: 455.h,
                 width: 376.w,
                 color: const Color(0xff000000).withOpacity(0.30),),
               Positioned(
@@ -37,39 +39,40 @@ class CustomPageViewBodyWidget extends StatelessWidget {
                     NavigatePages.pushToPage(const LogAs(), context);
                   },
                   child: SizedBox(
-                    width: 30.w,
-                    height:17.h,
-                    child: const Text("Skip",
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700
-                      ),
+                    child:  Text("Skip",
+                      style:TextStyles.font14CustomWight700wLato,
+                      textScaleFactor: ScaleSize.textScaleFactor(context),
                     ),
                   ),
                 ),)
             ],
           ),
-          verticalSpace(25),
-          SizedBox(
-            width: 274.w,
-            height: 32.h,
-            child:
-                Text(onBoardingModel.title,textAlign: TextAlign.center,
-            style: TextStyles.font24CustomBlack700Weight,)
+          verticalSpace(20),
+          Text(
+                onBoardingModel.title,
+                textAlign: TextAlign.center,
+                style: TextStyles.font24CustomBlack700WeightPoppins,
+               maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textScaleFactor: ScaleSize.textScaleFactor(context),
           ),
           verticalSpace(8),
-          SizedBox(
-            width: 343.w,
-            height: 50.h,
-            child: Text(
-                onBoardingModel.description,
-                // getLang(context ,'onBoardingDescription${onBoardingModel.number}'),
-                style:  TextStyles.font17CustomGray400Wight,
-                textAlign: TextAlign.center,
+          Padding(
+            padding:  EdgeInsets.only(left:16.w,right: 16.w),
+            child: SizedBox(
+              child: Text(
+                  onBoardingModel.description,
+                  // getLang(context ,'onBoardingDescription${onBoardingModel.number}'),
+                  style:  TextStyles.font17CustomGray400WightLato,
+                  textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textScaleFactor: ScaleSize.textScaleFactor(context),
+              ),
             ),
           ),
-          verticalSpace(32),
+          const Spacer(),
+
         ]);
   }
 }

@@ -6,6 +6,7 @@ import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
@@ -31,16 +32,25 @@ class RateScreen extends StatelessWidget {
                    child: Image.asset(AppImages.rate)),
                verticalSpace(32),
               Text('Send Your Feedback !',
-              style: TextStyles.font24CustomBlack700Weight.copyWith(
+                textScaleFactor: ScaleSize.textScaleFactor(context),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              style: TextStyles.font24CustomBlack700WeightPoppins.copyWith(
                 fontFamily: AppFontsFamily.fontPoppins
               ),),
               verticalSpace(8),
               Text('It is a long established fact that a reader will be distracted by the readab .',
+                textScaleFactor: ScaleSize.textScaleFactor(context),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyles.font17Black400WightLato.copyWith(
                     color: AppColorLight.customBlack
                 ),),
               verticalSpace(32),
               Text('How Was Your Experience ? ',
+                textScaleFactor: ScaleSize.textScaleFactor(context),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyles.font17Black400WightLato.copyWith(
                     color: AppColorLight.customBlack,
                     fontFamily: AppFontsFamily.fontPoppins

@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
-
 class TextStyles{
 
-  static TextStyle font24CustomBlack700Weight = TextStyle(
+
+  static TextStyle font24CustomBlack700WeightPoppins =  TextStyle(
     fontSize: 24.sp,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
+    fontFamily: AppFontsFamily.fontPoppins,
     color: AppColorLight.customBlack,
 
   );
@@ -47,22 +48,36 @@ class TextStyles{
     fontWeight: FontWeight.w500,
     color: AppColorLight.customBlack
   );
+  static TextStyle font14CustomWight700wLato = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w700,
+    fontFamily: AppFontsFamily.fontLato,
+    color: Colors.white
+  );
   static TextStyle font14CustomGray400w = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     color: AppColorLight.customGray
   );
 
-  static TextStyle font17CustomGray400Wight = TextStyle(
+  static TextStyle font17CustomGray400WightLato = TextStyle(
     fontSize: 17.sp,
     fontWeight: FontWeight.w400,
-    color: AppColorLight.customGray
+    color: AppColorLight.customGray,
+      fontFamily: AppFontsFamily.fontLato
+
   );
   static TextStyle font17Black400WightLato = TextStyle(
     fontSize: 17.sp,
     fontWeight: FontWeight.w400,
     color: AppColorLight.black,
     fontFamily: AppFontsFamily.fontLato
+  );
+  static TextStyle font10CustomGray500WightPoppins = TextStyle(
+    fontSize: 10.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColorLight.customGray,
+    fontFamily: AppFontsFamily.fontPoppins
   );
 
 

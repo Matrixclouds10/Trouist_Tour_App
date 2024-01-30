@@ -25,11 +25,11 @@ class OurProgramsScreen extends StatelessWidget {
                   imageHeight: 170,
                   titles: const ['Al-Rahma Mosque','Rijal Almaa Village','Al Tayebat Museum',
                     'Al-Ula Village','Al-Rahma Mosque','Rijal Almaa Village','Al Tayebat Museum','Al-Ula Village'],
-                  images: const [AppImages.program1,AppImages.program1,AppImages.program1,AppImages.program1,
-                    AppImages.program1,AppImages.program1,AppImages.program1,AppImages.program1],
+                  images: const [AppImages.test2,AppImages.test2,AppImages.test2,AppImages.test2,
+                    AppImages.test2,AppImages.test2,AppImages.test2,AppImages.test2],
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 5,
-                  crossAxisCount: 2, childAspectRatio: 1.1, onTap: (){
+                  crossAxisCount: 2, childAspectRatio: 1.15, onTap: (){
                   NavigatePages.pushToPage(const ProgramDetailsScreen(), context);
                 },),
               ),

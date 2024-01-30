@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
-import 'package:tourist_tour_app/feature/auth/presentation/screens/log_as.dart';
+import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/bloc/states.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/widgets/custom_page_view_body_widget.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/bloc/cubit.dart';
@@ -30,12 +30,15 @@ class OnBoardingScreen extends StatelessWidget {
                           physics: const BouncingScrollPhysics(),
                           onPageChanged: (int index){
                              AppOnBoardingCubit.get(context).page=index;
+                             AppOnBoardingCubit.get(context).changeCurrentPage(index);
+
                           },
                           itemCount: AppOnBoardingCubit.get(context).list.length,
                           itemBuilder: (context, i) {
                             return CustomPageViewBodyWidget(onBoardingModel:AppOnBoardingCubit.get(context).list[i]);
                           }),
                     ),
+                    verticalSpace(5),
                     Center(
                       child: SmoothPageIndicator(
                           controller: AppOnBoardingCubit.get(context).pageController,

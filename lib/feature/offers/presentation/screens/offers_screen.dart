@@ -7,15 +7,22 @@ class OffersScreen extends StatelessWidget {
   const OffersScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:  PreferredSize(
-          preferredSize: Size(double.infinity,62.h),
-          child: const CustomAppBar(title:'Offers', hasBackButton: true,)),
-      body:  ListView.builder(
-        itemCount: 20,
-        itemBuilder: (context,index){
-            return const CustomOfferItems();
-          }),
-        );
+    return
+      MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaleFactor: 1.0,
+          ),
+          child:  Scaffold(
+            appBar:  PreferredSize(
+                preferredSize: Size(double.infinity,62.h),
+                child: const CustomAppBar(title:'Offers', hasBackButton: true,)),
+            body:  ListView.builder(
+                itemCount: 20,
+                itemBuilder: (context,index){
+                  return const CustomOfferItems();
+                }),
+          )
+      );
+
   }
 }

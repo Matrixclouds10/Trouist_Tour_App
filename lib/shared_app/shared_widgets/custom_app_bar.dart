@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 
 
 class CustomAppBar extends StatelessWidget {
@@ -19,6 +20,9 @@ class CustomAppBar extends StatelessWidget {
       title: Padding(
         padding: EdgeInsets.only(top: 17.h),
         child: Text(title,
+          textScaleFactor: ScaleSize.textScaleFactor(context),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         style: TextStyles.font17CustomBlack500WeightPoppins,
         ),
       ),

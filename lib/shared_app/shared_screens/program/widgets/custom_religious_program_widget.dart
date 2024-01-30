@@ -4,6 +4,7 @@ import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/shared_app/shared_screens/program/widgets/custom_description_widget.dart';
 import 'package:tourist_tour_app/shared_app/shared_screens/program/widgets/custom_dot.dart';
@@ -17,9 +18,9 @@ class CustomReligiousProgramWidget extends StatelessWidget {
     return   Container(
       height:
       type!=null?
-      270.h:
+      275.h:
       isHasDes==true?
-      235.h:150.h ,
+      240.h:155.h ,
       decoration:  isHasDes==true?
       BoxDecoration(
           color: AppColorLight.customGray.withOpacity(0.10),
@@ -40,6 +41,9 @@ class CustomReligiousProgramWidget extends StatelessWidget {
               ),
               Text(
               type!,
+                textScaleFactor: ScaleSize.textScaleFactor(context),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               style: TextStyles.font17CustomBlack500WeightPoppins.copyWith(
                 fontWeight: FontWeight.w400,
                 color: type=='Up Coming'?const Color(0xffF59F01):type=='Completed'?AppColorLight.primaryColor:type=='Canceled'?const Color(0xffFF3A3A):null,
@@ -52,17 +56,35 @@ class CustomReligiousProgramWidget extends StatelessWidget {
             verticalSpace(5),
             Row(
               children: [
-                Text('Religious Program',
-                  style: TextStyles.font17CustomBlack700WeightPoppins,
+                SizedBox(
+                  width: 170.w,
+                  child: Text('Religious Program',
+                    textScaleFactor: ScaleSize.textScaleFactor(context),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.font17CustomBlack700WeightPoppins,
+                  ),
                 ),
                 const Spacer(),
-                Text('(150 Review)',
-                  style: TextStyles.font12CustomRed500WeightLato.copyWith(color: AppColorLight.desColor),
+                Container(
+                  width: 80.w,
+                  child: Text('(150 Review)',
+                    textScaleFactor: ScaleSize.textScaleFactor(context),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.font12CustomRed500WeightLato.copyWith(color: AppColorLight.desColor),
+                  ),
                 ),
                 horizontalSpace(2),
-                Text('4.8',
-                  style: TextStyles.font18CustomBlack600Weight.copyWith(
-                      fontFamily: AppFontsFamily.fontCairo
+                Container(
+                  width: 30.w,
+                  child: Text('4.8',
+                    textScaleFactor: ScaleSize.textScaleFactor(context),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.font18CustomBlack600Weight.copyWith(
+                        fontFamily: AppFontsFamily.fontCairo
+                    ),
                   ),
                 ),
                 const Icon(Icons.star,color: AppColorLight.starColor,),
@@ -71,28 +93,29 @@ class CustomReligiousProgramWidget extends StatelessWidget {
             Row(
               children: [
                 Text('1000 RS',
+                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
-                      decoration: TextDecoration.lineThrough,
-                      decorationColor: AppColorLight.redColor,
+                      // decoration: TextDecoration.lineThrough,
+                      // decorationColor: AppColorLight.redColor,
                       color: AppColorLight.redColor),
                 ),
                 horizontalSpace(5),
                 Text('1000 RS',
+                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                       color: AppColorLight.desColor),
                 ),
                 const Spacer(),
               ],
             ),
-            verticalSpace(8),
+            verticalSpace(5),
            isHasDes==true?
-           Expanded(
-             child: Column(
-               children: [
-                 const CustomDescriptionWidget(text: 'Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum .', maxLines: 3,),
-                 verticalSpace(8),
-               ],
-             ),
+           const Expanded(
+             child: CustomDescriptionWidget(text: 'Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum .', maxLines: 3,),
            ):const SizedBox.shrink(),
             Row(
               children: [
@@ -101,6 +124,9 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                     Image.asset(AppImages.returnCloc),
                     horizontalSpace(5),
                     Text('3 Days',
+                      textScaleFactor: ScaleSize.textScaleFactor(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyles.font17Black400WightLato.copyWith(
                         color: AppColorLight.black,
                       ),
@@ -112,9 +138,12 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   children: [
                     const Icon(Icons.location_on_outlined,color: AppColorLight.gray2,),
                     horizontalSpace(5),
-                    Container(
+                    SizedBox(
                       width: 120.w,
                       child: Text('Mecca , Medina',
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyles.font17Black400WightLato.copyWith(
                           color: AppColorLight.black,
                         ),
@@ -132,6 +161,9 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                     Image.asset(AppImages.group),
                     horizontalSpace(5),
                     Text('Group Trip',
+                      textScaleFactor: ScaleSize.textScaleFactor(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyles.font17Black400WightLato.copyWith(
                         color: AppColorLight.black,
                       ),
@@ -141,11 +173,14 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    Image.asset(AppImages.person),
+                    Image.asset(AppImages.person2),
                     horizontalSpace(5),
                     SizedBox(
                       width: 120.w,
                       child: Text('10 Persons',
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyles.font17Black400WightLato.copyWith(
                           color: AppColorLight.black,
                         ),

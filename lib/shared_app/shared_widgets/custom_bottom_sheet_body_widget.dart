@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 
 class CustomBottomSheetBodyWidget extends StatefulWidget {
 
@@ -31,6 +32,9 @@ class _CustomBottomSheetBodyWidgetState extends State<CustomBottomSheetBodyWidge
                },
              ),
              Text('My Plan Changed .',
+               textScaleFactor: ScaleSize.textScaleFactor(context),
+               maxLines: 1,
+               overflow: TextOverflow.ellipsis,
                style: TextStyles.font12CustomGray400WeightLato.copyWith(
                    color: AppColorLight.customBlack
                ),
@@ -51,6 +55,9 @@ class _CustomBottomSheetBodyWidgetState extends State<CustomBottomSheetBodyWidge
                },
              ),
              Text('My Plan Changed .',
+               textScaleFactor: ScaleSize.textScaleFactor(context),
+               maxLines: 1,
+               overflow: TextOverflow.ellipsis,
                style: TextStyles.font12CustomGray400WeightLato.copyWith(
                    color: AppColorLight.customBlack
                ),
@@ -71,6 +78,9 @@ class _CustomBottomSheetBodyWidgetState extends State<CustomBottomSheetBodyWidge
                },
              ),
              Text('My Plan Changed .',
+               textScaleFactor: ScaleSize.textScaleFactor(context),
+               maxLines: 1,
+               overflow: TextOverflow.ellipsis,
                style: TextStyles.font12CustomGray400WeightLato.copyWith(
                    color: AppColorLight.customBlack
                ),
@@ -91,6 +101,9 @@ class _CustomBottomSheetBodyWidgetState extends State<CustomBottomSheetBodyWidge
                },
              ),
              Text('Other',
+               textScaleFactor: ScaleSize.textScaleFactor(context),
+               maxLines: 1,
+               overflow: TextOverflow.ellipsis,
                style: TextStyles.font12CustomGray400WeightLato.copyWith(
                    color: AppColorLight.customBlack
                ),

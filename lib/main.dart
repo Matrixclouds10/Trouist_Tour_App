@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tourist_tour_app/core/di/dependency_injection.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
+import 'package:tourist_tour_app/core/routing/app_router.dart';
+import 'package:tourist_tour_app/core/routing/routes.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/bloc/cubit.dart';
-import 'package:tourist_tour_app/feature/onboarding/presentation/screens/onboarding_screen.dart';
-import 'package:tourist_tour_app/feature/root_pages/root_page.dart';
+import 'package:tourist_tour_app/feature/onboarding/presentation/screens/splash_screen.dart';
 import 'core/bloc_observer/bloc_observer.dart';
-import 'core/services/services_locator.dart';
 import 'core/shared_preference/shared_preference.dart';
 
 void main()async {
-  ServicesLocator().init();
+  // ServicesLocator().init();
+  setupGetIt();
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
@@ -23,11 +25,13 @@ void main()async {
   runApp(
       DevicePreview(
         enabled: false,
-        builder: (context) => const TouristTourApp()),);
+        builder: (context) =>  TouristTourApp(
+          appRouter: AppRouter(),
+        )),);
 }
 class TouristTourApp extends StatelessWidget {
-  // final AppRouter appRouter;
-  const TouristTourApp({super.key,});
+  final AppRouter appRouter;
+  const TouristTourApp({super.key, required this.appRouter,});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -43,12 +47,21 @@ class TouristTourApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Tourist Tour',
             theme: ThemeData(
+
               primaryColor: AppColorLight.primaryColor,
               scaffoldBackgroundColor: Colors.white,
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home:const OnBoardingScreen()
+            initialRoute: Routes.splashScreen,
+            onGenerateRoute: appRouter.generateRoute,
+            // home:MediaQuery(
+            //   data: MediaQuery.of(context).copyWith(
+            //     textScaleFactor: 1.0, // تعطيل textScaleFactor على مستوى التطبيق
+            //   ),
+            //
+            //   child:const SplashScreen()
+            // ),
             // onGenerateRoute: AppRouter.generateRoute,
           );
         },
@@ -56,4 +69,3 @@ class TouristTourApp extends StatelessWidget {
     );
   }
 }
-

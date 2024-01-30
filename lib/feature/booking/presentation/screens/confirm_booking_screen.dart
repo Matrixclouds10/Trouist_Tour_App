@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
@@ -46,11 +48,17 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                   children: [
                     verticalSpace(13),
                     Text('Religious Program',
+                      textScaleFactor: ScaleSize.textScaleFactor(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyles.font17CustomBlack700WeightPoppins,
                     ),
                     Row(
                       children: [
                         Text('1000 RS',
+                          textScaleFactor: ScaleSize.textScaleFactor(context),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                               decoration: TextDecoration.lineThrough,
                               decorationColor: AppColorLight.redColor,
@@ -59,6 +67,9 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                         ),
                         horizontalSpace(5),
                         Text('1000 RS',
+                          textScaleFactor: ScaleSize.textScaleFactor(context),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                               color: AppColorLight.desColor),
                         ),
@@ -73,6 +84,9 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                             Image.asset(AppImages.returnCloc),
                             horizontalSpace(5),
                             Text('3 Days',
+                              textScaleFactor: ScaleSize.textScaleFactor(context),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyles.font17Black400WightLato.copyWith(
                                 color: AppColorLight.customBlack,
                               ),
@@ -87,6 +101,9 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                             Container(
                               width: 120.w,
                               child: Text('Mecca , Medina',
+                                textScaleFactor: ScaleSize.textScaleFactor(context),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyles.font17Black400WightLato.copyWith(
                                   color: AppColorLight.customBlack,
                                 ),
@@ -102,16 +119,21 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                         const Icon(Icons.calendar_month_outlined,color: AppColorLight.gray2,),
                         horizontalSpace(5),
                         Text(' From 25 Dec 23 To  28 Dec 23',
+                          textScaleFactor: ScaleSize.textScaleFactor(context),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyles.font17Black400WightLato.copyWith(
                             color: AppColorLight.customBlack,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+
                         ),
                       ],
                     ),
                     verticalSpace(20),
                     Text('Notes',
+                      textScaleFactor: ScaleSize.textScaleFactor(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                         fontWeight: FontWeight.w600
                       ),
@@ -145,6 +167,9 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                   children: [
                     verticalSpace(13),
                     Text('Payment Methods',
+                      textScaleFactor: ScaleSize.textScaleFactor(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                           fontWeight: FontWeight.w600
                       ),),
@@ -162,7 +187,10 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                            });
                          },
                        ),
-                       Image.asset(AppImages.visa),
+                       SizedBox(
+                           height: 23.h,
+                           width: 32.w,
+                           child: Image.asset(AppImages.visa,fit: BoxFit.cover,)),
                      ],
                    ),
                    Row(
@@ -178,7 +206,10 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                            });
                          },
                        ),
-                       Image.asset(AppImages.card),
+                       SizedBox(
+                           height: 23.h,
+                           width: 32.w,
+                           child: Image.asset(AppImages.card,fit: BoxFit.cover,)),
                      ],
                    ),
                    Row(
@@ -194,7 +225,10 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                            });
                          },
                        ),
-                       Image.asset(AppImages.applePay),
+                       SizedBox(
+                           height: 23.h,
+                           width: 32.w,
+                           child: Image.asset(AppImages.applePay,fit: BoxFit.cover,)),
                      ],
                    )
                   ],
@@ -204,7 +238,9 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
             verticalSpace(76),
             CustomMaterialButtonWidget(
                 text: 'Confirm',
-                onPressed: (){}),
+                onPressed: (){
+                  showToast('Successfully Booking', ToastStates.success, context);
+                }),
             verticalSpace(100),
           ],
         ),

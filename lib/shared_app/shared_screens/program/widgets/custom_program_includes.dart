@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/shared_app/shared_screens/program/widgets/custom_program_include_item.dart';
 
@@ -26,6 +27,9 @@ class CustomProgramIncludesWidget extends StatelessWidget {
           children: [
             verticalSpace(13),
             Text('The program includes',
+              textScaleFactor: ScaleSize.textScaleFactor(context),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyles.font17CustomBlack700WeightPoppins,
             ),
             verticalSpace(8),

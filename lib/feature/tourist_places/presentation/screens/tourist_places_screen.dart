@@ -21,6 +21,7 @@ class TouristPlacesScreen extends StatelessWidget {
               padding:  EdgeInsets.only(left: 16.w,right: 16.w,top: 15.h),
               child:
               CustomGridViewWidget(
+                isPlaces: true,
                 imageHeight: 170,
                 titles: const ['Al-Rahma Mosque','Rijal Almaa Village','Al Tayebat Museum',
                   'Al-Ula Village','Al-Rahma Mosque','Rijal Almaa Village','Al Tayebat Museum','Al-Ula Village'],
@@ -28,7 +29,7 @@ class TouristPlacesScreen extends StatelessWidget {
                   AppImages.test,AppImages.test,AppImages.test,AppImages.test],
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 5,
-                crossAxisCount: 2, childAspectRatio: 1.1, onTap: (){
+                crossAxisCount: 2, childAspectRatio: 1.15, onTap: (){
                 NavigatePages.pushToPage(const TouristPlaceDetailsScreen(), context);
               },),
             ),

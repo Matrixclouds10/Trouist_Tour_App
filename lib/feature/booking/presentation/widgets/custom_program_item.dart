@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_bottom_sheet.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_button.dart';
@@ -39,19 +40,22 @@ class CustomProgramItem extends StatelessWidget {
                           child: Image.asset(AppImages.test2,fit: BoxFit.cover,))),
                   horizontalSpace(8),
                   SizedBox(
-                      height: 75.h,
                       width: 190.w,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Religious Program',
                             style: TextStyles.font17CustomBlack700WeightPoppins,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                              textScaleFactor: ScaleSize.textScaleFactor(context),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                           ),
                           Row(
                             children: [
                               Text('1000 RS',
+                                textScaleFactor: ScaleSize.textScaleFactor(context),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                                     color: AppColorLight.redColor),
                               ),
@@ -66,11 +70,12 @@ class CustomProgramItem extends StatelessWidget {
                                   ),
                                   horizontalSpace(5),
                                   Text('Group Trip',
+                                    textScaleFactor: ScaleSize.textScaleFactor(context),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyles.font12CustomGray400WeightLato.copyWith(
                                       color: AppColorLight.customBlack,
                                     ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   horizontalSpace(25),
 
@@ -89,6 +94,9 @@ class CustomProgramItem extends StatelessWidget {
                                   ),
                                   horizontalSpace(4),
                                   Text('3 Days',
+                                    textScaleFactor: ScaleSize.textScaleFactor(context),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyles.font12CustomGray400WeightLato.copyWith(
                                       color: AppColorLight.customBlack,
                                     ),
@@ -105,11 +113,12 @@ class CustomProgramItem extends StatelessWidget {
                                   horizontalSpace(1),
                                   SizedBox(
                                     child: Text('Mecca , Medina',
+                                      textScaleFactor: ScaleSize.textScaleFactor(context),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyles.font12CustomGray400WeightLato.copyWith(
                                         color: AppColorLight.customBlack,
                                       ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
                                     ),
 
                                   ),
@@ -126,7 +135,7 @@ class CustomProgramItem extends StatelessWidget {
               SizedBox(
                   height: 40.h,
                   width:311.w ,
-                  child: Expanded(child: CustomTextButton(text: textButtonText, onPressed: onPressed,))),
+                  child: CustomTextButton(text: textButtonText, onPressed: onPressed,)),
 
 
 

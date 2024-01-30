@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({super.key, required this.text, required this.onPressed, this.textColor, this.backGround, this.width, this.height});
@@ -27,13 +28,19 @@ class CustomTextButton extends StatelessWidget {
         ),
         fixedSize:  Size(width?? 320,height?? 42.0), // set width and height
       ),
-      child: Text(
-        text,
-        style:
-        TextStyles.font17Black400WightLato.copyWith(
-            color: textColor??AppColorLight.primaryColor,
-           fontFamily: AppFontsFamily.fontPoppins
-        )
+      child: FittedBox(
+        child: Text(
+
+          text,
+          style:
+          TextStyles.font17Black400WightLato.copyWith(
+              color: textColor??AppColorLight.primaryColor,
+             fontFamily: AppFontsFamily.fontPoppins
+          ),
+          textScaleFactor: ScaleSize.textScaleFactor(context),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }

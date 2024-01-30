@@ -14,7 +14,7 @@ class CustomUpComingWidget extends StatelessWidget {
         itemBuilder: (context,index){
           return InkWell(
             onTap: (){
-              NavigatePages.persistentNavBarNavigator(const BookingDetailsScreen(type: 'Up Coming',), context);
+              NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Up Coming',), context);
             },
             child: CustomProgramItem(textButtonText: 'Cancel', onPressed: () {  showModalBottomSheet(
               backgroundColor:Colors.white,

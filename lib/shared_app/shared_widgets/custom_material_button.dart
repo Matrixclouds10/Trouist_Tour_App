@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 
 class CustomMaterialButtonWidget extends StatelessWidget {
   const CustomMaterialButtonWidget({super.key, required this.text,required this.onPressed, this.backgroundColor, this.textColor, this.borderColor, this.elevation, this.height, this.minWidth, this.textSize});
@@ -25,6 +26,7 @@ class CustomMaterialButtonWidget extends StatelessWidget {
       color: backgroundColor ?? const Color(0xff009688),
       onPressed: onPressed,
       child:  Text(text,
+        textScaleFactor: ScaleSize.textScaleFactor(context),
         style: TextStyle(
             fontSize:textSize ?? 17.sp,
             fontWeight: FontWeight.w400,

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_slider_widget.dart';
 
 class CustomTopDetailsStackWidget extends StatefulWidget {
@@ -19,7 +20,7 @@ class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidge
   Widget build(BuildContext context) {
     return  Stack(
       children: [
-        const CustomSliderWidget(image: AppImages.test2,),
+        const CustomSliderWidget(image: [AppImages.test2,AppImages.test2,AppImages.test2,AppImages.test2,AppImages.test2,],),
         Positioned(
             top: 40.h,
             left: 10.w,
@@ -29,7 +30,7 @@ class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidge
               children: [
                 IconButton(onPressed: (){
                   Navigator.of(context).pop();
-                }, icon: const Icon(Icons.arrow_back_ios,color: AppColorLight.gray2,)),
+                }, icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
                 const Spacer(),
                 IconButton(onPressed: (){
                   setState(() {
@@ -37,7 +38,7 @@ class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidge
                   });
                 }, icon:  Icon(
                   isFav==false?
-                  Icons.favorite_border_rounded:Icons.favorite,color:isFav==false? AppColorLight.gray2:Colors.red,))
+                  Icons.favorite_border_rounded:Icons.favorite,color:isFav==false?  Colors.white:Colors.red,))
               ],
 
             )),
@@ -57,6 +58,9 @@ class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidge
                   padding: const EdgeInsets.only(left: 15.0,),
                   child: Text(
                     '3 Days       25 Dec 23 - 28 Dec 23 ',
+                    textScaleFactor: ScaleSize.textScaleFactor(context),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyles.font17Black400WightLato.copyWith(color: Colors.white),
                   ),
                 ),
