@@ -7,7 +7,7 @@ import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 
 class CustomSliderWidget extends StatefulWidget {
-  final List<String> image;
+  final List<String?> image;
   final bool? isHasRadius;
   final bool? isOffers;
   final double? height;
@@ -37,7 +37,10 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
               borderRadius: BorderRadius.circular(10),
               child: Stack(
                 children: [
-                  Image.asset(e!, fit: BoxFit.cover,
+                  Image.network(e!, fit: BoxFit.cover,
+                   errorBuilder: (context ,error,v){
+                    return const Center(child: CircularProgressIndicator(),);
+                   },
                    width: double.infinity,),
                   Center(
                     child: Container(
@@ -98,15 +101,12 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
             ) :
                ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(e!, fit: BoxFit.cover,
+              child: Image.network(e!, fit: BoxFit.cover,
                width: double.infinity,),
             ):
-            Image.asset(e!, fit: BoxFit.cover,
+            Image.network(e!, fit: BoxFit.cover,
              width: double.infinity,
-           ),
-
-            )
-                .toList(),
+           ),).toList(),
             options: CarouselOptions(
               height:widget.height?? 376.h,
               aspectRatio: 16/9,
@@ -133,7 +133,7 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children:
-          widget.image.asMap().entries.map((MapEntry<int, String> entry) {
+          widget.image.asMap().entries.map((MapEntry<int, String?> entry) {
             return GestureDetector(
               onTap: () => carouselController.animateToPage(entry.key),
               child: Container(

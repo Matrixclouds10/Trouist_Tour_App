@@ -35,7 +35,7 @@ class _ProgramDetailsOverViewScreenState extends State<ProgramDetailsOverViewScr
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const CustomTopDetailsStackWidget(),
+                    // const CustomTopDetailsStackWidget(),
                     const CustomReligiousProgramWidget(isHasDes: false,),
                     TabBar(
                       tabs: const [

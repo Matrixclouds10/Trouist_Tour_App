@@ -6,13 +6,15 @@ import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
+import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
 import 'package:tourist_tour_app/shared_app/shared_screens/program/widgets/custom_description_widget.dart';
 import 'package:tourist_tour_app/shared_app/shared_screens/program/widgets/custom_dot.dart';
 
 class CustomReligiousProgramWidget extends StatelessWidget {
-  const CustomReligiousProgramWidget({super.key, required this.isHasDes, this.type});
+  const CustomReligiousProgramWidget({super.key, required this.isHasDes, this.type, this.programResponse});
    final  bool isHasDes;
    final String? type;
+  final ProgramResponse? programResponse;
   @override
   Widget build(BuildContext context) {
     return   Container(
@@ -21,7 +23,8 @@ class CustomReligiousProgramWidget extends StatelessWidget {
       275.h:
       isHasDes==true?
       240.h:155.h ,
-      decoration:  isHasDes==true?
+      decoration:
+      isHasDes==true?
       BoxDecoration(
           color: AppColorLight.customGray.withOpacity(0.10),
           borderRadius: const BorderRadius.all(Radius.circular(10))
@@ -35,8 +38,9 @@ class CustomReligiousProgramWidget extends StatelessWidget {
             verticalSpace(type!=null?16:3),
             type!=null?
             Row(children: [
-              CustomDot(height: 16.w,
-              width: 16.w,
+              CustomDot(
+                height: 16.w,
+                width: 16.w,
                 color: type=='Up Coming'?const Color(0xffF59F01):type=='Completed'?AppColorLight.primaryColor:type=='Canceled'?const Color(0xffFF3A3A):null,
               ),
               Text(
@@ -58,7 +62,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 170.w,
-                  child: Text('Religious Program',
+                  child: Text(programResponse!.name!,
                     textScaleFactor: ScaleSize.textScaleFactor(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -66,7 +70,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Container(
+                SizedBox(
                   width: 80.w,
                   child: Text('(150 Review)',
                     textScaleFactor: ScaleSize.textScaleFactor(context),
@@ -76,7 +80,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   ),
                 ),
                 horizontalSpace(2),
-                Container(
+                SizedBox(
                   width: 30.w,
                   child: Text('4.8',
                     textScaleFactor: ScaleSize.textScaleFactor(context),
@@ -92,7 +96,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
             ),
             Row(
               children: [
-                Text('1000 RS',
+                Text('${programResponse!.price} RS',
                   textScaleFactor: ScaleSize.textScaleFactor(context),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -102,7 +106,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                       color: AppColorLight.redColor),
                 ),
                 horizontalSpace(5),
-                Text('1000 RS',
+                Text('${programResponse!.price} RS',
                   textScaleFactor: ScaleSize.textScaleFactor(context),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -114,8 +118,9 @@ class CustomReligiousProgramWidget extends StatelessWidget {
             ),
             verticalSpace(5),
            isHasDes==true?
-           const Expanded(
-             child: CustomDescriptionWidget(text: 'Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum .', maxLines: 3,),
+            Expanded(
+             child: CustomDescriptionWidget(text:
+             '${programResponse!.description}', maxLines: 3,),
            ):const SizedBox.shrink(),
             Row(
               children: [
@@ -123,7 +128,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   children: [
                     Image.asset(AppImages.returnCloc),
                     horizontalSpace(5),
-                    Text('3 Days',
+                    Text('${programResponse!.duration} Days',
                       textScaleFactor: ScaleSize.textScaleFactor(context),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -140,7 +145,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                     horizontalSpace(5),
                     SizedBox(
                       width: 120.w,
-                      child: Text('Mecca , Medina',
+                      child: Text('${programResponse!.region}',
                         textScaleFactor: ScaleSize.textScaleFactor(context),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -160,7 +165,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   children: [
                     Image.asset(AppImages.group),
                     horizontalSpace(5),
-                    Text('Group Trip',
+                    Text('${programResponse!.groupType} Trip',
                       textScaleFactor: ScaleSize.textScaleFactor(context),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -177,7 +182,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                     horizontalSpace(5),
                     SizedBox(
                       width: 120.w,
-                      child: Text('10 Persons',
+                      child: Text('${programResponse!.groupSize} Persons',
                         textScaleFactor: ScaleSize.textScaleFactor(context),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

@@ -4,6 +4,7 @@ import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/feature/booking/presentation/screens/booking_screen.dart';
 import 'package:tourist_tour_app/feature/favorite/presentation/screens/favorite_screen.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/home/pressentation/screens/home.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/more_screen.dart';
 import 'package:tourist_tour_app/feature/search/presentation/screen/search_screen.dart';
@@ -29,6 +30,8 @@ class _RootPagesState extends State<RootPages> {
 
    @override
   void initState() {
+     HomeCubit.get(context).getSliderCubit(context);
+     HomeCubit.get(context).getProgramsCubit(context);
      if(widget.check==null){
        currentIndex=0;
      }else{

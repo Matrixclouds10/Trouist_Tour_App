@@ -37,7 +37,8 @@ class TextStyles{
     fontWeight: FontWeight.w400,
       fontFamily: AppFontsFamily.fontLato,
       color: AppColorLight.customGray
-  );static TextStyle font12CustomRed500WeightLato = TextStyle(
+  );
+ static TextStyle font12CustomRed500WeightLato = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w500,
     color: AppColorLight.redColor,

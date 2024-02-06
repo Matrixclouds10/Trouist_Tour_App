@@ -20,24 +20,33 @@ mixin _$SignupState<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() signupLoading,
+    required TResult Function() signupGetCountryLoading,
+    required TResult Function(T data) signupGetCountrySuccess,
     required TResult Function(T data) signupSuccess,
     required TResult Function(String error) signupError,
+    required TResult Function(String error) signupGetCountryError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? signupLoading,
+    TResult? Function()? signupGetCountryLoading,
+    TResult? Function(T data)? signupGetCountrySuccess,
     TResult? Function(T data)? signupSuccess,
     TResult? Function(String error)? signupError,
+    TResult? Function(String error)? signupGetCountryError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? signupLoading,
+    TResult Function()? signupGetCountryLoading,
+    TResult Function(T data)? signupGetCountrySuccess,
     TResult Function(T data)? signupSuccess,
     TResult Function(String error)? signupError,
+    TResult Function(String error)? signupGetCountryError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,24 +54,38 @@ mixin _$SignupState<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(SignupLoading<T> value) signupLoading,
+    required TResult Function(SignupGetCountryLoading<T> value)
+        signupGetCountryLoading,
+    required TResult Function(SignupGetCountrySuccess<T> value)
+        signupGetCountrySuccess,
     required TResult Function(SignupSuccess<T> value) signupSuccess,
     required TResult Function(SignupError<T> value) signupError,
+    required TResult Function(SignupGetCountryError<T> value)
+        signupGetCountryError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(SignupLoading<T> value)? signupLoading,
+    TResult? Function(SignupGetCountryLoading<T> value)?
+        signupGetCountryLoading,
+    TResult? Function(SignupGetCountrySuccess<T> value)?
+        signupGetCountrySuccess,
     TResult? Function(SignupSuccess<T> value)? signupSuccess,
     TResult? Function(SignupError<T> value)? signupError,
+    TResult? Function(SignupGetCountryError<T> value)? signupGetCountryError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(SignupLoading<T> value)? signupLoading,
+    TResult Function(SignupGetCountryLoading<T> value)? signupGetCountryLoading,
+    TResult Function(SignupGetCountrySuccess<T> value)? signupGetCountrySuccess,
     TResult Function(SignupSuccess<T> value)? signupSuccess,
     TResult Function(SignupError<T> value)? signupError,
+    TResult Function(SignupGetCountryError<T> value)? signupGetCountryError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,8 +149,11 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() signupLoading,
+    required TResult Function() signupGetCountryLoading,
+    required TResult Function(T data) signupGetCountrySuccess,
     required TResult Function(T data) signupSuccess,
     required TResult Function(String error) signupError,
+    required TResult Function(String error) signupGetCountryError,
   }) {
     return initial();
   }
@@ -137,8 +163,11 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? signupLoading,
+    TResult? Function()? signupGetCountryLoading,
+    TResult? Function(T data)? signupGetCountrySuccess,
     TResult? Function(T data)? signupSuccess,
     TResult? Function(String error)? signupError,
+    TResult? Function(String error)? signupGetCountryError,
   }) {
     return initial?.call();
   }
@@ -148,8 +177,11 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? signupLoading,
+    TResult Function()? signupGetCountryLoading,
+    TResult Function(T data)? signupGetCountrySuccess,
     TResult Function(T data)? signupSuccess,
     TResult Function(String error)? signupError,
+    TResult Function(String error)? signupGetCountryError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -163,8 +195,14 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(SignupLoading<T> value) signupLoading,
+    required TResult Function(SignupGetCountryLoading<T> value)
+        signupGetCountryLoading,
+    required TResult Function(SignupGetCountrySuccess<T> value)
+        signupGetCountrySuccess,
     required TResult Function(SignupSuccess<T> value) signupSuccess,
     required TResult Function(SignupError<T> value) signupError,
+    required TResult Function(SignupGetCountryError<T> value)
+        signupGetCountryError,
   }) {
     return initial(this);
   }
@@ -174,8 +212,13 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(SignupLoading<T> value)? signupLoading,
+    TResult? Function(SignupGetCountryLoading<T> value)?
+        signupGetCountryLoading,
+    TResult? Function(SignupGetCountrySuccess<T> value)?
+        signupGetCountrySuccess,
     TResult? Function(SignupSuccess<T> value)? signupSuccess,
     TResult? Function(SignupError<T> value)? signupError,
+    TResult? Function(SignupGetCountryError<T> value)? signupGetCountryError,
   }) {
     return initial?.call(this);
   }
@@ -185,8 +228,11 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(SignupLoading<T> value)? signupLoading,
+    TResult Function(SignupGetCountryLoading<T> value)? signupGetCountryLoading,
+    TResult Function(SignupGetCountrySuccess<T> value)? signupGetCountrySuccess,
     TResult Function(SignupSuccess<T> value)? signupSuccess,
     TResult Function(SignupError<T> value)? signupError,
+    TResult Function(SignupGetCountryError<T> value)? signupGetCountryError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -240,8 +286,11 @@ class _$SignupLoadingImpl<T> implements SignupLoading<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() signupLoading,
+    required TResult Function() signupGetCountryLoading,
+    required TResult Function(T data) signupGetCountrySuccess,
     required TResult Function(T data) signupSuccess,
     required TResult Function(String error) signupError,
+    required TResult Function(String error) signupGetCountryError,
   }) {
     return signupLoading();
   }
@@ -251,8 +300,11 @@ class _$SignupLoadingImpl<T> implements SignupLoading<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? signupLoading,
+    TResult? Function()? signupGetCountryLoading,
+    TResult? Function(T data)? signupGetCountrySuccess,
     TResult? Function(T data)? signupSuccess,
     TResult? Function(String error)? signupError,
+    TResult? Function(String error)? signupGetCountryError,
   }) {
     return signupLoading?.call();
   }
@@ -262,8 +314,11 @@ class _$SignupLoadingImpl<T> implements SignupLoading<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? signupLoading,
+    TResult Function()? signupGetCountryLoading,
+    TResult Function(T data)? signupGetCountrySuccess,
     TResult Function(T data)? signupSuccess,
     TResult Function(String error)? signupError,
+    TResult Function(String error)? signupGetCountryError,
     required TResult orElse(),
   }) {
     if (signupLoading != null) {
@@ -277,8 +332,14 @@ class _$SignupLoadingImpl<T> implements SignupLoading<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(SignupLoading<T> value) signupLoading,
+    required TResult Function(SignupGetCountryLoading<T> value)
+        signupGetCountryLoading,
+    required TResult Function(SignupGetCountrySuccess<T> value)
+        signupGetCountrySuccess,
     required TResult Function(SignupSuccess<T> value) signupSuccess,
     required TResult Function(SignupError<T> value) signupError,
+    required TResult Function(SignupGetCountryError<T> value)
+        signupGetCountryError,
   }) {
     return signupLoading(this);
   }
@@ -288,8 +349,13 @@ class _$SignupLoadingImpl<T> implements SignupLoading<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(SignupLoading<T> value)? signupLoading,
+    TResult? Function(SignupGetCountryLoading<T> value)?
+        signupGetCountryLoading,
+    TResult? Function(SignupGetCountrySuccess<T> value)?
+        signupGetCountrySuccess,
     TResult? Function(SignupSuccess<T> value)? signupSuccess,
     TResult? Function(SignupError<T> value)? signupError,
+    TResult? Function(SignupGetCountryError<T> value)? signupGetCountryError,
   }) {
     return signupLoading?.call(this);
   }
@@ -299,8 +365,11 @@ class _$SignupLoadingImpl<T> implements SignupLoading<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(SignupLoading<T> value)? signupLoading,
+    TResult Function(SignupGetCountryLoading<T> value)? signupGetCountryLoading,
+    TResult Function(SignupGetCountrySuccess<T> value)? signupGetCountrySuccess,
     TResult Function(SignupSuccess<T> value)? signupSuccess,
     TResult Function(SignupError<T> value)? signupError,
+    TResult Function(SignupGetCountryError<T> value)? signupGetCountryError,
     required TResult orElse(),
   }) {
     if (signupLoading != null) {
@@ -312,6 +381,319 @@ class _$SignupLoadingImpl<T> implements SignupLoading<T> {
 
 abstract class SignupLoading<T> implements SignupState<T> {
   const factory SignupLoading() = _$SignupLoadingImpl<T>;
+}
+
+/// @nodoc
+abstract class _$$SignupGetCountryLoadingImplCopyWith<T, $Res> {
+  factory _$$SignupGetCountryLoadingImplCopyWith(
+          _$SignupGetCountryLoadingImpl<T> value,
+          $Res Function(_$SignupGetCountryLoadingImpl<T>) then) =
+      __$$SignupGetCountryLoadingImplCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$SignupGetCountryLoadingImplCopyWithImpl<T, $Res>
+    extends _$SignupStateCopyWithImpl<T, $Res, _$SignupGetCountryLoadingImpl<T>>
+    implements _$$SignupGetCountryLoadingImplCopyWith<T, $Res> {
+  __$$SignupGetCountryLoadingImplCopyWithImpl(
+      _$SignupGetCountryLoadingImpl<T> _value,
+      $Res Function(_$SignupGetCountryLoadingImpl<T>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SignupGetCountryLoadingImpl<T> implements SignupGetCountryLoading<T> {
+  const _$SignupGetCountryLoadingImpl();
+
+  @override
+  String toString() {
+    return 'SignupState<$T>.signupGetCountryLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignupGetCountryLoadingImpl<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signupLoading,
+    required TResult Function() signupGetCountryLoading,
+    required TResult Function(T data) signupGetCountrySuccess,
+    required TResult Function(T data) signupSuccess,
+    required TResult Function(String error) signupError,
+    required TResult Function(String error) signupGetCountryError,
+  }) {
+    return signupGetCountryLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signupLoading,
+    TResult? Function()? signupGetCountryLoading,
+    TResult? Function(T data)? signupGetCountrySuccess,
+    TResult? Function(T data)? signupSuccess,
+    TResult? Function(String error)? signupError,
+    TResult? Function(String error)? signupGetCountryError,
+  }) {
+    return signupGetCountryLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signupLoading,
+    TResult Function()? signupGetCountryLoading,
+    TResult Function(T data)? signupGetCountrySuccess,
+    TResult Function(T data)? signupSuccess,
+    TResult Function(String error)? signupError,
+    TResult Function(String error)? signupGetCountryError,
+    required TResult orElse(),
+  }) {
+    if (signupGetCountryLoading != null) {
+      return signupGetCountryLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(SignupLoading<T> value) signupLoading,
+    required TResult Function(SignupGetCountryLoading<T> value)
+        signupGetCountryLoading,
+    required TResult Function(SignupGetCountrySuccess<T> value)
+        signupGetCountrySuccess,
+    required TResult Function(SignupSuccess<T> value) signupSuccess,
+    required TResult Function(SignupError<T> value) signupError,
+    required TResult Function(SignupGetCountryError<T> value)
+        signupGetCountryError,
+  }) {
+    return signupGetCountryLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(SignupLoading<T> value)? signupLoading,
+    TResult? Function(SignupGetCountryLoading<T> value)?
+        signupGetCountryLoading,
+    TResult? Function(SignupGetCountrySuccess<T> value)?
+        signupGetCountrySuccess,
+    TResult? Function(SignupSuccess<T> value)? signupSuccess,
+    TResult? Function(SignupError<T> value)? signupError,
+    TResult? Function(SignupGetCountryError<T> value)? signupGetCountryError,
+  }) {
+    return signupGetCountryLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(SignupLoading<T> value)? signupLoading,
+    TResult Function(SignupGetCountryLoading<T> value)? signupGetCountryLoading,
+    TResult Function(SignupGetCountrySuccess<T> value)? signupGetCountrySuccess,
+    TResult Function(SignupSuccess<T> value)? signupSuccess,
+    TResult Function(SignupError<T> value)? signupError,
+    TResult Function(SignupGetCountryError<T> value)? signupGetCountryError,
+    required TResult orElse(),
+  }) {
+    if (signupGetCountryLoading != null) {
+      return signupGetCountryLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignupGetCountryLoading<T> implements SignupState<T> {
+  const factory SignupGetCountryLoading() = _$SignupGetCountryLoadingImpl<T>;
+}
+
+/// @nodoc
+abstract class _$$SignupGetCountrySuccessImplCopyWith<T, $Res> {
+  factory _$$SignupGetCountrySuccessImplCopyWith(
+          _$SignupGetCountrySuccessImpl<T> value,
+          $Res Function(_$SignupGetCountrySuccessImpl<T>) then) =
+      __$$SignupGetCountrySuccessImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({T data});
+}
+
+/// @nodoc
+class __$$SignupGetCountrySuccessImplCopyWithImpl<T, $Res>
+    extends _$SignupStateCopyWithImpl<T, $Res, _$SignupGetCountrySuccessImpl<T>>
+    implements _$$SignupGetCountrySuccessImplCopyWith<T, $Res> {
+  __$$SignupGetCountrySuccessImplCopyWithImpl(
+      _$SignupGetCountrySuccessImpl<T> _value,
+      $Res Function(_$SignupGetCountrySuccessImpl<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$SignupGetCountrySuccessImpl<T>(
+      freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as T,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SignupGetCountrySuccessImpl<T> implements SignupGetCountrySuccess<T> {
+  const _$SignupGetCountrySuccessImpl(this.data);
+
+  @override
+  final T data;
+
+  @override
+  String toString() {
+    return 'SignupState<$T>.signupGetCountrySuccess(data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignupGetCountrySuccessImpl<T> &&
+            const DeepCollectionEquality().equals(other.data, data));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignupGetCountrySuccessImplCopyWith<T, _$SignupGetCountrySuccessImpl<T>>
+      get copyWith => __$$SignupGetCountrySuccessImplCopyWithImpl<T,
+          _$SignupGetCountrySuccessImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signupLoading,
+    required TResult Function() signupGetCountryLoading,
+    required TResult Function(T data) signupGetCountrySuccess,
+    required TResult Function(T data) signupSuccess,
+    required TResult Function(String error) signupError,
+    required TResult Function(String error) signupGetCountryError,
+  }) {
+    return signupGetCountrySuccess(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signupLoading,
+    TResult? Function()? signupGetCountryLoading,
+    TResult? Function(T data)? signupGetCountrySuccess,
+    TResult? Function(T data)? signupSuccess,
+    TResult? Function(String error)? signupError,
+    TResult? Function(String error)? signupGetCountryError,
+  }) {
+    return signupGetCountrySuccess?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signupLoading,
+    TResult Function()? signupGetCountryLoading,
+    TResult Function(T data)? signupGetCountrySuccess,
+    TResult Function(T data)? signupSuccess,
+    TResult Function(String error)? signupError,
+    TResult Function(String error)? signupGetCountryError,
+    required TResult orElse(),
+  }) {
+    if (signupGetCountrySuccess != null) {
+      return signupGetCountrySuccess(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(SignupLoading<T> value) signupLoading,
+    required TResult Function(SignupGetCountryLoading<T> value)
+        signupGetCountryLoading,
+    required TResult Function(SignupGetCountrySuccess<T> value)
+        signupGetCountrySuccess,
+    required TResult Function(SignupSuccess<T> value) signupSuccess,
+    required TResult Function(SignupError<T> value) signupError,
+    required TResult Function(SignupGetCountryError<T> value)
+        signupGetCountryError,
+  }) {
+    return signupGetCountrySuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(SignupLoading<T> value)? signupLoading,
+    TResult? Function(SignupGetCountryLoading<T> value)?
+        signupGetCountryLoading,
+    TResult? Function(SignupGetCountrySuccess<T> value)?
+        signupGetCountrySuccess,
+    TResult? Function(SignupSuccess<T> value)? signupSuccess,
+    TResult? Function(SignupError<T> value)? signupError,
+    TResult? Function(SignupGetCountryError<T> value)? signupGetCountryError,
+  }) {
+    return signupGetCountrySuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(SignupLoading<T> value)? signupLoading,
+    TResult Function(SignupGetCountryLoading<T> value)? signupGetCountryLoading,
+    TResult Function(SignupGetCountrySuccess<T> value)? signupGetCountrySuccess,
+    TResult Function(SignupSuccess<T> value)? signupSuccess,
+    TResult Function(SignupError<T> value)? signupError,
+    TResult Function(SignupGetCountryError<T> value)? signupGetCountryError,
+    required TResult orElse(),
+  }) {
+    if (signupGetCountrySuccess != null) {
+      return signupGetCountrySuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignupGetCountrySuccess<T> implements SignupState<T> {
+  const factory SignupGetCountrySuccess(final T data) =
+      _$SignupGetCountrySuccessImpl<T>;
+
+  T get data;
+  @JsonKey(ignore: true)
+  _$$SignupGetCountrySuccessImplCopyWith<T, _$SignupGetCountrySuccessImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -382,8 +764,11 @@ class _$SignupSuccessImpl<T> implements SignupSuccess<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() signupLoading,
+    required TResult Function() signupGetCountryLoading,
+    required TResult Function(T data) signupGetCountrySuccess,
     required TResult Function(T data) signupSuccess,
     required TResult Function(String error) signupError,
+    required TResult Function(String error) signupGetCountryError,
   }) {
     return signupSuccess(data);
   }
@@ -393,8 +778,11 @@ class _$SignupSuccessImpl<T> implements SignupSuccess<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? signupLoading,
+    TResult? Function()? signupGetCountryLoading,
+    TResult? Function(T data)? signupGetCountrySuccess,
     TResult? Function(T data)? signupSuccess,
     TResult? Function(String error)? signupError,
+    TResult? Function(String error)? signupGetCountryError,
   }) {
     return signupSuccess?.call(data);
   }
@@ -404,8 +792,11 @@ class _$SignupSuccessImpl<T> implements SignupSuccess<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? signupLoading,
+    TResult Function()? signupGetCountryLoading,
+    TResult Function(T data)? signupGetCountrySuccess,
     TResult Function(T data)? signupSuccess,
     TResult Function(String error)? signupError,
+    TResult Function(String error)? signupGetCountryError,
     required TResult orElse(),
   }) {
     if (signupSuccess != null) {
@@ -419,8 +810,14 @@ class _$SignupSuccessImpl<T> implements SignupSuccess<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(SignupLoading<T> value) signupLoading,
+    required TResult Function(SignupGetCountryLoading<T> value)
+        signupGetCountryLoading,
+    required TResult Function(SignupGetCountrySuccess<T> value)
+        signupGetCountrySuccess,
     required TResult Function(SignupSuccess<T> value) signupSuccess,
     required TResult Function(SignupError<T> value) signupError,
+    required TResult Function(SignupGetCountryError<T> value)
+        signupGetCountryError,
   }) {
     return signupSuccess(this);
   }
@@ -430,8 +827,13 @@ class _$SignupSuccessImpl<T> implements SignupSuccess<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(SignupLoading<T> value)? signupLoading,
+    TResult? Function(SignupGetCountryLoading<T> value)?
+        signupGetCountryLoading,
+    TResult? Function(SignupGetCountrySuccess<T> value)?
+        signupGetCountrySuccess,
     TResult? Function(SignupSuccess<T> value)? signupSuccess,
     TResult? Function(SignupError<T> value)? signupError,
+    TResult? Function(SignupGetCountryError<T> value)? signupGetCountryError,
   }) {
     return signupSuccess?.call(this);
   }
@@ -441,8 +843,11 @@ class _$SignupSuccessImpl<T> implements SignupSuccess<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(SignupLoading<T> value)? signupLoading,
+    TResult Function(SignupGetCountryLoading<T> value)? signupGetCountryLoading,
+    TResult Function(SignupGetCountrySuccess<T> value)? signupGetCountrySuccess,
     TResult Function(SignupSuccess<T> value)? signupSuccess,
     TResult Function(SignupError<T> value)? signupError,
+    TResult Function(SignupGetCountryError<T> value)? signupGetCountryError,
     required TResult orElse(),
   }) {
     if (signupSuccess != null) {
@@ -528,8 +933,11 @@ class _$SignupErrorImpl<T> implements SignupError<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() signupLoading,
+    required TResult Function() signupGetCountryLoading,
+    required TResult Function(T data) signupGetCountrySuccess,
     required TResult Function(T data) signupSuccess,
     required TResult Function(String error) signupError,
+    required TResult Function(String error) signupGetCountryError,
   }) {
     return signupError(error);
   }
@@ -539,8 +947,11 @@ class _$SignupErrorImpl<T> implements SignupError<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? signupLoading,
+    TResult? Function()? signupGetCountryLoading,
+    TResult? Function(T data)? signupGetCountrySuccess,
     TResult? Function(T data)? signupSuccess,
     TResult? Function(String error)? signupError,
+    TResult? Function(String error)? signupGetCountryError,
   }) {
     return signupError?.call(error);
   }
@@ -550,8 +961,11 @@ class _$SignupErrorImpl<T> implements SignupError<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? signupLoading,
+    TResult Function()? signupGetCountryLoading,
+    TResult Function(T data)? signupGetCountrySuccess,
     TResult Function(T data)? signupSuccess,
     TResult Function(String error)? signupError,
+    TResult Function(String error)? signupGetCountryError,
     required TResult orElse(),
   }) {
     if (signupError != null) {
@@ -565,8 +979,14 @@ class _$SignupErrorImpl<T> implements SignupError<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(SignupLoading<T> value) signupLoading,
+    required TResult Function(SignupGetCountryLoading<T> value)
+        signupGetCountryLoading,
+    required TResult Function(SignupGetCountrySuccess<T> value)
+        signupGetCountrySuccess,
     required TResult Function(SignupSuccess<T> value) signupSuccess,
     required TResult Function(SignupError<T> value) signupError,
+    required TResult Function(SignupGetCountryError<T> value)
+        signupGetCountryError,
   }) {
     return signupError(this);
   }
@@ -576,8 +996,13 @@ class _$SignupErrorImpl<T> implements SignupError<T> {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(SignupLoading<T> value)? signupLoading,
+    TResult? Function(SignupGetCountryLoading<T> value)?
+        signupGetCountryLoading,
+    TResult? Function(SignupGetCountrySuccess<T> value)?
+        signupGetCountrySuccess,
     TResult? Function(SignupSuccess<T> value)? signupSuccess,
     TResult? Function(SignupError<T> value)? signupError,
+    TResult? Function(SignupGetCountryError<T> value)? signupGetCountryError,
   }) {
     return signupError?.call(this);
   }
@@ -587,8 +1012,11 @@ class _$SignupErrorImpl<T> implements SignupError<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
     TResult Function(SignupLoading<T> value)? signupLoading,
+    TResult Function(SignupGetCountryLoading<T> value)? signupGetCountryLoading,
+    TResult Function(SignupGetCountrySuccess<T> value)? signupGetCountrySuccess,
     TResult Function(SignupSuccess<T> value)? signupSuccess,
     TResult Function(SignupError<T> value)? signupError,
+    TResult Function(SignupGetCountryError<T> value)? signupGetCountryError,
     required TResult orElse(),
   }) {
     if (signupError != null) {
@@ -606,4 +1034,176 @@ abstract class SignupError<T> implements SignupState<T> {
   @JsonKey(ignore: true)
   _$$SignupErrorImplCopyWith<T, _$SignupErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SignupGetCountryErrorImplCopyWith<T, $Res> {
+  factory _$$SignupGetCountryErrorImplCopyWith(
+          _$SignupGetCountryErrorImpl<T> value,
+          $Res Function(_$SignupGetCountryErrorImpl<T>) then) =
+      __$$SignupGetCountryErrorImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$SignupGetCountryErrorImplCopyWithImpl<T, $Res>
+    extends _$SignupStateCopyWithImpl<T, $Res, _$SignupGetCountryErrorImpl<T>>
+    implements _$$SignupGetCountryErrorImplCopyWith<T, $Res> {
+  __$$SignupGetCountryErrorImplCopyWithImpl(
+      _$SignupGetCountryErrorImpl<T> _value,
+      $Res Function(_$SignupGetCountryErrorImpl<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$SignupGetCountryErrorImpl<T>(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SignupGetCountryErrorImpl<T> implements SignupGetCountryError<T> {
+  const _$SignupGetCountryErrorImpl({required this.error});
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'SignupState<$T>.signupGetCountryError(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignupGetCountryErrorImpl<T> &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignupGetCountryErrorImplCopyWith<T, _$SignupGetCountryErrorImpl<T>>
+      get copyWith => __$$SignupGetCountryErrorImplCopyWithImpl<T,
+          _$SignupGetCountryErrorImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() signupLoading,
+    required TResult Function() signupGetCountryLoading,
+    required TResult Function(T data) signupGetCountrySuccess,
+    required TResult Function(T data) signupSuccess,
+    required TResult Function(String error) signupError,
+    required TResult Function(String error) signupGetCountryError,
+  }) {
+    return signupGetCountryError(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? signupLoading,
+    TResult? Function()? signupGetCountryLoading,
+    TResult? Function(T data)? signupGetCountrySuccess,
+    TResult? Function(T data)? signupSuccess,
+    TResult? Function(String error)? signupError,
+    TResult? Function(String error)? signupGetCountryError,
+  }) {
+    return signupGetCountryError?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? signupLoading,
+    TResult Function()? signupGetCountryLoading,
+    TResult Function(T data)? signupGetCountrySuccess,
+    TResult Function(T data)? signupSuccess,
+    TResult Function(String error)? signupError,
+    TResult Function(String error)? signupGetCountryError,
+    required TResult orElse(),
+  }) {
+    if (signupGetCountryError != null) {
+      return signupGetCountryError(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial<T> value) initial,
+    required TResult Function(SignupLoading<T> value) signupLoading,
+    required TResult Function(SignupGetCountryLoading<T> value)
+        signupGetCountryLoading,
+    required TResult Function(SignupGetCountrySuccess<T> value)
+        signupGetCountrySuccess,
+    required TResult Function(SignupSuccess<T> value) signupSuccess,
+    required TResult Function(SignupError<T> value) signupError,
+    required TResult Function(SignupGetCountryError<T> value)
+        signupGetCountryError,
+  }) {
+    return signupGetCountryError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial<T> value)? initial,
+    TResult? Function(SignupLoading<T> value)? signupLoading,
+    TResult? Function(SignupGetCountryLoading<T> value)?
+        signupGetCountryLoading,
+    TResult? Function(SignupGetCountrySuccess<T> value)?
+        signupGetCountrySuccess,
+    TResult? Function(SignupSuccess<T> value)? signupSuccess,
+    TResult? Function(SignupError<T> value)? signupError,
+    TResult? Function(SignupGetCountryError<T> value)? signupGetCountryError,
+  }) {
+    return signupGetCountryError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial<T> value)? initial,
+    TResult Function(SignupLoading<T> value)? signupLoading,
+    TResult Function(SignupGetCountryLoading<T> value)? signupGetCountryLoading,
+    TResult Function(SignupGetCountrySuccess<T> value)? signupGetCountrySuccess,
+    TResult Function(SignupSuccess<T> value)? signupSuccess,
+    TResult Function(SignupError<T> value)? signupError,
+    TResult Function(SignupGetCountryError<T> value)? signupGetCountryError,
+    required TResult orElse(),
+  }) {
+    if (signupGetCountryError != null) {
+      return signupGetCountryError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignupGetCountryError<T> implements SignupState<T> {
+  const factory SignupGetCountryError({required final String error}) =
+      _$SignupGetCountryErrorImpl<T>;
+
+  String get error;
+  @JsonKey(ignore: true)
+  _$$SignupGetCountryErrorImplCopyWith<T, _$SignupGetCountryErrorImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }

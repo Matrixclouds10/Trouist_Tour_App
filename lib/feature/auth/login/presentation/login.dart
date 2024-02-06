@@ -16,6 +16,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit =context.read<LoginCubit>();
+    print('building... Login Screen');
     return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0, ),
     child:
     Scaffold(
@@ -61,39 +62,53 @@ class LoginScreen extends StatelessWidget {
                                 verticalSpace(5),
                                 CustomTextField(
                                   validationFunc: (value){
-                                    if (value == null ||
-                                        value.isEmpty ||
-                                        !AppRegex.isEmailValid(value)) {
+                                    if (value == null || value.isEmpty) {
                                       return 'Please enter a valid email';
                                     }
                                     return null;
                                   },
+                                  textInputType: TextInputType.number,
                                   contentVerticalPadding:15.h,
                                   prefixIcon: const Icon(Icons.phone,color: Color(0xff818181),),
                                   hintText: '',
                                   controller: cubit.phoneController,),
                                 verticalSpace(20),
-                                Text('Password',
-                                  style: TextStyles.font14CustomBlack500w,),
+                                Text('Password', style: TextStyles.font14CustomBlack500w,),
                                 verticalSpace(5),
-                                CustomTextField(
-                                  validationFunc: (value){
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter a valid password';
-                                    }
-                                    return null;
-                                  },
-                                  onFieldSubmitted: (val){
-                                    if(context.read<LoginCubit>().formKey.currentState!.validate()){
-                                      cubit.emitLoginStates(context);
-                                    }
-                                  },
-                                  textInputAction: TextInputAction.done,
-                                  contentVerticalPadding:15.h,
-                                  prefixIcon: const Icon(Icons.lock_open_outlined,color: Color(0xff818181),),
-                                  hintText: '',
-                                  suffixIcon: IconButton(onPressed: (){},icon: const Icon(Icons.visibility_off_outlined,color: Color(0xff818181),),),
-                                  controller:cubit.passwordController,),
+                                StatefulBuilder(builder: (context,setState){
+                                  return   CustomTextField(
+                                    validationFunc: (value){
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter a valid password';
+                                      }
+                                      return null;
+                                    },
+                                    onFieldSubmitted: (val){
+                                      if(context.read<LoginCubit>().formKey.currentState!.validate()){
+                                        cubit.emitLoginStates(context);
+                                      }
+                                    },
+                                    textInputAction: TextInputAction.done,
+                                    contentVerticalPadding:15.h,
+                                    prefixIcon: const Icon(Icons.lock_open_outlined,color: Color(0xff818181),),
+                                    hintText: '',
+                                    isPassword: cubit.isVisible,
+                                    suffixIcon: IconButton(onPressed: (){
+                                      setState((){
+                                        cubit.isVisible=!cubit.isVisible;
+                                      });
+                                    },icon:
+                                    cubit.isVisible?
+                                    const Icon(Icons.visibility_off_outlined,
+                                      color: Color(0xff818181),
+                                    ):
+                                    const Icon(Icons.visibility_outlined,
+                                      color: AppColorLight.primaryColor,
+                                    ),
+                                    ),
+                                    controller:cubit.passwordController,);
+                                }),
+
                                 verticalSpace(10),
                                 Align(
                                   alignment: AlignmentDirectional.centerEnd,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
@@ -10,6 +11,7 @@ import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/routing/routes.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/feature/auth/login/presentation/login.dart';
+import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/presentation/register.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
@@ -68,29 +70,35 @@ class LogAs extends StatelessWidget {
               borderColor: const Color(0xff009688),
               text: 'Signup',
               onPressed: () {
+
                 context.pushNamed(Routes.signUpScreen);
               },),
             verticalSpace(16),
-            Container(
-              padding: const EdgeInsets.only(
-                bottom: 2, // Space between underline and text
-              ),
-              decoration:  BoxDecoration(
-                  border: Border(bottom: BorderSide(
-                    color: Theme.of(context).primaryColor,
-                    width: 1.2, // Underline thickness
-                  ))
-              ),
-              child: Text(
-                'Login As A Guest',
-                style:TextStyles.font17CustomGray400WightLato.copyWith(
-                  color: Theme.of(context).primaryColor,
-                  fontFamily: AppFontsFamily.fontPoppins
+            InkWell(
+              onTap: (){
+                context.pushNamed(Routes.rootScreen);
+              },
+              child: Container(
+                padding: const EdgeInsets.only(
+                  bottom: 2, // Space between underline and text
                 ),
-                textScaleFactor: ScaleSize.textScaleFactor(context),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.center,
+                decoration:  BoxDecoration(
+                    border: Border(bottom: BorderSide(
+                      color: Theme.of(context).primaryColor,
+                      width: 1.2, // Underline thickness
+                    ))
+                ),
+                child: Text(
+                  'Login As A Guest',
+                  style:TextStyles.font17CustomGray400WightLato.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontFamily: AppFontsFamily.fontPoppins
+                  ),
+                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
             verticalSpace(100),

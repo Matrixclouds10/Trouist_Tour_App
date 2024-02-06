@@ -7,7 +7,11 @@ import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_slider_widget.dart';
 
 class CustomTopDetailsStackWidget extends StatefulWidget {
-  const CustomTopDetailsStackWidget({super.key});
+  const CustomTopDetailsStackWidget({super.key,  this.endDate,  this.startDate,  this.day, required this.image});
+  final String? endDate;
+  final String? startDate;
+  final String? day;
+  final List<String?> image;
 
   @override
   State<CustomTopDetailsStackWidget> createState() => _CustomTopDetailsStackWidgetState();
@@ -20,7 +24,7 @@ class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidge
   Widget build(BuildContext context) {
     return  Stack(
       children: [
-        const CustomSliderWidget(image: [AppImages.test2,AppImages.test2,AppImages.test2,AppImages.test2,AppImages.test2,],),
+        CustomSliderWidget(image: widget.image),
         Positioned(
             top: 40.h,
             left: 10.w,
@@ -55,9 +59,9 @@ class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidge
               height: 52.h,
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0,),
+                  padding: const EdgeInsets.only(left: 10.0,),
                   child: Text(
-                    '3 Days       25 Dec 23 - 28 Dec 23 ',
+                    '${widget.day??'3'} Days     ${widget.startDate??'25 Dec 23'} / ${widget.startDate??'25 Dec 23'}',
                     textScaleFactor: ScaleSize.textScaleFactor(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

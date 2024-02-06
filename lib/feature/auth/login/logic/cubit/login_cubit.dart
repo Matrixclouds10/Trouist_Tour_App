@@ -11,6 +11,8 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool isVisible= true;
+
 
   void emitLoginStates(BuildContext context) async {
     emit(const LoginState.loading());

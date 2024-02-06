@@ -15,7 +15,7 @@ class BookingDetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const CustomTopDetailsStackWidget(),
+            // const CustomTopDetailsStackWidget(),
             verticalSpace(24),
              CustomReligiousProgramWidget(isHasDes: true,type: type,),
             verticalSpace(24),

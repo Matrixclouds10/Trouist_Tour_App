@@ -33,7 +33,8 @@ class SignupBlocListener extends StatelessWidget {
           },
           signupSuccess: (signupResponse) {
             context.pop();
-            showSuccessDialog(context);
+            context.pushNamed(Routes.rootScreen);
+            // showSuccessDialog(context);
           },
           signupError: (error) {
             setupErrorState(context, error);
