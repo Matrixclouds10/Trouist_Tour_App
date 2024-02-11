@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
@@ -51,7 +52,7 @@ class _CustomTermsWidgetState extends State<CustomTermsWidget> {
                   },)
               ),
               horizontalSpace(10),
-              Text('I agree the ',
+              Text('agree'.tr(),
                 style:
                 TextStyles.font12CustomGray400WeightLato.copyWith(
                     color: cubit.color
@@ -83,7 +84,7 @@ class _CustomTermsWidgetState extends State<CustomTermsWidget> {
                      }
 
                     },
-                    child: Text(' terms & Conditions',
+                    child: Text(' ${'t&c'.tr()}',
                       style:
                       TextStyles.font12CustomGray400WeightLato.copyWith(
                           color: cubit.color2

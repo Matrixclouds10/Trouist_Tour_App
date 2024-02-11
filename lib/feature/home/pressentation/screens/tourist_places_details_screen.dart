@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
@@ -6,11 +7,12 @@ import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
+import 'package:tourist_tour_app/feature/home/data/models/tourist_places_response.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_slider_widget.dart';
 
 class TouristPlaceDetailsScreen extends StatefulWidget {
-  const TouristPlaceDetailsScreen({super.key});
-
+  const TouristPlaceDetailsScreen({super.key, this.touristPlaceResponse});
+  final TouristPlaceResponse? touristPlaceResponse;
   @override
   State<TouristPlaceDetailsScreen> createState() => _TouristPlaceDetailsScreenState();
 }
@@ -29,7 +31,7 @@ class _TouristPlaceDetailsScreenState extends State<TouristPlaceDetailsScreen> {
           children: [
             Stack(
               children: [
-                const CustomSliderWidget(image: [AppImages.category,AppImages.category,AppImages.category,AppImages.category],),
+                CustomSliderWidget(image:widget.touristPlaceResponse!.images!.map((e) => e.image!).toList()),
                 Positioned(
                     top: 40.h,
                     left: 10.w,
@@ -49,7 +51,6 @@ class _TouristPlaceDetailsScreenState extends State<TouristPlaceDetailsScreen> {
                       isFav==false?
                       Icons.favorite_border_rounded:Icons.favorite,color:isFav==false? Colors.white:Colors.red,))
                   ],
-
                 )),
                 Positioned(
                     bottom: 50.h,
@@ -59,13 +60,13 @@ class _TouristPlaceDetailsScreenState extends State<TouristPlaceDetailsScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.only(topRight: Radius.circular(8),bottomRight: Radius.circular(8))
                       ),
-                      width: 130.w,
+                      width: 150.w,
                       height: 30.h,
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 0.0,),
                           child: Text(
-                            '3 Tour Packages',
+                            '${widget.touristPlaceResponse!.packageTourCount} ${'tour_packages'.tr()}',
                             textScaleFactor: ScaleSize.textScaleFactor(context),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -81,29 +82,29 @@ class _TouristPlaceDetailsScreenState extends State<TouristPlaceDetailsScreen> {
               ],
             ),
             Padding(
-              padding:  EdgeInsets.only(left: 16.w,right: 16.w),
+              padding:  EdgeInsets.only(left: 16.w,right: 16.w,bottom: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Al-Rahma Mosque',
+                  Text(widget.touristPlaceResponse!.region!,
                     style: TextStyles.font17CustomBlack700WeightPoppins,
                     textScaleFactor: ScaleSize.textScaleFactor(context),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+
                   ),
                   verticalSpace(8),
-                  Text('Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum scelerisque eget. Dolor aenean egestas facilisis eget.',
+                  Text(widget.touristPlaceResponse!.information!,
                     style: TextStyles.font17CustomGray400WightLato,
                     textScaleFactor: ScaleSize.textScaleFactor(context),
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
+                  ),
+                  verticalSpace(10),
+                  Text(widget.touristPlaceResponse!.historicalFacts!,
+                    style: TextStyles.font17CustomGray400WightLato,
+                    textScaleFactor: ScaleSize.textScaleFactor(context),
                   ),
                   verticalSpace(32),
-                  Text('Related Programs',
+                  Text('related_programs'.tr(),
                     style: TextStyles.font17CustomBlack700WeightPoppins,
                     textScaleFactor: ScaleSize.textScaleFactor(context),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
                   verticalSpace(16),
                   SizedBox(

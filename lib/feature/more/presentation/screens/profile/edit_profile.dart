@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
@@ -7,8 +7,6 @@ import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
-import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
-import 'package:tourist_tour_app/feature/profile/presentaion/screens/change_password_screen.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_button.dart';
@@ -24,7 +22,7 @@ class EditProfileScreen extends StatelessWidget {
       child: Scaffold(
         appBar:  PreferredSize(
             preferredSize: Size(double.infinity,62.h),
-            child: const CustomAppBar(title:'Edit Profile', hasBackButton: true,)),
+            child:  CustomAppBar(title:'edit_profile'.tr(), hasBackButton: true,)),
         body: Padding(
           padding:  EdgeInsets.only(left: 16.w,right: 16.w),
           child: SingleChildScrollView(
@@ -68,13 +66,13 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                 ),
                 verticalSpace(24),
-                Text('Full Name',
+                Text('full_name'.tr(),
                 style: TextStyles.font17Black400WightLato.copyWith(
                   color: AppColorLight.customBlack,
                 ),),
                 const TextField(),
                 verticalSpace(16),
-                Text('Phone Number',
+                Text('phone_number'.tr(),
                   style: TextStyles.font17Black400WightLato.copyWith(
                     color: AppColorLight.customBlack,
                   ),
@@ -82,7 +80,7 @@ class EditProfileScreen extends StatelessWidget {
                 const TextField(),
                 verticalSpace(16),
 
-                Text('Email Address',
+                Text('email_address'.tr(),
                   style: TextStyles.font17Black400WightLato.copyWith(
                     color: AppColorLight.customBlack,
                   ),
@@ -90,7 +88,7 @@ class EditProfileScreen extends StatelessWidget {
                 const TextField(),
                 verticalSpace(16),
 
-                Text('Country',
+                Text('country'.tr(),
                   style: TextStyles.font17Black400WightLato.copyWith(
                     color: AppColorLight.customBlack,
                   ),
@@ -98,20 +96,20 @@ class EditProfileScreen extends StatelessWidget {
                 const TextField(),
                 verticalSpace(16),
 
-                Text('Password',
+                Text('password'.tr(),
                   style: TextStyles.font17Black400WightLato.copyWith(
                     color: AppColorLight.customBlack,),),
                   const TextField(
                     obscureText: true,
                   ),
                 verticalSpace(100),
-                CustomMaterialButtonWidget(text: 'Save', onPressed: (){
+                CustomMaterialButtonWidget(text: 'save'.tr(), onPressed: (){
                   showToast('Success Save', ToastStates.success, context);
                 }),
                 verticalSpace(16),
 
-                CustomTextButton(text: 'Change Password', onPressed: (){
-                  NavigatePages.pushToPage(const ChangePasswordScreen(), context);
+                CustomTextButton(text: 'change_password'.tr(), onPressed: (){
+                  // NavigatePages.pushToPage(const ChangePasswordScreen(), context);
                 },
                 height: 56.h,
                   width: 343.w,
@@ -123,7 +121,7 @@ class EditProfileScreen extends StatelessWidget {
                       showToast('Cancel Done', ToastStates.success, context);
 
                     },
-                    child: Text('Cancel',
+                    child: Text('cancel'.tr(),
                     style: TextStyles.font17Black400WightLato.copyWith(
                       fontFamily: AppFontsFamily.fontPoppins,
                       color: AppColorLight.primaryColor

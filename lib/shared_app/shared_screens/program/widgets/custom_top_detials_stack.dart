@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
@@ -61,7 +62,7 @@ class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidge
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0,),
                   child: Text(
-                    '${widget.day??'3'} Days     ${widget.startDate??'25 Dec 23'} / ${widget.startDate??'25 Dec 23'}',
+                    '${widget.day??'3'} ${'days'.tr()}   ${widget.startDate??'25 Dec 23'}/ ${widget.startDate??'25 Dec 23'}',
                     textScaleFactor: ScaleSize.textScaleFactor(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

@@ -6,8 +6,10 @@ import 'package:tourist_tour_app/feature/auth/login/data/repos/login_repo.dart';
 import 'package:tourist_tour_app/feature/auth/login/logic/cubit/login_cubit.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/data/repos/sign_up_repo.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
-import 'package:tourist_tour_app/feature/home/data/repos/sliders_repo.dart';
+import 'package:tourist_tour_app/feature/home/data/repos/home_repo.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
+import 'package:tourist_tour_app/feature/more/data/repo/more_repo.dart';
+import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -26,4 +28,8 @@ Future<void> setupGetIt() async {
   // home
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
+  //more
+  getIt.registerLazySingleton<MoreRepo>(() => MoreRepo(getIt()));
+  getIt.registerFactory<MoreCubit>(() => MoreCubit(getIt()));
+
 }

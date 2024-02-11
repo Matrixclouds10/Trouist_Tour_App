@@ -16,39 +16,48 @@ class BookingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3, // number of tabs
-      child: SafeArea(
-        minimum:EdgeInsets.only(top: 20.h),
-        child: Scaffold(
-          appBar:
-          PreferredSize(
-              preferredSize: Size(double.infinity,62.h),
-              child:  CustomAppBar(title:'Bookings', hasBackButton: false,
-                onTap: (){
-                // Navigator.pop(context);
-                  NavigatePages.pushToPage(const RootPages(check:'0',), context);}
-              )),
-          body: Column(
-            children: [
-              TabBar(
-                labelStyle: TextStyles.font17Black400WightLato,
-                indicatorColor: AppColorLight.primaryColor,
-                labelColor: AppColorLight.primaryColor,
-                tabs: const [
-                  Tab(text: 'Up Coming'),
-                  Tab(text: 'Completed '),
-                  Tab(text: 'Canceled'),
-                ],
-              ),
-              const Expanded(
-                child: TabBarView(
-                  children: [
-                    CustomUpComingWidget(),
-                    CustomCompleteWidget(),
-                    CustomCanceledWidget(),
+      child: PopScope(
+        canPop: false,
+        onPopInvoked: (_) async {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => const RootPages(
+                check: '0',
+              )));
+        },
+        child: SafeArea(
+          minimum:EdgeInsets.only(top: 20.h),
+          child: Scaffold(
+            appBar:
+            PreferredSize(
+                preferredSize: Size(double.infinity,62.h),
+                child:  CustomAppBar(title:'Bookings', hasBackButton: false,
+                  onTap: (){
+                  // Navigator.pop(context);
+                    NavigatePages.pushToPage(const RootPages(check:'0',), context);}
+                )),
+            body: Column(
+              children: [
+                TabBar(
+                  labelStyle: TextStyles.font17Black400WightLato,
+                  indicatorColor: AppColorLight.primaryColor,
+                  labelColor: AppColorLight.primaryColor,
+                  tabs: const [
+                    Tab(text: 'Up Coming'),
+                    Tab(text: 'Completed '),
+                    Tab(text: 'Canceled'),
                   ],
                 ),
-              ),
-            ],
+                const Expanded(
+                  child: TabBarView(
+                    children: [
+                      CustomUpComingWidget(),
+                      CustomCompleteWidget(),
+                      CustomCanceledWidget(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

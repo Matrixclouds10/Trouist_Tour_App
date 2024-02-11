@@ -4,6 +4,7 @@ import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
+import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import '../../data/models/model.dart';
 
@@ -36,7 +37,9 @@ class CustomPageViewBodyWidget extends StatelessWidget {
                 right: 16.5.w,
                 child: InkWell(
                   onTap: (){
-                    NavigatePages.pushToPage(const LogAs(), context);
+                    CacheHelper.saveDate(key: 'onBoarding', value: true).then((value){
+                      NavigatePages.pushToPage(const LogAs(), context);
+                    });
                   },
                   child: SizedBox(
                     child:  Text("Skip",

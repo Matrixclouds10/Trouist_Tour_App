@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tourist_tour_app/core/routing/routes.dart';
+import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import 'package:tourist_tour_app/feature/auth/login/logic/cubit/login_cubit.dart';
 import 'package:tourist_tour_app/feature/auth/login/presentation/login.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
@@ -40,6 +41,10 @@ class AppRouter {
         case Routes.splashScreen:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
+        );
+        case Routes.logAsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const LogAs(),
         );
       default:
         return MaterialPageRoute(

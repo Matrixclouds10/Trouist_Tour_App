@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
@@ -27,11 +28,11 @@ class ProgramDetailsScreen extends StatelessWidget {
           verticalSpace(24),
            CustomProgramIncludesWidget(programResponse: programResponse!,),
           verticalSpace(70),
-          CustomMaterialButtonWidget(text: 'Book Now', onPressed: (){
+          CustomMaterialButtonWidget(text: 'book_now'.tr(), onPressed: (){
             if(type=='offer'){
-              NavigatePages.pushToPage(const ConfirmBookingScreen(), context);
+              NavigatePages.pushToPage( ConfirmBookingScreen( programResponse: programResponse,), context);
             }else{
-              NavigatePages.pushToPage(const ProgramDetailsOverViewScreen(), context);
+              NavigatePages.pushToPage( ProgramDetailsOverViewScreen(programResponse:programResponse! ,), context);
             }
           }),
           verticalSpace(115),

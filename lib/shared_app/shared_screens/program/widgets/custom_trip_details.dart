@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
@@ -27,7 +28,7 @@ class CustomTripDetailsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             verticalSpace(13),
-            Text('Trip Details',
+            Text('trip_details'.tr(),
               textScaleFactor: ScaleSize.textScaleFactor(context),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -35,7 +36,8 @@ class CustomTripDetailsWidget extends StatelessWidget {
             ),
             Expanded(child:
             ListView.separated(
-               itemCount: programResponse!.tourRoute!.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: programResponse!.tourRoute!.length,
                 itemBuilder: (context,index){
                  var mq =MediaQuery.of(context).size;
                   return Row(

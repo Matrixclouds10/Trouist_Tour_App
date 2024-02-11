@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
-import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/resources/data_state.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
@@ -31,15 +31,15 @@ class CustomTopBodyHomeWidget extends StatelessWidget {
                     .of(context)
                     .primaryColor,),
               horizontalSpace(4),
-              Text('king Abdelaziz St',
-                style: TextStyles.font17Black400WightLato.copyWith(
-                  fontFamily: AppFontsFamily.fontPoppins,
+              Expanded(
+                child: Text('king_home'.tr(),
+                  style: TextStyles.font17Black400WightLato.copyWith(
+                    fontFamily: AppFontsFamily.fontPoppins,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                textScaleFactor: ScaleSize.textScaleFactor(context),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
               ),
-              const Spacer(),
               InkWell(
                 onTap: () {
                   NavigatePages.pushToPage(const NotificationScreen(), context);
@@ -52,10 +52,9 @@ class CustomTopBodyHomeWidget extends StatelessWidget {
           ),
         ),
         verticalSpace(16),
-        Text(" Let's The Fun Begin !",
+        Text("begin_home".tr(),
           style: TextStyles.font24CustomBlack700WeightPoppins,
-          textScaleFactor: ScaleSize.textScaleFactor(context),
-          maxLines: 1,
+          maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
         verticalSpace(16),

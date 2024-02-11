@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
-import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
@@ -69,50 +69,56 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                     style: TextStyles.font17CustomBlack700WeightPoppins,
                   ),
                 ),
-                const Spacer(),
-                SizedBox(
-                  width: 80.w,
-                  child: Text('(150 Review)',
-                    textScaleFactor: ScaleSize.textScaleFactor(context),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyles.font12CustomRed500WeightLato.copyWith(color: AppColorLight.desColor),
-                  ),
-                ),
-                horizontalSpace(2),
-                SizedBox(
-                  width: 30.w,
-                  child: Text('4.8',
-                    textScaleFactor: ScaleSize.textScaleFactor(context),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyles.font18CustomBlack600Weight.copyWith(
-                        fontFamily: AppFontsFamily.fontCairo
-                    ),
-                  ),
-                ),
-                const Icon(Icons.star,color: AppColorLight.starColor,),
+                // const Spacer(),
+                // SizedBox(
+                //   width: 80.w,
+                //   child: Text('(150 Review)',
+                //     textScaleFactor: ScaleSize.textScaleFactor(context),
+                //     maxLines: 1,
+                //     overflow: TextOverflow.ellipsis,
+                //     style: TextStyles.font12CustomRed500WeightLato.copyWith(color: AppColorLight.desColor),
+                //   ),
+                // ),
+                // horizontalSpace(2),
+                // SizedBox(
+                //   width: 30.w,
+                //   child: Text('4.8',
+                //     textScaleFactor: ScaleSize.textScaleFactor(context),
+                //     maxLines: 1,
+                //     overflow: TextOverflow.ellipsis,
+                //     style: TextStyles.font18CustomBlack600Weight.copyWith(
+                //         fontFamily: AppFontsFamily.fontCairo
+                //     ),
+                //   ),
+                // ),
+                // const Icon(Icons.star,color: AppColorLight.starColor,),
               ],
             ),
             Row(
               children: [
-                Text('${programResponse!.price} RS',
+                Text('${programResponse!.price} ${'rs'.tr()}',
                   textScaleFactor: ScaleSize.textScaleFactor(context),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
-                      // decoration: TextDecoration.lineThrough,
-                      // decorationColor: AppColorLight.redColor,
-                      color: AppColorLight.redColor),
+                  style:
+                  programResponse!.newPrice!=null?
+                  TextStyles.font17CustomBlack700WeightPoppins.copyWith(
+                      decoration: TextDecoration.lineThrough,
+                      decorationColor: AppColorLight.redColor,
+                      color: AppColorLight.redColor): TextStyles.font17CustomBlack700WeightPoppins.copyWith(
+                       color: AppColorLight.redColor,
+                  )
                 ),
                 horizontalSpace(5),
-                Text('${programResponse!.price} RS',
+
+                programResponse!.newPrice!=null?
+                Text('${programResponse!.newPrice} ${'rs'.tr()}',
                   textScaleFactor: ScaleSize.textScaleFactor(context),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                       color: AppColorLight.desColor),
-                ),
+                ):const SizedBox.shrink(),
                 const Spacer(),
               ],
             ),
@@ -128,7 +134,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   children: [
                     Image.asset(AppImages.returnCloc),
                     horizontalSpace(5),
-                    Text('${programResponse!.duration} Days',
+                    Text('${programResponse!.duration} ${'days'.tr()}',
                       textScaleFactor: ScaleSize.textScaleFactor(context),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -165,7 +171,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   children: [
                     Image.asset(AppImages.group),
                     horizontalSpace(5),
-                    Text('${programResponse!.groupType} Trip',
+                    Text('${programResponse!.groupType} ${'trip'.tr()}',
                       textScaleFactor: ScaleSize.textScaleFactor(context),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -182,7 +188,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                     horizontalSpace(5),
                     SizedBox(
                       width: 120.w,
-                      child: Text('${programResponse!.groupSize} Persons',
+                      child: Text('${programResponse!.groupSize} ${'persons'.tr()}',
                         textScaleFactor: ScaleSize.textScaleFactor(context),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

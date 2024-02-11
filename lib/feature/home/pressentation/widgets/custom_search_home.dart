@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
@@ -17,7 +18,7 @@ class CustomSearchHome extends StatelessWidget {
       child: CustomTextField(
           enabled: false,
           borderColor: AppColorLight.customGray,
-          hintText: 'Search For A Tourist Place',
+          hintText: 'search_home'.tr(),
           hintStyle: TextStyles.font14CustomGray400w,
           prefixIcon: const Icon(Icons.search,color: AppColorLight.gray2,),
           controller: TextEditingController()),

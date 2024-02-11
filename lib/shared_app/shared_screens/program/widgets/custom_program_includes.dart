@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +17,7 @@ class CustomProgramIncludesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   Container(
-      height:310.h ,
+      height:(programResponse!.priceIncludes!.length+2) *50.h ,
       width: 343.w,
       decoration: BoxDecoration(
           color: color ??AppColorLight.customGray.withOpacity(0.10),
@@ -28,7 +29,7 @@ class CustomProgramIncludesWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             verticalSpace(13),
-            Text('The program includes',
+            Text('program_includes'.tr(),
               textScaleFactor: ScaleSize.textScaleFactor(context),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -37,6 +38,7 @@ class CustomProgramIncludesWidget extends StatelessWidget {
             verticalSpace(8),
             Expanded(
               child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount:  programResponse!.priceIncludes!.length,
                   itemBuilder: (context,index){
                 return CustomProgramIncludeItem(text: programResponse!.priceIncludes![index],);

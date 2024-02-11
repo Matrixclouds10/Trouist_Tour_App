@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,12 +22,12 @@ class CustomSignUpBodyWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomAuthTextWidget(text: 'Full Name',),
+         CustomAuthTextWidget(text: 'full_name'.tr(),),
         verticalSpace(5),
         CustomTextField(
           validationFunc: (value) {
             if (value == null || value.isEmpty) {
-              return 'Please enter a valid full name';
+              return 'sign_val_na'.tr();
             }
             return null;
           },
@@ -39,14 +40,14 @@ class CustomSignUpBodyWidget extends StatelessWidget {
           controller: cubit.nameController,
         ),
         verticalSpace(20),
-        const CustomAuthTextWidget(
-          text: 'Phone Number',
+         CustomAuthTextWidget(
+          text: 'phone_number'.tr(),
         ),
         verticalSpace(5),
         CustomTextField(
           validationFunc: (value) {
             if (value == null || value.isEmpty) {
-              return 'Please enter a valid phone';
+              return 'sign_val_phone'.tr();
             }
             return null;
           },
@@ -60,8 +61,8 @@ class CustomSignUpBodyWidget extends StatelessWidget {
           controller: cubit.phoneController,
         ),
         verticalSpace(20),
-        const CustomAuthTextWidget(
-          text: 'Email Address',
+         CustomAuthTextWidget(
+          text: 'email_address'.tr(),
         ),
         verticalSpace(5),
         CustomTextField(
@@ -69,7 +70,7 @@ class CustomSignUpBodyWidget extends StatelessWidget {
             if (value == null ||
                 value.isEmpty ||
                 !AppRegex.isEmailValid(value)) {
-              return 'Please enter a valid email';
+              return 'login_val_em'.tr();
             }
             return null;
           },
@@ -82,8 +83,8 @@ class CustomSignUpBodyWidget extends StatelessWidget {
           controller: cubit.emailController,
         ),
         verticalSpace(20),
-        const CustomAuthTextWidget(
-          text: 'Country',
+         CustomAuthTextWidget(
+          text: 'country'.tr(),
         ),
         verticalSpace(5),
         BlocConsumer<SignupCubit, SignupState>(
@@ -180,7 +181,7 @@ class CustomSignUpBodyWidget extends StatelessWidget {
         ),
         // const CustomCountryWidget(),
         verticalSpace(20),
-        const CustomAuthTextWidget(text: 'Password',),
+         CustomAuthTextWidget(text: 'password'.tr(),),
         verticalSpace(5),
         StatefulBuilder(builder: (context, setState) {
           return CustomTextField(
@@ -188,7 +189,7 @@ class CustomSignUpBodyWidget extends StatelessWidget {
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
                 if (value!.length <= 6) {
-                  return 'Please enter a valid password';
+                  return 'login_val_pa'.tr();
                 }
               }
               return null;
@@ -219,8 +220,8 @@ class CustomSignUpBodyWidget extends StatelessWidget {
           );
         }),
         verticalSpace(20),
-        const CustomAuthTextWidget(
-          text: 'Confirm Password',
+         CustomAuthTextWidget(
+          text: 'confirm_password'.tr(),
         ),
         verticalSpace(5),
         StatefulBuilder(builder: (context, setState) {
@@ -228,10 +229,10 @@ class CustomSignUpBodyWidget extends StatelessWidget {
             isPassword: cubit.isVisibleConfirm,
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter a valid confirm password';
+                return 'please_valid_confirm'.tr();
               } else {
                 if (cubit.passwordController.text != value) {
-                  return 'Password confirmation does not match the password';
+                  return 'not_match'.tr();
                 }
               }
               return null;

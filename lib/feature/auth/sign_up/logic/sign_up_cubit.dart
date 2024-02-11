@@ -16,7 +16,7 @@ class SignupCubit extends Cubit<SignupState> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmationController = TextEditingController();
-  List<String> countryList =['Egypt','Sudia Arabi'];
+  // List<String> countryList =['Egypt','Sudia Arabi'];
   final formKey = GlobalKey<FormState>();
   bool isChecked=false;
   bool isVisible=true;

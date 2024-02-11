@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,17 +60,17 @@ class RegisterScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 verticalSpace(10),
-                                Text('Signup!',
+                                Text('sign_up!'.tr(),
                                 style: TextStyles.font24CustomBlack700WeightPoppins,
                                 ),
                                 verticalSpace(2),
-                                Text('Create A New Account',
+                                Text('create_account'.tr(),
                                   style:  TextStyles.font17CustomGray400WightLato,
                                 ),
                                 verticalSpace(25),
                                 const CustomSignUpBodyWidget(),
                                 verticalSpace(87),
-                                CustomMaterialButtonWidget(text: 'Signup', onPressed:
+                                CustomMaterialButtonWidget(text: 'sign_up'.tr(), onPressed:
                                     (){
                                   if(context.read<SignupCubit>().formKey.currentState!.validate()){
                                     if(cubit.countryChooseId!=null){
@@ -80,7 +81,7 @@ class RegisterScreen extends StatelessWidget {
                                         cubit.emitSignupStates();
                                       }
                                     }else{
-                                      showToast('choose country', ToastStates.error, context);
+                                      showToast('choose_country'.tr(), ToastStates.error, context);
                                     }
                                   }
                                 }

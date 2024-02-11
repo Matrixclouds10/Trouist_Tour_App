@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
@@ -29,7 +30,7 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
       child: Scaffold(
         appBar:  PreferredSize(
             preferredSize: Size(double.infinity,62.h),
-            child: const CustomAppBar(title:'Your Program', hasBackButton: true,)),
+            child:  CustomAppBar(title:'your_program'.tr(), hasBackButton: true,)),
         body: Padding(
           padding:  EdgeInsets.only(left: 16.w,right: 16.w),
           child: SingleChildScrollView(
@@ -49,7 +50,7 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
                       )),
                 ),
                 verticalSpace(16),
-                Text('Type Of Group',
+                Text('type_of_group'.tr(),
                 style: TextStyles.font17CustomBlack700WeightPoppins,),
                 Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +68,7 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
                            });
                          },
                        ),
-                       Text('Family',
+                       Text('family'.tr(),
                          style: TextStyles.font17Black400WightLato.copyWith(
                              color: AppColorLight.customBlack
                          ),
@@ -88,7 +89,7 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
                            });
                          },
                        ),
-                       Text('Friends',
+                       Text('friends'.tr(),
                          style: TextStyles.font17Black400WightLato.copyWith(
                              color: AppColorLight.customBlack
                          ),
@@ -108,7 +109,7 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
                            });
                          },
                        ),
-                       Text('Couple',
+                       Text('couple'.tr(),
                          style: TextStyles.font17Black400WightLato.copyWith(
                              color: AppColorLight.customBlack
                          ),
@@ -119,19 +120,19 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
                ),
                 verticalSpace(16),
                 currentMethod==1?
-                const CustomDetailsOfCounterWidget(text1: 'Number Of Persons', text2: 'Number Of Childerns ( From 2 - 12 yeas )',
-                  text3: 'Number Of Babbies ( From 0 - 2 yeas )',)
+                 CustomDetailsOfCounterWidget(text1: 'number_persons'.tr(), text2: '${'number_children'.tr()} ( ${'from'.tr()} 2 - 12 ${'years'.tr()} )',
+                  text3: '${'number_babies'.tr()} ( ${'from'.tr()} 0 - 2 ${'years'.tr()} )',)
                     :const SizedBox.shrink(),
                 currentMethod==2?
-                const CustomDetailsOfCounterWidget(text1: 'Number Of Persons',
-                  text2: 'Number Of Males ', text3: 'Number Of Females ',):
+                 CustomDetailsOfCounterWidget(text1:  'number_persons'.tr(),
+                  text2: 'number_males'.tr(), text3: 'number_females'.tr(),):
                 const SizedBox.shrink(),
                 currentMethod==3?
-                const CustomDetailsOfCounterWidget(text1: 'Number Of Persons',
-                  text2: 'Number Of Males ', text3: 'Number Of Females ',):
+                 CustomDetailsOfCounterWidget(text1: 'number_persons'.tr(),
+                  text2: 'number_males'.tr(), text3: 'number_females'.tr(),):
                 const SizedBox.shrink(),
 
-                Text('Type Of Recepion & Arrival',
+                Text('type_reception_arrival'.tr(),
                   style: TextStyles.font17CustomBlack700WeightPoppins,),
                 Column(
                   children: [
@@ -148,7 +149,7 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
                             });
                           },
                         ),
-                        Text(' Booking Flight',
+                        Text('booking_flight'.tr(),
                           style: TextStyles.font17Black400WightLato.copyWith(
                               color: AppColorLight.customBlack
                           ),
@@ -168,7 +169,7 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
                             });
                           },
                         ),
-                        Text(' Reception At The Airport',
+                        Text('reception_airport'.tr(),
                           style: TextStyles.font17Black400WightLato.copyWith(
                               color: AppColorLight.customBlack
                           ),
@@ -188,7 +189,7 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
                             });
                           },
                         ),
-                        Text('Coming By Private Car',
+                        Text('coming_private_car'.tr(),
                           style: TextStyles.font17Black400WightLato.copyWith(
                               color: AppColorLight.customBlack
                           ),
@@ -199,11 +200,11 @@ class _CustomProgramScreenState extends State<CustomProgramScreen> {
                 ),
                 verticalSpace(16),
 
-                Text('Type Of Staying',
+                Text('type_staying'.tr(),
                   style: TextStyles.font17CustomBlack700WeightPoppins,),
                 const CustomTypeOfStayWidget(),
                 verticalSpace(85),
-                CustomMaterialButtonWidget(text: 'Confirm', onPressed: (){
+                CustomMaterialButtonWidget(text: 'confirm'.tr(), onPressed: (){
                   showToast('Successfully Confirm', ToastStates.success, context);
                 }),
                 verticalSpace(50),

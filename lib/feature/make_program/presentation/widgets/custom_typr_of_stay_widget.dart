@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 });
               },
             ),
-            Text('Resorts',
+            Text('resorts'.tr(),
               style: TextStyles.font17Black400WightLato.copyWith(
                   color: AppColorLight.customBlack
               ),
@@ -54,7 +55,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 });
               },
             ),
-            Text('Hotels',
+            Text('hotels'.tr(),
               style: TextStyles.font17Black400WightLato.copyWith(
                   color: AppColorLight.customBlack
               ),
@@ -76,7 +77,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 });
               },
             ),
-            Text('A Rural Place',
+            Text('rural_place'.tr(),
               style: TextStyles.font17Black400WightLato.copyWith(
                   color: AppColorLight.customBlack
               ),
@@ -98,7 +99,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 });
               },
             ),
-            Text('Furnished Apartments',
+            Text('furnished_apartments'.tr(),
               style: TextStyles.font17Black400WightLato.copyWith(
                   color: AppColorLight.customBlack
               ),
@@ -120,7 +121,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 });
               },
             ),
-            Text('Chalets',
+            Text('chalets'.tr(),
               style: TextStyles.font17Black400WightLato.copyWith(
                   color: AppColorLight.customBlack
               ),

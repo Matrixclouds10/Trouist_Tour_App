@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
-import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
-import 'package:tourist_tour_app/feature/tourist_places/presentation/screens/tourist_places_details_screen.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
+import 'package:tourist_tour_app/feature/home/pressentation/screens/tourist_places_details_screen.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_loading_widget.dart';
 
 class CustomTouristPlaces extends StatelessWidget {
   const CustomTouristPlaces({super.key});
 
   @override
   Widget build(BuildContext context) {
+    HomeCubit cubit =HomeCubit.get(context);
     return   GridView.count(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -18,10 +20,10 @@ class CustomTouristPlaces extends StatelessWidget {
       crossAxisSpacing: 5,
       mainAxisSpacing: 10,
       childAspectRatio: 1 / 0.75,
-      children: List.generate(10, (index) {
+      children: List.generate( cubit.touristPlacesResponseModel!.length, (index) {
         return InkWell(
           onTap: (){
-            NavigatePages.pushToPage(const TouristPlaceDetailsScreen(), context);
+            NavigatePages.pushToPage( TouristPlaceDetailsScreen(touristPlaceResponse: cubit.touristPlacesResponseModel![index],), context);
           },
           child: SizedBox(
             width: 168.w,
@@ -32,13 +34,18 @@ class CustomTouristPlaces extends StatelessWidget {
                     height:100.h,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      child: Image.asset(AppImages.testImage,fit: BoxFit.cover,width: 168.w,),
+                      child: Image.network(
+                        cubit.touristPlacesResponseModel![index].images![0].image!,
+                        errorBuilder: (context,error,v){
+                          return const CustomLoadingWidget();
+                        },
+                        fit: BoxFit.cover,width: 168.w,),
                     ),
                   ),
                 ),
                 verticalSpace(8),
-                Text('Rijal Almaa Village',
-                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                 Text( cubit.touristPlacesResponseModel![index].region!,
+                  // textScaleFactor: ScaleSize.textScaleFactor(context),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

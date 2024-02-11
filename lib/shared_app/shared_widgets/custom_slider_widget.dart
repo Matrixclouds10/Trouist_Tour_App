@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
@@ -44,54 +45,42 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
                    width: double.infinity,),
                   Center(
                     child: Container(
+                      decoration: const BoxDecoration(
+                          color: Color(0xffC00614),
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
                       height: 120.h,
                       width:222.w,
-                      color: const Color(0xffC00614),
                       child: Padding(
                         padding:  EdgeInsets.only(top: 5.h,left: 24.w,right: 24.w,bottom: 8.h),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            verticalSpace(5),
-                            Expanded(
-                              flex: 1,
-                              child: SizedBox(
-                                // height: 20.h,
-                                child: Text('NOW',
-                                  textScaleFactor: ScaleSize.textScaleFactor(context),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyles.font17CustomGray400WightLato.copyWith(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: FittedBox(
-                                // height: 38.h,
-                                child: Text('40% OFF',
-                                  textScaleFactor: ScaleSize.textScaleFactor(context),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyles.font14CustomBlack500w.copyWith(fontSize: 32.sp,color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              // height: 20.h,
-                              child: Text('Amazing Offers Here',
-                                textScaleFactor: ScaleSize.textScaleFactor(context),
+                        child: FittedBox(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              verticalSpace(5),
+                              Text('now'.tr(),
+                                // textScaleFactor: ScaleSize.textScaleFactor(context),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyles.font17CustomGray400WightLato.copyWith(color: Colors.white),
                               ),
-                            ),
-                            verticalSpace(5),
-
-                          ],
+                              Text('${'off'.tr()} 0',
+                                // textScaleFactor: ScaleSize.textScaleFactor(context),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyles.font14CustomBlack500w.copyWith(fontSize: 32.sp,color: Colors.white),
+                              ),
+                              Text('offer_home'.tr(),
+                                // textScaleFactor: ScaleSize.textScaleFactor(context),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyles.font17CustomGray400WightLato.copyWith(color: Colors.white),
+                              ),
+                              verticalSpace(5),
+                            ],
+                          ),
                         ),
                       ),
                     ),

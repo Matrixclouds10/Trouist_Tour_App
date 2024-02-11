@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
@@ -41,16 +42,23 @@ class CustomMoreItemWidget extends StatelessWidget {
                     Container(
                       height:36.h ,
                       width: 41.w,
-                      decoration: BoxDecoration(
+                      decoration:
+                      context.locale==const Locale('en')?
+                      BoxDecoration(
                            color:AppColorLight.primaryColor,
                           // border: Border.all(color:AuthCubit.get(context).localeLanguage==Locale('ar')? Color(0xff100E0D):Colors.transparent),
+                          borderRadius: BorderRadius.all(Radius.circular(10.sp))
+                      ):
+                      BoxDecoration(
+                          // color:AppColorLight.primaryColor,
+                          border: Border.all(color: const Color(0xff929D9C)),
                           borderRadius: BorderRadius.all(Radius.circular(10.sp))
                       ),
                       child: Center(child: FittedBox(
                         child: Text('EN',
                           style: TextStyles.font17CustomGray400WightLato.copyWith(
                             fontFamily: AppFontsFamily.fontPoppins,
-                            color: Colors.white
+                            color: context.locale==const Locale('en')? Colors.white:null,
                           )
                         ),
                       )),
@@ -59,15 +67,23 @@ class CustomMoreItemWidget extends StatelessWidget {
                     Container(
                       height:36.h ,
                       width: 42.w,
-                      decoration: BoxDecoration(
+                      decoration:
+                      context.locale==const Locale('en')?
+                      BoxDecoration(
                         // color: AppColorLight.primaryColor,
-                          border: Border.all(color:Color(0xff929D9C)),
+                          border: Border.all(color:const Color(0xff929D9C)),
+                          borderRadius: BorderRadius.all(Radius.circular(10.sp))
+                      ):
+                      BoxDecoration(
+                          color: AppColorLight.primaryColor,
+                          // border: Border.all(color:Color(0xff929D9C)),
                           borderRadius: BorderRadius.all(Radius.circular(10.sp))
                       ),
                       child:  Center(child: FittedBox(
                         child: Text('AR',
                           style: TextStyles.font17CustomGray400WightLato.copyWith(
                             fontFamily: AppFontsFamily.fontPoppins,
+                              color:context.locale==const Locale('ar')? Colors.white:null,
                         )
                         ),
                       )),

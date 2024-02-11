@@ -31,7 +31,6 @@ class AppOnBoardingCubit extends Cubit<AppOnBoardingStates>{
     currentPage=x;
     emit(ChangeCurrentPageState());
   }
-
   void changingPageView(context){
     if(page == list.length-1){
       CacheHelper.saveDate(key: 'onBoarding', value: true).then((value) =>

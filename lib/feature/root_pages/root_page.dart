@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
@@ -30,8 +31,6 @@ class _RootPagesState extends State<RootPages> {
 
    @override
   void initState() {
-     HomeCubit.get(context).getSliderCubit(context);
-     HomeCubit.get(context).getProgramsCubit(context);
      if(widget.check==null){
        currentIndex=0;
      }else{
@@ -41,10 +40,23 @@ class _RootPagesState extends State<RootPages> {
   }
 
   @override
+  void didChangeDependencies() {
+    HomeCubit.get(context).getSliderCubit(context);
+    HomeCubit.get(context).getPrograms(context.locale.toString(),context);
+    HomeCubit.get(context).getOffers(context.locale.toString(),context);
+    HomeCubit.get(context).getTouristPlaces(context.locale.toString(),context);
+    // Listen for language changes and trigger BottomNavigationBar rebuild
+    context.locale; // This line is used to ensure that context.locale is initialized
+    EasyLocalization.of(context)!.locale;
+    setState(() {});
+    super.didChangeDependencies();
+  }
+  @override
   Widget build(BuildContext context) {
     return MediaQuery(
           data: MediaQuery.of(context).copyWith(
-          textScaleFactor: 1.0,),
+          textScaleFactor: 1.0,
+          ),
           child: Scaffold(
              body:   Stack(
                children: [
@@ -105,7 +117,7 @@ class _RootPagesState extends State<RootPages> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Icon(Icons.home_outlined,color: AppColorLight.gray2,),
-                                  Text('Home',
+                                  Text('home'.tr(),
                                     style: TextStyles.font10CustomGray500WightPoppins,
                                   )
                                 ],
@@ -132,7 +144,7 @@ class _RootPagesState extends State<RootPages> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Icon(Icons.favorite_border,color: AppColorLight.gray2,),
-                                  Text('Favorite',
+                                  Text('favorite'.tr(),
                                     style: TextStyles.font10CustomGray500WightPoppins,
                                   )
                                 ],
@@ -148,7 +160,7 @@ class _RootPagesState extends State<RootPages> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Icon(null),
-                            Text('Search',
+                            Text('search'.tr(),
                               style: TextStyles.font10CustomGray500WightPoppins,
                             ),
                           ],
@@ -180,7 +192,7 @@ class _RootPagesState extends State<RootPages> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Icon(Icons.calendar_month_outlined,color: AppColorLight.gray2,),
-                                  Text('Bookings',
+                                  Text('bookings'.tr(),
                                     style: TextStyles.font10CustomGray500WightPoppins,
                                   )
                                 ],
@@ -206,7 +218,7 @@ class _RootPagesState extends State<RootPages> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Icon(Icons.menu,color: AppColorLight.gray2,),
-                                  Text('More',
+                                  Text('more'.tr(),
                                     style: TextStyles.font10CustomGray500WightPoppins,
                                   )
                                 ],
