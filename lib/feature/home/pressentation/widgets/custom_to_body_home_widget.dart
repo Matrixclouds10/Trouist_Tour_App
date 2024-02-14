@@ -8,6 +8,7 @@ import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/resources/data_state.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
+import 'package:tourist_tour_app/feature/favorite/logic/favorite_cubit.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/home/pressentation/screens/notification_screen.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_slider_widget.dart';

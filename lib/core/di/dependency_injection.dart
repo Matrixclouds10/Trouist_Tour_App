@@ -6,6 +6,10 @@ import 'package:tourist_tour_app/feature/auth/login/data/repos/login_repo.dart';
 import 'package:tourist_tour_app/feature/auth/login/logic/cubit/login_cubit.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/data/repos/sign_up_repo.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
+import 'package:tourist_tour_app/feature/booking/data/repo/booking_repo.dart';
+import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
+import 'package:tourist_tour_app/feature/favorite/data/repo/favorite_repo.dart';
+import 'package:tourist_tour_app/feature/favorite/logic/favorite_cubit.dart';
 import 'package:tourist_tour_app/feature/home/data/repos/home_repo.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/more/data/repo/more_repo.dart';
@@ -31,5 +35,11 @@ Future<void> setupGetIt() async {
   //more
   getIt.registerLazySingleton<MoreRepo>(() => MoreRepo(getIt()));
   getIt.registerFactory<MoreCubit>(() => MoreCubit(getIt()));
+//favorite
+  getIt.registerLazySingleton<FavoriteRepo>(() => FavoriteRepo(getIt()));
+  getIt.registerFactory<FavoriteCubit>(() => FavoriteCubit(getIt()));
+  //booking
+  getIt.registerLazySingleton<BookingRepo>(() => BookingRepo(getIt()));
+  getIt.registerFactory<BookingCubit>(() => BookingCubit(getIt()));
 
 }

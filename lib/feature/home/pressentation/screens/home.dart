@@ -31,6 +31,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeCubit cubit =HomeCubit.get(context);
+    cubit.initHome(context: context);
     return PopScope(
       canPop: false,
       onPopInvoked: (_)  async{

@@ -10,23 +10,21 @@ import 'package:tourist_tour_app/core/helpers/bloc/help_cubit.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/presentation/widget/custom_sign_up_body.dart';
-import 'package:tourist_tour_app/feature/auth/sign_up/presentation/widget/sign_up_bloc_listener.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
-
     var cubit =context.read<SignupCubit>();
-    cubit.getCountryCode();
-    cubit.getTerms('ar');
+    cubit.getCountryCode(context.locale.toString());
+    cubit.getTerms(context.locale.toString());
     return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0,),
     child:
       Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          key: cubit.formKey2,
           children: [
             Stack(
               children: [
@@ -74,11 +72,10 @@ class RegisterScreen extends StatelessWidget {
                                     (){
                                   if(context.read<SignupCubit>().formKey.currentState!.validate()){
                                     if(cubit.countryChooseId!=null){
-                                      print(cubit.countryChooseId!);
                                       if(context.read<HelpCubit>().isChecked==false){
                                         context.read<HelpCubit>().changeColor(AppColorLight.redColor);
                                       }else{
-                                        cubit.emitSignupStates();
+                                        cubit.emitSignupStates(context);
                                       }
                                     }else{
                                       showToast('choose_country'.tr(), ToastStates.error, context);
@@ -87,7 +84,7 @@ class RegisterScreen extends StatelessWidget {
                                 }
                                 ),
                                 verticalSpace(75),
-                                const SignupBlocListener()
+                                // const SignupBlocListener()
                               ],
                             ),
                           ),
@@ -101,7 +98,8 @@ class RegisterScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),),
+      ),
+      ),
     );
   }
 }

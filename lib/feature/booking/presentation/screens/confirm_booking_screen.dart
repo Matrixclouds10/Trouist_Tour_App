@@ -7,6 +7,8 @@ import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
+import 'package:tourist_tour_app/feature/booking/data/models/booking_request.dart';
+import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
@@ -24,6 +26,7 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
    int currentMethod=0;
   @override
   Widget build(BuildContext context) {
+    BookingCubit bookingCubit=BookingCubit.get(context);
     return Scaffold(
       appBar:  PreferredSize(
           preferredSize: Size(double.infinity,62.h),
@@ -149,7 +152,7 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                         borderColor: Colors.white,
                         maxLines: 4,
                         hintText:'',
-                        controller: TextEditingController(),),
+                        controller: bookingCubit.noteController,),
                     ),
                     verticalSpace(8),
 
@@ -244,7 +247,10 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
             CustomMaterialButtonWidget(
                 text: 'confirm'.tr(),
                 onPressed: (){
-                  showToast('Successfully Booking', ToastStates.success, context);
+                  BookingRequest bookingRequest =BookingRequest(
+                      id: widget.programResponse!.id,
+                    notes: bookingCubit.noteController.text.isNotEmpty?bookingCubit.noteController.text:"note", payment:  'Cash', total:  widget.programResponse!.newPrice ?? widget.programResponse!.price,);
+                  bookingCubit.bookingPrograms(bookingRequest, context);
                 }),
             verticalSpace(100),
           ],

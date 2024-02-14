@@ -78,33 +78,34 @@ class SignupBlocListener extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
-    context.pop();
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 50,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
-        fontFamily: AppFontsFamily.fontCairo,
+
+}
+void setupErrorState(BuildContext context, String error) {
+  context.pop();
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      icon: const Icon(
+        Icons.error,
+        color: Colors.red,
+        size: 50,
+      ),
+      content: Text(
+        error,
+        style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
+            fontFamily: AppFontsFamily.fontCairo,
             color: AppColorLight.customBlack
         ),),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: const Text(
-              'Got it',
-            ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            context.pop();
+          },
+          child: const Text(
+            'Got it',
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 }

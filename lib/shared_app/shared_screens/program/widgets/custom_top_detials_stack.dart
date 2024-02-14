@@ -1,31 +1,38 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
+import 'package:tourist_tour_app/feature/favorite/logic/favorite_cubit.dart';
+import 'package:tourist_tour_app/feature/home/data/models/offer_model.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_show_image.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_slider_widget.dart';
 
-class CustomTopDetailsStackWidget extends StatefulWidget {
-  const CustomTopDetailsStackWidget({super.key,  this.endDate,  this.startDate,  this.day, required this.image});
+class CustomTopDetailsStackWidget extends StatelessWidget {
+   CustomTopDetailsStackWidget({super.key,  this.endDate,  this.startDate,  this.day, required this.image, required this.isVideo, required this.id});
   final String? endDate;
   final String? startDate;
   final String? day;
+  final int id;
   final List<String?> image;
-
-  @override
-  State<CustomTopDetailsStackWidget> createState() => _CustomTopDetailsStackWidgetState();
-}
-
-class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidget> {
+  final List<bool?> isVideo;
   bool isFav =false;
 
   @override
   Widget build(BuildContext context) {
+    List<OfferModel> list=[];
+    for(int i=0;i<=image.length-1;i++){
+      list.add(OfferModel(image: image[i]!, off:isVideo[i]!.toString()));
+    }
     return  Stack(
       children: [
-        CustomSliderWidget(image: widget.image),
+        InkWell(
+            onTap: (){
+              showCustomImages(context: context, images:  list);
+            },
+            child: CustomSliderWidget(image:image,imageList: list,)),
         Positioned(
             top: 40.h,
             left: 10.w,
@@ -37,15 +44,18 @@ class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidge
                   Navigator.of(context).pop();
                 }, icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
                 const Spacer(),
-                IconButton(onPressed: (){
-                  setState(() {
-                    isFav=!isFav;
-                  });
-                }, icon:  Icon(
-                  isFav==false?
-                  Icons.favorite_border_rounded:Icons.favorite,color:isFav==false?  Colors.white:Colors.red,))
+                StatefulBuilder(builder: (context,setState){
+                  return IconButton(onPressed: (){
+                    setState(() {
+                      isFav=!isFav;
+                    });
+                    FavoriteCubit.get(context).addFavoriteProgram(id,HomeCubit.get(context).token!,context.locale.toString(),context,);
+                  },
+                      icon:  Icon(
+                        isFav==false?
+                        Icons.favorite_border_rounded:Icons.favorite,color:isFav==false?  Colors.white:Colors.red,));
+                })
               ],
-
             )),
         Positioned(
             bottom: 50.h,
@@ -62,7 +72,7 @@ class _CustomTopDetailsStackWidgetState extends State<CustomTopDetailsStackWidge
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0,),
                   child: Text(
-                    '${widget.day??'3'} ${'days'.tr()}   ${widget.startDate??'25 Dec 23'}/ ${widget.startDate??'25 Dec 23'}',
+                    '${day??'3'} ${'days'.tr()}   ${startDate??'25 Dec 23'}/ ${startDate??'25 Dec 23'}',
                     textScaleFactor: ScaleSize.textScaleFactor(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/login/data/models/login_request_body.dart';
 import 'package:tourist_tour_app/feature/auth/login/data/repos/login_repo.dart';
 import 'package:tourist_tour_app/feature/auth/login/logic/cubit/login_state.dart';
@@ -23,6 +24,7 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(success: (loginResponse) {
+      CacheHelper.saveDate(key: 'token', value:loginResponse.userData!.token!);
       emit(LoginState.success(loginResponse));
     }, failure: (error) {
       emit(LoginState.error(error: error.apiErrorModel.message ?? ''));

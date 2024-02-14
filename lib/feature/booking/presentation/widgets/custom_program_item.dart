@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
@@ -6,14 +6,14 @@ import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
-import 'package:tourist_tour_app/shared_app/shared_widgets/custom_bottom_sheet.dart';
+import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_button.dart';
 
 class CustomProgramItem extends StatelessWidget {
-  const CustomProgramItem({super.key, required this.textButtonText, required this.onPressed});
+  const CustomProgramItem({super.key, required this.textButtonText, required this.onPressed, this.programResponse});
   final String textButtonText;
   final VoidCallback onPressed;
-
+  final ProgramResponse? programResponse;
   @override
   Widget build(BuildContext context) {
     return   Padding(
@@ -44,22 +44,22 @@ class CustomProgramItem extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Religious Program',
+                          Text(programResponse!.name!,
                             style: TextStyles.font17CustomBlack700WeightPoppins,
                               textScaleFactor: ScaleSize.textScaleFactor(context),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('1000 RS',
+                              Text('${programResponse!.newPrice!=null?programResponse!.newPrice!.toString():programResponse!.price!.toString()} ${'rs'.tr()}',
                                 textScaleFactor: ScaleSize.textScaleFactor(context),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                                     color: AppColorLight.redColor),
                               ),
-                              const Spacer(),
                               Row(
                                 children: [
                                   SizedBox(
@@ -69,7 +69,7 @@ class CustomProgramItem extends StatelessWidget {
 
                                   ),
                                   horizontalSpace(5),
-                                  Text('Group Trip',
+                                  Text('${programResponse!.groupType} ${'trip'.tr()}',
                                     textScaleFactor: ScaleSize.textScaleFactor(context),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -77,7 +77,6 @@ class CustomProgramItem extends StatelessWidget {
                                       color: AppColorLight.customBlack,
                                     ),
                                   ),
-                                  horizontalSpace(25),
 
                                 ],
                               ),
@@ -93,7 +92,7 @@ class CustomProgramItem extends StatelessWidget {
                                     child: Image.asset(AppImages.returnCloc,fit: BoxFit.cover,),
                                   ),
                                   horizontalSpace(4),
-                                  Text('3 Days',
+                                  Text('${programResponse!.duration!} ${'days'.tr()}',
                                     textScaleFactor: ScaleSize.textScaleFactor(context),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -112,7 +111,7 @@ class CustomProgramItem extends StatelessWidget {
                                   ),
                                   horizontalSpace(1),
                                   SizedBox(
-                                    child: Text('Mecca , Medina',
+                                    child: Text(programResponse!.region!,
                                       textScaleFactor: ScaleSize.textScaleFactor(context),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -136,10 +135,6 @@ class CustomProgramItem extends StatelessWidget {
                   height: 40.h,
                   width:311.w ,
                   child: CustomTextButton(text: textButtonText, onPressed: onPressed,)),
-
-
-
-
             ],
           ),
         ),

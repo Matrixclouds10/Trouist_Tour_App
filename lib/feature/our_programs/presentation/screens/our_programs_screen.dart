@@ -47,7 +47,9 @@ class OurProgramsScreen extends StatelessWidget {
                   }
               }
               else{
-                return const CustomLoadingWidget();
+                return  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 100.h),
+                    child: const CustomLoadingWidget());
               }
             },
           ),

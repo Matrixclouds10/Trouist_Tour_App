@@ -20,7 +20,7 @@ class ProgramDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(children: [
-          CustomTopDetailsStackWidget(startDate: programResponse!.startDate!, day: programResponse!.duration, image: programResponse!.images!.map((e) => e.image).toList(),),
+          CustomTopDetailsStackWidget(startDate: programResponse!.startDate!, day: programResponse!.duration, image: programResponse!.images!.map((e) => e.image).toList(),isVideo: programResponse!.images!.map((e) => e.isVideo).toList(), id: programResponse!.id!,),
           verticalSpace(24),
           CustomReligiousProgramWidget(isHasDes: true,programResponse: programResponse!,),
           verticalSpace(24),

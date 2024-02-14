@@ -124,12 +124,12 @@ class CustomSignUpBodyWidget extends StatelessWidget {
                   ),
                   isExpanded: true,
                   underline: const SizedBox.shrink(),
-                  items: cubit.countryCodeModel!.countries!
-                      .map((Countries? e) =>
+                  items: cubit.countryCodeModel!
+                      .map(( CountryResponse e) =>
                       DropdownMenuItem<String>(
-                        value: e!.name!.en,
+                        value: e.name!,
                         child: Text(
-                          e.name!.en.toString(),
+                          e.name!.toString(),
                           style: const TextStyle(fontSize: 14),
                         ),
                       ))
@@ -137,10 +137,10 @@ class CustomSignUpBodyWidget extends StatelessWidget {
                   onChanged: (String? value) {
                     setState(() {
                       cubit.countryChoose = value!;
-                      for(var a in  cubit.countryCodeModel!.countries!){
-                        if(cubit.countryChoose==a.name!.en!){
+                      for(var a in  cubit.countryCodeModel!){
+                        if(cubit.countryChoose==a.name!){
                           cubit.countryChooseId=a.id;
-                        }
+                    }
                       }
                     });
                   },

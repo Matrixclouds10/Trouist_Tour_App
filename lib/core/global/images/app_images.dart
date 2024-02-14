@@ -11,6 +11,8 @@ class AppImages{
   static const String history='${baseImages}history.png';
   static const String register='${baseImages}register.png';
   static const String logoSvg='${baseSvg}logo.svg';
+  static const String holder='${baseImages}hol.png';
+  static const String video='${baseImages}video.png';
 
   static const String category='${baseImages}categ1.png';
   static const String program1='${baseImages}prog1.png';

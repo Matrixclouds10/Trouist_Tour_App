@@ -22,13 +22,14 @@ class SignupRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
-  Future<ApiResult<CountryCodeModel>> getCountryCode() async {
+  Future<List<CountryResponse>?> getCountryCode(String language) async {
     try {
-      final response = await _apiService.getCountryCode();
-      return ApiResult.success(response);
+      final response = await _apiService.getCountryCode(language);
+      return response.data!;
     } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
+      return null;
     }
+
   }
   Future<TermsResponse?> getTerms(String language) async {
     try {

@@ -80,7 +80,6 @@
   "cancel": "Cancel",
   "exit": "Exit",
   "exit_mes": "Are you sure you want to exit?",
-
   "log1": "Enjoy Your Trip With Us",
   "log2": "It is a long established fact that a reader will",
   "sign_in": "Signin",
@@ -94,15 +93,20 @@
   "sign_up!": "Signup!",
   "create_account": "Create A New Account",
   "choose_country": "Choose country",
-
   "sign_val_na": "Please enter a valid full name",
   "sign_val_phone": "Please enter a valid phone",
   "confirm_password": "Confirm Password",
   "please_valid_confirm": "Please enter a valid confirm password",
   "not_match": "Password confirmation does not match the password",
-  "agree": "I agree the "
-
-
-
-
+  "agree": "I agree the ",
+  "skip": "Skip",
+  "on_title1": "Discover The Adventure",
+  "on_des1": "It is a long established fact that a reader will be distracted by",
+  "on_title2": "Book The Best Place",
+  "on_des2": "It is a long established fact that a reader will be distracted by ",
+  "on_title3": "Get Relax",
+  "on_des3": "It is a long established fact that a reader will be distracted by ",
+  "on_button": "Let's Start",
+  "on_language": "عربي",
+  "no_data_currently": "There is no data currently"
 }

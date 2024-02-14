@@ -36,7 +36,7 @@ class AppRouter {
         );
       case Routes.rootScreen:
         return MaterialPageRoute(
-          builder: (_) => const RootPages(),
+          builder: (_) =>  RootPages(),
         );
         case Routes.splashScreen:
         return MaterialPageRoute(

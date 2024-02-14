@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +32,6 @@ class OnBoardingScreen extends StatelessWidget {
                           onPageChanged: (int index){
                              AppOnBoardingCubit.get(context).page=index;
                              AppOnBoardingCubit.get(context).changeCurrentPage(index);
-
                           },
                           itemCount: AppOnBoardingCubit.get(context).list.length,
                           itemBuilder: (context, i) {
@@ -53,11 +53,11 @@ class OnBoardingScreen extends StatelessWidget {
                     ),
                     verticalSpace(78),
                     AppOnBoardingCubit.get(context).currentPage==2?
-                    CustomMaterialButtonWidget(text:"Let's Start", onPressed: () {
+                    CustomMaterialButtonWidget(text:'on_button'.tr(), onPressed: () {
                       NavigatePages.pushToPage(const LogAs(), context);}
                     ):
                     Padding(
-                      padding:  EdgeInsets.only(right: 16.w),
+                      padding:   EdgeInsets.symmetric(horizontal: 16.w),
                       child: Align(
                         alignment: AlignmentDirectional.centerEnd,
                         child: FloatingActionButton(

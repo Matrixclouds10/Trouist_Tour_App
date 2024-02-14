@@ -19,7 +19,7 @@ class FavoriteScreen extends StatelessWidget {
           canPop: false,
           onPopInvoked: (_) async {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (BuildContext context) => const RootPages(
+                builder: (BuildContext context) =>  RootPages(
                   check: '0',
                 )));
           },

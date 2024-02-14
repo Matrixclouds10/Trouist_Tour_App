@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
@@ -9,12 +10,14 @@ import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/log_as.dart';
+import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/about_us/about_us_screen.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/history_program/hiistory_screen.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/privacy/privacy_screen.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/profile/edit_profile.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/terms/terms_screen.dart';
+import 'package:tourist_tour_app/feature/more/presentation/widgets/custom_more_image.dart';
 import 'package:tourist_tour_app/feature/more/presentation/widgets/custom_more_item_widget.dart';
 import 'package:tourist_tour_app/feature/root_pages/root_page.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
@@ -35,7 +38,7 @@ class MoreScreen extends StatelessWidget {
         canPop: false,
         onPopInvoked: (_) async {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => const RootPages(
+              builder: (BuildContext context) =>  RootPages(
                 check: '0',
               )));
         },
@@ -49,14 +52,10 @@ class MoreScreen extends StatelessWidget {
             child: Column(
               children: [
                 verticalSpace(20),
-                const CircleAvatar(
+                 const CircleAvatar(
                   radius: 71,
                   backgroundColor: Colors.black38,
-                  child: CircleAvatar(
-                    radius:70,
-                    backgroundImage:
-                    NetworkImage('https://ui-avatars.com/api/?font-size=0.5&name=ya&bold=true&width=1024&size=1024'),
-                  ),),
+                  child: CustomMoreImage()),
                 verticalSpace(5),
                 MaterialButton(
                   shape: RoundedRectangleBorder(
@@ -64,7 +63,22 @@ class MoreScreen extends StatelessWidget {
                   ),
                   color: AppColorLight.primaryColor,
                   onPressed: (){
-                    NavigatePages.pushToPage(const EditProfileScreen(), context);
+                    if(cubit.profileResponse!=null){
+                      cubit.nameController.text=cubit.profileResponse!.name!;
+                      cubit.phoneController.text=cubit.profileResponse!.phone!;
+                      cubit.emailController.text=cubit.profileResponse!.email!;
+                      if(context.read<SignupCubit>().countryCodeModel!=null){
+                        for(var a in context.read<SignupCubit>().countryCodeModel!){
+                          if(a.id==cubit.profileResponse!.countryId){
+                            cubit.countryController.text=a.name!;
+                            context.read<SignupCubit>().countryChoose=a.name!;
+                            cubit.countryControllerId = a.id!;
+                          }
+                        }
+                      }
+                      NavigatePages.pushToPage(const EditProfileScreen(), context);
+
+                    }
                   },
                 child: Text('edit_profile'.tr(),
                 style: TextStyles.font12CustomRed500WeightLato.copyWith(

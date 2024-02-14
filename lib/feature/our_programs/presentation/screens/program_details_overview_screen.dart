@@ -35,7 +35,9 @@ class _ProgramDetailsOverViewScreenState extends State<ProgramDetailsOverViewScr
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                     CustomTopDetailsStackWidget(image:widget.programResponse!.images!.map((e) => e.image!).toList(),startDate: widget.programResponse!.startDate,endDate: widget.programResponse!.startDate,),
+                     CustomTopDetailsStackWidget(
+                       isVideo: widget.programResponse!.images!.map((e) => e.isVideo).toList(),
+                       image:widget.programResponse!.images!.map((e) => e.image!).toList(),startDate: widget.programResponse!.startDate,endDate: widget.programResponse!.startDate, id:  widget.programResponse!.id!,),
                      CustomReligiousProgramWidget(
                        isHasDes: false, programResponse: widget.programResponse,),
                     TabBar(

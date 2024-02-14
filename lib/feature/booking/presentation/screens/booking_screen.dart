@@ -20,7 +20,7 @@ class BookingScreen extends StatelessWidget {
         canPop: false,
         onPopInvoked: (_) async {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (BuildContext context) => const RootPages(
+              builder: (BuildContext context) =>  RootPages(
                 check: '0',
               )));
         },
@@ -33,7 +33,7 @@ class BookingScreen extends StatelessWidget {
                 child:  CustomAppBar(title:'Bookings', hasBackButton: false,
                   onTap: (){
                   // Navigator.pop(context);
-                    NavigatePages.pushToPage(const RootPages(check:'0',), context);}
+                    NavigatePages.pushToPage( RootPages(check:'0',), context);}
                 )),
             body: Column(
               children: [
