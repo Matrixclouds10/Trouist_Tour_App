@@ -103,7 +103,7 @@ class TouristTourApp extends StatelessWidget {
             initialRoute:  Routes.splashScreen ,
             onGenerateRoute: appRouter.generateRoute,
             // home: OnBoardingScreen(),
-            //ios3
+            //ios5
             // home:MediaQuery(
             //   data: MediaQuery.of(context).copyWith(
             //     textScaleFactor: 1.0, // تعطيل textScaleFactor على مستوى التطبيق
