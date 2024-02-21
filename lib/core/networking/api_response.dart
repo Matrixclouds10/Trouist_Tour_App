@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tourist_tour_app/core/networking/pagination.dart';
-
-
 part 'api_response.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
