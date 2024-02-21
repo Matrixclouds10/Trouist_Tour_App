@@ -1,9 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'program_response.g.dart';
-
+part 'booking_response.g.dart';
 @JsonSerializable()
-class ProgramResponse{
+class BookingResponse{
   @JsonKey(name: 'id')
   int? id;
   @JsonKey(name: 'name')
@@ -23,7 +21,7 @@ class ProgramResponse{
   @JsonKey(name: 'group_type')
   String? groupType;
   @JsonKey(name: 'tour_route')
-  List<TourRouteResponse>? tourRoute;
+  List<TourRouteBookingResponse>? tourRoute;
   @JsonKey(name: 'departure')
   String? departure;
   @JsonKey(name: 'departure_time')
@@ -42,11 +40,13 @@ class ProgramResponse{
   bool? isFav;
   @JsonKey(name: 'new_price')
   int? newPrice;
+  @JsonKey(name: 'booking_id')
+  int? bookingId;
   @JsonKey(name: 'images')
-  List<ImagesResponse>? images;
+  List<ImagesBookingResponse>? images;
 
 
-  ProgramResponse(
+  BookingResponse(
       this.id,
       this.name,
       this.region,
@@ -62,39 +62,40 @@ class ProgramResponse{
       this.returnTime,
       this.priceIncludes,
       this.isFav,
+      this.bookingId,
       this.discountAmount,
       this.newPrice,
       this.discountPercentage,
       this.mainImage,
       this.images); // ProgramResponse(
 
-  factory ProgramResponse.fromJson(Map<String, dynamic> json) =>
-      _$ProgramResponseFromJson(json);
+  factory BookingResponse.fromJson(Map<String, dynamic> json) =>
+      _$BookingResponseFromJson(json);
 
 }
 
 @JsonSerializable()
-class ImagesResponse {
+class ImagesBookingResponse {
   @JsonKey(name: 'is_video')
   bool? isVideo;
   @JsonKey(name: 'size')
   int? size;
   @JsonKey(name: 'url')
   String? image;
-  ImagesResponse(this.isVideo, this.size, this.image);
+  ImagesBookingResponse(this.isVideo, this.size, this.image);
 
-  factory ImagesResponse.fromJson(Map<String, dynamic> json) =>
-      _$ImagesResponseFromJson(json);
+  factory ImagesBookingResponse.fromJson(Map<String, dynamic> json) =>
+      _$ImagesBookingResponseFromJson(json);
 
 }
 @JsonSerializable()
-class TourRouteResponse {
+class TourRouteBookingResponse {
   dynamic key;
   String? value;
 
-  TourRouteResponse(this.key, this.value);
+  TourRouteBookingResponse(this.key, this.value);
 
-  factory TourRouteResponse.fromJson(Map<String, dynamic> json) =>
-      _$TourRouteResponseFromJson(json);
+  factory TourRouteBookingResponse.fromJson(Map<String, dynamic> json) =>
+      _$TourRouteBookingResponseFromJson(json);
 
 }

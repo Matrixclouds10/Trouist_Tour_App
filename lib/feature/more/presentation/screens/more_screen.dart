@@ -11,6 +11,7 @@ import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/about_us/about_us_screen.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/history_program/hiistory_screen.dart';
@@ -51,43 +52,61 @@ class MoreScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                verticalSpace(20),
-                 const CircleAvatar(
-                  radius: 71,
-                  backgroundColor: Colors.black38,
-                  child: CustomMoreImage()),
-                verticalSpace(5),
-                MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(7)
-                  ),
-                  color: AppColorLight.primaryColor,
-                  onPressed: (){
-                    if(cubit.profileResponse!=null){
-                      cubit.nameController.text=cubit.profileResponse!.name!;
-                      cubit.phoneController.text=cubit.profileResponse!.phone!;
-                      cubit.emailController.text=cubit.profileResponse!.email!;
-                      if(context.read<SignupCubit>().countryCodeModel!=null){
-                        for(var a in context.read<SignupCubit>().countryCodeModel!){
-                          if(a.id==cubit.profileResponse!.countryId){
-                            cubit.countryController.text=a.name!;
-                            context.read<SignupCubit>().countryChoose=a.name!;
-                            cubit.countryControllerId = a.id!;
+             HomeCubit.get(context).token!=null?
+              Column(
+                children: [
+                  verticalSpace(20),
+                  const CircleAvatar(
+                      radius: 71,
+                      backgroundColor: Colors.black38,
+                      child: CustomMoreImage()),
+                  verticalSpace(5),
+                  MaterialButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7)
+                    ),
+                    color: AppColorLight.primaryColor,
+                    onPressed: (){
+                      if(cubit.profileResponse!=null){
+                        cubit.nameController.text=cubit.profileResponse!.name!;
+                        cubit.phoneController.text=cubit.profileResponse!.phone!;
+                        cubit.emailController.text=cubit.profileResponse!.email!;
+                        if(context.read<SignupCubit>().countryCodeModel!=null){
+                          for(var a in context.read<SignupCubit>().countryCodeModel!){
+                            if(a.id==cubit.profileResponse!.countryId){
+                              cubit.countryController.text=a.name!;
+                              context.read<SignupCubit>().countryChoose=a.name!;
+                              cubit.countryControllerId = a.id!;
+                            }
                           }
                         }
-                      }
-                      NavigatePages.pushToPage(const EditProfileScreen(), context);
+                        NavigatePages.pushToPage(const EditProfileScreen(), context);
 
-                    }
-                  },
-                child: Text('edit_profile'.tr(),
-                style: TextStyles.font12CustomRed500WeightLato.copyWith(
-                  fontFamily: AppFontsFamily.fontPoppins,
-                  fontSize: 14,
-                  color: Colors.white
-                  ),),
-                ),
-                verticalSpace(30),
+                      }
+                    },
+                    child: Text('edit_profile'.tr(),
+                      style: TextStyles.font12CustomRed500WeightLato.copyWith(
+                          fontFamily: AppFontsFamily.fontPoppins,
+                          fontSize: 14,
+                          color: Colors.white
+                      ),),
+                  ),
+                  verticalSpace(30),
+                ],
+              ):
+              SizedBox(
+               height: 200.h,
+               child: Center(
+                 child: Text('Log_in_first'.tr(),
+                   style: TextStyle(
+                     fontSize: 20.sp,
+                     fontWeight: FontWeight.bold,
+                     color: Colors.black,
+                     fontFamily: AppFontsFamily.fontCairo,
+                   ),
+                 ),
+               ),
+             ),
                 Padding(
                   padding:  EdgeInsets.only(left: 16.w,right: 16.w),
                   child: Column(children: [
@@ -112,12 +131,13 @@ class MoreScreen extends StatelessWidget {
                         NavigatePages.pushToPage(const TermsScreen(), context);
                       }, tex: 't&c'.tr(),),
                     verticalSpace(16),
+                    HomeCubit.get(context).token!=null?
                     CustomMoreItemWidget(
                       iconPath: AppImages.more3,
                       function: (){
                         NavigatePages.pushToPage(const HistoryScreen(), context);
-                      }, tex: 'program_history'.tr(),),
-                    verticalSpace(16),
+                      }, tex: 'program_history'.tr(),):const SizedBox.shrink(),
+                    HomeCubit.get(context).token!=null?verticalSpace(16):const SizedBox.shrink(),
                     CustomMoreItemWidget(
                       hasArrowButton: false,
                       iconPath: AppImages.more4,
@@ -127,36 +147,43 @@ class MoreScreen extends StatelessWidget {
                         }else{
                           context.setLocale(const Locale('en'));
                         }
+                        HomeCubit cubit =HomeCubit.get(context);
+                        cubit.initHome(context: context);
                       }, tex: 'change_language'.tr(),
                       lang: true,
                     ),
-                    verticalSpace(16),
-                    CustomMoreItemWidget(
-                      hasArrowButton: false,
-                      iconPath: AppImages.more5,
-                      function: (){
-                        showCustomDialog(title:'log_out'.tr(),des: 'log_out_mes'.tr(),bt1:  'yes'.tr(),bt2: 'no'.tr(),
-                            onPressed1: (){
-                             CacheHelper.removeData(key: 'isLog').then((value) {
-                               NavigatePages.pushReplacePage(const LogAs(), context);
-                             });
-                            },
-                            context: context);
-                      }, tex: 'logout'.tr(),),
-                    verticalSpace(16),
-                    CustomMoreItemWidget(
-                      hasArrowButton: false,
-                      iconPath: AppImages.more6,
-                      textColor: Colors.red,
-                      function: (){
-                        showCustomDialog(title:'delete_account'.tr(),des: 'delete_account_mes'.tr(),bt1:  'yes'.tr(),bt2:  'no'.tr(),
-                            onPressed1: (){
-                              // CacheHelper.removeData(key: 'isLog').then((value) {
-                              //   NavigatePages.pushReplacePage(const LogAs(), context);
-                              // });
-                            },
-                            context: context);
-                      }, tex: 'delete_account'.tr()),
+                    HomeCubit.get(context).token!=null?
+                    Column(
+                     children: [
+                       verticalSpace(16),
+                       CustomMoreItemWidget(
+                         hasArrowButton: false,
+                         iconPath: AppImages.more5,
+                         function: (){
+                           showCustomDialog(
+                               title:'log_out'.tr(),des: 'log_out_mes'.tr(),bt1:  'yes'.tr(),bt2: 'no'.tr(),
+                               onPressed1: (){
+                                 CacheHelper.removeData(key: 'token');
+                                 CacheHelper.removeData(key: 'isLog').then((value) {
+                                   NavigatePages.pushReplacePage(const LogAs(), context);
+                                 });
+                               },
+                               context: context);
+                         }, tex: 'logout'.tr(),),
+                       verticalSpace(16),
+                       CustomMoreItemWidget(
+                           hasArrowButton: false,
+                           iconPath: AppImages.more6,
+                           textColor: Colors.red,
+                           function: (){
+                             showCustomDialog(title:'delete_account'.tr(),des: 'delete_account_mes'.tr(),bt1:  'yes'.tr(),bt2:  'no'.tr(),
+                                 onPressed1: (){
+                                   cubit.deleteProfile(context);
+                                 },
+                                 context: context);
+                           }, tex: 'delete_account'.tr()),
+                     ],
+                   ):const SizedBox.shrink()
                   ],),
                 )
               ],

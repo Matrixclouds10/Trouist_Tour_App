@@ -12,7 +12,7 @@ class CustomCompleteWidget extends StatelessWidget {
     return Column(children: [
       InkWell(
         onTap: (){
-          NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Completed',), context);
+          // NavigatePages.pushToPage( BookingDetailsScreen(type: 'Completed',), context);
         },
         child: CustomProgramItem(textButtonText: 'Review', onPressed: () {
           NavigatePages.pushToPage(const RateScreen(), context);
@@ -21,7 +21,7 @@ class CustomCompleteWidget extends StatelessWidget {
       ),
       InkWell(
         onTap: (){
-          NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Completed',), context);
+          // NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Completed',), context);
         },
         child: CustomProgramItem(textButtonText: 'Rate Your Program', onPressed: () {
           NavigatePages.pushToPage(const RateScreen(), context);
@@ -30,7 +30,7 @@ class CustomCompleteWidget extends StatelessWidget {
       ),
       InkWell(
         onTap: (){
-          NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Completed',), context);
+          // NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Completed',), context);
         },
         child: CustomProgramItem(textButtonText: 'View Rate', onPressed: () {
           NavigatePages.pushToPage(const RateScreen(), context);

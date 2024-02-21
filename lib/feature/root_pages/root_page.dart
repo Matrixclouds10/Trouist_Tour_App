@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
-import 'package:tourist_tour_app/core/resources/data_state.dart';
 import 'package:tourist_tour_app/feature/booking/presentation/screens/booking_screen.dart';
 import 'package:tourist_tour_app/feature/favorite/presentation/screens/favorite_screen.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
@@ -12,9 +11,15 @@ import 'package:tourist_tour_app/feature/home/pressentation/screens/home.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/more_screen.dart';
 import 'package:tourist_tour_app/feature/search/presentation/screen/search_screen.dart';
 
-class RootPages extends StatelessWidget {
+class RootPages extends StatefulWidget {
   final String? check;
    RootPages({super.key, this.check});
+
+  @override
+  State<RootPages> createState() => _RootPagesState();
+}
+
+class _RootPagesState extends State<RootPages> {
   List<Widget> screens =
   [
     const Home(),
@@ -24,14 +29,20 @@ class RootPages extends StatelessWidget {
     const MoreScreen(),
   ];
   @override
+  void initState() {
+    HomeCubit.get(context).getToken(context);
+    HomeCubit.get(context).initRoot(check: widget.check);
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+    print('===========building Root Page==========================================');
     HomeCubit cubit =HomeCubit.get(context);
-    cubit.initRoot(check: check);
     return MediaQuery(
           data: MediaQuery.of(context).copyWith(
           textScaleFactor: 1.0,
           ),
-          child: BlocConsumer<HomeCubit, DataState>(
+          child: BlocConsumer<HomeCubit, HomeState>(
             listener: (context, state) {},
             builder: (context, state) {
               return Scaffold(
@@ -51,6 +62,7 @@ class RootPages extends StatelessWidget {
 
 
   }
+
   Widget bottomNavigationBar(BuildContext context) {
     HomeCubit cubit =HomeCubit.get(context);
 

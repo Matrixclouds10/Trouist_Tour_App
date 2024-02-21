@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/feature/favorite/logic/favorite_cubit.dart';
 import 'package:tourist_tour_app/feature/home/data/models/offer_model.dart';
@@ -11,14 +12,14 @@ import 'package:tourist_tour_app/shared_app/shared_widgets/custom_show_image.dar
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_slider_widget.dart';
 
 class CustomTopDetailsStackWidget extends StatelessWidget {
-   CustomTopDetailsStackWidget({super.key,  this.endDate,  this.startDate,  this.day, required this.image, required this.isVideo, required this.id});
+    CustomTopDetailsStackWidget({super.key,  this.endDate,  this.startDate,  this.day, required this.image, required this.isVideo, required this.id, this.isFav});
   final String? endDate;
   final String? startDate;
   final String? day;
   final int id;
   final List<String?> image;
   final List<bool?> isVideo;
-  bool isFav =false;
+  bool? isFav;
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +47,16 @@ class CustomTopDetailsStackWidget extends StatelessWidget {
                 const Spacer(),
                 StatefulBuilder(builder: (context,setState){
                   return IconButton(onPressed: (){
-                    setState(() {
-                      isFav=!isFav;
-                    });
-                    FavoriteCubit.get(context).addFavoriteProgram(id,HomeCubit.get(context).token!,context.locale.toString(),context,);
-                  },
+                    if(HomeCubit.get(context).token!=null){
+                      setState(() {
+                        isFav =!isFav!;
+                      });
+                      FavoriteCubit.get(context).addFavoriteProgram(id,HomeCubit.get(context).token!,context.locale.toString(),context,);
+                    }
+                    else{
+                      showToast('Log_in_first'.tr(), ToastStates.error, context);
+                    }
+                    },
                       icon:  Icon(
                         isFav==false?
                         Icons.favorite_border_rounded:Icons.favorite,color:isFav==false?  Colors.white:Colors.red,));

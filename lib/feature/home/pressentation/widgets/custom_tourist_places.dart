@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';

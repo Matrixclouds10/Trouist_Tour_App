@@ -4,6 +4,15 @@ part of 'home_cubit.dart';
 abstract class HomeState {}
 
 class HomeInitial extends HomeState {}
-class LoadingState extends HomeState {}
-class SuccessState extends HomeState {}
+class LoadingTokenState extends HomeState {}
+class SuccessInitHomeState extends HomeState {}
+class SuccessChangeIndexState extends HomeState {}
+class SuccessGetSliderState extends HomeState {}
+class SuccessGetProgramsState extends HomeState {}
+class SuccessGetOffersState extends HomeState {}
+class SuccessGetTouristPlacesState extends HomeState {}
+class ErrorGetOffersState extends HomeState {}
+class ErrorGetTouristPlacesState extends HomeState {}
+class ErrorGetProgramsState extends HomeState {}
+class ErrorGetSliderState extends HomeState {}
 class ErrorState extends HomeState {}

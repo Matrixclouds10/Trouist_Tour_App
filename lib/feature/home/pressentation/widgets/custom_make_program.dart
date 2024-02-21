@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/make_program/presentation/screens/custom_program_screen.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
@@ -43,7 +45,11 @@ class CustomMakeProgram extends StatelessWidget {
                 text: 'make_program'.tr(),
                 textSize: 14,
                 onPressed: (){
-                  NavigatePages.pushToPage(const CustomProgramScreen(), context);
+                  if(HomeCubit.get(context).token!=null){
+                    NavigatePages.pushToPage(const CustomProgramScreen(), context);
+                  }else{
+                    showToast('Log_in_first'.tr(), ToastStates.error, context);
+                  }
                 }),
           ),
           verticalSpace(5),

@@ -5,7 +5,9 @@ import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/feature/favorite/presentation/widgets/custom_places_body.dart';
 import 'package:tourist_tour_app/feature/favorite/presentation/widgets/custom_programs_body_widget.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/root_pages/root_page.dart';
+import 'package:tourist_tour_app/shared_app/shared_screens/visitor/visitor_screen.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
@@ -23,9 +25,12 @@ class FavoriteScreen extends StatelessWidget {
                   check: '0',
                 )));
           },
-          child: SafeArea(
+          child:
+          HomeCubit.get(context).token!=null?
+          SafeArea(
             minimum: const EdgeInsets.only(top: 30),
-            child: DefaultTabController(
+            child:
+            DefaultTabController(
               length: 2,
               child: Scaffold(
                 appBar:
@@ -70,7 +75,8 @@ class FavoriteScreen extends StatelessWidget {
 
               ),
             ),
-          ),
+          ):
+          const CustomVisitorScreen(),
         )
     );
   }

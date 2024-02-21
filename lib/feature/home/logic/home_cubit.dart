@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tourist_tour_app/core/resources/bloc/base_cubit.dart';
-import 'package:tourist_tour_app/core/resources/data_state.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
@@ -14,36 +14,46 @@ import 'package:tourist_tour_app/feature/home/data/repos/home_repo.dart';
 import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
 part 'home_state.dart';
 
-class HomeCubit extends BaseCubit {
+class HomeCubit extends Cubit<HomeState> {
   final HomeRepo _homeRepo;
-  HomeCubit(this._homeRepo);
+  HomeCubit(this._homeRepo) : super(HomeInitial());
   static HomeCubit get(BuildContext context)=>BlocProvider.of(context);
   List<SlidersResponse>? slidersResponseModel;
   List<ProgramResponse>? programResponseModel;
   List<ProgramResponse>? offersResponseModel;
   List<TouristPlaceResponse>? touristPlacesResponseModel;
   String? token;
-  void getToken(BuildContext context) async {
+  Future getToken(BuildContext context) async {
     token= await CacheHelper.getDate(key: 'token');
+    emit(LoadingTokenState());
     print(token);
+    token!=null?
     Future.delayed(const Duration(microseconds: 0)).then((value) {
       MoreCubit.get(context).getProfile(token!, context);
       FavoriteCubit.get(context).getFavoriteProgram(token!,context.locale.toString(),context);
       BookingCubit.get(context).getBookingPrograms(token!, context,context.locale.toString());
       BookingCubit.get(context).getCanceledPrograms(token!, context,context.locale.toString());
-    });
-
-    emit(SuccessStateListener(''));
+    }):null;
+    emit(LoadingTokenState());
   }
-  int? currentIndex;
+  String location='';
+  void getLoc()async{
+    Position p ;
+    p=await Geolocator.getCurrentPosition().then((value) => value);
+    List<Placemark> place= await placemarkFromCoordinates(p.latitude,p.longitude);
+    location='${place[0].country}/${place[0].administrativeArea}/${place[0].subAdministrativeArea}${place[0].thoroughfare}${place[0].subThoroughfare}';
+    emit(SuccessInitHomeState());
+  }
+  int? currentIndex=0;
   void initHome({String? check, required BuildContext context}){
+    getLoc();
     HomeCubit.get(context).getToken(context);
     HomeCubit.get(context).getSliderCubit(context);
     HomeCubit.get(context).getPrograms(context.locale.toString());
     HomeCubit.get(context).getOffers(context.locale.toString());
     HomeCubit.get(context).getTouristPlaces(context.locale.toString());
     context.read<SignupCubit>().getCountryCode(context.locale.toString());
-    emit(SuccessStateListener(''));
+    emit(SuccessInitHomeState());
   }
   void initRoot({String? check,}){
     if(check==null){
@@ -54,50 +64,46 @@ class HomeCubit extends BaseCubit {
   }
   void changeCurrentIndex(int x){
     currentIndex= x;
-    emit(SuccessStateListener(''));
+    emit(SuccessChangeIndexState());
   }
   void getSliderCubit(BuildContext context) async {
-    emit(LoadingStateListener());
-   try{
-     final response = await _homeRepo.getSliders();
-     slidersResponseModel=response!.data!;
-     emit(SuccessStateListener(''));
-   }catch(e){
-     emit(FailureStateListener(e));
-   }
+    try{
+      final response = await _homeRepo.getSliders();
+      slidersResponseModel=response!.data!;
+      emit(SuccessGetSliderState());
+    }catch(e){
+      emit(ErrorGetSliderState());
+    }
   }
   void getPrograms(String language) async {
     programResponseModel=null;
-    emit(LoadingStateListener());
     try{
       final response = await _homeRepo.getPrograms(language);
       programResponseModel=response!.data!;
-      emit(SuccessStateListener(''));
+      emit(SuccessGetProgramsState());
     }catch(e){
-      emit(FailureStateListener(e));
+      emit(ErrorGetProgramsState());
     }
   }
 
   void getOffers(String language) async {
     offersResponseModel=null;
-    emit(LoadingStateListener());
     try{
       final response = await _homeRepo.getOffers(language);
       offersResponseModel=response!.data!;
-      emit(SuccessStateListener(''));
+      emit(SuccessGetOffersState());
     }catch(e){
-      emit(FailureStateListener(e));
+      emit(ErrorGetOffersState());
     }
   }
   void getTouristPlaces(String language) async {
     touristPlacesResponseModel=null;
-    emit(LoadingStateListener());
     try{
       final response = await _homeRepo.getTouristPlaces(language);
       touristPlacesResponseModel=response!.data!;
-      emit(SuccessStateListener(''));
+      emit(SuccessGetTouristPlacesState());
     }catch(e){
-      emit(FailureStateListener(e));
+      emit(ErrorGetTouristPlacesState());
     }
   }
 

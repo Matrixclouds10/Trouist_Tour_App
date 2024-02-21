@@ -20,7 +20,6 @@ class CustomProgramsBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FavoriteCubit cubit =FavoriteCubit.get(context);
-    bool isFav =false;
     return BlocConsumer<FavoriteCubit, DataState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -65,12 +64,12 @@ class CustomProgramsBodyWidget extends StatelessWidget {
                                         StatefulBuilder(builder: (context,setState){
                                           return IconButton(onPressed: (){
                                             setState(() {
-                                              isFav=!isFav;
+                                              cubit.getFavoriteList![index].isFav=!cubit.getFavoriteList![index].isFav!;
                                             });
                                             FavoriteCubit.get(context).addFavoriteProgram(cubit.getFavoriteList![index].id!,HomeCubit.get(context).token!,context.locale.toString(), context);
                                           }, icon:  Icon(
-                                            isFav==false?
-                                            Icons.favorite_border_rounded:Icons.favorite,color:isFav==false?  Colors.white:Colors.red,));
+                                            cubit.getFavoriteList![index].isFav==false?
+                                            Icons.favorite_border_rounded:Icons.favorite,color:cubit.getFavoriteList![index].isFav==false?  Colors.white:Colors.red,));
                                         }),
                                       ),
                                       Positioned(
@@ -103,7 +102,6 @@ class CustomProgramsBodyWidget extends StatelessWidget {
                                     CustomReligiousProgramWidget(
                                      programResponse:cubit.getFavoriteList![index],
                                      isHasDes: false,),
-
                                 ],
                               ),
                             ),

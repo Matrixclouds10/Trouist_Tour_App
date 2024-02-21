@@ -17,7 +17,7 @@ class TouristPlacesScreen extends StatelessWidget {
       appBar:  PreferredSize(
           preferredSize: Size(double.infinity,62.h),
           child:  CustomAppBar(title:'tourist_places'.tr(), hasBackButton: true,)),
-      body: BlocConsumer<HomeCubit, DataState>(
+      body: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {},
           builder: (context, state) {
             if(cubit.touristPlacesResponseModel!=null){

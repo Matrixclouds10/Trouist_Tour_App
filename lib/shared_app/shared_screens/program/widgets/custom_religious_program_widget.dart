@@ -41,7 +41,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
               CustomDot(
                 height: 16.w,
                 width: 16.w,
-                color: type=='Up Coming'?const Color(0xffF59F01):type=='Completed'?AppColorLight.primaryColor:type=='Canceled'?const Color(0xffFF3A3A):null,
+                color: type=='up_coming'.tr()?const Color(0xffF59F01):type=='completed'.tr()?AppColorLight.primaryColor:type=='canceled'.tr()?const Color(0xffFF3A3A):null,
               ),
               Text(
               type!,

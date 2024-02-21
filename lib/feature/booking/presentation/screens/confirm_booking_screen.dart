@@ -7,10 +7,14 @@ import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
+import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
+import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/booking_request.dart';
 import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_field.dart';
 
@@ -247,10 +251,22 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
             CustomMaterialButtonWidget(
                 text: 'confirm'.tr(),
                 onPressed: (){
-                  BookingRequest bookingRequest =BookingRequest(
+                  if(HomeCubit.get(context).token!=null){
+                    BookingRequest bookingRequest =BookingRequest(
                       id: widget.programResponse!.id,
-                    notes: bookingCubit.noteController.text.isNotEmpty?bookingCubit.noteController.text:"note", payment:  'Cash', total:  widget.programResponse!.newPrice ?? widget.programResponse!.price,);
-                  bookingCubit.bookingPrograms(bookingRequest, context);
+                      notes: bookingCubit.noteController.text.isNotEmpty?bookingCubit.noteController.text:"note", payment:  'Cash', total:  widget.programResponse!.newPrice ?? widget.programResponse!.price,);
+                    bookingCubit.bookingPrograms(bookingRequest, context);
+                  }else{
+                    showCustomDialog2(
+                        title:'success'.tr(),
+                        des:'Log_in_first'.tr(),
+                        bt1:  AppImages.logMessage,
+                        bt2:  'sign_up2'.tr(),
+                        onPressed1: (){
+                          NavigatePages.pushReplacePage(const LogAs(), context);
+                        },
+                        context: context);
+                  }
                 }),
             verticalSpace(100),
           ],

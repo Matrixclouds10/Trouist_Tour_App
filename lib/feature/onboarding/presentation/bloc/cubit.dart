@@ -18,45 +18,19 @@ class AppOnBoardingCubit extends Cubit<AppOnBoardingStates>{
 
   AppOnBoardingCubit() : super(AppInitialOnBoardingStates()){
     init();
-    getData();
   }
   void init(){
-    // BaseLocalDataBase baseLocalDataBase =LocalDataBase();
-    // BaseOnBoardingRepo baseOnBoardingRepo =OnBoardingRepo(baseLocalDataBase);
-    // list= OnBoardingUseCase(baseOnBoardingRepo).getOnBoarding();
-    // print("list ${list[0].title}");
-    // emit(AppGetData());
+    BaseLocalDataBase baseLocalDataBase =LocalDataBase();
+    BaseOnBoardingRepo baseOnBoardingRepo =OnBoardingRepo(baseLocalDataBase);
+    list= OnBoardingUseCase(baseOnBoardingRepo).getOnBoarding();
+    print("list ${list[0].title}");
+    emit(AppGetData());
   }
 
 
   static AppOnBoardingCubit get(context)=>BlocProvider.of(context);
-  // List<OnBoardingModel> list=[];
+   List<OnBoardingModel> list=[];
   int page =0;
-  List<OnBoardingModel> list=[];
-  getData() {
-    list =[
-      OnBoardingModel(
-        title: 'on_title1'.tr(),
-        image: AppImages.onBoarding1,
-        description: 'on_des1'.tr(),
-        number: '1',
-      ),
-      OnBoardingModel(
-        title: 'on_title2'.tr(),
-        image: AppImages.onBoarding2,
-        description: 'on_des2'.tr(),
-        number: '2',
-
-      ),
-      OnBoardingModel(
-        title: 'on_title3'.tr(),
-        image: AppImages.onBoarding3,
-        number: '3',
-        description: "on_des3".tr(),
-      ),
-    ];
-    return list;
-  }
   int currentPage =0;
   void changeCurrentPage(int x){
     currentPage=x;

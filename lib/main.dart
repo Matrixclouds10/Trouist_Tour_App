@@ -15,7 +15,6 @@ import 'package:tourist_tour_app/feature/favorite/logic/favorite_cubit.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/bloc/cubit.dart';
-import 'package:tourist_tour_app/feature/onboarding/presentation/screens/onboarding_screen.dart';
 import 'core/bloc_observer/bloc_observer.dart';
 import 'core/shared_preference/shared_preference.dart';
 
@@ -79,6 +78,7 @@ class TouristTourApp extends StatelessWidget {
         BlocProvider(create: (context) => HelpCubit()),
         BlocProvider(create: (context) => HomeCubit(getIt())),
         BlocProvider(create: (context) => MoreCubit(getIt())),
+        BlocProvider(create: (context) => MoreCubit(getIt())),
         BlocProvider(create: (context) => SignupCubit(getIt())),
         BlocProvider(create: (context) => FavoriteCubit(getIt())),
         BlocProvider(create: (context) => BookingCubit(getIt())),
@@ -103,6 +103,7 @@ class TouristTourApp extends StatelessWidget {
             initialRoute:  Routes.splashScreen ,
             onGenerateRoute: appRouter.generateRoute,
             // home: OnBoardingScreen(),
+            //ios2
             // home:MediaQuery(
             //   data: MediaQuery.of(context).copyWith(
             //     textScaleFactor: 1.0, // تعطيل textScaleFactor على مستوى التطبيق

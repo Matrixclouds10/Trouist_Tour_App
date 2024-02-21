@@ -64,15 +64,16 @@ class CustomPageViewBodyWidget extends StatelessWidget {
                       child:
                       InkWell(
                         onTap: () {
-                          AppOnBoardingCubit.get(context).getData();
-
                           if (context.locale == const Locale('en')) {
-                            context.setLocale(const Locale('ar'));
-                          } else {
-                            context.setLocale(const Locale('en'));
+                            context.setLocale(const Locale('ar')).then((value) {
+                              AppOnBoardingCubit.get(context).init();
+                            });
                           }
-                          AppOnBoardingCubit.get(context).getData();
-
+                          else {
+                            context.setLocale(const Locale('en')).then((value){
+                              AppOnBoardingCubit.get(context).init();
+                            });
+                          }
                         },
                         child: SizedBox(
                           child: Text("on_language".tr(),

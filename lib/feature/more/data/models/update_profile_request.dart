@@ -10,7 +10,9 @@ class UpdateProfileRequest{
   final String email;
   @JsonKey(name: 'country_id')
   final int countryId;
+  @JsonKey(name: 'image')
+  final String? image;
 
-  UpdateProfileRequest({required this.name, required this.phone, required this.email, required this.countryId});
+  UpdateProfileRequest({required this.name, required this.phone, required this.email, required this.countryId,this.image});
   Map<String, dynamic> toJson() => _$UpdateProfileRequestToJson(this);
 }

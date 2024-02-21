@@ -16,7 +16,7 @@ class CustomHorizontalListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit =HomeCubit.get(context);
-    return BlocConsumer<HomeCubit, DataState>(
+    return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {},
       builder: (context, state) {
         if( cubit.programResponseModel!=null){

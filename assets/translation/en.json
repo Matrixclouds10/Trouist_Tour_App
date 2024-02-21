@@ -32,6 +32,9 @@
   "privacy": "Privacy",
   "search_text": "Enter a place or tourist program",
   "rs": "RS",
+  "ok": "Ok",
+  "Log_in_first": "Log in first",
+
   "trip": "Trip",
   "persons": "Persons",
   "trip_details": "Trip Details",
@@ -84,6 +87,7 @@
   "log2": "It is a long established fact that a reader will",
   "sign_in": "Signin",
   "sign_up": "Signup",
+  "sign_up2": "Sign Up",
   "log3": "Login As A Guest",
   "login": "Login!",
   "login_continue": "Login To Continue",
@@ -108,5 +112,18 @@
   "on_des3": "It is a long established fact that a reader will be distracted by ",
   "on_button": "Let's Start",
   "on_language": "عربي",
-  "no_data_currently": "There is no data currently"
+  "no_data_currently": "There is no data currently",
+  "button_sheet_title": "Why do you want to cancel The Trip ?",
+  "button_sheet_hint": "Enter a description...",
+  "button_sheet_body1": "My Plan Changed .",
+  "button_sheet_body2": "The timing is not suitable",
+  "button_sheet_body3": "The price is not suitable",
+  "button_sheet_btn": "Send",
+  "other": "Other",
+  "success": "Successfully",
+
+  "up_coming": "Up Coming",
+  "completed": "Completed",
+  "canceled": "Canceled"
+
 }

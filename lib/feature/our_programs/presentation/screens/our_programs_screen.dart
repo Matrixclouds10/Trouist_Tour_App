@@ -19,7 +19,7 @@ class OurProgramsScreen extends StatelessWidget {
             preferredSize: Size(double.infinity,62.h),
             child:  CustomAppBar(title:'our_programs'.tr(), hasBackButton: true,)),
         body: SingleChildScrollView(
-          child: BlocConsumer<HomeCubit, DataState>(
+          child: BlocConsumer<HomeCubit, HomeState>(
             listener: (context, state) {},
             builder: (context, state) {
               if(cubit.programResponseModel!=null){

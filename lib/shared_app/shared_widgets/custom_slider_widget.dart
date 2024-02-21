@@ -45,8 +45,7 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
                 children: [
                   Image.network(e!.image, fit: BoxFit.cover,
                     errorBuilder: (context,error,v){
-                      return
-                        e.off=='true'?
+                      return e.off=='true'?
                         VideoPlayerWidget(videoUrl: e.image):
                         Image.asset(
                           AppImages.holder, // Path to your custom placeholder image
@@ -218,6 +217,9 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
            ClipRRect(
              borderRadius: BorderRadius.circular(10),
              child: Image.network(e!, fit: BoxFit.cover,
+               errorBuilder: (context,error,v){
+                 return  const Center(child: CircularProgressIndicator(),);
+               },
                width: double.infinity,),
            ):
            Image.network(e!, fit: BoxFit.cover,

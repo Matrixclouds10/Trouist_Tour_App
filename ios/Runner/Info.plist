@@ -46,6 +46,8 @@
         	<string>en</string>
         	<string>ar</string>
         </array>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>لجلب موقع العميل نستخدم تحديد الموقع</string>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>

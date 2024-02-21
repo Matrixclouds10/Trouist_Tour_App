@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/resources/bloc/base_cubit.dart';
 import 'package:tourist_tour_app/core/resources/data_state.dart';
+import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
 import 'package:tourist_tour_app/feature/favorite/data/repo/favorite_repo.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 part 'favorite_state.dart';
 
 class FavoriteCubit extends BaseCubit {
@@ -20,6 +22,9 @@ class FavoriteCubit extends BaseCubit {
         Future.delayed(const Duration(microseconds: 0)).then((value) {
           showToast('${response.message}', ToastStates.success, context);
           getFavoriteProgram(token, language,context,);
+          BookingCubit.get(context).getBookingPrograms(token, context, language);
+          BookingCubit.get(context).getCanceledPrograms(token, context, language);
+          HomeCubit.get(context).getPrograms(language);
         });
       }else{
         Future.delayed(const Duration(microseconds: 0)).then((value) {

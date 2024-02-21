@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
+import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/bloc/states.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/widgets/custom_page_view_body_widget.dart';
@@ -54,7 +55,11 @@ class OnBoardingScreen extends StatelessWidget {
                     verticalSpace(78),
                     AppOnBoardingCubit.get(context).currentPage==2?
                     CustomMaterialButtonWidget(text:'on_button'.tr(), onPressed: () {
-                      NavigatePages.pushToPage(const LogAs(), context);}
+                      CacheHelper.saveDate(key: 'onBoarding', value: true).then((value) =>
+                      {
+                        NavigatePages.pushReplacePage(const LogAs(), context)
+                      });
+                  }
                     ):
                     Padding(
                       padding:   EdgeInsets.symmetric(horizontal: 16.w),

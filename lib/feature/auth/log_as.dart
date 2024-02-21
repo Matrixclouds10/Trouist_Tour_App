@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
@@ -12,9 +12,19 @@ import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/routing/routes.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
-class LogAs extends StatelessWidget {
+class LogAs extends StatefulWidget {
   const LogAs({super.key});
 
+  @override
+  State<LogAs> createState() => _LogAsState();
+}
+
+class _LogAsState extends State<LogAs> {
+  @override
+  void initState() {
+    getPermission();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -111,5 +121,21 @@ class LogAs extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future getPermission()async{
+    bool service;
+    LocationPermission permission;
+    service =await Geolocator.isLocationServiceEnabled();
+    if(service ==false){
+    }
+    permission =await Geolocator.checkPermission();
+    if(permission ==LocationPermission.denied){
+      permission =await Geolocator.requestPermission();
+    }
+    // Position p ;
+    // p=await Geolocator.getCurrentPosition().then((value) => value);
+    // List<Placemark> place= await placemarkFromCoordinates(p.latitude,p.longitude);
+    return permission;
   }
 }

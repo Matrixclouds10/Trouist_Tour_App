@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/resources/data_state.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
@@ -14,35 +15,43 @@ class CustomUpComingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     BookingCubit cubit =BookingCubit.get(context);
     return
-      BlocConsumer<BookingCubit, DataState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          if(cubit.getBookingProgramsList!=null){
-            if(cubit.getBookingProgramsList!.isNotEmpty){
-              return ListView.builder(
-                  itemCount: cubit.getBookingProgramsList!.length,
-                  itemBuilder: (context,index){
-                    return InkWell(
-                      onTap: (){
-                        NavigatePages.pushToPage(const BookingDetailsScreen(type: 'Up Coming',), context);
-                      },
-                      child: CustomProgramItem(
-                        programResponse: cubit.getBookingProgramsList![index],
-                        textButtonText: 'Cancel', onPressed: () {  showModalBottomSheet(
-                        backgroundColor:Colors.white,
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (context) => const SingleChildScrollView(child: CustomBottomSheet()),
-                      ); },),
-                    );
-                  });
+      Padding(
+        padding: EdgeInsets.only(bottom: 50.h),
+        child: BlocConsumer<BookingCubit, BookingState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            if(cubit.getBookingProgramsList!=null){
+              if(cubit.getBookingProgramsList!.isNotEmpty){
+                return ListView.builder(
+                    itemCount: cubit.getBookingProgramsList!.length,
+                    itemBuilder: (context,index){
+                      return InkWell(
+                        onTap: (){
+                          NavigatePages.pushToPage(
+                              BookingDetailsScreen(type: 'up_coming'.tr(),
+                                bookingResponse:  cubit.getBookingProgramsList![index],), context);
+                        },
+                        child: CustomProgramItem(
+                          programResponse: cubit.getBookingProgramsList![index],
+                          textButtonText: 'cancel'.tr(), onPressed: () {
+                            showModalBottomSheet(
+                          backgroundColor:Colors.white,
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (context) =>  CustomBottomSheet(
+                            note: cubit.noteController.text.isNotEmpty?cubit.noteController.text:cubit.valueCanceled, id: cubit.getBookingProgramsList![index].bookingId!,
+                            name: cubit.getBookingProgramsList![index].name!,),
+                        ); },),
+                      );
+                    });
+              }else{
+                return Center(child: Text('no_data_currently'.tr()),);
+              }
             }else{
-              return Center(child: Text('no_data_currently'.tr()),);
+              return const Center(child: CircularProgressIndicator(),);
             }
-          }else{
-            return const Center(child: CircularProgressIndicator(),);
-          }
-        },
-    );
+          },
+            ),
+      );
   }
 }

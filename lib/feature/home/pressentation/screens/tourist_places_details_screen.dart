@@ -5,9 +5,11 @@ import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/feature/home/data/models/tourist_places_response.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_slider_widget.dart';
 
 class TouristPlaceDetailsScreen extends StatefulWidget {
@@ -44,9 +46,14 @@ class _TouristPlaceDetailsScreenState extends State<TouristPlaceDetailsScreen> {
                     }, icon: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
                     const Spacer(),
                     IconButton(onPressed: (){
-                      setState(() {
-                        isFav=!isFav;
-                      });
+                      if(HomeCubit.get(context).token!=null){
+                        setState(() {
+                          isFav=!isFav;
+                        });
+                      }else{
+                        showToast('Log_in_first'.tr(), ToastStates.error, context);
+                      }
+
                     }, icon:  Icon(
                       isFav==false?
                       Icons.favorite_border_rounded:Icons.favorite,color:isFav==false? Colors.white:Colors.red,))

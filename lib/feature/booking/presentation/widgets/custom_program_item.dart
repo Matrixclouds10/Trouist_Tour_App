@@ -6,6 +6,7 @@ import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
+import 'package:tourist_tour_app/feature/booking/data/models/booking_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_button.dart';
 
@@ -13,7 +14,7 @@ class CustomProgramItem extends StatelessWidget {
   const CustomProgramItem({super.key, required this.textButtonText, required this.onPressed, this.programResponse});
   final String textButtonText;
   final VoidCallback onPressed;
-  final ProgramResponse? programResponse;
+  final BookingResponse? programResponse;
   @override
   Widget build(BuildContext context) {
     return   Padding(
