@@ -23,6 +23,7 @@
   "change_language": "Change Language",
   "log_out": "Log Out",
   "log_out_mes": "Are you sure you want to go out?",
+  "finish": "Finish",
   "yes": "Yes",
   "no": "No",
   "logout": "Logout",
@@ -34,7 +35,7 @@
   "rs": "RS",
   "ok": "Ok",
   "Log_in_first": "Log in first",
-
+  "create_acc": "Create an account ?",
   "trip": "Trip",
   "persons": "Persons",
   "trip_details": "Trip Details",
@@ -60,7 +61,7 @@
   "number_persons": "Number Of Persons",
   "number_children": "Number Of Childrens",
   "years": "years",
-  "number_babies": "Number Of Babies",
+  "age_group": "Age group",
   "number_males": "Number Of Males",
   "number_females": "Number Of Females",
   "type_reception_arrival": "Type Of Reception & Arrival",
@@ -124,6 +125,12 @@
 
   "up_coming": "Up Coming",
   "completed": "Completed",
-  "canceled": "Canceled"
+  "canceled": "Canceled",
+  "new_password": "New Password",
+  "confirm_new_password": "Confirm New Password",
+  "done": "Done",
+  "favourites": "Favourites",
+  "places": "Places",
+  "programs": "Programs"
 
 }

@@ -6,6 +6,7 @@ import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/home/pressentation/screens/home.dart';
+import 'package:tourist_tour_app/feature/home/pressentation/screens/search_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -44,9 +45,10 @@ class _SplashScreenState extends State<SplashScreen> {
       }
       await Future.delayed(const Duration(microseconds: 0)).then((value) {
         HomeCubit cubit =HomeCubit.get(context);
-        cubit.initHome(context: context);
+
+        // cubit.initHome(context: context);
         context.pushReplacementNamed(widget);
-        // NavigatePages.pushReplacePage(const Home(), context);
+        // NavigatePages.pushReplacePage(const SearchScreen(), context);
       });
     });
   }

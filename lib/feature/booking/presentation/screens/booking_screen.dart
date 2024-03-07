@@ -52,13 +52,12 @@ class BookingScreen extends StatelessWidget {
                     Tab(text: 'canceled'.tr()),
                   ],
                 ),
-                 Expanded(
+                 const Expanded(
                   child: TabBarView(
                     children: [
-                      const CustomUpComingWidget(),
-                      Container(),
-                      // CustomCompleteWidget(),
-                      const CustomCanceledWidget(),
+                      CustomUpComingWidget(),
+                       CustomCompleteWidget(),
+                      CustomCanceledWidget(),
                     ],
                   ),
                 ),

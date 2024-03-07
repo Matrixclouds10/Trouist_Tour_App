@@ -8,9 +8,11 @@ import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
 import 'package:tourist_tour_app/feature/favorite/logic/favorite_cubit.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
+import 'package:tourist_tour_app/feature/home/data/models/search_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/sliders_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/tourist_places_response.dart';
 import 'package:tourist_tour_app/feature/home/data/repos/home_repo.dart';
+import 'package:tourist_tour_app/feature/make_program/logic/make_program_cubit.dart';
 import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
 part 'home_state.dart';
 
@@ -22,18 +24,38 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProgramResponse>? programResponseModel;
   List<ProgramResponse>? offersResponseModel;
   List<TouristPlaceResponse>? touristPlacesResponseModel;
+  SearchResponse? searchResponse;
   String? token;
+  bool isSearchStart =false;
+  TextEditingController searchControllerHome =TextEditingController();
+
   Future getToken(BuildContext context) async {
     token= await CacheHelper.getDate(key: 'token');
     emit(LoadingTokenState());
     print(token);
+
     token!=null?
     Future.delayed(const Duration(microseconds: 0)).then((value) {
+      HomeCubit.get(context).getPrograms(token!,context.locale.toString());
+      HomeCubit.get(context).getTouristPlaces(token!,context.locale.toString());
       MoreCubit.get(context).getProfile(token!, context);
       FavoriteCubit.get(context).getFavoriteProgram(token!,context.locale.toString(),context);
+      FavoriteCubit.get(context).getFavoritePlaces(token!,context.locale.toString(),context);
       BookingCubit.get(context).getBookingPrograms(token!, context,context.locale.toString());
       BookingCubit.get(context).getCanceledPrograms(token!, context,context.locale.toString());
-    }):null;
+      BookingCubit.get(context).getCompletedPrograms(token!, context,context.locale.toString());
+    }):
+    Future.delayed(const Duration(microseconds: 0)).then((value) {
+      HomeCubit.get(context).getPrograms('123',context.locale.toString());
+      HomeCubit.get(context).getTouristPlaces('123',context.locale.toString());
+    });
+    Future.delayed(const Duration(microseconds: 0)).then((value) {
+      getLoc();
+      MakeProgramCubit.get(context).getPlaces(context);
+      HomeCubit.get(context).getSliderCubit(context);
+      HomeCubit.get(context).getOffers(context.locale.toString());
+      context.read<SignupCubit>().getCountryCode(context.locale.toString());
+    });
     emit(LoadingTokenState());
   }
   String location='';
@@ -47,11 +69,10 @@ class HomeCubit extends Cubit<HomeState> {
   int? currentIndex=0;
   void initHome({String? check, required BuildContext context}){
     getLoc();
+    MakeProgramCubit.get(context).getPlaces(context);
     HomeCubit.get(context).getToken(context);
     HomeCubit.get(context).getSliderCubit(context);
-    HomeCubit.get(context).getPrograms(context.locale.toString());
     HomeCubit.get(context).getOffers(context.locale.toString());
-    HomeCubit.get(context).getTouristPlaces(context.locale.toString());
     context.read<SignupCubit>().getCountryCode(context.locale.toString());
     emit(SuccessInitHomeState());
   }
@@ -75,10 +96,10 @@ class HomeCubit extends Cubit<HomeState> {
       emit(ErrorGetSliderState());
     }
   }
-  void getPrograms(String language) async {
+  void getPrograms(String token ,String language) async {
     programResponseModel=null;
     try{
-      final response = await _homeRepo.getPrograms(language);
+      final response = await _homeRepo.getPrograms(token,language);
       programResponseModel=response!.data!;
       emit(SuccessGetProgramsState());
     }catch(e){
@@ -96,15 +117,30 @@ class HomeCubit extends Cubit<HomeState> {
       emit(ErrorGetOffersState());
     }
   }
-  void getTouristPlaces(String language) async {
+  void getTouristPlaces(String token,String language) async {
     touristPlacesResponseModel=null;
     try{
-      final response = await _homeRepo.getTouristPlaces(language);
+      final response = await _homeRepo.getTouristPlaces(token,language);
       touristPlacesResponseModel=response!.data!;
       emit(SuccessGetTouristPlacesState());
     }catch(e){
       emit(ErrorGetTouristPlacesState());
     }
+  }
+  TextEditingController searchController =TextEditingController();
+  void search(String text,BuildContext context) async {
+    searchResponse=null;
+    try{
+      final response = await _homeRepo.search(text,token!,context.locale.languageCode);
+      searchResponse=response!.data!;
+      emit(SuccessSearchState());
+    }catch(e){
+      emit(ErrorSearchState());
+    }
+  }
+  void changeSearchStart(bool x){
+    isSearchStart=x;
+    emit(ChangeLoadingState());
   }
 
 }

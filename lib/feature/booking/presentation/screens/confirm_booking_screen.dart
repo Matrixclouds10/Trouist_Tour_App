@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
-import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
@@ -38,7 +37,13 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-             SizedBox(height: 172.h, width: double.infinity, child: Image.asset(AppImages.test2,fit: BoxFit.cover,)),
+             SizedBox(height: 200.h, width: double.infinity, child:
+             Image.network(
+               widget.programResponse!.images![0].image!,fit: BoxFit.cover,
+             errorBuilder: (context,error,v){
+                 return Image.asset(AppImages.holder,fit: BoxFit.cover,);
+             },
+             )),
             verticalSpace(24),
             Container(
               height:310.h ,

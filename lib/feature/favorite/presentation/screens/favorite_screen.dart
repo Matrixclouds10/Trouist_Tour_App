@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
@@ -38,15 +39,15 @@ class FavoriteScreen extends StatelessWidget {
                       elevation: 0,
                       backgroundColor: Colors.white,
                       centerTitle: true,
-                      title: Text('Favourites',
+                      title: Text('favourites'.tr(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyles.font17CustomBlack500WeightPoppins,
                       ),
                       bottom:  TabBar(
-                          tabs: const [
-                            Tab(text: 'Places'),
-                            Tab(text: 'Programs'),
+                          tabs:  [
+                            Tab(text: 'places'.tr()),
+                            Tab(text: 'programs'.tr()),
                           ],
                         labelStyle: TextStyle(
                             color: AppColorLight.primaryColor,

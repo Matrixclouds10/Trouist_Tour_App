@@ -4,38 +4,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/feature/make_program/data/models/get_places_response.dart';
+import 'package:tourist_tour_app/feature/make_program/logic/make_program_cubit.dart';
 
 class CustomDrpDownWidget extends StatefulWidget {
-  const CustomDrpDownWidget({super.key});
-
+   CustomDrpDownWidget({super.key, required this.hotelsResponseList, required this.title});
+   List<HotelsResponse> hotelsResponseList;
+   String title;
   @override
   State<CustomDrpDownWidget> createState() => _CustomDrpDownState();
 }
 
 class _CustomDrpDownState extends State<CustomDrpDownWidget> {
-  var value1='Laguna Vista';
-var value2='Golden Tulip';
-var value3='Al-Malfa Hotel';
-List<String> list=['Laguna Vista','Golden Tulip','Al-Malfa Hotel','Al-Morshedy Hotel','El Alaamen Hotel'];
+
 @override
   Widget build(BuildContext context) {
-    return DropdownButton2<String>(
+  MakeProgramCubit cubit =MakeProgramCubit.get(context);
 
-      // iconStyleData:IconStyleData(icon: Icon(Icons.arrow_drop_down_circle_outlined)),
+  return DropdownButton2<String>(
       isExpanded: true,
       underline: const SizedBox.shrink(),
-      hint: Text(value1, style: TextStyles.font17Black400WightLato,),
-      items: list.map((String? e) =>
+      hint: Text(widget.title, style: TextStyles.font17Black400WightLato,),
+      items: widget.hotelsResponseList.map((HotelsResponse e) =>
           DropdownMenuItem<String>(
-            value: e!,
+            value: e.name,
             child: Text(
-              e,
+              e.name!,
               style: const TextStyle(fontSize: 14),
             ),
           )).toList(),
       onChanged: (String? value) {
         setState(() {
-          value1 = value!;
+          widget.title = value!;
+          cubit.typeOfStayingPlace=value;
         });
       },
       buttonStyleData: ButtonStyleData(

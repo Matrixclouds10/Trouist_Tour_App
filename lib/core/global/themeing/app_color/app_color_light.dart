@@ -14,4 +14,6 @@ class AppColorLight{
   static const Color  grayBorderColor= Color(0xffD0D5DD);
   static const Color  grayBackGroundColor= Color(0xffF6F6F6);
   static const Color  starColor= Color(0xffE4A951);
+  static const Color imageBg = Color(0xffE2F0FF);
+
 }

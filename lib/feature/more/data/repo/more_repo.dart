@@ -3,6 +3,7 @@ import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/networking/api_response.dart';
 import 'package:tourist_tour_app/core/networking/api_service.dart';
 import 'package:tourist_tour_app/feature/more/data/models/about_us_response.dart';
+import 'package:tourist_tour_app/feature/more/data/models/change_password_request.dart';
 import 'package:tourist_tour_app/feature/more/data/models/profile_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/update_profile_request.dart';
 import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
@@ -46,6 +47,14 @@ class MoreRepo{
   Future<ApiResponse?> deleteProfile(String token)async{
     try {
       final response = await _apiService.deleteProfile(token);
+      return response;
+    } catch (error) {
+      return null;
+    }
+  }
+  Future<ApiResponse?> changePassword(String token,ChangePasswordRequest changePasswordRequest)async{
+    try {
+      final response = await _apiService.changePassword(token,changePasswordRequest);
       return response;
     } catch (error) {
       return null;

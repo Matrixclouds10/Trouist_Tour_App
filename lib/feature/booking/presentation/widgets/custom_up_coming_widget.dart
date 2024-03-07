@@ -22,7 +22,8 @@ class CustomUpComingWidget extends StatelessWidget {
           builder: (context, state) {
             if(cubit.getBookingProgramsList!=null){
               if(cubit.getBookingProgramsList!.isNotEmpty){
-                return ListView.builder(
+                return
+                  ListView.builder(
                     itemCount: cubit.getBookingProgramsList!.length,
                     itemBuilder: (context,index){
                       return InkWell(

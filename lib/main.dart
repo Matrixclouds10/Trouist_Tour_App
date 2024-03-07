@@ -13,6 +13,7 @@ import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
 import 'package:tourist_tour_app/feature/favorite/logic/favorite_cubit.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
+import 'package:tourist_tour_app/feature/make_program/logic/make_program_cubit.dart';
 import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
 import 'package:tourist_tour_app/feature/onboarding/presentation/bloc/cubit.dart';
 import 'core/bloc_observer/bloc_observer.dart';
@@ -82,6 +83,7 @@ class TouristTourApp extends StatelessWidget {
         BlocProvider(create: (context) => SignupCubit(getIt())),
         BlocProvider(create: (context) => FavoriteCubit(getIt())),
         BlocProvider(create: (context) => BookingCubit(getIt())),
+        BlocProvider(create: (context) => MakeProgramCubit(getIt())),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

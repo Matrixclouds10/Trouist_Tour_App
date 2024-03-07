@@ -45,6 +45,7 @@ class CustomTopBodyHomeWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  horizontalSpace(5),
                   InkWell(
                     onTap: () {
                       NavigatePages.pushToPage(
@@ -57,12 +58,12 @@ class CustomTopBodyHomeWidget extends StatelessWidget {
                 ],
               ),
             ),
-            verticalSpace(16),
-            Text("begin_home".tr(),
-              style: TextStyles.font24CustomBlack700WeightPoppins,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+            // verticalSpace(16),
+            // Text("begin_home".tr(),
+            //   style: TextStyles.font24CustomBlack700WeightPoppins,
+            //   maxLines: 2,
+            //   overflow: TextOverflow.ellipsis,
+            // ),
             verticalSpace(16),
             BlocConsumer<HomeCubit, HomeState>(
               listener: (context, state) {},

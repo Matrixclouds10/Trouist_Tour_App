@@ -7,6 +7,8 @@ import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/booking_response.dart';
+import 'package:tourist_tour_app/feature/booking/data/models/canceled_request.dart';
+import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_button.dart';
 
@@ -132,10 +134,29 @@ class CustomProgramItem extends StatelessWidget {
                 ],
               ),
               verticalSpace(10),
-              SizedBox(
-                  height: 40.h,
-                  width:311.w ,
-                  child: CustomTextButton(text: textButtonText, onPressed: onPressed,)),
+
+              textButtonText!='cancel'.tr()?
+                 textButtonText!='Review'?
+                 SizedBox(
+                     height: 40.h,
+                     width:311.w ,
+                     child: CustomTextButton(text: textButtonText, onPressed: onPressed,)):const SizedBox.shrink():
+                 Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                   children: [
+                     SizedBox(
+                         height: 40.h,
+                         width:MediaQuery.of(context).size.width*0.4,
+                         child: CustomTextButton(text: textButtonText, onPressed: onPressed,)),
+                     SizedBox(
+                         height: 40.h,
+                         width:MediaQuery.of(context).size.width*0.4,
+                         child: CustomTextButton(text: 'finish'.tr(), onPressed: (){
+                           CanceledRequest canceledRequest=CanceledRequest(id: programResponse!.bookingId, notes: 'note');
+                           BookingCubit.get(context).finishedProgram(canceledRequest,context);
+                         },))
+                   ],
+                 ),
             ],
           ),
         ),

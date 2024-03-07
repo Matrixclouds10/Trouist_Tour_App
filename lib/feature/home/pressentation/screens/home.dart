@@ -87,9 +87,8 @@ class Home extends StatelessWidget {
                               cubit.offersResponseModel!.isNotEmpty?
                            InkWell(
                             onTap: (){
-                              NavigatePages.pushToPage( OffersScreen(offersResponseModel: cubit.offersResponseModel,), context);
+                              NavigatePages.pushToPage(OffersScreen(offersResponseModel: cubit.offersResponseModel,), context);
                             },
-
                             child:
                             CustomHomeOffer(
                               offerProgramResponse: cubit.offersResponseModel! ,

@@ -8,8 +8,8 @@ import 'package:tourist_tour_app/feature/booking/presentation/screens/booking_sc
 import 'package:tourist_tour_app/feature/favorite/presentation/screens/favorite_screen.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/home/pressentation/screens/home.dart';
+import 'package:tourist_tour_app/feature/home/pressentation/screens/search_screen.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/more_screen.dart';
-import 'package:tourist_tour_app/feature/search/presentation/screen/search_screen.dart';
 
 class RootPages extends StatefulWidget {
   final String? check;

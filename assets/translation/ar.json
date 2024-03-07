@@ -8,6 +8,8 @@
   "make_program_des": "Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum.",
   "make_program": "أنشئ برنامجك",
   "now": "الآن",
+  "age_group": "الفئة العمرية",
+  "finish": "أنهى",
   "off": "خصم",
   "offer_home": "عروض مذهلة هنا",
   "tourist_places": "أماكن سياحية",
@@ -99,6 +101,7 @@
   "not_match": "تأكيد كلمة المرور لا يتطابق مع كلمة المرور",
   "agree": "أوافق على ",
   "skip": "تخطى",
+  "create_acc": "انشاء حساب ؟",
   "ok": "موافق",
   "Log_in_first": "قم بتسجيل الدخول اولا ",
   "on_title1": "اكتشف المغامرة",
@@ -121,6 +124,12 @@
   "other": "آخر",
   "up_coming": "قادم",
   "completed": "مُكتمل",
-  "canceled": "مُلغى"
+  "canceled": "مُلغى",
+  "new_password": "كلمة مرور جديدة",
+  "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+  "done": "تم",
+  "favourites": "المفضلة",
+  "places": "الأماكن",
+  "programs": "البرامج"
 
 }

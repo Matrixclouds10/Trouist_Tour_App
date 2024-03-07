@@ -16,7 +16,7 @@ class ApiResponse<T> {
   Pagination? pagination;
 
 
-  ApiResponse({this.code, this.message, this.data, this.pagination});
+  ApiResponse({this.code, this.message, this.data, this.pagination, bool? status});
 
   factory ApiResponse.fromJson(
     Map<String, dynamic> json,

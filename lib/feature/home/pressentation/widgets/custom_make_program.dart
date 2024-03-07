@@ -7,6 +7,7 @@ import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
+import 'package:tourist_tour_app/feature/make_program/logic/make_program_cubit.dart';
 import 'package:tourist_tour_app/feature/make_program/presentation/screens/custom_program_screen.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
@@ -46,6 +47,7 @@ class CustomMakeProgram extends StatelessWidget {
                 textSize: 14,
                 onPressed: (){
                   if(HomeCubit.get(context).token!=null){
+                    MakeProgramCubit.get(context).getPlaces(context);
                     NavigatePages.pushToPage(const CustomProgramScreen(), context);
                   }else{
                     showToast('Log_in_first'.tr(), ToastStates.error, context);

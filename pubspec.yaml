@@ -2,7 +2,7 @@ name: tourist_tour_app
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -20,6 +20,7 @@ dependencies:
   #code generate
   freezed: ^2.4.5
   freezed_annotation: ^2.4.1
+  shimmer: ^3.0.0
   #Dependency injection
   get_it: ^7.6.4
 #  #Automatically generate code for convert to and from json
