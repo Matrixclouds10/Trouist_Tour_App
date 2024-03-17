@@ -21,19 +21,13 @@ class FavoriteCubit extends BaseCubit {
     emit(LoadingStateListener());
     try{
       final response = await _favoriteRepo.addFavoriteProgram(id,'Bearer $token');
-      if(response.status==true){
-        Future.delayed(const Duration(microseconds: 0)).then((value) {
-          showToast('${response.message}', ToastStates.success, context);
-          getFavoriteProgram(token, language,context,);
-          BookingCubit.get(context).getBookingPrograms(token, context, language);
-          BookingCubit.get(context).getCanceledPrograms(token, context, language);
-          HomeCubit.get(context).getPrograms(HomeCubit.get(context).token!,language);
-        });
-      }else{
-        Future.delayed(const Duration(microseconds: 0)).then((value) {
-          showToast('${response.message}', ToastStates.error, context);
-        });
-      }
+      Future.delayed(const Duration(microseconds: 0)).then((value) {
+        showToast('${response.message}', ToastStates.success, context);
+        getFavoriteProgram(token, language,context,);
+        BookingCubit.get(context).getBookingPrograms(token, context, language);
+        BookingCubit.get(context).getCanceledPrograms(token, context, language);
+        HomeCubit.get(context).getPrograms(HomeCubit.get(context).token!,language);
+      });
       emit(SuccessStateListener(''));
     }catch(e){
       Future.delayed(const Duration(microseconds: 0)).then((value) {
@@ -63,16 +57,16 @@ class FavoriteCubit extends BaseCubit {
     try{
       final response = await _favoriteRepo.addFavoritePlaces(id,'Bearer $token');
       if(response.status==true){
-        Future.delayed(const Duration(microseconds: 0)).then((value) {
-          showToast('${response.message}', ToastStates.success, context);
-          getFavoritePlaces(token, language,context,);
-          HomeCubit.get(context).getTouristPlaces(HomeCubit.get(context).token!,language);
-        });
+
       }else{
         Future.delayed(const Duration(microseconds: 0)).then((value) {
           showToast('${response.message}', ToastStates.error, context);
         });
-      }
+      } Future.delayed(const Duration(microseconds: 0)).then((value) {
+        showToast('${response.message}', ToastStates.success, context);
+        getFavoritePlaces(token, language,context,);
+        HomeCubit.get(context).getTouristPlaces(HomeCubit.get(context).token!,language);
+      });
       emit(SuccessStateListener(''));
     }catch(e){
       Future.delayed(const Duration(microseconds: 0)).then((value) {

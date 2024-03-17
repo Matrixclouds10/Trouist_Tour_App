@@ -40,7 +40,13 @@ class CustomProgramItem extends StatelessWidget {
                       width: 105.w,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(AppImages.test2,fit: BoxFit.cover,))),
+                          child: Image.network(
+                            programResponse!.images![0].image!,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context,error,v){
+                              return Image.asset(AppImages.holder);
+                            },
+                          ))),
                   horizontalSpace(8),
                   SizedBox(
                       width: 190.w,

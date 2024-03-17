@@ -38,6 +38,8 @@ class SearchScreen extends StatelessWidget {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (BuildContext context) =>
                       RootPages(check: '0',)));
+              cubit.searchController.text='';
+              cubit.changeSearchStart(false);
             },
             child: Scaffold(
               appBar: AppBar(
@@ -46,7 +48,15 @@ class SearchScreen extends StatelessWidget {
                   // color: AppColorLight.primaryColor
                 )),
                 centerTitle: true,
-                leading: const Icon(Icons.arrow_back_ios),
+                leading: InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              RootPages(check: '0',)));
+                      cubit.searchController.text='';
+                      cubit.changeSearchStart(false);
+                    },
+                    child: const Icon(Icons.arrow_back_ios)),
               ),
                 body:
                 Padding(
