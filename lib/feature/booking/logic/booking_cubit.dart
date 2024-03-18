@@ -4,14 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
+import 'package:tourist_tour_app/core/services/logger.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/booking_request.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/booking_response.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/canceled_request.dart';
 import 'package:tourist_tour_app/feature/booking/data/repo/booking_repo.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
+import 'package:tourist_tour_app/feature/more/data/models/profile_response.dart';
+import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
 import 'package:tourist_tour_app/feature/root_pages/root_page.dart';
+import 'package:tourist_tour_app/main.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
+import 'package:urwaypayment/urwaypayment.dart';
 part 'booking_state.dart';
 
 class BookingCubit extends Cubit<BookingState> {
@@ -122,5 +127,47 @@ class BookingCubit extends Cubit<BookingState> {
       emit(BookingProgramsErrorState());
     }
   }
+
+  // ur way payment request
+   urWayPayment({required String id, required String amount,required BuildContext context}) async {
+    try {
+      MoreCubit cubit =MoreCubit.get(context);
+      HomeCubit cubitHomeCubit =HomeCubit.get(context);
+      cubitHomeCubit.getLoc();
+      ProfileResponse? profile =await cubit.getProfile(HomeCubit.get(context).token!, context);
+      print('profile is id  ${profile!.id}');
+      print('profile is ${profile.email}');
+
+      final data = await Payment.makepaymentService(
+        context: context,
+        country: "SA",
+        trackid: "${profile.id ?? '0'}$id${DateTime.now().millisecondsSinceEpoch}",
+        currency: "SAR",
+        action: "1",
+        amt: amount,
+        customerEmail: (profile.email != null && profile.email!.isNotEmpty) ?  profile.email!  : "noemail@no.no",
+        udf1: "",
+        udf2: "",
+        udf3: "",
+        udf4: "",
+        udf5: "",
+        cardToken: "",
+        address:(cubitHomeCubit.city!=null) ?cubitHomeCubit.city! : "no address",
+        city:(cubitHomeCubit.city!=null) ?cubitHomeCubit.city! : "no address",
+        state: "Pending",
+        tokenizationType: "1",
+        zipCode: "",
+        tokenOperation: "A/U/D", metadata:"",
+      );
+      log('Result in Main is :', data);
+      emit(BookingProgramsSuccessState());
+      return data;
+    } on Exception catch (e) {
+      log('Error in platform :', e.toString());
+      rethrow;
+    }
+
+   }
+
 
 }

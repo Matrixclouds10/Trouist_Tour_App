@@ -48,8 +48,9 @@ class CustomTopBodyHomeWidget extends StatelessWidget {
                   horizontalSpace(5),
                   InkWell(
                     onTap: () {
-                      NavigatePages.pushToPage(
-                          const NotificationScreen(), context);
+                      cubit.getNotificationCubit(context);
+                      NavigatePages.pushToPage(const NotificationScreen(), context);
+
                     },
                     child: const Icon(Icons.notifications_none,
                       color: AppColorLight.gray2,

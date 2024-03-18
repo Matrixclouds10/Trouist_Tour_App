@@ -52,7 +52,7 @@ class SearchScreen extends StatelessWidget {
                     onTap: (){
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              RootPages(check: '0',)));
+                              const RootPages(check: '0',)));
                       cubit.searchController.text='';
                       cubit.changeSearchStart(false);
                     },

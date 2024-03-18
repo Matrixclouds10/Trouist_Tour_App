@@ -19,3 +19,6 @@ class ErrorGetProgramsState extends HomeState {}
 class ErrorGetSliderState extends HomeState {}
 class ErrorState extends HomeState {}
 class ChangeLoadingState extends HomeState {}
+class NotificationLoadingState extends HomeState {}
+class NotificationSuccessState extends HomeState {}
+class NotificationErrorState extends HomeState {}

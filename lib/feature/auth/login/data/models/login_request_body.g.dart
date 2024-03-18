@@ -10,10 +10,12 @@ LoginRequestBody _$LoginRequestBodyFromJson(Map<String, dynamic> json) =>
     LoginRequestBody(
       email: json['EmailOrPhone'] as String,
       password: json['password'] as String,
+      fcmToken: json['fcm_token'] as String,
     );
 
 Map<String, dynamic> _$LoginRequestBodyToJson(LoginRequestBody instance) =>
     <String, dynamic>{
       'EmailOrPhone': instance.email,
       'password': instance.password,
+      'fcm_token': instance.fcmToken,
     };

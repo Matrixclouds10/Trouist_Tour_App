@@ -7,6 +7,7 @@ import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
 import 'package:tourist_tour_app/feature/favorite/logic/favorite_cubit.dart';
+import 'package:tourist_tour_app/feature/home/data/models/notification_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/search_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/sliders_response.dart';
@@ -59,11 +60,13 @@ class HomeCubit extends Cubit<HomeState> {
     emit(LoadingTokenState());
   }
   String location='';
+  String? city;
   void getLoc()async{
     Position p ;
     p=await Geolocator.getCurrentPosition().then((value) => value);
     List<Placemark> place= await placemarkFromCoordinates(p.latitude,p.longitude);
     location='${place[0].country}/${place[0].administrativeArea}/${place[0].subAdministrativeArea}${place[0].thoroughfare}${place[0].subThoroughfare}';
+    city='${place[0].country}/${place[0].administrativeArea}/${place[0].subAdministrativeArea}';
     emit(SuccessInitHomeState());
   }
   int? currentIndex=0;
@@ -142,5 +145,16 @@ class HomeCubit extends Cubit<HomeState> {
     isSearchStart=x;
     emit(ChangeLoadingState());
   }
-
+  List<NotificationResponse>? notificationResponse;
+  void getNotificationCubit(BuildContext context) async {
+    notificationResponse=null;
+    emit(NotificationLoadingState());
+    final response = await _homeRepo.getNotification(token!);
+      response!.when(success: (notificationResponseData) {
+        notificationResponse=notificationResponseData.data;
+        emit(NotificationSuccessState());
+      }, failure: (error) {
+        emit(NotificationErrorState());
+      });
+  }
 }

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tourist_tour_app/core/networking/api_constants.dart';
 import 'package:tourist_tour_app/core/networking/api_response.dart';
+import 'package:tourist_tour_app/core/networking/api_result.dart';
 import 'package:tourist_tour_app/feature/auth/login/data/models/login_request_body.dart';
 import 'package:tourist_tour_app/feature/auth/login/data/models/login_response.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/data/models/country_code_response.dart';
@@ -11,6 +12,7 @@ import 'package:tourist_tour_app/feature/auth/sign_up/data/models/terms_response
 import 'package:tourist_tour_app/feature/booking/data/models/booking_request.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/booking_response.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/canceled_request.dart';
+import 'package:tourist_tour_app/feature/home/data/models/notification_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/search_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/sliders_response.dart';
@@ -92,7 +94,11 @@ abstract class ApiService {
       @Header('Authorization') String token,
       @Header('Accept-Language') String acceptLanguage
       );
-
+//Notification
+  @GET(ApiConstants.notification)
+  Future<ApiResponse<List<NotificationResponse>>> getNotification(
+      @Header('Authorization') String token,
+      );
  //Favorite
   @GET(ApiConstants.getFavoriteProgram)
   Future<ApiResponse<List<ProgramResponse>>> getFavoriteProgram(

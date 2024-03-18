@@ -23,6 +23,7 @@ class ApiConstants {
   static const String finishProgram = "finishProgram";
   static const String getFavoritePlaces = "getfavoriteplaces";
   static const String searchPlaces = "search";
+  static const String notification = "notifacations";
 
   //More
   static const String getAbout = "about-us";

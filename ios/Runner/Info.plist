@@ -49,6 +49,13 @@
         <key>NSLocationWhenInUseUsageDescription</key>
         <string>لجلب موقع العميل نستخدم تحديد الموقع</string>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
+     	<key>NSPhotoLibraryUsageDescription</key>
+       	<string>يحتاج التطبيق الى اخذ الصور</string>
+       	<key>NSAppTransportSecurity</key>
+        <dict>
+        <key>NSAllowsArbitraryLoads</key> <true/>
+        </dict>
+        <key>io.flutter.embedded_views_preview</key> <true/>
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>

@@ -1,11 +1,18 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
+import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
+import 'package:tourist_tour_app/feature/home/pressentation/widgets/custom_notification_item.dart';
+import 'package:tourist_tour_app/feature/home/pressentation/widgets/notification_shimmer.dart';
+import 'package:tourist_tour_app/feature/home/pressentation/widgets/shimmer_places_search.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -13,94 +20,53 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeCubit cubit =HomeCubit.get(context);
     return Scaffold(
-      appBar:  PreferredSize(
-          preferredSize: Size(double.infinity,62.h),
-          child: const CustomAppBar(title:'Notifications', hasBackButton: true,)),
-      body: Padding(
-        padding:  EdgeInsets.only(left: 16.w,right: 16.w),
-        child: Column(
-          children: [
-            verticalSpace(20),
-            Container(
-              height: 79.h,
-              width: 343.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColorLight.customGray)
-              ),
-              child: Row(
+      appBar: PreferredSize(
+          preferredSize: Size(double.infinity, 62.h),
+          child:  CustomAppBar(
+            title: 'notifications'.tr(), hasBackButton: true,)),
+      body:
+      RefreshIndicator(
+          onRefresh: ()async{
+            await Future.delayed(const Duration(seconds: 1)).then((value) {
+                cubit.getNotificationCubit(context);
+          });
+          },
+          child: BlocConsumer<HomeCubit, HomeState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if(cubit.notificationResponse!=null){
+            if(cubit.notificationResponse!.isEmpty){
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  horizontalSpace(10),
-                  Image.asset(AppImages.trueImage),
-                  horizontalSpace(8),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('your Trip Has Been Confirmed ',
-                        textScaleFactor: ScaleSize.textScaleFactor(context),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      style: TextStyles.font17Black400WightLato.copyWith(
-                        color: AppColorLight.customBlack
-                      ),
-                      ),
-                      Text('5 Min Ago',
-                        textScaleFactor: ScaleSize.textScaleFactor(context),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      style: TextStyles.font12CustomGray400WeightLato,
-                      ),
-                    ],
+                  Center(child: Image.asset(AppImages.notification)),
+                  Text('no_data_notification'.tr(),
+                      style: TextStyles.font17CustomBlack700WeightPoppins
                   )
-
-
                 ],
-              ),
-            ),
-            verticalSpace(16),
-            Container(
-              height: 79.h,
-              width: 343.w,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColorLight.customGray)
-              ),
-              child: Row(
-                children: [
-                  horizontalSpace(10),
-                  Image.asset(AppImages.falseImage),
-                  horizontalSpace(8),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('your Trip Have Been Cancelled ',
-                        textScaleFactor: ScaleSize.textScaleFactor(context),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyles.font17Black400WightLato.copyWith(
-                            color: AppColorLight.customBlack
-                        ),
-                      ),
-                      Text('10 Min Ago',
-                        textScaleFactor: ScaleSize.textScaleFactor(context),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyles.font12CustomGray400WeightLato,
-                      ),
-                    ],
-                  )
+              );
+            }
+            else{
+              return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 10.h),
+                  child: ListView.builder(
+                      itemCount: cubit.notificationResponse!.length,
+                      itemBuilder: (context,index){
+                        return  CustomNotificationItem(notificationResponse: cubit.notificationResponse![index],);
+                      })
 
+              );
+            }
+          }
+          else{
+            return const Center(child: CircularProgressIndicator(),);
+          }
+        },
+      ))
 
-                ],
-              ),
-            )
-
-          ],
-        ),
-      ),
     );
   }
 }

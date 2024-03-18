@@ -24,6 +24,13 @@
   "log_out": "Log Out",
   "log_out_mes": "Are you sure you want to go out?",
   "finish": "Finish",
+  "no_data_notification": "No Notifications Found",
+  "notifications": "Notifications",
+  "ago": "Ago",
+  "hours": "h",
+  "minutes": "m",
+  "seconds": "s",
+
   "yes": "Yes",
   "no": "No",
   "logout": "Logout",

@@ -89,14 +89,16 @@ class MoreCubit extends BaseCubit {
       emit(FailureStateListener(e));
     }
   }
-  void getProfile(String token ,BuildContext context) async {
+  Future<ProfileResponse?> getProfile(String token ,BuildContext context) async {
     emit(LoadingStateListener());
     try{
       final response = await _moreRepo.getProfile('Bearer $token');
       profileResponse=response!.data!;
        emit(SuccessStateListener(''));
+       return profileResponse;
     }catch(e){
       emit(FailureStateListener(e));
+      return null;
     }
   }
   void changePassword(String token ,BuildContext context) async {

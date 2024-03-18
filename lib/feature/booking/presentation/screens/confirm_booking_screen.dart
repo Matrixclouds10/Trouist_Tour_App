@@ -257,10 +257,16 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                 text: 'confirm'.tr(),
                 onPressed: (){
                   if(HomeCubit.get(context).token!=null){
-                    BookingRequest bookingRequest =BookingRequest(
-                      id: widget.programResponse!.id,
-                      notes: bookingCubit.noteController.text.isNotEmpty?bookingCubit.noteController.text:"note", payment:  'Cash', total:  widget.programResponse!.newPrice ?? widget.programResponse!.price,);
-                    bookingCubit.bookingPrograms(bookingRequest, context);
+                    // BookingRequest bookingRequest =BookingRequest(
+                    //   id: widget.programResponse!.id,
+                    //   notes: bookingCubit.noteController.text.isNotEmpty?
+                    //   bookingCubit.noteController.text:"note",
+                    //   payment:  'Cash', total:  widget.programResponse!.newPrice ??
+                    //     widget.programResponse!.price,);
+                    // bookingCubit.bookingPrograms(bookingRequest, context);
+
+                    bookingCubit.urWayPayment(id: widget.programResponse!.id.toString(),
+                        amount: '${widget.programResponse!.newPrice!=null?widget.programResponse!.newPrice!:widget.programResponse!.price}', context: context);
                   }else{
                     showCustomDialog2(
                         title:'success'.tr(),
