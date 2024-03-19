@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:tourist_tour_app/core/networking/api_error_handler.dart';
 import 'package:tourist_tour_app/core/networking/api_response.dart';
@@ -26,8 +24,9 @@ class HomeRepo{
     }
   }
   Future<ApiResponse<List<ProgramResponse>>?> getPrograms(String token ,String language)async{
+
     try {
-      final response = await _apiService.getPrograms(token,language);
+      final response = await _apiService.getPrograms('Bearer $token',language);
       return response;
     } catch (error) {
       debugPrint('error repo');
@@ -45,7 +44,7 @@ class HomeRepo{
   }
   Future<ApiResponse<List<TouristPlaceResponse>>?> getTouristPlaces(String token ,String language)async{
     try {
-      final response = await _apiService.getTouristPlaces(token ,language);
+      final response = await _apiService.getTouristPlaces('Bearer $token' ,language);
       return response;
     } catch (error) {
       debugPrint('error repo');

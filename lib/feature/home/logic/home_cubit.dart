@@ -60,13 +60,15 @@ class HomeCubit extends Cubit<HomeState> {
     emit(LoadingTokenState());
   }
   String location='';
+  String? address;
   String? city;
   void getLoc()async{
     Position p ;
     p=await Geolocator.getCurrentPosition().then((value) => value);
     List<Placemark> place= await placemarkFromCoordinates(p.latitude,p.longitude);
     location='${place[0].country}/${place[0].administrativeArea}/${place[0].subAdministrativeArea}${place[0].thoroughfare}${place[0].subThoroughfare}';
-    city='${place[0].country}/${place[0].administrativeArea}/${place[0].subAdministrativeArea}';
+    address='${place[0].country}/${place[0].administrativeArea}/${place[0].subAdministrativeArea}';
+    city='${place[0].subAdministrativeArea}';
     emit(SuccessInitHomeState());
   }
   int? currentIndex=0;

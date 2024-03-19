@@ -11,3 +11,6 @@ class BookingProgramsSuccessState extends BookingState {}
 class BookingProgramsErrorState extends BookingState {}
 class GetCanceledProgramsErrorState extends BookingState {}
 class GetBookingProgramsErrorState extends BookingState {}
+class PaymentLoadingState extends BookingState {}
+class PaymentSuccessState extends BookingState {}
+class PaymentErrorState extends BookingState {}

@@ -137,6 +137,7 @@ class MoreScreen extends StatelessWidget {
                     CustomMoreItemWidget(
                       iconPath: AppImages.more3,
                       function: (){
+                        cubit.getHistoryCubit(context);
                         NavigatePages.pushToPage(const HistoryScreen(), context);
                       }, tex: 'program_history'.tr(),):const SizedBox.shrink(),
                     HomeCubit.get(context).token!=null?verticalSpace(16):const SizedBox.shrink(),

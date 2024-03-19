@@ -12,6 +12,7 @@ import 'package:tourist_tour_app/feature/auth/sign_up/data/models/terms_response
 import 'package:tourist_tour_app/feature/booking/data/models/booking_request.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/booking_response.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/canceled_request.dart';
+import 'package:tourist_tour_app/feature/booking/data/models/payment_request.dart';
 import 'package:tourist_tour_app/feature/home/data/models/notification_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
 import 'package:tourist_tour_app/feature/home/data/models/search_response.dart';
@@ -21,6 +22,7 @@ import 'package:tourist_tour_app/feature/make_program/data/models/get_places_res
 import 'package:tourist_tour_app/feature/make_program/data/models/make_program_request.dart';
 import 'package:tourist_tour_app/feature/more/data/models/about_us_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/change_password_request.dart';
+import 'package:tourist_tour_app/feature/more/data/models/history_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/profile_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/update_profile_request.dart';
 
@@ -98,6 +100,17 @@ abstract class ApiService {
   @GET(ApiConstants.notification)
   Future<ApiResponse<List<NotificationResponse>>> getNotification(
       @Header('Authorization') String token,
+      );
+//History
+  @GET(ApiConstants.history)
+  Future<ApiResponse<List<HistoryResponse>>> getHistory(
+      @Header('Authorization') String token,
+      );
+  //Payment
+  @POST(ApiConstants.payment)
+  Future<ApiResponse> payment(
+      @Header('Authorization') String token,
+      @Body() PaymentRequest paymentRequest,
       );
  //Favorite
   @GET(ApiConstants.getFavoriteProgram)

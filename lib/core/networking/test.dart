@@ -5,7 +5,6 @@ class ApiResponseInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     // Check if response indicates an error
-    print('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
 
     try {
       // Make your Dio request here

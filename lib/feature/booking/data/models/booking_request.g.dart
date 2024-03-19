@@ -11,7 +11,7 @@ BookingRequest _$BookingRequestFromJson(Map<String, dynamic> json) =>
       id: json['tour_program_id'] as int?,
       notes: json['notes'] as String?,
       payment: json['payment'] as String?,
-      total: json['total'] as int?,
+      total: (json['total'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$BookingRequestToJson(BookingRequest instance) =>

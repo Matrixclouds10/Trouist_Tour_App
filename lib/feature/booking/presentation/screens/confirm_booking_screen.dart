@@ -6,6 +6,7 @@ import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
+import 'package:tourist_tour_app/core/services/logger.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/booking_request.dart';
@@ -191,30 +192,12 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                           fontWeight: FontWeight.w600
                       ),),
                     verticalSpace(16),
+
                    Row(
                      children: [
                        Radio(
                          activeColor:AppColorLight.primaryColor,
                          value: 0,
-                         groupValue: currentMethod,
-                         onChanged: (value) {
-                           // cubit.changeRadio(value!);
-                           setState(() {
-                             currentMethod = value!;
-                           });
-                         },
-                       ),
-                       SizedBox(
-                           height: 23.h,
-                           width: 32.w,
-                           child: Image.asset(AppImages.visa,fit: BoxFit.cover,)),
-                     ],
-                   ),
-                   Row(
-                     children: [
-                       Radio(
-                         activeColor:AppColorLight.primaryColor,
-                         value: 1,
                          groupValue: currentMethod,
                          onChanged: (value) {
                            // cubit.changeRadio(value!);
@@ -233,7 +216,7 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                      children: [
                        Radio(
                          activeColor:AppColorLight.primaryColor,
-                         value: 2,
+                         value: 1,
                          groupValue: currentMethod,
                          onChanged: (value) {
                            // cubit.changeRadio(value!);
@@ -245,7 +228,7 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                        SizedBox(
                            height: 23.h,
                            width: 32.w,
-                           child: Image.asset(AppImages.applePay,fit: BoxFit.cover,)),
+                           child: Image.asset(AppImages.cash,fit: BoxFit.cover,color: Colors.grey,)),
                      ],
                    )
                   ],
@@ -257,17 +240,19 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                 text: 'confirm'.tr(),
                 onPressed: (){
                   if(HomeCubit.get(context).token!=null){
-                    // BookingRequest bookingRequest =BookingRequest(
-                    //   id: widget.programResponse!.id,
-                    //   notes: bookingCubit.noteController.text.isNotEmpty?
-                    //   bookingCubit.noteController.text:"note",
-                    //   payment:  'Cash', total:  widget.programResponse!.newPrice ??
-                    //     widget.programResponse!.price,);
-                    // bookingCubit.bookingPrograms(bookingRequest, context);
-
-                    bookingCubit.urWayPayment(id: widget.programResponse!.id.toString(),
-                        amount: '${widget.programResponse!.newPrice!=null?widget.programResponse!.newPrice!:widget.programResponse!.price}', context: context);
-                  }else{
+                    if(currentMethod==0){
+                      bookingCubit.makePayment(id: widget.programResponse!.id.toString(),
+                          amount: '${widget.programResponse!.newPrice!=null?widget.programResponse!.newPrice!:widget.programResponse!.price}', context: context);
+                    }else{
+                      BookingRequest bookingRequest =BookingRequest(
+                        id: widget.programResponse!.id,
+                        notes: bookingCubit.noteController.text.isNotEmpty?
+                        bookingCubit.noteController.text:"note",
+                        payment:  'Cash', total:  widget.programResponse!.newPrice!=null?
+                        double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
+                        bookingCubit.bookingPrograms(bookingRequest, context);
+                    }
+                    }else{
                     showCustomDialog2(
                         title:'success'.tr(),
                         des:'Log_in_first'.tr(),

@@ -12,6 +12,7 @@ import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/more/data/models/about_us_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/change_password_request.dart';
+import 'package:tourist_tour_app/feature/more/data/models/history_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/profile_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/update_profile_request.dart';
 import 'package:tourist_tour_app/feature/more/data/repo/more_repo.dart';
@@ -141,6 +142,18 @@ class MoreCubit extends BaseCubit {
       emit(FailureStateListener(e));
     }
     changeLoad(false);
+  }
+  List<HistoryResponse>? historyResponseList;
+  void getHistoryCubit(BuildContext context) async {
+    historyResponseList=null;
+    emit(LoadingStateListener());
+    final response = await _moreRepo.getHistory(HomeCubit.get(context).token!);
+    response!.when(success: (notificationResponseData) {
+      historyResponseList=notificationResponseData.data;
+      emit(SuccessStateListener(''));
+    }, failure: (error) {
+      emit(FailureStateListener(error));
+    });
   }
   void updateProfile(String token ,BuildContext context) async {
     UpdateProfileRequest updateProfileRequest =UpdateProfileRequest(

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +11,8 @@ import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/booking_request.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/booking_response.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/canceled_request.dart';
+import 'package:tourist_tour_app/feature/booking/data/models/payment_request.dart';
+import 'package:tourist_tour_app/feature/booking/data/models/urway_response.dart';
 import 'package:tourist_tour_app/feature/booking/data/repo/booking_repo.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/more/data/models/profile_response.dart';
@@ -80,7 +84,7 @@ class BookingCubit extends Cubit<BookingState> {
             des:response.message,
             bt1: AppImages.dialog,bt2:  'ok'.tr(),
             onPressed1: (){
-              NavigatePages.pushReplacePage(RootPages(check: '3',), context);
+              NavigatePages.pushReplacePage(const RootPages(check: '3',), context);
             },
             context: context);
 
@@ -146,14 +150,14 @@ class BookingCubit extends Cubit<BookingState> {
         action: "1",
         amt: amount,
         customerEmail: (profile.email != null && profile.email!.isNotEmpty) ?  profile.email!  : "noemail@no.no",
-        udf1: "",
+        udf1: "$id",
         udf2: "",
-        udf3: "",
+        udf3: "${profile.id}",
         udf4: "",
         udf5: "",
         cardToken: "",
-        address:(cubitHomeCubit.city!=null) ?cubitHomeCubit.city! : "no address",
-        city:(cubitHomeCubit.city!=null) ?cubitHomeCubit.city! : "no address",
+        address:(cubitHomeCubit.address!=null) ?cubitHomeCubit.address! : "no address",
+        city:(cubitHomeCubit.city!=null) ?cubitHomeCubit.city! : "no city",
         state: "Pending",
         tokenizationType: "1",
         zipCode: "",
@@ -169,5 +173,32 @@ class BookingCubit extends Cubit<BookingState> {
 
    }
 
+   Future paymentCubit(PaymentRequest paymentRequest,context) async {
+    emit(PaymentLoadingState());
+    final response = await _bookingRepo.payment(HomeCubit.get(context).token!,paymentRequest);
+    response.when(success: (paymentResponse) {
+      BookingRequest bookingRequest =BookingRequest(
+        id: int.parse(paymentRequest.tourId!),
+        notes: noteController.text.isNotEmpty? noteController.text:"note",
+        payment:'Credit Card', total:double.parse(paymentRequest.amount!));
+      bookingPrograms(bookingRequest, context);
+      emit(PaymentSuccessState());
+    }, failure: (error) {
+      emit(PaymentErrorState());
+    });
+  }
 
+  Future<void> makePayment({required String id, required String amount,required BuildContext context})async{
+    emit(PaymentLoadingState());
+     try{
+       final data = await urWayPayment(id: id, amount: amount, context: context);
+       UrWayResponse urWayResponse =UrWayResponse.fromJson(jsonDecode(data));
+       PaymentRequest paymentRequest =PaymentRequest(paymentId: urWayResponse.paymentId!, tourId: urWayResponse.userField1!, userId:urWayResponse.userField3!, amount: urWayResponse.amount!, paymentType: urWayResponse.paymentType, result: urWayResponse.result);
+       paymentCubit(paymentRequest, context);
+
+     }catch(e){
+       log('makePayment  error', e.toString());
+
+     }
+  }
 }

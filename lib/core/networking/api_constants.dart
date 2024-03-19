@@ -24,6 +24,8 @@ class ApiConstants {
   static const String getFavoritePlaces = "getfavoriteplaces";
   static const String searchPlaces = "search";
   static const String notification = "notifacations";
+  static const String history = "getProgramsHistory";
+  static const String payment = "SavePayment";
 
   //More
   static const String getAbout = "about-us";

@@ -1,26 +1,32 @@
 import 'package:dio/dio.dart';
 import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
+import 'package:tourist_tour_app/core/networking/api_error_handler.dart';
 import 'package:tourist_tour_app/core/networking/api_response.dart';
+import 'package:tourist_tour_app/core/networking/api_result.dart';
 import 'package:tourist_tour_app/core/networking/api_service.dart';
+import 'package:tourist_tour_app/core/services/logger.dart';
 import 'package:tourist_tour_app/feature/more/data/models/about_us_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/change_password_request.dart';
+import 'package:tourist_tour_app/feature/more/data/models/history_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/profile_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/update_profile_request.dart';
 import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
 
-class MoreRepo{
+class MoreRepo {
   final ApiService _apiService;
-  MoreRepo(this._apiService);
-  Future<ApiResponse<AboutUsResponse>?> getAboutUs(String language)async{
-    try {
 
+  MoreRepo(this._apiService);
+
+  Future<ApiResponse<AboutUsResponse>?> getAboutUs(String language) async {
+    try {
       final response = await _apiService.getAboutUs(language);
       return response;
     } catch (error) {
       return null;
     }
   }
-  Future<ApiResponse<AboutUsResponse>?> getTermsApp(String language)async{
+
+  Future<ApiResponse<AboutUsResponse>?> getTermsApp(String language) async {
     try {
       final response = await _apiService.getTermsApp(language);
       return response;
@@ -28,7 +34,8 @@ class MoreRepo{
       return null;
     }
   }
-  Future<ApiResponse<AboutUsResponse>?> getPrivacy(String language)async{
+
+  Future<ApiResponse<AboutUsResponse>?> getPrivacy(String language) async {
     try {
       final response = await _apiService.getPrivacy(language);
       return response;
@@ -36,7 +43,8 @@ class MoreRepo{
       return null;
     }
   }
-  Future<ApiResponse<ProfileResponse>?> getProfile(String token)async{
+
+  Future<ApiResponse<ProfileResponse>?> getProfile(String token) async {
     try {
       final response = await _apiService.getProfile(token);
       return response;
@@ -44,7 +52,8 @@ class MoreRepo{
       return null;
     }
   }
-  Future<ApiResponse?> deleteProfile(String token)async{
+
+  Future<ApiResponse?> deleteProfile(String token) async {
     try {
       final response = await _apiService.deleteProfile(token);
       return response;
@@ -52,34 +61,52 @@ class MoreRepo{
       return null;
     }
   }
-  Future<ApiResponse?> changePassword(String token,ChangePasswordRequest changePasswordRequest)async{
+
+  Future<ApiResponse?> changePassword(String token,
+      ChangePasswordRequest changePasswordRequest) async {
     try {
-      final response = await _apiService.changePassword(token,changePasswordRequest);
+      final response = await _apiService.changePassword(
+          token, changePasswordRequest);
       return response;
     } catch (error) {
       return null;
     }
   }
 
-  Future<dynamic> updateProfile(String token ,UpdateProfileRequest updateProfileRequest,context)async{
+  Future<ApiResult<ApiResponse<List<HistoryResponse>>>?> getHistory(
+      String token) async {
     try {
-      MoreCubit cubit =MoreCubit.get(context);
+      final response = await _apiService.getHistory('Bearer $token');
+      log('History Response Successa : ', response.data.toString());
+      return ApiResult.success(response);
+    } catch (error) {
+      log('History Response Error : ', "$error");
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+
+  Future<dynamic> updateProfile(String token,
+      UpdateProfileRequest updateProfileRequest, context) async {
+    try {
+      MoreCubit cubit = MoreCubit.get(context);
       var headers = {
         'Accept': 'application/json',
         'Authorization': token,
       };
       var data =
-      cubit.imageFile!=null?
+      cubit.imageFile != null ?
       FormData.fromMap({
         'image': [
-          await MultipartFile.fromFile(cubit.imageFile!.path, filename: 'upload')
+          await MultipartFile.fromFile(
+              cubit.imageFile!.path, filename: 'upload')
         ],
         'full_name': updateProfileRequest.name,
         'phone': updateProfileRequest.phone,
         'email': updateProfileRequest.email,
         'country_id': updateProfileRequest.countryId,
         'date_of_birth': '2001-01-22'
-      }):
+      }) :
       FormData.fromMap({
         'full_name': updateProfileRequest.name,
         'phone': updateProfileRequest.phone,

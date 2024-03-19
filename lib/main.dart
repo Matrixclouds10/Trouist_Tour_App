@@ -67,7 +67,6 @@ class TouristTourApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getDeviceToken(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AppOnBoardingCubit()),

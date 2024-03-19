@@ -39,58 +39,60 @@ class CustomNotificationItem extends StatelessWidget {
     }else{
       time= '${'since'.tr()} : ${'$days${'day'.tr()} , ${hours}h:${minutes}m:${seconds}s'}';
     }
-
-    return  Container(
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: const [BoxShadow(color: Colors.black38,blurRadius: 2,offset: Offset(3, 3))],
-          border: Border.all(color: AppColorLight.customGray)
-      ),
-      child: Padding(
-        padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 5.w),
-        child: Row(
-          children: [
-            horizontalSpace(10),
-            const CustomAvatarGrowWidget(glowColor: AppColorLight.primaryColor, icon: Icons.notifications_active_outlined,),
-            horizontalSpace(20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(notificationResponse.data!.title!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyles.font17CustomBlack500WeightPoppins.copyWith(
-                      color: AppColorLight.customBlack,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 17.sp
+    return  Padding(
+      padding: EdgeInsets.symmetric(vertical: 10.h),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: const [BoxShadow(color: Colors.black38,blurRadius: 2,offset: Offset(3, 3))],
+            border: Border.all(color: AppColorLight.customGray)
+        ),
+        child: Padding(
+          padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 5.w),
+          child: Row(
+            children: [
+              horizontalSpace(10),
+              const CustomAvatarGrowWidget(glowColor: AppColorLight.primaryColor, icon: Icons.notifications_active_outlined,),
+              horizontalSpace(20),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(notificationResponse.data!.title!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.font17CustomBlack500WeightPoppins.copyWith(
+                        color: AppColorLight.customBlack,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 17.sp
+                    ),
                   ),
-                ),
-                Text(notificationResponse.data!.message!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyles.font12CustomGray400WeightLato.copyWith(
+                  Text(notificationResponse.data!.message!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.font12CustomGray400WeightLato.copyWith(
+                        fontFamily: AppFontsFamily.fontPoppins,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15.sp
+                    ),
+                  ),
+                  //"الفرق في الوقت: $days أيام, $hours ساعات, $minutes دقائق, $seconds ثواني"
+                  Text(
+                    '${days!=0?'$days${'day'.tr()} , ':''}${hours!=0?'$hours${'hours'.tr()} ':''}:${minutes!=0?'$minutes${'minutes'.tr()} ':''}:${seconds!=0?'$seconds${'seconds'.tr()} ':''} ${'ago'.tr()}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.font12CustomGray400WeightLato.copyWith(
                       fontFamily: AppFontsFamily.fontPoppins,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15.sp
+                        fontWeight: FontWeight.w500,
+                        color: AppColorLight.customGray.withOpacity(0.8),
+                        fontSize: 10.sp
+                    ),
                   ),
-                ),
-                //"الفرق في الوقت: $days أيام, $hours ساعات, $minutes دقائق, $seconds ثواني"
-                Text(
-                  '${days!=0?'$days${'day'.tr()} , ':''}${hours!=0?'$hours${'hours'.tr()} ':''}:${minutes!=0?'$minutes${'minutes'.tr()} ':''}:${seconds!=0?'$seconds${'seconds'.tr()} ':''} ${'ago'.tr()}',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyles.font12CustomGray400WeightLato.copyWith(
-                    fontFamily: AppFontsFamily.fontPoppins,
-                      fontWeight: FontWeight.w500,
-                      color: AppColorLight.customGray.withOpacity(0.8),
-                      fontSize: 10.sp
-                  ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
