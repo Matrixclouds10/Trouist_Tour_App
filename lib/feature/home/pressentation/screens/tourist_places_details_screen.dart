@@ -118,21 +118,28 @@ class TouristPlaceDetailsScreen extends StatelessWidget {
                     textScaleFactor: ScaleSize.textScaleFactor(context),
                   ),
                   verticalSpace(32),
-                  Text('related_programs'.tr(),
-                    style: TextStyles.font17CustomBlack700WeightPoppins,
-                    textScaleFactor: ScaleSize.textScaleFactor(context),
-                  ),
-                  verticalSpace(16),
-                  SizedBox(
-                    height: 130.h,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: touristPlaceResponse!.relatedPrograms!.length,
-                        itemBuilder: (context,index){
-                          return CustomRelatedProgramsWidget(programResponse: touristPlaceResponse!.relatedPrograms![index],);
-                        }),
-                  ),
-                  verticalSpace(20),
+                  touristPlaceResponse!.relatedPrograms!.isNotEmpty?
+                  Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     Text('related_programs'.tr(),
+                       style: TextStyles.font17CustomBlack700WeightPoppins,
+                       textScaleFactor: ScaleSize.textScaleFactor(context),
+                     ),
+                     verticalSpace(16),
+                     SizedBox(
+                       height: 130.h,
+                       child: ListView.builder(
+                           scrollDirection: Axis.horizontal,
+                           itemCount: touristPlaceResponse!.relatedPrograms!.length,
+                           itemBuilder: (context,index){
+                             return CustomRelatedProgramsWidget(programResponse: touristPlaceResponse!.relatedPrograms![index],);
+                           }),
+                     ),
+                     verticalSpace(20),
+                   ],
+                 ):
+                      const SizedBox.shrink(),
 
                 ],
               ),

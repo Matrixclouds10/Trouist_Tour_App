@@ -5,6 +5,7 @@ import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/make_program/data/models/get_places_response.dart';
 import 'package:tourist_tour_app/feature/make_program/data/models/make_program_request.dart';
 import 'package:tourist_tour_app/feature/make_program/data/repo/make_program_repo.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
 part 'make_program_state.dart';
 
 class MakeProgramCubit extends Cubit<MakeProgramState> {
@@ -32,6 +33,7 @@ class MakeProgramCubit extends Cubit<MakeProgramState> {
 
 
    Future makeProgram(BuildContext context) async {
+     emit(MakeProgramLoadingStata());
      if(typeOfGroup=='Family'){
        if(familyCounter==0){
          showToast('Number of person equal zero', ToastStates.error, context);
@@ -50,18 +52,24 @@ class MakeProgramCubit extends Cubit<MakeProgramState> {
                typeOfArrivalMethod,
                typeOfStaying,
                typeOfStayingPlace, '', '', '', '');
-           final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest);
-           Future.delayed(const Duration(microseconds: 0)).then((value) {
-             showToast('${response!.message}', ToastStates.success, context);
-             Navigator.of(context).pop();
-             familyCounter=0;
-             friendsCounter=0;
-             familyNumberController.text='';
-             friendsNumberController.text='';
-             typeOfStaying=null;
-             typeOfStayingPlace=null;
+           final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest,context);
+           response!.when(success: (msg) {
+             showSuccessDialog(context,msg.message.toString(),
+                     (){Navigator.of(context).pop();Navigator.of(context).pop();});
+             Future.delayed(const Duration(microseconds: 0)).then((value) {
+               familyCounter=0;
+               friendsCounter=0;
+               familyNumberController.text='';
+               friendsNumberController.text='';
+               typeOfStaying=null;
+               typeOfStayingPlace=null;
+             });
+              emit(MakeProgramSuccessStata());
+           }, failure: (error) {
+             showErrorDialog(context,error.toString());
+              emit(MakeProgramErrorStata());
            });
-         emit(GetPlacesStateSuccess());
+
        }
      }else{
          MakeProgramRequest makeProgramRequest= MakeProgramRequest(
@@ -71,19 +79,24 @@ class MakeProgramCubit extends Cubit<MakeProgramState> {
              typeOfArrivalMethod,
              typeOfStaying,
              typeOfStayingPlace, '', '', '', '');
-         final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest);
-         Future.delayed(const Duration(microseconds: 0)).then((value) {
-           showToast('${response!.message}', ToastStates.success, context);
-           Navigator.of(context).pop();
-           familyCounter=0;
-           friendsCounter=0;
-           familyNumberController.text='';
-           friendsNumberController.text='';
-           typeOfStaying=null;
-           typeOfStayingPlace=null;
+         final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest,context);
+         response!.when(success: (msg) {
+           showSuccessDialog(context,msg.message.toString(),
+                   (){Navigator.of(context).pop();Navigator.of(context).pop();});
+           Future.delayed(const Duration(microseconds: 0)).then((value) {
+             familyCounter=0;
+             friendsCounter=0;
+             familyNumberController.text='';
+             friendsNumberController.text='';
+             typeOfStaying=null;
+             typeOfStayingPlace=null;
+           });
+           emit(MakeProgramSuccessStata());
+         }, failure: (error) {
+           showErrorDialog(context,error.toString());
+           emit(MakeProgramErrorStata());
          });
        }
-       emit(GetPlacesStateSuccess());
      }
 
      else if(typeOfGroup=='Friends'){
@@ -107,19 +120,24 @@ class MakeProgramCubit extends Cubit<MakeProgramState> {
                typeOfStaying,
                typeOfStayingPlace, '', '', '', '');
 
-           final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest);
-           Future.delayed(const Duration(microseconds: 0)).then((value) {
-             showToast('${response!.message}', ToastStates.success, context);
-             Navigator.of(context).pop();
-             familyCounter=0;
-             friendsCounter=0;
-             familyNumberController.text='';
-             friendsNumberController.text='';
-             typeOfStaying=null;
-             typeOfStayingPlace=null;
-           });
+           final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest,context);
 
-         emit(GetPlacesStateSuccess());
+           response!.when(success: (msg) {
+             showSuccessDialog(context,msg.message.toString(),
+                     (){Navigator.of(context).pop();Navigator.of(context).pop();});
+             Future.delayed(const Duration(microseconds: 0)).then((value) {
+               familyCounter=0;
+               friendsCounter=0;
+               familyNumberController.text='';
+               friendsNumberController.text='';
+               typeOfStaying=null;
+               typeOfStayingPlace=null;
+             });
+             emit(MakeProgramSuccessStata());
+           }, failure: (error) {
+             showErrorDialog(context,error.toString());
+             emit(MakeProgramErrorStata());
+           });
          }
      }else{
          MakeProgramRequest  makeProgramRequest= MakeProgramRequest(
@@ -130,19 +148,24 @@ class MakeProgramCubit extends Cubit<MakeProgramState> {
              typeOfStaying,
              typeOfStayingPlace, '', '', '', '');
 
-         final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest);
-         Future.delayed(const Duration(microseconds: 0)).then((value) {
-           showToast('${response!.message}', ToastStates.success, context);
-           Navigator.of(context).pop();
-           familyCounter=0;
-           friendsCounter=0;
-           familyNumberController.text='';
-           friendsNumberController.text='';
-           typeOfStaying=null;
-           typeOfStayingPlace=null;
+         final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest,context);
+         response!.when(success: (msg) {
+           showSuccessDialog(context,msg.message.toString(),
+                   (){Navigator.of(context).pop();Navigator.of(context).pop();});
+           Future.delayed(const Duration(microseconds: 0)).then((value) {
+             familyCounter=0;
+             friendsCounter=0;
+             familyNumberController.text='';
+             friendsNumberController.text='';
+             typeOfStaying=null;
+             typeOfStayingPlace=null;
+           });
+           emit(MakeProgramSuccessStata());
+         }, failure: (error) {
+           showErrorDialog(context,error.toString());
+           emit(MakeProgramErrorStata());
          });
        }
-       emit(GetPlacesStateSuccess());
 
      }
      else{
@@ -160,16 +183,22 @@ class MakeProgramCubit extends Cubit<MakeProgramState> {
                typeOfStaying,
                typeOfStayingPlace, '', '', '', '');
 
-           final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest);
-           Future.delayed(const Duration(microseconds: 0)).then((value) {
-             showToast('${response!.message}', ToastStates.success, context);
-             Navigator.of(context).pop();
-             familyCounter=0;
-             friendsCounter=0;
-             familyNumberController.text='';
-             friendsNumberController.text='';
-             typeOfStaying=null;
-             typeOfStayingPlace=null;
+           final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest,context);
+           response!.when(success: (msg) {
+             showSuccessDialog(context,msg.message.toString(),
+                     (){Navigator.of(context).pop();Navigator.of(context).pop();});
+             Future.delayed(const Duration(microseconds: 0)).then((value) {
+               familyCounter=0;
+               friendsCounter=0;
+               familyNumberController.text='';
+               friendsNumberController.text='';
+               typeOfStaying=null;
+               typeOfStayingPlace=null;
+             });
+             emit(MakeProgramSuccessStata());
+           }, failure: (error) {
+             showErrorDialog(context,error.toString());
+             emit(MakeProgramErrorStata());
            });
          }
        }else{
@@ -181,16 +210,22 @@ class MakeProgramCubit extends Cubit<MakeProgramState> {
              typeOfStaying,
              typeOfStayingPlace, '', '', '', '');
 
-         final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest);
-         Future.delayed(const Duration(microseconds: 0)).then((value) {
-           showToast('${response!.message}', ToastStates.success, context);
-           Navigator.of(context).pop();
-           familyCounter=0;
-           friendsCounter=0;
-           familyNumberController.text='';
-           friendsNumberController.text='';
-           typeOfStaying=null;
-           typeOfStayingPlace=null;
+         final response = await _makeProgramRepo.makeProgram('Bearer ${HomeCubit.get(context).token!}',makeProgramRequest,context);
+         response!.when(success: (msg) {
+           showSuccessDialog(context,msg.message.toString(),
+                   (){Navigator.of(context).pop();Navigator.of(context).pop();});
+           Future.delayed(const Duration(microseconds: 0)).then((value) {
+             familyCounter=0;
+             friendsCounter=0;
+             familyNumberController.text='';
+             friendsNumberController.text='';
+             typeOfStaying=null;
+             typeOfStayingPlace=null;
+           });
+           emit(MakeProgramSuccessStata());
+         }, failure: (error) {
+           showErrorDialog(context,error.toString());
+           emit(MakeProgramErrorStata());
          });
        }
      }

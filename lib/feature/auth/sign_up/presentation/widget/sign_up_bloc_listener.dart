@@ -47,39 +47,10 @@ class SignupBlocListener extends StatelessWidget {
     );
   }
 
-  void showSuccessDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Signup Successful'),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Congratulations, you have signed up successfully!'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.blue,
-                onSurface: Colors.grey,
-              ),
-              onPressed: () {
-                context.pushNamed(Routes.rootScreen);
-              },
-              child: const Text('Continue'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
 
 }
+
 void setupErrorState(BuildContext context, String error) {
   context.pop();
   showDialog(

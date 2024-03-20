@@ -6,10 +6,12 @@ import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
+import 'package:tourist_tour_app/feature/auth/sign_up/presentation/widget/sign_up_bloc_listener.dart';
 import 'package:tourist_tour_app/feature/make_program/logic/make_program_cubit.dart';
 import 'package:tourist_tour_app/feature/make_program/presentation/widgets/custom_details_of_counter.dart';
 import 'package:tourist_tour_app/feature/make_program/presentation/widgets/custom_typr_of_stay_widget.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
 class CustomProgramScreen extends StatefulWidget {

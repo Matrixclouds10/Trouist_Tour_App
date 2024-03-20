@@ -10,6 +10,7 @@ import 'package:tourist_tour_app/feature/booking/data/models/booking_response.da
 import 'package:tourist_tour_app/feature/booking/data/models/canceled_request.dart';
 import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_button.dart';
 
 class CustomProgramItem extends StatelessWidget {
@@ -142,11 +143,12 @@ class CustomProgramItem extends StatelessWidget {
               verticalSpace(10),
 
               textButtonText!='cancel'.tr()?
-                 textButtonText!='Review'?
+                 // textButtonText!='Review'?
                  SizedBox(
                      height: 40.h,
                      width:311.w ,
-                     child: CustomTextButton(text: textButtonText, onPressed: onPressed,)):const SizedBox.shrink():
+                     child: CustomTextButton(text: textButtonText, onPressed: onPressed,)):
+                 // const SizedBox.shrink():
                  Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween ,
                    children: [
@@ -158,8 +160,15 @@ class CustomProgramItem extends StatelessWidget {
                          height: 40.h,
                          width:MediaQuery.of(context).size.width*0.4,
                          child: CustomTextButton(text: 'finish'.tr(), onPressed: (){
-                           CanceledRequest canceledRequest=CanceledRequest(id: programResponse!.bookingId, notes: 'note');
-                           BookingCubit.get(context).finishedProgram(canceledRequest,context);
+                           showCustomDialog(
+                               context: context,
+                               title:'finish2'.tr(),des: 'sure_finish'.tr(),bt1:  'yes'.tr(),bt2: 'no'.tr(),
+                               onPressed1: (){
+                                 CanceledRequest canceledRequest=CanceledRequest(id: programResponse!.bookingId, notes: 'note');
+                                 BookingCubit.get(context).finishedProgram(canceledRequest,context);
+                                 Navigator.of(context).pop();
+                               });
+
                          },))
                    ],
                  ),

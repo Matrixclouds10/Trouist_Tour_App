@@ -7,6 +7,7 @@ import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/helpers/extensions.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
@@ -15,11 +16,14 @@ void showCustomDialog({String? title ,String? des ,String? bt1,String? bt2 ,void
     context: context!,
     builder: (BuildContext context) {
       return AlertDialog(
-        title:  Text(title!,
-          style: TextStyles.font17CustomBlack700WeightPoppins,
+        title:  Center(
+          child: Text(title!,
+            style: TextStyles.font17CustomBlack700WeightPoppins,
+          ),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(AppImages.logoSvg,width: 100,),
             verticalSpace(10),
@@ -35,25 +39,32 @@ void showCustomDialog({String? title ,String? des ,String? bt1,String? bt2 ,void
           ],
         ),
         actions: [
-          MaterialButton(
-            color: AppColorLight.primaryColor,
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(bt2!,
-              style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
-                  color: Colors.white
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MaterialButton(
+                color: AppColorLight.primaryColor,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(bt2!,
+                  style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
+                      color: Colors.white
+                  ),
+                ),
               ),
-            ),
-          ),
-          MaterialButton(
-            color: AppColorLight.primaryColor,
-            onPressed:onPressed1!,
-            child: Text(bt1!,
-              style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
-                  color: Colors.white
+              horizontalSpace(10),
+              MaterialButton(
+                color: AppColorLight.primaryColor,
+                onPressed:onPressed1!,
+                child: Text(bt1!,
+                  style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
+                      color: Colors.white
+                  ),
+                ),
               ),
-            ),
+
+            ],
           ),
         ],
       );
@@ -126,4 +137,60 @@ void showCustomDialog2({String? title ,String? des ,String? bt1,String? bt2 ,voi
     },
   );
 
+}
+void showSuccessDialog(BuildContext context,String text, void Function()? onPressed) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title:  Text('success'.tr()),
+        content:  SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(text),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+              backgroundColor: AppColorLight.primaryColor,
+              onSurface: Colors.grey,
+            ),
+            onPressed: onPressed,
+            child:  Text('done'.tr()),
+          ),
+        ],
+      );
+    },
+  );
+}
+void showErrorDialog(BuildContext context, String error) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      icon: const Icon(
+        Icons.error,
+        color: Colors.red,
+        size: 50,
+      ),
+      content: Text(
+        error,
+        style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
+            fontFamily: AppFontsFamily.fontCairo,
+            color: AppColorLight.customBlack
+        ),),
+      actions: [
+        TextButton(
+          onPressed: () {
+            context.pop();
+          },
+          child:  Text(
+            'back'.tr(),
+          ),
+        ),
+      ],
+    ),
+  );
 }

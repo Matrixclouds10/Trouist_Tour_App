@@ -46,16 +46,16 @@ class CustomTopBodyHomeWidget extends StatelessWidget {
                     ),
                   ),
                   horizontalSpace(5),
-                  InkWell(
-                    onTap: () {
-                      cubit.getNotificationCubit(context);
-                      NavigatePages.pushToPage(const NotificationScreen(), context);
-
-                    },
-                    child: const Icon(Icons.notifications_none,
-                      color: AppColorLight.gray2,
-                    ),
-                  )
+                  // InkWell(
+                  //   onTap: () {
+                  //     cubit.getNotificationCubit(context);
+                  //     NavigatePages.pushToPage(const NotificationScreen(), context);
+                  //
+                  //   },
+                  //   child: const Icon(Icons.notifications_none,
+                  //     color: AppColorLight.gray2,
+                  //   ),
+                  // )
                 ],
               ),
             ),

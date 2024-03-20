@@ -56,7 +56,7 @@ class BookingScreen extends StatelessWidget {
                   child: TabBarView(
                     children: [
                       CustomUpComingWidget(),
-                       CustomCompleteWidget(),
+                      CustomCompleteWidget(),
                       CustomCanceledWidget(),
                     ],
                   ),

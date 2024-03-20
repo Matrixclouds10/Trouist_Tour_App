@@ -18,11 +18,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   Container(
-      height:
-      type!=null?
-      275.h:
-      isHasDes==true?
-      240.h:155.h ,
+
       decoration:
       isHasDes==true?
       BoxDecoration(
@@ -110,7 +106,6 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   )
                 ),
                 horizontalSpace(5),
-
                 programResponse!.newPrice!=null?
                 Text('${programResponse!.newPrice} ${'rs'.tr()}',
                   textScaleFactor: ScaleSize.textScaleFactor(context),
@@ -124,10 +119,9 @@ class CustomReligiousProgramWidget extends StatelessWidget {
             ),
             verticalSpace(5),
            isHasDes==true?
-            Expanded(
-             child: CustomDescriptionWidget(text:
-             '${programResponse!.description}', maxLines: 3,),
-           ):const SizedBox.shrink(),
+            CustomDescriptionWidget(text:
+            '${programResponse!.description}', maxLines: 3,):const SizedBox.shrink(),
+            verticalSpace(5),
             Row(
               children: [
                 Row(

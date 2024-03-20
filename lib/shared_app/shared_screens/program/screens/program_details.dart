@@ -27,7 +27,7 @@ class ProgramDetailsScreen extends StatelessWidget {
           CustomTripDetailsWidget(programResponse: programResponse!,),
           verticalSpace(24),
            CustomProgramIncludesWidget(programResponse: programResponse!,),
-          verticalSpace(70),
+          verticalSpace(50),
           CustomMaterialButtonWidget(text: 'book_now'.tr(), onPressed: (){
             if(type=='offer'){
               NavigatePages.pushToPage( ConfirmBookingScreen( programResponse: programResponse,), context);
@@ -35,7 +35,7 @@ class ProgramDetailsScreen extends StatelessWidget {
               NavigatePages.pushToPage( ProgramDetailsOverViewScreen(programResponse:programResponse! ,), context);
             }
           }),
-          verticalSpace(115),
+          verticalSpace(30),
         ],),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
+import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/extensions.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
@@ -12,6 +13,7 @@ import 'package:tourist_tour_app/core/routing/routes.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
+import 'package:tourist_tour_app/feature/home/pressentation/screens/notification_screen.dart';
 import 'package:tourist_tour_app/feature/home/pressentation/screens/offers_screen.dart';
 import 'package:tourist_tour_app/feature/home/pressentation/screens/tourist_places_screen.dart';
 import 'package:tourist_tour_app/feature/home/pressentation/widgets/custom_home_offer.dart';
@@ -64,7 +66,34 @@ class Home extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          verticalSpace(40),
+                          verticalSpace(20),
+                          Align(
+                            alignment: context.locale==const Locale("en")?Alignment.centerRight:Alignment.centerLeft,
+                            child: Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: 5.w),
+                              child: InkWell(
+                                onTap: () {
+                                  cubit.getNotificationCubit(context);
+                                  NavigatePages.pushToPage(const NotificationScreen(), context);
+
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: Colors.white,
+                                      boxShadow: const [BoxShadow(color: Colors.black26,blurRadius: 5,
+                                      )]
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(Icons.notifications_none,
+                                      color: AppColorLight.gray2,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                           Center(child: SvgPicture.asset(AppImages.logoSvg)),
                           verticalSpace(16),
                           const CustomTopBodyHomeWidget(),

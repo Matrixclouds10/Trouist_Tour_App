@@ -114,7 +114,13 @@ class HistoryItemWidget extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(historyResponse.familyMembers!=null?historyResponse.familyMembers!.toString():'0',
+                        Text(
+                          historyResponse.touristsType=='Family'?
+                           historyResponse.familyMembers!=null?
+                             historyResponse.familyMembers!.toString(): '0':
+                          historyResponse.touristsType=='Friends'?
+                           historyResponse.friendsMembers!=null?
+                             historyResponse.friendsMembers!.toString(): '0':'0',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyles.font17CustomBlack500WeightPoppins.copyWith(

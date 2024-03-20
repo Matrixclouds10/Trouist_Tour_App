@@ -34,13 +34,14 @@ class CustomUpComingWidget extends StatelessWidget {
                         },
                         child: CustomProgramItem(
                           programResponse: cubit.getBookingProgramsList![index],
-                          textButtonText: 'cancel'.tr(), onPressed: () {
+                          textButtonText: 'cancel'.tr(),
+                          onPressed: () {
                             showModalBottomSheet(
                           backgroundColor:Colors.white,
                           context: context,
                           isScrollControlled: true,
                           builder: (context) =>  CustomBottomSheet(
-                            note: cubit.noteController.text.isNotEmpty?cubit.noteController.text:cubit.valueCanceled, id: cubit.getBookingProgramsList![index].bookingId!,
+                            note: cubit.noteControllerCanceled.text.isNotEmpty?cubit.noteControllerCanceled.text:cubit.valueCanceled, id: cubit.getBookingProgramsList![index].bookingId!,
                             name: cubit.getBookingProgramsList![index].name!,),
                         ); },),
                       );

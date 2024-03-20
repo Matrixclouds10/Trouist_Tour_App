@@ -30,7 +30,8 @@ class BookingCubit extends Cubit<BookingState> {
   List<BookingResponse>? getBookingProgramsList;
   List<BookingResponse>? getCanceledProgramsList;
   List<BookingResponse>? getCompletedProgramsList;
-  TextEditingController noteController= TextEditingController();
+  TextEditingController noteControllerBooking= TextEditingController();
+  TextEditingController noteControllerCanceled= TextEditingController();
   String valueCanceled='button_sheet_body1'.tr();
   void putValueCanceled(String x){
     valueCanceled =x;
@@ -87,7 +88,7 @@ class BookingCubit extends Cubit<BookingState> {
               NavigatePages.pushReplacePage(const RootPages(check: '3',), context);
             },
             context: context);
-
+      noteControllerBooking.text='';
     emit(BookingProgramsErrorState());
   });}
   void cancelingProgram(CanceledRequest canceledRequest,BuildContext context) async {
@@ -102,7 +103,7 @@ class BookingCubit extends Cubit<BookingState> {
             .token!, context, context.locale.toString());
         showToast('${response!.message}', ToastStates.success, context);
         Navigator.of(context).pop();
-        noteController.text = '';
+        noteControllerCanceled.text = '';
       });
         emit(BookingProgramsSuccessState());
 
@@ -120,7 +121,6 @@ class BookingCubit extends Cubit<BookingState> {
         getBookingPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
         getCompletedPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
         showToast('${response!.message}', ToastStates.success, context);
-        noteController.text='';
       });
         emit(BookingProgramsSuccessState());
 
@@ -179,7 +179,7 @@ class BookingCubit extends Cubit<BookingState> {
     response.when(success: (paymentResponse) {
       BookingRequest bookingRequest =BookingRequest(
         id: int.parse(paymentRequest.tourId!),
-        notes: noteController.text.isNotEmpty? noteController.text:"note",
+        notes: noteControllerBooking.text.isNotEmpty? noteControllerBooking.text:"note",
         payment:'Credit Card', total:double.parse(paymentRequest.amount!));
       bookingPrograms(bookingRequest, context);
       emit(PaymentSuccessState());

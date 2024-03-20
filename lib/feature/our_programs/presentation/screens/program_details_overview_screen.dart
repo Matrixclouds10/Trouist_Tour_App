@@ -52,23 +52,22 @@ class _ProgramDetailsOverViewScreenState extends State<ProgramDetailsOverViewScr
 
                     ),
                     verticalSpace(15),
-                    SizedBox(height: 350,
+                    SizedBox(height: 250.h,
                       child:
                       TabBarView(
                         children: [
                           Padding(
                             padding: EdgeInsets.only(left:16.w,right: 16.w),
                             child: const CustomDescriptionWidget(text: 'Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum . Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum', maxLines: 10,),),
-                           CustomTripDetailsWidget(
+                          CustomTripDetailsWidget(
                           programResponse: widget.programResponse,color:Colors.white),
                           CustomProgramIncludesWidget(programResponse: widget.programResponse,color:Colors.white),
                         ],
                       ),),
-                    verticalSpace(100),
                     CustomMaterialButtonWidget(text: 'book_now'.tr(), onPressed: (){
                       NavigatePages.pushToPage( ConfirmBookingScreen(programResponse: widget.programResponse,), context);
                     }),
-                    verticalSpace(80),
+                    verticalSpace(20),
                   ],
                 ),
               ),
