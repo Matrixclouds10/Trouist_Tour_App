@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
@@ -10,11 +9,11 @@ import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/helpers/app_regex.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/resources/data_state.dart';
+import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/more/logic/more_cubit.dart';
+import 'package:tourist_tour_app/feature/more/presentation/screens/profile/change_password_screen.dart';
 import 'package:tourist_tour_app/feature/more/presentation/widgets/custom_country_widget.dart';
-import 'package:tourist_tour_app/feature/more/presentation/widgets/custom_more_image.dart';
-import 'package:tourist_tour_app/feature/more/presentation/widgets/update_profile_listen.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_button.dart';
@@ -182,8 +181,7 @@ class EditProfileScreen extends StatelessWidget {
                           verticalSpace(16),
                           // const UpdateProfileBlocListener(),
                           CustomTextButton(text: 'change_password'.tr(), onPressed: (){
-
-                            // NavigatePages.pushToPage(const ChangePasswordScreen(), context);
+                            NavigatePages.pushToPage(const ChangePasswordScreen(), context);
                           },
                           height: 56.h,
                             width: 343.w,
@@ -192,8 +190,7 @@ class EditProfileScreen extends StatelessWidget {
                           Center(
                             child: InkWell(
                               onTap: (){
-                                showToast('Cancel Done', ToastStates.success, context);
-
+                                Navigator.of(context).pop();
                               },
                               child: Text('cancel'.tr(),
                               style: TextStyles.font17Black400WightLato.copyWith(
@@ -203,9 +200,7 @@ class EditProfileScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-
                           verticalSpace(50),
-
                         ],
                       ),
                     ),

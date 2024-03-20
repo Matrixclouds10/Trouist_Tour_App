@@ -14,8 +14,7 @@ class CustomDescriptionWidget extends StatelessWidget {
       textScaleFactor: ScaleSize.textScaleFactor(context),
       style: TextStyles.font17Black400WightLato.copyWith(
           color: AppColorLight.desColor),
-       maxLines: maxLines,
-      overflow: TextOverflow.ellipsis,
+       maxLines: null,
     );
   }
 }

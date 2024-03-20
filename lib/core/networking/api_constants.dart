@@ -16,14 +16,24 @@ class ApiConstants {
   static const String getPlaces = "getDestinationPaginate";
   static const String getFavoriteProgram = "getWishlist";
   static const String getBookingProgram = "getBookingPrograms";
+  static const String getCompletedProgram = "getFinishPrograms";
   static const String getCanceledProgram = "getCancelPrograms";
   static const String bookProgram = "bookingProgram";
   static const String cancelProgram = "cancelProgram";
-  // static const String addFavoriteProgram = "add_remove_wishlist/";
+  static const String finishProgram = "finishProgram";
+  static const String getFavoritePlaces = "getfavoriteplaces";
+  static const String searchPlaces = "search";
+  static const String notification = "notifacations";
+  static const String history = "getProgramsHistory";
+  static const String payment = "SavePayment";
 
   //More
   static const String getAbout = "about-us";
   static const String getPrivacy= "privacy";
+  static const String changePassword= "changePassword";
+//Make Program
+  static const String places= "getplaces";
+  static const String makeProgram= "makeProgram";
 
 
 }

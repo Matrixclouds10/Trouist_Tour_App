@@ -22,7 +22,8 @@ class CustomUpComingWidget extends StatelessWidget {
           builder: (context, state) {
             if(cubit.getBookingProgramsList!=null){
               if(cubit.getBookingProgramsList!.isNotEmpty){
-                return ListView.builder(
+                return
+                  ListView.builder(
                     itemCount: cubit.getBookingProgramsList!.length,
                     itemBuilder: (context,index){
                       return InkWell(
@@ -33,13 +34,14 @@ class CustomUpComingWidget extends StatelessWidget {
                         },
                         child: CustomProgramItem(
                           programResponse: cubit.getBookingProgramsList![index],
-                          textButtonText: 'cancel'.tr(), onPressed: () {
+                          textButtonText: 'cancel'.tr(),
+                          onPressed: () {
                             showModalBottomSheet(
                           backgroundColor:Colors.white,
                           context: context,
                           isScrollControlled: true,
                           builder: (context) =>  CustomBottomSheet(
-                            note: cubit.noteController.text.isNotEmpty?cubit.noteController.text:cubit.valueCanceled, id: cubit.getBookingProgramsList![index].bookingId!,
+                            note: cubit.noteControllerCanceled.text.isNotEmpty?cubit.noteControllerCanceled.text:cubit.valueCanceled, id: cubit.getBookingProgramsList![index].bookingId!,
                             name: cubit.getBookingProgramsList![index].name!,),
                         ); },),
                       );

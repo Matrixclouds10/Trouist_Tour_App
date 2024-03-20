@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tourist_tour_app/core/notification/device_token.dart';
 import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/login/data/models/login_request_body.dart';
 import 'package:tourist_tour_app/feature/auth/login/data/repos/login_repo.dart';
@@ -13,21 +14,23 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool isVisible= true;
-
-
+ String? fcmToken;
   void emitLoginStates(BuildContext context) async {
     emit(const LoginState.loading());
-    final response = await _loginRepo.login(
-      LoginRequestBody(
-        email: phoneController.text,
-        password: passwordController.text,
-      ),
-    );
-    response.when(success: (loginResponse) {
-      CacheHelper.saveDate(key: 'token', value:loginResponse.userData!.token!);
-      emit(LoginState.success(loginResponse));
-    }, failure: (error) {
-      emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
-    });
+    getDeviceToken(context).then((value) async{
+      final response = await _loginRepo.login(
+        LoginRequestBody(
+          email: phoneController.text,
+          password: passwordController.text,
+          fcmToken: value!,
+        ),
+      );
+      response.when(success: (loginResponse) {
+        CacheHelper.saveDate(key: 'token', value:loginResponse.userData!.token!);
+        emit(LoginState.success(loginResponse));
+      }, failure: (error) {
+        emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
+      });    });
   }
+
 }

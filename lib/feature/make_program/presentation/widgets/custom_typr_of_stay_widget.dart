@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/feature/make_program/data/models/get_places_response.dart';
+import 'package:tourist_tour_app/feature/make_program/logic/make_program_cubit.dart';
 import 'package:tourist_tour_app/feature/make_program/presentation/widgets/custom_dropdown.dart';
 
 class CustomTypeOfStayWidget extends StatefulWidget {
-  const CustomTypeOfStayWidget({super.key});
-
+  const CustomTypeOfStayWidget({super.key, required this.getPlacesResponse});
+  final GetPlacesResponse getPlacesResponse;
   @override
   State<CustomTypeOfStayWidget> createState() => _CustomTypeOfStayWidgetState();
 }
@@ -18,6 +20,8 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
   int currentMethod3=0;
   @override
   Widget build(BuildContext context) {
+    MakeProgramCubit cubit =MakeProgramCubit.get(context);
+
     return  Column(
       children: [
         Row(
@@ -30,6 +34,8 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 // cubit.changeRadio(value!);
                 setState(() {
                   currentMethod3 = value!;
+                  cubit.typeOfStaying='Resorts';
+                  cubit.typeOfStayingPlace=null;
                 });
               },
             ),
@@ -40,7 +46,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
             ),
           ],
         ),
-       currentMethod3==1? const CustomDrpDownWidget():const SizedBox.shrink(),
+       currentMethod3==1?  CustomDrpDownWidget(hotelsResponseList: widget.getPlacesResponse.resorts!, title: 'Resorts',):const SizedBox.shrink(),
 
         Row(
           children: [
@@ -52,6 +58,9 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 // cubit.changeRadio(value!);
                 setState(() {
                   currentMethod3 = value!;
+                  cubit.typeOfStaying='Hotels';
+                  cubit.typeOfStayingPlace=null;
+
                 });
               },
             ),
@@ -62,7 +71,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
             ),
           ],
         ),
-        currentMethod3==2? const CustomDrpDownWidget():const SizedBox.shrink(),
+        currentMethod3==2?  CustomDrpDownWidget(hotelsResponseList: widget.getPlacesResponse.hotels!, title: 'Hotels'):const SizedBox.shrink(),
 
         Row(
           children: [
@@ -74,6 +83,10 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 // cubit.changeRadio(value!);
                 setState(() {
                   currentMethod3 = value!;
+                  cubit.typeOfStaying='A Rural place';
+                  cubit.typeOfStayingPlace=null;
+
+
                 });
               },
             ),
@@ -84,7 +97,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
             ),
           ],
         ),
-        currentMethod3==3? const CustomDrpDownWidget():const SizedBox.shrink(),
+        currentMethod3==3?  CustomDrpDownWidget(hotelsResponseList: widget.getPlacesResponse.inns!, title: 'Inns'):const SizedBox.shrink(),
 
         Row(
           children: [
@@ -96,6 +109,10 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 // cubit.changeRadio(value!);
                 setState(() {
                   currentMethod3 = value!;
+                  cubit.typeOfStaying='Furnished Apartments';
+                  cubit.typeOfStayingPlace=null;
+
+
                 });
               },
             ),
@@ -106,7 +123,6 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
             ),
           ],
         ),
-        currentMethod3==4? const CustomDrpDownWidget():const SizedBox.shrink(),
 
         Row(
           children: [
@@ -118,6 +134,8 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 // cubit.changeRadio(value!);
                 setState(() {
                   currentMethod3 = value!;
+                  cubit.typeOfStaying='Chalets';
+                  cubit.typeOfStayingPlace=null;
                 });
               },
             ),
@@ -128,7 +146,6 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
             ),
           ],
         ),
-        currentMethod3==5? const CustomDrpDownWidget():const SizedBox.shrink(),
 
       ],
     );

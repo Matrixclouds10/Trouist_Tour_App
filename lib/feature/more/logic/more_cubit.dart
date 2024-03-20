@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,10 +11,11 @@ import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/log_as.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/more/data/models/about_us_response.dart';
+import 'package:tourist_tour_app/feature/more/data/models/change_password_request.dart';
+import 'package:tourist_tour_app/feature/more/data/models/history_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/profile_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/update_profile_request.dart';
 import 'package:tourist_tour_app/feature/more/data/repo/more_repo.dart';
-
 class MoreCubit extends BaseCubit {
   final MoreRepo _moreRepo;
   MoreCubit(this._moreRepo);
@@ -26,12 +26,15 @@ class MoreCubit extends BaseCubit {
   ProfileResponse? profileResponse;
   TextEditingController nameController =TextEditingController();
   TextEditingController phoneController  =TextEditingController();
+  TextEditingController passwordController  =TextEditingController();
+  TextEditingController passwordConfirmController  =TextEditingController();
+
   TextEditingController emailController  =TextEditingController();
   TextEditingController countryController  =TextEditingController();
   int? countryControllerId;
   final formKey = GlobalKey<FormState>();
-
   String isLoading ='';
+  bool isLoadingChange=false;
   void getAboutUs(String language ,BuildContext context) async {
     aboutUsResponse=null;
     emit(LoadingStateListener());
@@ -87,15 +90,70 @@ class MoreCubit extends BaseCubit {
       emit(FailureStateListener(e));
     }
   }
-  void getProfile(String token ,BuildContext context) async {
+  Future<ProfileResponse?> getProfile(String token ,BuildContext context) async {
     emit(LoadingStateListener());
     try{
       final response = await _moreRepo.getProfile('Bearer $token');
       profileResponse=response!.data!;
        emit(SuccessStateListener(''));
+       return profileResponse;
+    }catch(e){
+      emit(FailureStateListener(e));
+      return null;
+    }
+  }
+  void changePassword(String token ,BuildContext context) async {
+    changeLoad(true);
+    try{
+      if(passwordController.text.isNotEmpty&&passwordConfirmController.text.isNotEmpty){
+          if(passwordController.text==passwordConfirmController.text){
+            ChangePasswordRequest changePasswordRequest =ChangePasswordRequest(
+                password: passwordController.text,
+                passwordConfirmation: passwordConfirmController.text);
+            final response = await _moreRepo.changePassword('Bearer $token',changePasswordRequest);
+            if(response!.status==true){
+
+              if(response.code==200){
+                Future.delayed(const Duration(seconds: 0)).then((value) {
+                  showToast('${response.message}', ToastStates.success, context);
+                  passwordController.text='';
+                  passwordConfirmController.text='';
+                  Navigator.of(context).pop();
+                });
+              }else{
+                Future.delayed(const Duration(seconds: 0)).then((value) {
+                  showToast('${response.message}', ToastStates.error, context);
+                });
+              }
+            }else{
+              Future.delayed(const Duration(seconds: 0)).then((value) {
+                showToast('${response.message}', ToastStates.error, context);
+              });
+            }
+            emit(SuccessStateListener(''));
+          }else{
+            showToast('the confirm password not match password', ToastStates.error, context);
+
+          }
+      }else{
+        showToast('The data not completed', ToastStates.error, context);
+      }
     }catch(e){
       emit(FailureStateListener(e));
     }
+    changeLoad(false);
+  }
+  List<HistoryResponse>? historyResponseList;
+  void getHistoryCubit(BuildContext context) async {
+    historyResponseList=null;
+    emit(LoadingStateListener());
+    final response = await _moreRepo.getHistory(HomeCubit.get(context).token!);
+    response!.when(success: (notificationResponseData) {
+      historyResponseList=notificationResponseData.data;
+      emit(SuccessStateListener(''));
+    }, failure: (error) {
+      emit(FailureStateListener(error));
+    });
   }
   void updateProfile(String token ,BuildContext context) async {
     UpdateProfileRequest updateProfileRequest =UpdateProfileRequest(
@@ -127,7 +185,10 @@ class MoreCubit extends BaseCubit {
       Navigator.pop(context);
     });
   }
-
+ void changeLoad(bool x){
+   isLoadingChange=x;
+   emit(SuccessStateListener(''));
+ }
   File? imageFile;
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();

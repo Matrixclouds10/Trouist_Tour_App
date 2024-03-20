@@ -17,7 +17,8 @@ ApiResponse<T> _$ApiResponseFromJson<T>(
       pagination: json['pagination'] == null
           ? null
           : Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
-    )..status = json['status'] as bool?;
+      status: json['status'] as bool?,
+    );
 
 Map<String, dynamic> _$ApiResponseToJson<T>(
   ApiResponse<T> instance,

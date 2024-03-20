@@ -26,11 +26,13 @@ class CustomProgramsBodyWidget extends StatelessWidget {
         if(cubit.getFavoriteList!=null){
             if(cubit.getFavoriteList!.isNotEmpty){
               return Padding(
-                  padding:  EdgeInsets.only(left: 16.w,right: 16.w),
+                  padding:  EdgeInsets.only(left: 16.w,right: 16.w,bottom: 60.h),
                   child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
                       itemCount: cubit.getFavoriteList!.length,
                       itemBuilder: (context,index){
-                        return Padding(
+                        return
+                          Padding(
                           padding: const EdgeInsets.only(top: 16.0),
                           child: InkWell(
                             onTap: (){

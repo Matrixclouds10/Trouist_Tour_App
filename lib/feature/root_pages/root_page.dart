@@ -4,16 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
+import 'package:tourist_tour_app/core/notification/FcmHandler.dart';
+import 'package:tourist_tour_app/core/routing/navigation_services.dart';
 import 'package:tourist_tour_app/feature/booking/presentation/screens/booking_screen.dart';
 import 'package:tourist_tour_app/feature/favorite/presentation/screens/favorite_screen.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/home/pressentation/screens/home.dart';
+import 'package:tourist_tour_app/feature/home/pressentation/screens/search_screen.dart';
 import 'package:tourist_tour_app/feature/more/presentation/screens/more_screen.dart';
-import 'package:tourist_tour_app/feature/search/presentation/screen/search_screen.dart';
 
 class RootPages extends StatefulWidget {
   final String? check;
-   RootPages({super.key, this.check});
+   const RootPages({super.key, this.check});
 
   @override
   State<RootPages> createState() => _RootPagesState();
@@ -38,27 +40,30 @@ class _RootPagesState extends State<RootPages> {
   Widget build(BuildContext context) {
     print('===========building Root Page==========================================');
     HomeCubit cubit =HomeCubit.get(context);
-    return MediaQuery(
+    return
+      FcmHandler(navigatorKey:NavigationService.navigationKey, child:   MediaQuery(
           data: MediaQuery.of(context).copyWith(
-          textScaleFactor: 1.0,
+            textScaleFactor: 1.0,
           ),
           child: BlocConsumer<HomeCubit, HomeState>(
             listener: (context, state) {},
             builder: (context, state) {
               return Scaffold(
-                       body:   Stack(
-                         children: [
-                           screens[cubit.currentIndex!],
-                           Positioned(
-                               left: 0,
-                               right: 0,
-                               bottom: 0,
-                               child: bottomNavigationBar(context))
-                         ],
-                       ),
-                    );
+                body:   Stack(
+                  children: [
+                    screens[cubit.currentIndex!],
+                    Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: bottomNavigationBar(context))
+                  ],
+                ),
+              );
             },
-          ) );
+          ) ));
+
+
 
 
   }

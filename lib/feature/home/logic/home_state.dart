@@ -12,7 +12,13 @@ class SuccessGetProgramsState extends HomeState {}
 class SuccessGetOffersState extends HomeState {}
 class SuccessGetTouristPlacesState extends HomeState {}
 class ErrorGetOffersState extends HomeState {}
+class SuccessSearchState extends HomeState {}
+class ErrorSearchState extends HomeState {}
 class ErrorGetTouristPlacesState extends HomeState {}
 class ErrorGetProgramsState extends HomeState {}
 class ErrorGetSliderState extends HomeState {}
 class ErrorState extends HomeState {}
+class ChangeLoadingState extends HomeState {}
+class NotificationLoadingState extends HomeState {}
+class NotificationSuccessState extends HomeState {}
+class NotificationErrorState extends HomeState {}

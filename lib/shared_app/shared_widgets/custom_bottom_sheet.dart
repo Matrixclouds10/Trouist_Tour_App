@@ -9,6 +9,7 @@ import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/canceled_request.dart';
 import 'package:tourist_tour_app/feature/booking/logic/booking_cubit.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_bottom_sheet_body_widget.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_field.dart';
 
@@ -67,11 +68,18 @@ class CustomBottomSheet extends StatelessWidget {
               maxLines: 3,
                 borderColor: AppColorLight.grayBorderColor,
                 hintText: 'button_sheet_hint'.tr(),
-                controller: BookingCubit.get(context).noteController),
+                controller: BookingCubit.get(context).noteControllerCanceled),
             verticalSpace(23),
            CustomMaterialButtonWidget(text: 'button_sheet_btn'.tr(), onPressed: (){
-             CanceledRequest canceledRequest=CanceledRequest(id: id, notes: note);
-             BookingCubit.get(context).cancelingProgram(canceledRequest,context);
+                  showCustomDialog(
+                    context: context,
+                    title:'cancel'.tr(),des: 'sure_cancel'.tr(),bt1:  'yes'.tr(),bt2: 'no'.tr(),
+                    onPressed1: (){
+                      CanceledRequest canceledRequest=CanceledRequest(id: id, notes: note);
+                      BookingCubit.get(context).cancelingProgram(canceledRequest,context);
+                      Navigator.of(context).pop();
+                    });
+
            }),
             verticalSpace(40),
 

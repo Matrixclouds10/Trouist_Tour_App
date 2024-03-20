@@ -19,7 +19,7 @@ class CustomTouristPlaces extends StatelessWidget {
       crossAxisSpacing: 5,
       mainAxisSpacing: 10,
       childAspectRatio: 1 / 0.75,
-      children: List.generate( cubit.touristPlacesResponseModel!.length, (index) {
+      children: List.generate( 4, (index) {
         return InkWell(
           onTap: (){
             NavigatePages.pushToPage( TouristPlaceDetailsScreen(touristPlaceResponse: cubit.touristPlacesResponseModel![index],), context);

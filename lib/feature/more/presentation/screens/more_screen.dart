@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
@@ -23,10 +24,10 @@ import 'package:tourist_tour_app/feature/more/presentation/widgets/custom_more_i
 import 'package:tourist_tour_app/feature/root_pages/root_page.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
+import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     MoreCubit cubit=MoreCubit.get(context);
@@ -94,19 +95,20 @@ class MoreScreen extends StatelessWidget {
                   verticalSpace(30),
                 ],
               ):
-              SizedBox(
-               height: 200.h,
-               child: Center(
-                 child: Text('Log_in_first'.tr(),
-                   style: TextStyle(
-                     fontSize: 20.sp,
-                     fontWeight: FontWeight.bold,
-                     color: Colors.black,
-                     fontFamily: AppFontsFamily.fontCairo,
-                   ),
-                 ),
-               ),
-             ),
+              Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(AppImages.logoSvg,
+                      height: MediaQuery.of(context).size.height*0.2,
+                    ),
+                    verticalSpace(5),
+
+                    SizedBox(height: 30.h,),
+                  ],
+                ),
+              ),
                 Padding(
                   padding:  EdgeInsets.only(left: 16.w,right: 16.w),
                   child: Column(children: [
@@ -135,6 +137,7 @@ class MoreScreen extends StatelessWidget {
                     CustomMoreItemWidget(
                       iconPath: AppImages.more3,
                       function: (){
+                        cubit.getHistoryCubit(context);
                         NavigatePages.pushToPage(const HistoryScreen(), context);
                       }, tex: 'program_history'.tr(),):const SizedBox.shrink(),
                     HomeCubit.get(context).token!=null?verticalSpace(16):const SizedBox.shrink(),
@@ -185,7 +188,28 @@ class MoreScreen extends StatelessWidget {
                      ],
                    ):const SizedBox.shrink()
                   ],),
-                )
+                ),
+                SizedBox(height: 100.h,),
+                HomeCubit.get(context).token!=null?SizedBox.shrink():
+                Column(
+                  children: [
+                    Text('Log_in_first'.tr(),
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontFamily: AppFontsFamily.fontCairo,
+                      ),
+                    ),
+                    SizedBox(height: 5.h,),
+                    CustomMaterialButtonWidget(
+                        height: 40.h,
+                        minWidth: 220.w,
+                        text: 'sign_up'.tr(), onPressed: (){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>const LogAs()));
+                    }),
+                  ],
+                ),
               ],
             ),
           )),

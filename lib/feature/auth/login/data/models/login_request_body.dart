@@ -8,8 +8,10 @@ class LoginRequestBody{
   final String email;
   @JsonKey(name: 'password')
   final String password;
+  @JsonKey(name: 'fcm_token')
+  final String fcmToken;
 
-  LoginRequestBody({required this.email, required this.password});
+  LoginRequestBody({required this.email, required this.password,required this.fcmToken});
 
   Map<String, dynamic> toJson() => _$LoginRequestBodyToJson(this);
 }

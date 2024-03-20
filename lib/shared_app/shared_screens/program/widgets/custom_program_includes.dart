@@ -17,18 +17,16 @@ class CustomProgramIncludesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   Container(
-      height:(programResponse!.priceIncludes!.length+2) *50.h ,
       width: 343.w,
       decoration: BoxDecoration(
           color: color ??AppColorLight.customGray.withOpacity(0.10),
           borderRadius: const BorderRadius.all(Radius.circular(10))),
       child:
       Padding(
-        padding:  EdgeInsets.only(left: 16.w,right: 16.w),
+        padding:  EdgeInsets.symmetric(horizontal: 16.w,vertical: 16.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            verticalSpace(13),
             Text('program_includes'.tr(),
               textScaleFactor: ScaleSize.textScaleFactor(context),
               maxLines: 1,
@@ -36,14 +34,7 @@ class CustomProgramIncludesWidget extends StatelessWidget {
               style: TextStyles.font17CustomBlack700WeightPoppins,
             ),
             verticalSpace(8),
-            Expanded(
-              child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount:  programResponse!.priceIncludes!.length,
-                  itemBuilder: (context,index){
-                return CustomProgramIncludeItem(text: programResponse!.priceIncludes![index],);
-              }),
-            )
+           ... programResponse!.priceIncludes!.map((e) => CustomProgramIncludeItem(text: e,))
           ],
         ),
       ),

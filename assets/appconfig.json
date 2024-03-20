@@ -1,0 +1,6 @@
+{
+  "merchantKey": "28071a29255981c8f795503d99565983b4e754ad8e87d7819b5e9af41f1b236f",
+  "terminalId": "touristt",
+  "terminalPass": "tourist@1210",
+  "requestUrl": "https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest"
+}

@@ -7,6 +7,7 @@ class AppImages{
   static const String loginAs='${baseImages}logAs.png';
   static const String login='${baseImages}login.png';
   static const String logoPng='${baseImages}logo.png';
+  static const String logo2='${baseImages}logo2.png';
   static const String terms='${baseImages}terms.png';
   static const String history='${baseImages}history.png';
   static const String register='${baseImages}register.png';
@@ -15,6 +16,7 @@ class AppImages{
   static const String logMessage='${baseSvg}log2.svg';
   static const String holder='${baseImages}hol.png';
   static const String video='${baseImages}video.png';
+  static const String notification='${baseImages}notification.png';
 
   static const String category='${baseImages}categ1.png';
   static const String program1='${baseImages}prog1.png';
@@ -28,6 +30,7 @@ class AppImages{
   static const String returnCloc='${baseImages}return.png';
   static const String visa='${baseImages}visa.png';
   static const String applePay='${baseImages}apple-pay.png';
+  static const String cash='${baseImages}cash.png';
   static const String card='${baseImages}card.png';
   static const String rate='${baseImages}rate.png';
   static const String trueImage='${baseImages}tr.png';

@@ -26,6 +26,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validationFunc;
   final void Function(String)? onFieldSubmitted;
   final TextStyle? hintStyle;
+  final void Function(String)? onChanged;
   const CustomTextField({
     Key? key,
     required this.hintText,
@@ -35,6 +36,7 @@ class CustomTextField extends StatelessWidget {
     this.fillColor,
     this.contentHorizontalPadding,
     this.contentVerticalPadding,
+    this.onChanged,
     this.maxLines,
     this.hintFontFamily,
     this.validationMessage,
@@ -60,6 +62,7 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       obscureText: isPassword ?? false,
       maxLines: maxLines ?? 1,
+      onChanged:onChanged ,
       decoration:
       customInputDecoration(
         fontSize: fontSize,

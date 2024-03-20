@@ -251,25 +251,32 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
          ),
        ),
         verticalSpace(8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-          widget.image.asMap().entries.map((MapEntry<int, String?> entry) {
-            return GestureDetector(
-              onTap: () => carouselController.animateToPage(entry.key),
-              child: Container(
-                width: 12.0,
-                height: 12.0,
-                margin:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: currentIndex == entry.key
-                        ? AppColorLight.primaryColor
-                        : Colors.black.withOpacity(0.2)),
-              ),
-            );
-          }).toList(),
+
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 16.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              widget.image.asMap().entries.map((MapEntry<int, String?> entry) {
+                return GestureDetector(
+                  onTap: () => carouselController.animateToPage(entry.key),
+                  child: Container(
+                    width: 12.0,
+                    height: 12.0,
+                    margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: currentIndex == entry.key
+                            ? AppColorLight.primaryColor
+                            : Colors.black.withOpacity(0.2)),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
         ),
 
       ],

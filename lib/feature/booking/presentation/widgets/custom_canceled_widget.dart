@@ -33,7 +33,7 @@ class CustomCanceledWidget extends StatelessWidget {
                         },
                         child: CustomProgramItem(
                           programResponse: cubit.getCanceledProgramsList![index],
-                          textButtonText: 'book_now'.tr(),
+                          textButtonText: 'book_again'.tr(),
                           onPressed: () {
                             NavigatePages.pushToPage(
                                 ProgramDetailsScreen(

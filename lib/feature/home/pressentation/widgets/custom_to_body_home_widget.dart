@@ -45,24 +45,26 @@ class CustomTopBodyHomeWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      NavigatePages.pushToPage(
-                          const NotificationScreen(), context);
-                    },
-                    child: const Icon(Icons.notifications_none,
-                      color: AppColorLight.gray2,
-                    ),
-                  )
+                  horizontalSpace(5),
+                  // InkWell(
+                  //   onTap: () {
+                  //     cubit.getNotificationCubit(context);
+                  //     NavigatePages.pushToPage(const NotificationScreen(), context);
+                  //
+                  //   },
+                  //   child: const Icon(Icons.notifications_none,
+                  //     color: AppColorLight.gray2,
+                  //   ),
+                  // )
                 ],
               ),
             ),
-            verticalSpace(16),
-            Text("begin_home".tr(),
-              style: TextStyles.font24CustomBlack700WeightPoppins,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+            // verticalSpace(16),
+            // Text("begin_home".tr(),
+            //   style: TextStyles.font24CustomBlack700WeightPoppins,
+            //   maxLines: 2,
+            //   overflow: TextOverflow.ellipsis,
+            // ),
             verticalSpace(16),
             BlocConsumer<HomeCubit, HomeState>(
               listener: (context, state) {},

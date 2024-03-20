@@ -9,7 +9,7 @@ class BookingRequest{
   @JsonKey(name: 'payment')
   final String? payment;
   @JsonKey(name: 'total')
-  final int? total;
+  final double? total;
 
   BookingRequest({required this.id,required this.notes,required this.payment,required this.total});
   Map<String, dynamic> toJson() => _$BookingRequestToJson(this);
