@@ -135,15 +135,23 @@
   "other": "Other",
   "back": "Back",
   "success": "Successfully",
-
+  "home_des": "You can fulfill your dreams of traveling and explore the world in a unique way, whether you're looking for an adventurous experience full of excitement and thrills, or even if you prefer a peaceful and comfortable vacation. We are pleased to offer a platform that allows you to design your trips entirely based on your preferences, with a diverse range of customized options and services available.",
   "up_coming": "Up Coming",
   "completed": "Completed",
   "canceled": "Canceled",
+  "reason": "Reason",
   "new_password": "New Password",
   "confirm_new_password": "Confirm New Password",
   "done": "Done",
   "favourites": "Favourites",
   "places": "Places",
-  "programs": "Programs"
+  "programs": "Programs",
+
+  "review": "Review",
+  "feedback": "Send Your Feedback !",
+  "send_feedback": "Send Feedback",
+  "title_rate": "How Was Your Experience ? ",
+  "text_rate": "Send Your Feedback Here.....",
+  "feedback_des": "It is a long established fact that a reader will be distracted by the readab ."
 
 }

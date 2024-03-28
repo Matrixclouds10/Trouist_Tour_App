@@ -10,6 +10,8 @@ import 'package:tourist_tour_app/feature/booking/data/models/booking_response.da
 import 'package:tourist_tour_app/feature/booking/data/models/canceled_request.dart';
 import 'package:tourist_tour_app/feature/booking/data/models/payment_request.dart';
 
+import '../models/rating_request.dart';
+
 class BookingRepo{
   final ApiService _apiService;
   BookingRepo(this._apiService);
@@ -98,6 +100,20 @@ class BookingRepo{
   Future<ApiResponse?> finishedProgram(String? token,CanceledRequest canceledRequest,context)async{
     try {
       final response = await _apiService.finishedProgram(token!,canceledRequest);
+      return response;
+    }on DioError catch (e) {
+      if (e.response != null && e.response!.statusCode != 200) {
+        showToast('${e.response!.data["message"]}', ToastStates.error, context);
+      } else {
+        showToast('Error: ${e.message}', ToastStates.error, context);
+      }
+    }
+    return null;
+  }
+
+  Future<ApiResponse?> ratingProgram(String? token ,RatingRequest ratingRequest,context)async{
+    try {
+      final response = await _apiService.ratingProgram(token!,ratingRequest);
       return response;
     }on DioError catch (e) {
       if (e.response != null && e.response!.statusCode != 200) {

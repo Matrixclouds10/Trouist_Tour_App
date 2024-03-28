@@ -26,6 +26,8 @@ import 'package:tourist_tour_app/feature/more/data/models/history_response.dart'
 import 'package:tourist_tour_app/feature/more/data/models/profile_response.dart';
 import 'package:tourist_tour_app/feature/more/data/models/update_profile_request.dart';
 
+import '../../feature/booking/data/models/rating_request.dart';
+
 
 part 'api_service.g.dart';
 
@@ -169,6 +171,12 @@ abstract class ApiService {
   Future<ApiResponse> finishedProgram(
       @Header('Authorization') String token,
       @Body()CanceledRequest canceledRequest
+      );
+
+@POST(ApiConstants.rating)
+  Future<ApiResponse> ratingProgram(
+      @Header('Authorization') String token,
+      @Body() RatingRequest ratingRequest
       );
 
 

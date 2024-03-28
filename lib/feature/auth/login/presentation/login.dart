@@ -163,10 +163,7 @@ class LoginScreen extends StatelessWidget {
                                   CustomMaterialButtonWidget(
                                       text: 'sign_in'.tr(),
                                       onPressed: () {
-                                        if (context
-                                            .read<LoginCubit>()
-                                            .formKey
-                                            .currentState!
+                                        if (context.read<LoginCubit>().formKey.currentState!
                                             .validate()) {
                                           cubit.emitLoginStates(context);
                                         }

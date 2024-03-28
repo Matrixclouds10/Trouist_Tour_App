@@ -17,46 +17,49 @@ class CustomMakeProgram extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Container(
-      height:170.h ,
       width: 345.w,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         color: AppColorLight.customGray.withOpacity(0.10),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          verticalSpace(10),
-          Text('make_program_des'.tr(),
-            style: TextStyles.font17CustomGray400WightLato.copyWith(
-                color: const Color(0xff4C5756)
+      child: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            verticalSpace(5),
+            Text('home_des'.tr(),
+              style: TextStyles.font17CustomGray400WightLato.copyWith(
+                  color: const Color(0xff4C5756),
+                fontSize: 14
+              ),
+              maxLines: null,
+              // overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.start,
             ),
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-          ),
-          verticalSpace(10),
-          Container(
-            height:40,
-            padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 3),
-            child: CustomMaterialButtonWidget(
-                height: 36,
-                minWidth: 205.w,
-                text: 'make_program'.tr(),
-                textSize: 14,
-                onPressed: (){
-                  if(HomeCubit.get(context).token!=null){
-                    MakeProgramCubit.get(context).getPlaces(context);
-                    NavigatePages.pushToPage(const CustomProgramScreen(), context);
-                  }else{
-                    showToast('Log_in_first'.tr(), ToastStates.error, context);
-                  }
-                }),
-          ),
-          verticalSpace(5),
+            verticalSpace(10),
+            Container(
+              height:40,
+              padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 3),
+              child: CustomMaterialButtonWidget(
+                  height: 36,
+                  minWidth: 205.w,
+                  text: 'make_program'.tr(),
+                  textSize: 14,
+                  onPressed: (){
+                    if(HomeCubit.get(context).token!=null){
+                      MakeProgramCubit.get(context).getPlaces(context);
+                      NavigatePages.pushToPage(const CustomProgramScreen(), context);
+                    }else{
+                      showToast('Log_in_first'.tr(), ToastStates.error, context);
+                    }
+                  }),
+            ),
+            verticalSpace(5),
 
-        ],
+          ],
+        ),
       ),
     );
   }

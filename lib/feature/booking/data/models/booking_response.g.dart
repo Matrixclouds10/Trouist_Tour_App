@@ -16,6 +16,7 @@ BookingResponse _$BookingResponseFromJson(Map<String, dynamic> json) =>
       json['start_date'] as String?,
       json['price'] as int?,
       json['group_size'] as int?,
+      json['rate'] as int?,
       json['group_type'] as String?,
       (json['tour_route'] as List<dynamic>?)
           ?.map((e) =>
@@ -29,6 +30,7 @@ BookingResponse _$BookingResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
       json['is_favourite'] as bool?,
       json['booking_id'] as int?,
+      json['notes'] as String?,
       json['discount_amount'] as String?,
       json['new_price'] as int?,
       json['discount_percentage'] as String?,
@@ -58,6 +60,8 @@ Map<String, dynamic> _$BookingResponseToJson(BookingResponse instance) =>
       'discount_amount': instance.discountAmount,
       'discount_percentage': instance.discountPercentage,
       'main_image': instance.mainImage,
+      'notes': instance.note,
+      'rate': instance.rate,
       'is_favourite': instance.isFav,
       'new_price': instance.newPrice,
       'booking_id': instance.bookingId,

@@ -36,6 +36,10 @@ class BookingResponse{
   String? discountPercentage;
   @JsonKey(name: 'main_image')
   String? mainImage;
+  @JsonKey(name: 'notes')
+  String? note;
+  @JsonKey(name: 'rate')
+  int? rate;
   @JsonKey(name: 'is_favourite')
   bool? isFav;
   @JsonKey(name: 'new_price')
@@ -55,6 +59,7 @@ class BookingResponse{
       this.startDate,
       this.price,
       this.groupSize,
+      this.rate,
       this.groupType,
       this.tourRoute,
       this.departure,
@@ -63,6 +68,7 @@ class BookingResponse{
       this.priceIncludes,
       this.isFav,
       this.bookingId,
+      this.note,
       this.discountAmount,
       this.newPrice,
       this.discountPercentage,

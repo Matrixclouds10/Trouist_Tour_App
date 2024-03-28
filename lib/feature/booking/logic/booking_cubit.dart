@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
@@ -21,20 +22,30 @@ import 'package:tourist_tour_app/feature/root_pages/root_page.dart';
 import 'package:tourist_tour_app/main.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
 import 'package:urwaypayment/urwaypayment.dart';
+
+import '../data/models/rating_request.dart';
+import '../presentation/screens/rate_screen.dart';
 part 'booking_state.dart';
 
 class BookingCubit extends Cubit<BookingState> {
   final BookingRepo _bookingRepo;
   BookingCubit(this._bookingRepo): super(BookingInitial());
+  double  rate =3;
   static BookingCubit get(BuildContext context)=>BlocProvider.of(context);
   List<BookingResponse>? getBookingProgramsList;
   List<BookingResponse>? getCanceledProgramsList;
   List<BookingResponse>? getCompletedProgramsList;
   TextEditingController noteControllerBooking= TextEditingController();
   TextEditingController noteControllerCanceled= TextEditingController();
+  TextEditingController commentController= TextEditingController();
   String valueCanceled='button_sheet_body1'.tr();
   void putValueCanceled(String x){
     valueCanceled =x;
+    print(valueCanceled);
+    emit(PutState());
+  }
+  void putRate(double x){
+    rate =x;
     emit(PutState());
   }
   void getBookingPrograms(String token ,BuildContext context,String? language) async {
@@ -76,9 +87,11 @@ class BookingCubit extends Cubit<BookingState> {
   }
 
   void bookingPrograms(BookingRequest bookingRequest,BuildContext context) async {
+    emit(BookingLoadingState());
     final response = await _bookingRepo.bookingPrograms('Bearer ${HomeCubit.get(context).token}',bookingRequest,context);
       Future.delayed(const Duration(microseconds: 0)).then((value) {
         getBookingPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
+        emit(BookingSuccessState());
         showToast('${response!.message}', ToastStates.success, context);
         showCustomDialog2(
             title:'success'.tr(),
@@ -89,7 +102,7 @@ class BookingCubit extends Cubit<BookingState> {
             },
             context: context);
       noteControllerBooking.text='';
-    emit(BookingProgramsErrorState());
+    emit(BookingErrorState());
   });}
   void cancelingProgram(CanceledRequest canceledRequest,BuildContext context) async {
     try{
@@ -114,21 +127,41 @@ class BookingCubit extends Cubit<BookingState> {
       emit(BookingProgramsErrorState());
     }
   }
-  void finishedProgram(CanceledRequest canceledRequest,BuildContext context) async {
+  void finishedProgram(CanceledRequest canceledRequest,BuildContext context,int programId) async {
     try{
       final response = await _bookingRepo.finishedProgram('Bearer ${HomeCubit.get(context).token}',canceledRequest,context);
       Future.delayed(const Duration(microseconds: 0)).then((value) {
         getBookingPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
         getCompletedPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
         showToast('${response!.message}', ToastStates.success, context);
+        Navigator.push( context,MaterialPageRoute(builder: (context)=> RateScreen(programId: programId,)));
       });
-        emit(BookingProgramsSuccessState());
+      emit(BookingProgramsSuccessState());
 
     }on DioException catch(e){
       Future.delayed(const Duration(microseconds: 0)).then((value) {
         showToast('$e', ToastStates.error, context);
       });
       emit(BookingProgramsErrorState());
+    }
+  }
+  void ratingProgram(RatingRequest ratingRequest,BuildContext context) async {
+    emit(RatingLoadingSuccessState());
+    try{
+      final response = await _bookingRepo.ratingProgram('Bearer ${HomeCubit.get(context).token}',ratingRequest,context);
+      Future.delayed(const Duration(microseconds: 0)).then((value) {
+        getCompletedPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
+        commentController.text='';
+        rate=3;
+        showToast('${response!.message}', ToastStates.success, context);
+        Navigator.pop(context);
+      });
+      emit(RatingProgramsSuccessState());
+    }on DioException catch(e){
+      Future.delayed(const Duration(microseconds: 0)).then((value) {
+        showToast('$e', ToastStates.error, context);
+      });
+      emit(RatingProgramsErrorState());
     }
   }
 
@@ -174,7 +207,7 @@ class BookingCubit extends Cubit<BookingState> {
    }
 
    Future paymentCubit(PaymentRequest paymentRequest,context) async {
-    emit(PaymentLoadingState());
+    emit(BookingLoadingState());
     final response = await _bookingRepo.payment(HomeCubit.get(context).token!,paymentRequest);
     response.when(success: (paymentResponse) {
       BookingRequest bookingRequest =BookingRequest(
@@ -193,8 +226,12 @@ class BookingCubit extends Cubit<BookingState> {
      try{
        final data = await urWayPayment(id: id, amount: amount, context: context);
        UrWayResponse urWayResponse =UrWayResponse.fromJson(jsonDecode(data));
-       PaymentRequest paymentRequest =PaymentRequest(paymentId: urWayResponse.paymentId!, tourId: urWayResponse.userField1!, userId:urWayResponse.userField3!, amount: urWayResponse.amount!, paymentType: urWayResponse.paymentType, result: urWayResponse.result);
-       paymentCubit(paymentRequest, context);
+       if(urWayResponse.result=='Failure'){
+         showToast('Failure payment', ToastStates.error, context);
+       }else{
+         PaymentRequest paymentRequest =PaymentRequest(paymentId: urWayResponse.paymentId!, tourId: urWayResponse.userField1!, userId:urWayResponse.userField3!, amount: urWayResponse.amount!, paymentType: urWayResponse.paymentType, result: urWayResponse.result);
+         paymentCubit(paymentRequest, context);
+       }
 
      }catch(e){
        log('makePayment  error', e.toString());

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 
 class CustomMaterialButtonWidget extends StatelessWidget {
-  const CustomMaterialButtonWidget({super.key, required this.text,required this.onPressed, this.backgroundColor, this.textColor, this.borderColor, this.elevation, this.height, this.minWidth, this.textSize});
+  const CustomMaterialButtonWidget({super.key, required this.text,required this.onPressed, this.backgroundColor, this.textColor, this.borderColor, this.elevation, this.height, this.minWidth, this.textSize, this.isLoading});
   final String text;
   final Color? backgroundColor;
   final Color? textColor;
@@ -13,6 +14,7 @@ class CustomMaterialButtonWidget extends StatelessWidget {
   final double? height;
   final double? minWidth;
   final double? textSize;
+  final bool? isLoading;
   @override
   Widget build(BuildContext context) {
     return   MaterialButton(
@@ -25,7 +27,9 @@ class CustomMaterialButtonWidget extends StatelessWidget {
       minWidth: minWidth ?? 343.w,
       color: backgroundColor ?? const Color(0xff009688),
       onPressed: onPressed,
-      child:  Text(text,
+      child:
+      isLoading==true?const Center(child: CircularProgressIndicator(color: Colors.white,),):
+      Text(text,
         textScaleFactor: ScaleSize.textScaleFactor(context),
         style: TextStyle(
             fontSize:textSize ?? 17.sp,

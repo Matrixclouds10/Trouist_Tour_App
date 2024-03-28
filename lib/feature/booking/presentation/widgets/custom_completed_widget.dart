@@ -29,8 +29,9 @@ class CustomCompleteWidget extends StatelessWidget {
                     onTap: (){
                       NavigatePages.pushToPage( BookingDetailsScreen(type: 'Completed', bookingResponse: cubit.getCompletedProgramsList![index],), context);
                     },
-                    child: CustomProgramItem(textButtonText: 'book_again'.tr(), onPressed: () {
-                      // NavigatePages.pushToPage(const RateScreen(), context);
+                    child: CustomProgramItem(
+                      type: 'Completed',
+                      textButtonText: 'book_again'.tr(), onPressed: () {
                       NavigatePages.pushToPage(
                           ProgramDetailsScreen(
                             programResponse:

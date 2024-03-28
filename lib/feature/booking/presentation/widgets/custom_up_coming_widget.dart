@@ -41,7 +41,7 @@ class CustomUpComingWidget extends StatelessWidget {
                           context: context,
                           isScrollControlled: true,
                           builder: (context) =>  CustomBottomSheet(
-                            note: cubit.noteControllerCanceled.text.isNotEmpty?cubit.noteControllerCanceled.text:cubit.valueCanceled, id: cubit.getBookingProgramsList![index].bookingId!,
+                            note: '${cubit.valueCanceled} ${cubit.noteControllerCanceled.text}', id: cubit.getBookingProgramsList![index].bookingId!,
                             name: cubit.getBookingProgramsList![index].name!,),
                         ); },),
                       );

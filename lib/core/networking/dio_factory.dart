@@ -23,12 +23,12 @@ class DioFactory {
   }
 
   static void addDioInterceptor() {
-    // dio?.interceptors.add(
-    //   PrettyDioLogger(
-    //     requestBody: true,
-    //     requestHeader: true,
-    //     responseHeader: true,
-    //   ),
-    // );
+    dio?.interceptors.add(
+      PrettyDioLogger(
+        requestBody: true,
+        requestHeader: true,
+        responseHeader: true,
+      ),
+    );
   }
 }
