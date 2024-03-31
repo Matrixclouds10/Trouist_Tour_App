@@ -30,7 +30,7 @@ class CustomPageViewBodyWidget extends StatelessWidget {
                 Stack(
                   children: [
                     SizedBox(
-                      height: 455.h,
+                      height: 445.h,
                       width: 376.w,
                       child: Image.asset(
                         onBoardingModel.image,
@@ -38,7 +38,7 @@ class CustomPageViewBodyWidget extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 455.h,
+                      height: 445.h,
                       width: 376.w,
                       color: const Color(0xff000000).withOpacity(0.30),),
                     Positioned(
@@ -84,7 +84,7 @@ class CustomPageViewBodyWidget extends StatelessWidget {
                       ),),
                   ],
                 ),
-                verticalSpace(20),
+                verticalSpace(10),
                 Text(
                   onBoardingModel.title,
                   textAlign: TextAlign.center,
@@ -93,23 +93,22 @@ class CustomPageViewBodyWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   textScaleFactor: ScaleSize.textScaleFactor(context),
                 ),
-                verticalSpace(8),
-                Padding(
-                  padding: EdgeInsets.only(left: 16.w, right: 16.w),
-                  child: SizedBox(
-                    child: Text(
-                      onBoardingModel.description,
-                      // getLang(context ,'onBoardingDescription${onBoardingModel.number}'),
-                      style: TextStyles.font17CustomGray400WightLato,
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textScaleFactor: ScaleSize.textScaleFactor(context),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                    child: Center(
+                      child: Text(
+                        onBoardingModel.description,
+                        // getLang(context ,'onBoardingDescription${onBoardingModel.number}'),
+                        style: TextStyles.font17CustomGray400WightLato,
+                        textAlign: TextAlign.center,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
+                      ),
                     ),
                   ),
                 ),
-                const Spacer(),
-
               ]);
         },
       );

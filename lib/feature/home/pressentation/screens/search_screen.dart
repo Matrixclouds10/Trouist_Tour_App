@@ -74,8 +74,9 @@ class SearchScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: Colors.red,
                                   borderRadius: BorderRadius.circular(10),
-                                  boxShadow: const [BoxShadow(color: Colors.black26,blurRadius: 1,
-                                  offset: Offset(2,4),)
+                                  boxShadow: const [BoxShadow(color: Colors.black12,blurRadius: 1,
+                                  // offset: Offset(2,4),
+                                  )
                                   ],
 
                                 ),

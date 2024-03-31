@@ -67,7 +67,8 @@ class Home extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           verticalSpace(20),
-                          Align(
+                         HomeCubit.get(context).token!=null?
+                         Align(
                             alignment: context.locale==const Locale("en")?Alignment.centerRight:Alignment.centerLeft,
                             child: Padding(
                               padding:  EdgeInsets.symmetric(horizontal: 5.w),
@@ -81,7 +82,7 @@ class Home extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
                                       color: Colors.white,
-                                      boxShadow: const [BoxShadow(color: Colors.black26,blurRadius: 5,
+                                      boxShadow: const [BoxShadow(color: Colors.black26,blurRadius: 1,
                                       )]
                                   ),
                                   child: const Padding(
@@ -93,7 +94,7 @@ class Home extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),
+                          ): SizedBox(height: 20.h,),
                           Center(child: SvgPicture.asset(AppImages.logoSvg)),
                           verticalSpace(16),
                           const CustomTopBodyHomeWidget(),

@@ -66,12 +66,15 @@ class _LogAsState extends State<LogAs> {
 
               ),
               verticalSpace(8),
-              Text('log2'.tr(),
-                style: TextStyles.font17CustomGray400WightLato,
-                textAlign: TextAlign.center,
-                textScaleFactor: ScaleSize.textScaleFactor(context),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 16.w),
+                child: Text('log2'.tr(),
+                  style: TextStyles.font17CustomGray400WightLato.copyWith(
+                    fontSize: 14.sp
+                  ),
+                  textAlign: TextAlign.center,
+                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                ),
               ),
               verticalSpace(33),
               CustomMaterialButtonWidget(text: 'sign_in'.tr(),

@@ -42,7 +42,7 @@ class CustomCanceledWidget extends StatelessWidget {
                                       bookingResponse.id, bookingResponse.name,
                                       bookingResponse.region, bookingResponse.description,
                                       bookingResponse.duration, bookingResponse.startDate,
-                                      bookingResponse.price, bookingResponse.groupSize,
+                                      bookingResponse.price!.toDouble(), bookingResponse.groupSize,
                                       bookingResponse.groupType,
                                       bookingResponse.tourRoute!.map((e) =>
                                           TourRouteResponse(e.key!,
@@ -51,8 +51,10 @@ class CustomCanceledWidget extends StatelessWidget {
                                       bookingResponse.departure, bookingResponse.departureTime,
                                       bookingResponse.returnTime, bookingResponse.priceIncludes,
                                       bookingResponse.isFav, bookingResponse.discountAmount,
-                                      bookingResponse.newPrice, bookingResponse.discountPercentage,
-                                      bookingResponse.mainImage, bookingResponse.images!.map((e) => ImagesResponse(e.isVideo, e.size, e.image)).toList()),
+                                      bookingResponse.newPrice!.toDouble(), bookingResponse.discountPercentage,
+                                      bookingResponse.mainImage, bookingResponse.images!.map((e) => ImagesResponse(e.isVideo, e.size, e.image)).toList(),false,
+                                      bookingResponse.endDate
+                                  ),
                                   type: 'Canceled',), context);
                             },),
                       );

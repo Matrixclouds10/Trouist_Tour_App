@@ -159,7 +159,8 @@ abstract class ApiService {
  @POST(ApiConstants.bookProgram)
   Future<ApiResponse> bookingPrograms(
       @Header('Authorization') String token,
-      @Body()BookingRequest bookingRequest
+     @Header('Accept-Language') String acceptLanguage,
+     @Body()BookingRequest bookingRequest
       );
 
  @POST(ApiConstants.cancelProgram)

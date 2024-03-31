@@ -824,11 +824,15 @@ class _ApiService implements ApiService {
   @override
   Future<ApiResponse<dynamic>> bookingPrograms(
     String token,
+    String acceptLanguage,
     BookingRequest bookingRequest,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Authorization': token,
+      r'Accept-Language': acceptLanguage,
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(bookingRequest.toJson());

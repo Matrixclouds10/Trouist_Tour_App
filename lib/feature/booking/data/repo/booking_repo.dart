@@ -72,9 +72,9 @@ class BookingRepo{
     }
 
   }
-  Future<ApiResponse?> bookingPrograms(String? token, BookingRequest bookingRequest, context) async {
+  Future<ApiResponse?> bookingPrograms(String? token, BookingRequest bookingRequest, String? language,context) async {
     try {
-      final response = await _apiService.bookingPrograms(token!, bookingRequest);
+      final response = await _apiService.bookingPrograms(token!,language!, bookingRequest,);
       return response;
     } on DioError catch (e) {
       if (e.response != null && e.response!.statusCode != 200) {

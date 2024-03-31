@@ -53,7 +53,7 @@ class RateScreen extends StatelessWidget {
                 verticalSpace(8),
                 Text('feedback_des'.tr(),
                   textScaleFactor: ScaleSize.textScaleFactor(context),
-                  maxLines: 3,
+                  maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyles.font17Black400WightLato.copyWith(
                       color: AppColorLight.customBlack

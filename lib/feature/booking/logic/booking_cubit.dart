@@ -88,7 +88,7 @@ class BookingCubit extends Cubit<BookingState> {
 
   void bookingPrograms(BookingRequest bookingRequest,BuildContext context) async {
     emit(BookingLoadingState());
-    final response = await _bookingRepo.bookingPrograms('Bearer ${HomeCubit.get(context).token}',bookingRequest,context);
+    final response = await _bookingRepo.bookingPrograms('Bearer ${HomeCubit.get(context).token}',bookingRequest,context.locale.languageCode,context);
       Future.delayed(const Duration(microseconds: 0)).then((value) {
         getBookingPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
         emit(BookingSuccessState());

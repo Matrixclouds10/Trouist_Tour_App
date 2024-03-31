@@ -39,54 +39,58 @@ class CustomPlacesBodyWidget extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 16.0),
                           child:
                           Container(
-                            height: 317.h,
                             width: 343.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.grey.shade200,
                                 boxShadow: const [BoxShadow(color: Colors.black,blurRadius: 2)]
                             ),
-                            child:  Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Stack(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.only(topRight: Radius.circular(10),topLeft:  Radius.circular(10)),
-                                      child: CustomSliderWidget(
-                                        height: 235.h,
-                                        image:cubit.getFavoritePlacesList![index].images!.map((e) => e.image!).toList(),),
-                                    ),
-                                    Positioned(
-                                      top: 10.h,
-                                      right: 10.w,
-                                      child:
-                                      StatefulBuilder(builder: (context,setState){
-                                        return IconButton(onPressed: (){
-                                          setState(() {
-                                            cubit.getFavoritePlacesList![index].isFav= !cubit.getFavoritePlacesList![index].isFav!;
-                                             FavoriteCubit.get(context).addFavoritePlaces(cubit.getFavoritePlacesList![index].id!,HomeCubit.get(context).token!,context.locale.toString(),context);
-                                          });
-                                        }, icon:  Icon(
-                                          cubit.getFavoritePlacesList![index].isFav==false?
-                                          Icons.favorite_border_rounded:Icons.favorite,color:cubit.getFavoritePlacesList![index].isFav==false? Colors.white:Colors.red,));
-                                      }),
-                                    ),
+                            child:  Padding(
+                              padding:  EdgeInsets.only(bottom: 10.h),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: const BorderRadius.only(topRight: Radius.circular(10),topLeft:  Radius.circular(10)),
+                                        child: CustomSliderWidget(
+                                          height: 235.h,
+                                          image:cubit.getFavoritePlacesList![index].images!.map((e) => e.image!).toList(),),
+                                      ),
+                                      Positioned(
+                                        top: 10.h,
+                                        right: 10.w,
+                                        child:
+                                        StatefulBuilder(builder: (context,setState){
+                                          return IconButton(onPressed: (){
+                                            setState(() {
+                                              cubit.getFavoritePlacesList![index].isFav= !cubit.getFavoritePlacesList![index].isFav!;
+                                               FavoriteCubit.get(context).addFavoritePlaces(cubit.getFavoritePlacesList![index].id!,HomeCubit.get(context).token!,context.locale.toString(),context);
+                                            });
+                                          }, icon:  Icon(
+                                            cubit.getFavoritePlacesList![index].isFav==false?
+                                            Icons.favorite_border_rounded:Icons.favorite,color:cubit.getFavoritePlacesList![index].isFav==false? Colors.white:Colors.red,));
+                                        }),
+                                      ),
 
-                                  ],
-                                ),
-                                verticalSpace(0),
-                                Padding(
-                                  padding:  EdgeInsets.only(left: 16.w,right: 16.w),
-                                  child: Text(cubit.getFavoritePlacesList![index].region!,
-                                    style: TextStyles.font14CustomBlack500w.copyWith(
-                                        fontFamily: AppFontsFamily.fontPoppins
+                                    ],
+                                  ),
+                                  verticalSpace(0),
+                                  Center(
+                                    child: Padding(
+                                      padding:  EdgeInsets.only(left: 16.w,right: 16.w),
+                                      child: Text(cubit.getFavoritePlacesList![index].title!,
+                                        style: TextStyles.font14CustomBlack500w.copyWith(
+                                            fontFamily: AppFontsFamily.fontPoppins
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                verticalSpace(0),
+                                  verticalSpace(0),
 
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),

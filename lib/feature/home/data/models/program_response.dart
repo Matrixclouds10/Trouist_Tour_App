@@ -17,7 +17,7 @@ class ProgramResponse{
   @JsonKey(name: 'start_date')
   String? startDate;
   @JsonKey(name: 'price')
-  int? price;
+  double? price;
   @JsonKey(name: 'group_size')
   int? groupSize;
   @JsonKey(name: 'group_type')
@@ -41,10 +41,13 @@ class ProgramResponse{
   @JsonKey(name: 'is_favourite')
   bool? isFav;
   @JsonKey(name: 'new_price')
-  int? newPrice;
+  double? newPrice;
   @JsonKey(name: 'images')
   List<ImagesResponse>? images;
-
+  @JsonKey(name: 'is_booked')
+  bool? isBooked;
+  @JsonKey(name: 'end_date')
+  String? endDate;
 
   ProgramResponse(
       this.id,
@@ -66,7 +69,10 @@ class ProgramResponse{
       this.newPrice,
       this.discountPercentage,
       this.mainImage,
-      this.images); // ProgramResponse(
+      this.images,
+      this.isBooked,
+      this.endDate,
+      ); // ProgramResponse(
 
   factory ProgramResponse.fromJson(Map<String, dynamic> json) =>
       _$ProgramResponseFromJson(json);

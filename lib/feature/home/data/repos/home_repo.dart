@@ -27,9 +27,10 @@ class HomeRepo{
 
     try {
       final response = await _apiService.getPrograms('Bearer $token',language);
+      log('getPrograms test repo ', response.toString());
       return response;
     } catch (error) {
-      debugPrint('error repo');
+      log('error repo repo ', error.toString());
       return null;
     }
   }
@@ -53,7 +54,9 @@ class HomeRepo{
   }
   Future<ApiResponse<SearchResponse>?> search(String text,String token ,String language)async{
     try {
-      final response = await _apiService.searchPlaces(text,token,language);
+
+
+      final response = await _apiService.searchPlaces(text,'Bearer $token',language);
       return response;
     } catch (error) {
       debugPrint('error repo');

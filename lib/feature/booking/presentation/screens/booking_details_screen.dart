@@ -25,7 +25,7 @@ class BookingDetailsScreen extends StatelessWidget {
         bookingResponse.id, bookingResponse.name,
         bookingResponse.region, bookingResponse.description,
         bookingResponse.duration, bookingResponse.startDate,
-        bookingResponse.price, bookingResponse.groupSize,
+        bookingResponse.price!.toDouble(), bookingResponse.groupSize,
         bookingResponse.groupType,
         bookingResponse.tourRoute!.map((e) =>
             TourRouteResponse(e.key!,
@@ -34,8 +34,10 @@ class BookingDetailsScreen extends StatelessWidget {
         bookingResponse.departure, bookingResponse.departureTime,
         bookingResponse.returnTime, bookingResponse.priceIncludes,
         bookingResponse.isFav, bookingResponse.discountAmount,
-        bookingResponse.newPrice, bookingResponse.discountPercentage,
-        bookingResponse.mainImage, bookingResponse.images!.map((e) => ImagesResponse(e.isVideo, e.size, e.image)).toList());
+        bookingResponse.newPrice!=null?bookingResponse.newPrice!.toDouble():0, bookingResponse.discountPercentage,
+        bookingResponse.mainImage, bookingResponse.images!.map((e) => ImagesResponse(e.isVideo, e.size, e.image)).toList(), true,
+        bookingResponse.endDate
+      );
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -48,7 +50,7 @@ class BookingDetailsScreen extends StatelessWidget {
                CustomReligiousProgramWidget(
                  programResponse: program,
                  isHasDes: true,type: type,),
-              verticalSpace(24),
+                 verticalSpace(24),
                CustomTripDetailsWidget(
                 programResponse:program
               ),
