@@ -26,6 +26,8 @@ class ProgramResponse{
   List<TourRouteResponse>? tourRoute;
   @JsonKey(name: 'departure')
   String? departure;
+  @JsonKey(name: 'overview')
+  String? overview;
   @JsonKey(name: 'departure_time')
   String? departureTime;
   @JsonKey(name: 'return_time')
@@ -72,6 +74,7 @@ class ProgramResponse{
       this.images,
       this.isBooked,
       this.endDate,
+      this.overview,
       ); // ProgramResponse(
 
   factory ProgramResponse.fromJson(Map<String, dynamic> json) =>

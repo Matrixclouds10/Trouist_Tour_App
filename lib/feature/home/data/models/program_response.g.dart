@@ -36,6 +36,7 @@ ProgramResponse _$ProgramResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
       json['is_booked'] as bool?,
       json['end_date'] as String?,
+      json['overview'] as String?,
     );
 
 Map<String, dynamic> _$ProgramResponseToJson(ProgramResponse instance) =>
@@ -51,6 +52,7 @@ Map<String, dynamic> _$ProgramResponseToJson(ProgramResponse instance) =>
       'group_type': instance.groupType,
       'tour_route': instance.tourRoute,
       'departure': instance.departure,
+      'overview': instance.overview,
       'departure_time': instance.departureTime,
       'return_time': instance.returnTime,
       'price_includes': instance.priceIncludes,

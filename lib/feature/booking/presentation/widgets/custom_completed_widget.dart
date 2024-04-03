@@ -49,7 +49,7 @@ class CustomCompleteWidget extends StatelessWidget {
                                 bookingResponse.returnTime, bookingResponse.priceIncludes,
                                 bookingResponse.isFav, bookingResponse.discountAmount,
                                 bookingResponse.newPrice!=null?bookingResponse.newPrice!.toDouble():0, bookingResponse.discountPercentage,
-                                bookingResponse.mainImage, bookingResponse.images!.map((e) => ImagesResponse(e.isVideo, e.size, e.image)).toList(),false,bookingResponse.endDate),
+                                bookingResponse.mainImage, bookingResponse.images!.map((e) => ImagesResponse(e.isVideo, e.size, e.image)).toList(),false,bookingResponse.endDate,bookingResponse.description),
                             type: 'Completed',), context);
                     },
                       programResponse: cubit.getCompletedProgramsList![index],),

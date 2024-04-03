@@ -36,7 +36,8 @@ class BookingDetailsScreen extends StatelessWidget {
         bookingResponse.isFav, bookingResponse.discountAmount,
         bookingResponse.newPrice!=null?bookingResponse.newPrice!.toDouble():0, bookingResponse.discountPercentage,
         bookingResponse.mainImage, bookingResponse.images!.map((e) => ImagesResponse(e.isVideo, e.size, e.image)).toList(), true,
-        bookingResponse.endDate
+        bookingResponse.endDate,
+        bookingResponse.description,
       );
     return Scaffold(
       body: SingleChildScrollView(

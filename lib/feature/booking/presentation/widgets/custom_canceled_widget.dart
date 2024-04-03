@@ -53,7 +53,7 @@ class CustomCanceledWidget extends StatelessWidget {
                                       bookingResponse.isFav, bookingResponse.discountAmount,
                                       bookingResponse.newPrice!.toDouble(), bookingResponse.discountPercentage,
                                       bookingResponse.mainImage, bookingResponse.images!.map((e) => ImagesResponse(e.isVideo, e.size, e.image)).toList(),false,
-                                      bookingResponse.endDate
+                                      bookingResponse.endDate, bookingResponse.description
                                   ),
                                   type: 'Canceled',), context);
                             },),
