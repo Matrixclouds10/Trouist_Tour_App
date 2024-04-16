@@ -20,7 +20,7 @@ class FavoriteCubit extends BaseCubit {
   void addFavoriteProgram(int id,String token ,String language,BuildContext context) async {
     emit(LoadingStateListener());
     try{
-      final response = await _favoriteRepo.addFavoriteProgram(id,'Bearer $token');
+      final response = await _favoriteRepo.addFavoriteProgram(id,'Bearer $token',context);
       Future.delayed(const Duration(microseconds: 0)).then((value) {
         showToast('${response.message}', ToastStates.success, context);
         getFavoriteProgram(token, language,context,);
@@ -55,7 +55,7 @@ class FavoriteCubit extends BaseCubit {
   void addFavoritePlaces(int id,String token ,String language,BuildContext context) async {
     emit(LoadingStateListener());
     try{
-      final response = await _favoriteRepo.addFavoritePlaces(id,'Bearer $token');
+      final response = await _favoriteRepo.addFavoritePlaces(id,'Bearer $token',context);
       if(response.status==true){
 
       }else{

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tourist_tour_app/core/networking/api_error_handler.dart';
 import 'package:tourist_tour_app/core/networking/api_response.dart';
@@ -63,9 +64,9 @@ class HomeRepo{
       return null;
     }
   }
-  Future<ApiResult<ApiResponse<List<NotificationResponse>>>?> getNotification(String token )async{
+  Future<ApiResult<ApiResponse<List<NotificationResponse>>>?> getNotification(String token,BuildContext context )async{
     try {
-      final response = await _apiService.getNotification('Bearer $token');
+      final response = await _apiService.getNotification(context.locale.languageCode.toString(),'Bearer $token');
       log('Notification Response : ',"$response");
       return ApiResult.success(response);
     } catch (error) {

@@ -24,41 +24,41 @@ class CustomTopBodyHomeWidget extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              width: 342.w,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(Icons.location_on_outlined,
-                    color: Theme
-                        .of(context)
-                        .primaryColor,),
-                  horizontalSpace(4),
-                  Expanded(
-                    child: Text(cubit.location,
-                      style: TextStyles.font17Black400WightLato.copyWith(
-                          fontFamily: AppFontsFamily.fontPoppins,
-                          fontSize: 12
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  horizontalSpace(5),
-                  // InkWell(
-                  //   onTap: () {
-                  //     cubit.getNotificationCubit(context);
-                  //     NavigatePages.pushToPage(const NotificationScreen(), context);
-                  //
-                  //   },
-                  //   child: const Icon(Icons.notifications_none,
-                  //     color: AppColorLight.gray2,
-                  //   ),
-                  // )
-                ],
-              ),
-            ),
+            // SizedBox(
+            //   width: 342.w,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+            //       Icon(Icons.location_on_outlined,
+            //         color: Theme
+            //             .of(context)
+            //             .primaryColor,),
+            //       horizontalSpace(4),
+            //       Expanded(
+            //         child: Text(cubit.location,
+            //           style: TextStyles.font17Black400WightLato.copyWith(
+            //               fontFamily: AppFontsFamily.fontPoppins,
+            //               fontSize: 12
+            //           ),
+            //           maxLines: 1,
+            //           overflow: TextOverflow.ellipsis,
+            //         ),
+            //       ),
+            //       horizontalSpace(5),
+            //       // InkWell(
+            //       //   onTap: () {
+            //       //     cubit.getNotificationCubit(context);
+            //       //     NavigatePages.pushToPage(const NotificationScreen(), context);
+            //       //
+            //       //   },
+            //       //   child: const Icon(Icons.notifications_none,
+            //       //     color: AppColorLight.gray2,
+            //       //   ),
+            //       // )
+            //     ],
+            //   ),
+            // ),
             // verticalSpace(16),
             // Text("begin_home".tr(),
             //   style: TextStyles.font24CustomBlack700WeightPoppins,

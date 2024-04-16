@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tourist_tour_app/core/networking/api_constants.dart';
@@ -60,11 +62,15 @@ abstract class ApiService {
       @Header('Authorization') String token
       );
 
-  @POST(ApiConstants.updateProfile)
-  Future<ApiResponse> updateProfile(
-      @Header('Authorization') String token,
-      @Body() UpdateProfileRequest updateProfileRequest,
-      );
+  // @POST(ApiConstants.updateProfile)
+  // Future<ApiResponse> updateProfile(
+  //     @Header('Authorization') String token,
+  //     @Part('full_name') String name,
+  //     @Part('phone') String phone,
+  //     @Path('email') String email,
+  //     @Path('country_id') int countryId,
+  //     @Path('image') File image,
+  //     );
   @POST(ApiConstants.deleteProfile)
   Future<ApiResponse> deleteProfile(
       @Header('Authorization') String token,
@@ -101,12 +107,14 @@ abstract class ApiService {
 //Notification
   @GET(ApiConstants.notification)
   Future<ApiResponse<List<NotificationResponse>>> getNotification(
+      @Header('Accept-Language') String acceptLanguage,
       @Header('Authorization') String token,
       );
 //History
   @GET(ApiConstants.history)
   Future<ApiResponse<List<HistoryResponse>>> getHistory(
-      @Header('Authorization') String token,
+  @Header('Accept-Language') String acceptLanguage,
+  @Header('Authorization') String token,
       );
   //Payment
   @POST(ApiConstants.payment)
@@ -121,9 +129,10 @@ abstract class ApiService {
       @Header('Accept-Language') String acceptLanguage
       );
 
-  @GET("https://dev05.matrix-clouds.com/Tourist_Tour/public/api/add_remove_wishlist/{id}") // Assuming 'id' is the dynamic part of the URL
+  @GET("${ApiConstants.apiBaseUrl}add_remove_wishlist/{id}") // Assuming 'id' is the dynamic part of the URL
   Future<ApiResponse> addFavoriteProgram(
       @Path('id') int id, // Use @Path to specify the dynamic part of the URL
+      @Header('Accept-Language') String acceptLanguage,
       @Header('Authorization') String token,
       );
   @GET(ApiConstants.getFavoritePlaces)
@@ -132,9 +141,10 @@ abstract class ApiService {
       @Header('Accept-Language') String acceptLanguage
       );
 
-  @GET("https://dev05.matrix-clouds.com/Tourist_Tour/public/api/add_remove_favorite_places/{id}") // Assuming 'id' is the dynamic part of the URL
+  @GET("${ApiConstants.apiBaseUrl}add_remove_favorite_places/{id}") // Assuming 'id' is the dynamic part of the URL
   Future<ApiResponse> addFavoritePlaces(
       @Path('id') int id, // Use @Path to specify the dynamic part of the URL
+      @Header('Accept-Language') String acceptLanguage,
       @Header('Authorization') String token,
       );
 
@@ -209,11 +219,13 @@ abstract class ApiService {
   //Make Program
   @GET(ApiConstants.places)
   Future<ApiResponse<GetPlacesResponse>> places(
+      @Header('Accept-Language') String acceptLanguage,
       @Header('Authorization') String token,
       );
   @POST(ApiConstants.makeProgram)
   Future<ApiResponse> makeProgram(
-      @Header('Authorization') String token,
+       @Header('Accept-Language') String acceptLanguage,
+       @Header('Authorization') String token,
       @Body() MakeProgramRequest makeProgramRequest
       );
 }

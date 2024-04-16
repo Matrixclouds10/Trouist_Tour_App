@@ -78,17 +78,18 @@ class CustomNotificationItem extends StatelessWidget {
                     ),
                   ),
                   //"الفرق في الوقت: $days أيام, $hours ساعات, $minutes دقائق, $seconds ثواني"
-                  Text(
-                    '${days!=0?'$days${'day'.tr()} , ':''}${hours!=0?'$hours${'hours'.tr()} ':''}:${minutes!=0?'$minutes${'minutes'.tr()} ':''}:${seconds!=0?'$seconds${'seconds'.tr()} ':''} ${'ago'.tr()}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyles.font12CustomGray400WeightLato.copyWith(
-                      fontFamily: AppFontsFamily.fontPoppins,
-                        fontWeight: FontWeight.w500,
-                        color: AppColorLight.customGray.withOpacity(0.8),
-                        fontSize: 10.sp
-                    ),
-                  ),
+                  // Text(
+                  //   '${days!=0?'$days${'day'.tr()} , ':''}${hours!=0?'$hours${'hours'.tr()} ':''}:${minutes!=0?'$minutes${'minutes'.tr()} ':''}:${seconds!=0?'$seconds${'seconds'.tr()} ':''} ${'ago'.tr()}',
+                  //   maxLines: 1,
+                  //   overflow: TextOverflow.ellipsis,
+                  //   style: TextStyles.font12CustomGray400WeightLato.copyWith(
+                  //     fontFamily: AppFontsFamily.fontPoppins,
+                  //       fontWeight: FontWeight.w500,
+                  //       color: AppColorLight.customGray.withOpacity(0.8),
+                  //       fontSize: 10.sp
+                  //   ),
+                  // ),
+
                 ],
               )
             ],

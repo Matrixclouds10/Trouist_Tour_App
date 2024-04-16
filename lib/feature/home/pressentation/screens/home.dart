@@ -33,7 +33,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
 
     HomeCubit cubit =HomeCubit.get(context);
-    cubit.getLoc();
+    // cubit.getLoc();
     // cubit.initHome(context: context);
     return PopScope(
       canPop: false,

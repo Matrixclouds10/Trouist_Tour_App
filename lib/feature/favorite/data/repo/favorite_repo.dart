@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:tourist_tour_app/core/networking/api_response.dart';
 import 'package:tourist_tour_app/core/networking/api_service.dart';
 import 'package:tourist_tour_app/core/services/logger.dart';
@@ -7,9 +9,9 @@ import 'package:tourist_tour_app/feature/home/data/models/tourist_places_respons
 class FavoriteRepo {
   final ApiService _apiService;
   FavoriteRepo(this._apiService);
-  Future<ApiResponse> addFavoriteProgram(int? id, String? token)async{
+  Future<ApiResponse> addFavoriteProgram(int? id, String? token,BuildContext context)async{
     try {
-      final response = await _apiService.addFavoriteProgram(id!, token!);
+      final response = await _apiService.addFavoriteProgram(id!, context.locale.languageCode.toString(),token!);
       return response;
     } catch (error) {
       print('error repo');
@@ -25,9 +27,9 @@ class FavoriteRepo {
       throw error.toString();
     }
   }
-  Future<ApiResponse> addFavoritePlaces(int? id, String? token)async{
+  Future<ApiResponse> addFavoritePlaces(int? id, String? token,BuildContext context)async{
     try {
-      final response = await _apiService.addFavoritePlaces(id!, token!);
+      final response = await _apiService.addFavoritePlaces(id!,context.locale.languageCode.toString() ,token!);
       return response;
     } catch (error) {
       print('error repo');

@@ -22,7 +22,7 @@ class LogAs extends StatefulWidget {
 class _LogAsState extends State<LogAs> {
   @override
   void initState() {
-    getPermission();
+    // getPermission();
     super.initState();
   }
   @override

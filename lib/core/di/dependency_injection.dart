@@ -24,8 +24,7 @@ Future<void> setupGetIt() async {
   // Dio & ApiService
   Dio dio = DioFactory.getDio();
   dio.interceptors.add(ApiResponseInterceptor()); // Add interceptor to Dio instance
-
-  getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
+  getIt.registerLazySingleton<ApiService>(() => ApiService(dio,));
 
   // login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));

@@ -24,7 +24,7 @@ class MakeProgramCubit extends Cubit<MakeProgramState> {
    int familyCounter=0;
    int friendsCounter=0;
    Future getPlaces(BuildContext context) async {
-     final response = await _makeProgramRepo.places('Bearer ${HomeCubit.get(context).token!}');
+     final response = await _makeProgramRepo.places('Bearer ${HomeCubit.get(context).token!}',context);
      getPlacesResponse=response!.data;
      emit(GetPlacesStateSuccess());
    }

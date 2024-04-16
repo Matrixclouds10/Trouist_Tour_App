@@ -51,7 +51,7 @@ class HomeCubit extends Cubit<HomeState> {
       HomeCubit.get(context).getTouristPlaces('123',context.locale.toString());
     });
     Future.delayed(const Duration(microseconds: 0)).then((value) {
-      getLoc();
+      // getLoc();
       MakeProgramCubit.get(context).getPlaces(context);
       HomeCubit.get(context).getSliderCubit(context);
       HomeCubit.get(context).getOffers(context.locale.toString());
@@ -62,7 +62,7 @@ class HomeCubit extends Cubit<HomeState> {
   String location='';
   String? address;
   String? city;
-  void getLoc()async{
+  void getLoc5()async{
     Position p ;
     p=await Geolocator.getCurrentPosition().then((value) => value);
     List<Placemark> place= await placemarkFromCoordinates(p.latitude,p.longitude);
@@ -73,7 +73,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
   int? currentIndex=0;
   void initHome({String? check, required BuildContext context}){
-    getLoc();
+    // getLoc();
     MakeProgramCubit.get(context).getPlaces(context);
     HomeCubit.get(context).getToken(context);
     HomeCubit.get(context).getSliderCubit(context);
@@ -151,7 +151,7 @@ class HomeCubit extends Cubit<HomeState> {
   void getNotificationCubit(BuildContext context) async {
     notificationResponse=null;
     emit(NotificationLoadingState());
-    final response = await _homeRepo.getNotification(token!);
+    final response = await _homeRepo.getNotification(token!,context);
       response!.when(success: (notificationResponseData) {
         notificationResponse=notificationResponseData.data;
         emit(NotificationSuccessState());

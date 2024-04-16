@@ -6,6 +6,7 @@ import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.
 import 'package:tourist_tour_app/core/global/toast_states/enums.dart';
 import 'package:tourist_tour_app/core/resources/bloc/base_cubit.dart';
 import 'package:tourist_tour_app/core/resources/data_state.dart';
+import 'package:tourist_tour_app/core/services/logger.dart';
 import 'package:tourist_tour_app/core/services/routeing_page/routing.dart';
 import 'package:tourist_tour_app/core/shared_preference/shared_preference.dart';
 import 'package:tourist_tour_app/feature/auth/log_as.dart';
@@ -147,7 +148,7 @@ class MoreCubit extends BaseCubit {
   void getHistoryCubit(BuildContext context) async {
     historyResponseList=null;
     emit(LoadingStateListener());
-    final response = await _moreRepo.getHistory(HomeCubit.get(context).token!);
+    final response = await _moreRepo.getHistory(HomeCubit.get(context).token!,context);
     response!.when(success: (notificationResponseData) {
       historyResponseList=notificationResponseData.data;
       emit(SuccessStateListener(''));
@@ -169,7 +170,8 @@ class MoreCubit extends BaseCubit {
     );
     emit(LoadingStateListener());
     try{
-       await _moreRepo.updateProfile('Bearer $token',updateProfileRequest,context);
+
+      await _moreRepo.updateProfile(updateProfileRequest,'Bearer $token',context);
        Future.delayed(const Duration(microseconds: 0)).then((value) {
          getProfile(token,context);
          // showToast('Update Successfully', ToastStates.success, context);

@@ -170,7 +170,7 @@ class BookingCubit extends Cubit<BookingState> {
     try {
       MoreCubit cubit =MoreCubit.get(context);
       HomeCubit cubitHomeCubit =HomeCubit.get(context);
-      cubitHomeCubit.getLoc();
+      // cubitHomeCubit.getLoc();
       ProfileResponse? profile =await cubit.getProfile(HomeCubit.get(context).token!, context);
       print('profile is id  ${profile!.id}');
       print('profile is ${profile.email}');
@@ -189,8 +189,8 @@ class BookingCubit extends Cubit<BookingState> {
         udf4: "",
         udf5: "",
         cardToken: "",
-        address:(cubitHomeCubit.address!=null) ?cubitHomeCubit.address! : "no address",
-        city:(cubitHomeCubit.city!=null) ?cubitHomeCubit.city! : "no city",
+        address:"Riyadh",
+        city:"Qassim",
         state: "Pending",
         tokenizationType: "1",
         zipCode: "",
