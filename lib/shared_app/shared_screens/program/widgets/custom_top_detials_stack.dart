@@ -71,7 +71,8 @@ class CustomTopDetailsStackWidget extends StatelessWidget {
                   color: AppColorLight.customBlack,
                   borderRadius: BorderRadius.only(topRight: Radius.circular(8),bottomRight: Radius.circular(8))
               ),
-              child: Center(
+              child:
+              Center(
                 child: Padding(
                   padding:  EdgeInsets.symmetric(horizontal: 16.w,vertical: 12.h),
                   child: Text(

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
@@ -10,6 +11,7 @@ import 'package:tourist_tour_app/core/helpers/extensions.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/core/routing/routes.dart';
+import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
 class LogAs extends StatefulWidget {
@@ -88,6 +90,9 @@ class _LogAsState extends State<LogAs> {
                 borderColor: const Color(0xff009688),
                 text: 'sign_up'.tr(),
                 onPressed: () {
+                  var cubit =context.read<SignupCubit>();
+                  cubit.getCountryCode(context.locale.languageCode.toString());
+                  cubit.getTerms(context.locale.languageCode.toString());
                   context.pushNamed(Routes.signUpScreen);
                 },),
               verticalSpace(16),

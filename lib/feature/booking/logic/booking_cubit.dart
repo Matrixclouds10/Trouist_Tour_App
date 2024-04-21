@@ -86,34 +86,46 @@ class BookingCubit extends Cubit<BookingState> {
     }
   }
 
-  void bookingPrograms(BookingRequest bookingRequest,BuildContext context) async {
+  void bookingPrograms(BookingRequest bookingRequest,BuildContext context,String type) async {
     emit(BookingLoadingState());
-    final response = await _bookingRepo.bookingPrograms('Bearer ${HomeCubit.get(context).token}',bookingRequest,context.locale.languageCode,context);
-      Future.delayed(const Duration(microseconds: 0)).then((value) {
-        getBookingPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
-        emit(BookingSuccessState());
-        showToast('${response!.message}', ToastStates.success, context);
-        showCustomDialog2(
-            title:'success'.tr(),
-            des:response.message,
-            bt1: AppImages.dialog,bt2:  'ok'.tr(),
-            onPressed1: (){
-              NavigatePages.pushReplacePage(const RootPages(check: '3',), context);
-            },
-            context: context);
-      noteControllerBooking.text='';
-    emit(BookingErrorState());
-  });}
+    try{
+      final response = await _bookingRepo.bookingPrograms('Bearer ${HomeCubit.get(context).token}',bookingRequest,context.locale.languageCode,context);
+      response.when(success: (bookingResponse) {
+        if(type=='Cash'){
+          Future.delayed(const Duration(microseconds: 0)).then((value) {
+            HomeCubit.get(context).getPrograms(HomeCubit.get(context).token!, context.locale.toString());
+            getBookingPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
+            emit(BookingSuccessState());
+            showToast('${bookingResponse.message}', ToastStates.success, context);
+            showCustomDialog2(
+                title:'success'.tr(),
+                des:bookingResponse.message,
+                bt1: AppImages.dialog,bt2:  'ok'.tr(),
+                onPressed1: (){
+                  NavigatePages.pushReplacePage(const RootPages(check: '3',), context);
+                },
+                context: context);
+            noteControllerBooking.text='';
+            emit(BookingSuccessState());
+          });
+        }
+        else{
+          makePayment(id: bookingRequest.id.toString(), amount: bookingRequest.total!.toString(), context: context);
+        }
+      }, failure: (error) {
+        emit(BookingErrorState());
+      });
+    }on DioError catch (e) {
+      emit(BookingErrorState());
+    }
+  }
   void cancelingProgram(CanceledRequest canceledRequest,BuildContext context) async {
     try{
       final response = await _bookingRepo.cancelingProgram('Bearer ${HomeCubit.get(context).token}',canceledRequest,context);
       Future.delayed(const Duration(microseconds: 0)).then((value) {
-        getBookingPrograms(HomeCubit
-            .get(context)
-            .token!, context, context.locale.toString());
-        getCanceledPrograms(HomeCubit
-            .get(context)
-            .token!, context, context.locale.toString());
+        HomeCubit.get(context).getPrograms(HomeCubit.get(context).token!, context.locale.toString());
+        getBookingPrograms(HomeCubit.get(context).token!, context, context.locale.toString());
+        getCanceledPrograms(HomeCubit.get(context).token!, context, context.locale.toString());
         showToast('${response!.message}', ToastStates.success, context);
         Navigator.of(context).pop();
         noteControllerCanceled.text = '';
@@ -131,6 +143,7 @@ class BookingCubit extends Cubit<BookingState> {
     try{
       final response = await _bookingRepo.finishedProgram('Bearer ${HomeCubit.get(context).token}',canceledRequest,context);
       Future.delayed(const Duration(microseconds: 0)).then((value) {
+        HomeCubit.get(context).getPrograms(HomeCubit.get(context).token!, context.locale.toString());
         getBookingPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
         getCompletedPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
         showToast('${response!.message}', ToastStates.success, context);
@@ -206,17 +219,16 @@ class BookingCubit extends Cubit<BookingState> {
 
    }
 
-   Future paymentCubit(PaymentRequest paymentRequest,context) async {
-    emit(BookingLoadingState());
+   Future paymentCubit(PaymentRequest paymentRequest,BuildContext  context) async {
+    emit(PaymentLoadingState());
     final response = await _bookingRepo.payment(HomeCubit.get(context).token!,paymentRequest);
     response.when(success: (paymentResponse) {
-      BookingRequest bookingRequest =BookingRequest(
-        id: int.parse(paymentRequest.tourId!),
-        notes: noteControllerBooking.text.isNotEmpty? noteControllerBooking.text:"note",
-        payment:'Credit Card', total:double.parse(paymentRequest.amount!));
-      bookingPrograms(bookingRequest, context);
+      HomeCubit.get(context).getPrograms(HomeCubit.get(context).token!, context.locale.toString());
+      getBookingPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
+      showToast('${paymentResponse.message}', ToastStates.success, context);
       emit(PaymentSuccessState());
     }, failure: (error) {
+      showToast('$error', ToastStates.error, context);
       emit(PaymentErrorState());
     });
   }
@@ -227,6 +239,8 @@ class BookingCubit extends Cubit<BookingState> {
        final data = await urWayPayment(id: id, amount: amount, context: context);
        UrWayResponse urWayResponse =UrWayResponse.fromJson(jsonDecode(data));
        if(urWayResponse.result=='Failure'){
+         PaymentRequest paymentRequest =PaymentRequest(paymentId: urWayResponse.paymentId!, tourId: urWayResponse.userField1!, userId:urWayResponse.userField3!, amount: urWayResponse.amount!, paymentType: urWayResponse.paymentType, result: urWayResponse.result);
+         paymentCubit(paymentRequest, context);
          showToast('Failure payment', ToastStates.error, context);
        }else{
          PaymentRequest paymentRequest =PaymentRequest(paymentId: urWayResponse.paymentId!, tourId: urWayResponse.userField1!, userId:urWayResponse.userField3!, amount: urWayResponse.amount!, paymentType: urWayResponse.paymentType, result: urWayResponse.result);

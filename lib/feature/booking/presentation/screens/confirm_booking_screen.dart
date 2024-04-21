@@ -264,9 +264,19 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                                   text: 'confirm'.tr(),
                                   onPressed: (){
                                     if(HomeCubit.get(context).token!=null){
+
                                       if(currentMethod==0){
-                                        bookingCubit.makePayment(id: widget.programResponse!.id.toString(),
-                                            amount: '${widget.programResponse!.newPrice!=null?widget.programResponse!.newPrice!:widget.programResponse!.price}', context: context);
+                                        BookingRequest bookingRequest =BookingRequest(
+                                          id: widget.programResponse!.id,
+                                          notes: bookingCubit.noteControllerBooking.text.isNotEmpty?
+                                          bookingCubit.noteControllerBooking.text:"note",
+                                          payment:  'Credit Card', total:  widget.programResponse!.newPrice!=null?
+                                        double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
+
+                                        bookingCubit.bookingPrograms(bookingRequest, context,'Credit Card');
+
+                                        // bookingCubit.makePayment(id: widget.programResponse!.id.toString(),
+                                        //     amount: '${widget.programResponse!.newPrice!=null?widget.programResponse!.newPrice!:widget.programResponse!.price}', context: context);
                                       }
                                       else{
                                         BookingRequest bookingRequest =BookingRequest(
@@ -274,8 +284,9 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                                           notes: bookingCubit.noteControllerBooking.text.isNotEmpty?
                                           bookingCubit.noteControllerBooking.text:"note",
                                           payment:  'Cash', total:  widget.programResponse!.newPrice!=null?
-                                          double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
-                                          bookingCubit.bookingPrograms(bookingRequest, context);
+                                        double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
+
+                                        bookingCubit.bookingPrograms(bookingRequest, context,'Cash');
                                       }
                                       }else{
                                       showCustomDialog2(

@@ -72,21 +72,22 @@ class BookingRepo{
     }
 
   }
-  Future<ApiResponse?> bookingPrograms(String? token, BookingRequest bookingRequest, String? language,context) async {
+  Future<ApiResult<ApiResponse>> bookingPrograms(String? token, BookingRequest bookingRequest, String? language,context) async {
     try {
       final response = await _apiService.bookingPrograms(token!,language!, bookingRequest,);
-      return response;
+      return ApiResult.success(response);
     } on DioError catch (e) {
       if (e.response != null && e.response!.statusCode != 200) {
         showToast(e.response!.data["message"].toString(), ToastStates.error, context);
       } else {
         showToast('Error: ${e.message}', ToastStates.error, context);
       }
+      return ApiResult.failure(ErrorHandler.handle(e));
     } catch (e) {
       showToast('Error: $e', ToastStates.error, context);
+      return ApiResult.failure(ErrorHandler.handle(e));
     }
 
-    return null;
   }
   Future<ApiResponse?> cancelingProgram(String? token,CanceledRequest canceledRequest,context)async{
     try {

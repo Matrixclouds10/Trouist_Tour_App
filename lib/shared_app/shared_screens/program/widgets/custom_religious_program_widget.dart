@@ -57,11 +57,11 @@ class CustomReligiousProgramWidget extends StatelessWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 170.w,
+                  // width: 170.w,
                   child: Text(programResponse!.name!,
                     textScaleFactor: ScaleSize.textScaleFactor(context),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    // maxLines: 1,
+                    // overflow: TextOverflow.ellipsis,
                     style: TextStyles.font17CustomBlack700WeightPoppins,
                   ),
                 ),

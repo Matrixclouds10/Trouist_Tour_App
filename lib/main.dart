@@ -21,6 +21,7 @@ import 'package:tourist_tour_app/feature/onboarding/presentation/bloc/cubit.dart
 import 'package:tourist_tour_app/firebase_options.dart';
 import 'core/bloc_observer/bloc_observer.dart';
 import 'core/shared_preference/shared_preference.dart';
+import 'feature/auth/login/logic/cubit/login_cubit.dart';
 
 void main()async {
 
@@ -71,10 +72,11 @@ class TouristTourApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AppOnBoardingCubit()),
         BlocProvider(create: (context) => HelpCubit()),
+        BlocProvider(create: (context) => SignupCubit(getIt())),
+        BlocProvider(create: (context) => LoginCubit(getIt())),
         BlocProvider(create: (context) => HomeCubit(getIt())),
         BlocProvider(create: (context) => MoreCubit(getIt())),
         BlocProvider(create: (context) => MoreCubit(getIt())),
-        BlocProvider(create: (context) => SignupCubit(getIt())),
         BlocProvider(create: (context) => FavoriteCubit(getIt())),
         BlocProvider(create: (context) => BookingCubit(getIt())),
         BlocProvider(create: (context) => MakeProgramCubit(getIt())),

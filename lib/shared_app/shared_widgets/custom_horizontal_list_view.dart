@@ -51,12 +51,12 @@ class CustomHorizontalListView extends StatelessWidget {
                           SizedBox(
                               height: 25.h,
                               width: 80.w,
-                              child: Text(cubit.programResponseModel![index].name!,
-                                textScaleFactor: ScaleSize.textScaleFactor(context),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyles.font17Black400WightLato.copyWith(color: AppColorLight.customBlack),
-                                textAlign: TextAlign.center,
+                              child: FittedBox(
+                                child: Text(cubit.programResponseModel![index].name!,
+                                  textScaleFactor: ScaleSize.textScaleFactor(context),
+                                  style: TextStyles.font17Black400WightLato.copyWith(color: AppColorLight.customBlack),
+                                  textAlign: TextAlign.center,
+                                ),
                               )),
                         ],
                       ),

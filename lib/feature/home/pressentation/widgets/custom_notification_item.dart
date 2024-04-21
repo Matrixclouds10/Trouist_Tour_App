@@ -45,7 +45,7 @@ class CustomNotificationItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(16),
-            boxShadow: const [BoxShadow(color: Colors.black38,blurRadius: 2,offset: Offset(3, 3))],
+            // boxShadow: const [BoxShadow(color: Colors.black38,blurRadius: 2,offset: Offset(3, 3))],
             border: Border.all(color: AppColorLight.customGray)
         ),
         child: Padding(

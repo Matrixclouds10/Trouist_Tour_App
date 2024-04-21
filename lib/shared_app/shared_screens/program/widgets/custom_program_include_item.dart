@@ -19,8 +19,6 @@ class CustomProgramIncludeItem extends StatelessWidget {
           child: Text('$text',
             textScaleFactor: ScaleSize.textScaleFactor(context),
             style: TextStyles.font17Black400WightLato.copyWith(color: AppColorLight.customBlack),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],

@@ -22,7 +22,7 @@ class FavoriteScreen extends StatelessWidget {
           canPop: false,
           onPopInvoked: (_) async {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (BuildContext context) =>  RootPages(
+                builder: (BuildContext context) =>  const RootPages(
                   check: '0',
                 )));
           },
@@ -66,6 +66,7 @@ class FavoriteScreen extends StatelessWidget {
                         ),
                     ),
                   body:const TabBarView(
+
                     children: [
                       CustomPlacesBodyWidget(),
                       CustomProgramsBodyWidget()
