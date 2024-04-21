@@ -17,6 +17,7 @@ class _CustomBottomSheetBodyWidgetState extends State<CustomBottomSheetBodyWidge
   int currentMethod =0;
  @override
   build(BuildContext context) {
+
    BookingCubit cubit =BookingCubit.get(context);
     return
      Column(
@@ -105,6 +106,8 @@ class _CustomBottomSheetBodyWidgetState extends State<CustomBottomSheetBodyWidge
                  // cubit.changeRadio(value!);
                  setState(() {
                    currentMethod = value!;
+                   cubit.putValueCanceled('other'.tr());
+
                  });
                },
              ),

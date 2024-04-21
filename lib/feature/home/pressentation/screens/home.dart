@@ -26,15 +26,14 @@ import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_horizontal_list_view.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_loading_widget.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_title_row.dart';
-
 class Home extends StatelessWidget {
   const Home({super.key});
   @override
   Widget build(BuildContext context) {
 
     HomeCubit cubit =HomeCubit.get(context);
-    cubit.getLoc();
-    // cubit.initHome(context: context);
+    // cubit.getLoc();
+    //  cubit.initHome(context: context);
     return PopScope(
       canPop: false,
       onPopInvoked: (_)  async{
@@ -55,92 +54,104 @@ class Home extends StatelessWidget {
         }
       },
       child: Scaffold(
-        body: SafeArea(
-          minimum: EdgeInsets.only(top: 30.h),
-          child: BlocConsumer<HomeCubit, HomeState>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              return SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          verticalSpace(20),
-                          Align(
-                            alignment: context.locale==const Locale("en")?Alignment.centerRight:Alignment.centerLeft,
-                            child: Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: 5.w),
-                              child: InkWell(
-                                onTap: () {
-                                  cubit.getNotificationCubit(context);
-                                  NavigatePages.pushToPage(const NotificationScreen(), context);
+        body: RefreshIndicator(
+          onRefresh: ()async{
+            HomeCubit.get(context).getSliderCubit(context);
+            await Future.delayed(const Duration(seconds: 1)).then((value) {
+              cubit.getSliderCubit(context);
+              cubit.getPrograms(cubit.token!,context.locale.toString());
+              cubit.getOffers(context.locale.toString());
+              cubit.getTouristPlaces(cubit.token!,context.locale.toString());
+            });
+          },
+          child: SafeArea(
+            minimum: EdgeInsets.only(top: 30.h),
+            child: BlocConsumer<HomeCubit, HomeState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                return SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            verticalSpace(20),
+                           HomeCubit.get(context).token!=null?
+                           Align(
+                              alignment: context.locale==const Locale("en")?Alignment.centerRight:Alignment.centerLeft,
+                              child: Padding(
+                                padding:  EdgeInsets.symmetric(horizontal: 5.w),
+                                child: InkWell(
+                                  onTap: () {
+                                    cubit.getNotificationCubit(context);
+                                    NavigatePages.pushToPage(const NotificationScreen(), context);
 
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.white,
-                                      boxShadow: const [BoxShadow(color: Colors.black26,blurRadius: 5,
-                                      )]
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(Icons.notifications_none,
-                                      color: AppColorLight.gray2,
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Colors.white,
+                                        boxShadow: const [BoxShadow(color: Colors.black26,blurRadius: 1,
+                                        )]
+                                    ),
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Icon(Icons.notifications_none,
+                                        color: AppColorLight.gray2,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                          Center(child: SvgPicture.asset(AppImages.logoSvg)),
-                          verticalSpace(16),
-                          const CustomTopBodyHomeWidget(),
-                          const CustomSearchHome(),
-                          verticalSpace(25),
-                          CustomTitleRow(title: 'our_programs'.tr(), onTap: (){
-                            NavigatePages.pushToPage(const OurProgramsScreen(), context);},),
-                          verticalSpace(16),
-                           const CustomHorizontalListView(),
-                           verticalSpace(20),
-                           Text("custom_program".tr(),
-                           style: TextStyles.font24CustomBlack700WeightPoppins.copyWith(fontSize: 17),
-                             overflow: TextOverflow.ellipsis,
-                             maxLines: 1,
-                           ),
+                            ): SizedBox(height: 20.h,),
+                            Center(child: SvgPicture.asset(AppImages.logoSvg)),
+                            verticalSpace(16),
+                            const CustomTopBodyHomeWidget(),
+                            const CustomSearchHome(),
+                            verticalSpace(25),
+                            CustomTitleRow(title: 'our_programs'.tr(), onTap: (){
+                              NavigatePages.pushToPage(const OurProgramsScreen(), context);},),
+                            verticalSpace(16),
+                             const CustomHorizontalListView(),
+                             verticalSpace(20),
+                             Text("custom_program".tr(),
+                             style: TextStyles.font24CustomBlack700WeightPoppins.copyWith(fontSize: 17),
+                               overflow: TextOverflow.ellipsis,
+                               maxLines: 1,
+                             ),
+                             verticalSpace(16),
+                             const CustomMakeProgram(),
+                             verticalSpace(15),
+                            cubit.offersResponseModel!=null?
+                                cubit.offersResponseModel!.isNotEmpty?
+                             InkWell(
+                              onTap: (){
+                                NavigatePages.pushToPage(OffersScreen(offersResponseModel: cubit.offersResponseModel,), context);
+                              },
+                              child:
+                              CustomHomeOffer(
+                                offerProgramResponse: cubit.offersResponseModel! ,
+                                height: 190.h,
+                                isCenterPages: true,
+                                image: cubit.offersResponseModel!.map((e) => e.images![0].image!).toList(),),
+                            ) : const SizedBox.shrink():
+                            const SizedBox.shrink(),
+                           verticalSpace(25),
+                            CustomTitleRow(
+                              title: 'tourist_places'.tr(), onTap: () {
+                              NavigatePages.pushToPage(const TouristPlacesScreen(), context);
+                            },),
                            verticalSpace(16),
-                           const CustomMakeProgram(),
-                           verticalSpace(15),
-                          cubit.offersResponseModel!=null?
-                              cubit.offersResponseModel!.isNotEmpty?
-                           InkWell(
-                            onTap: (){
-                              NavigatePages.pushToPage(OffersScreen(offersResponseModel: cubit.offersResponseModel,), context);
-                            },
-                            child:
-                            CustomHomeOffer(
-                              offerProgramResponse: cubit.offersResponseModel! ,
-                              height: 190.h,
-                              isCenterPages: true,
-                              image: cubit.offersResponseModel!.map((e) => e.images![0].image!).toList(),),
-                          ) : const SizedBox.shrink():
-                          const SizedBox.shrink(),
-                         verticalSpace(25),
-                          CustomTitleRow(
-                            title: 'tourist_places'.tr(), onTap: () {
-                            NavigatePages.pushToPage(const TouristPlacesScreen(), context);
-                          },),
-                         verticalSpace(16),
-                         cubit.touristPlacesResponseModel!=null?
-                         const CustomTouristPlaces():
-                          const CustomLoadingWidget(),
-                         verticalSpace(100),
-                        ],
+                           cubit.touristPlacesResponseModel!=null?
+                           const CustomTouristPlaces():
+                            const CustomLoadingWidget(),
+                           verticalSpace(100),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-            },
+                    );
+              },
+            ),
           ),
         ),
       ),

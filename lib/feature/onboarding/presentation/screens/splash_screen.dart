@@ -20,8 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
-    super.dispose();
     timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -44,8 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
         widget = Routes.onBoardingScreen;
       }
       await Future.delayed(const Duration(microseconds: 0)).then((value) {
-        HomeCubit cubit =HomeCubit.get(context);
-
+        // HomeCubit cubit =HomeCubit.get(context);
         // cubit.initHome(context: context);
         context.pushReplacementNamed(widget);
         // NavigatePages.pushReplacePage(const SearchScreen(), context);

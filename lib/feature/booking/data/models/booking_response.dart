@@ -15,7 +15,7 @@ class BookingResponse{
   @JsonKey(name: 'start_date')
   String? startDate;
   @JsonKey(name: 'price')
-  int? price;
+  double? price;
   @JsonKey(name: 'group_size')
   int? groupSize;
   @JsonKey(name: 'group_type')
@@ -36,14 +36,20 @@ class BookingResponse{
   String? discountPercentage;
   @JsonKey(name: 'main_image')
   String? mainImage;
+  @JsonKey(name: 'notes')
+  String? note;
+  @JsonKey(name: 'rate')
+  int? rate;
   @JsonKey(name: 'is_favourite')
   bool? isFav;
   @JsonKey(name: 'new_price')
-  int? newPrice;
+  double? newPrice;
   @JsonKey(name: 'booking_id')
   int? bookingId;
   @JsonKey(name: 'images')
   List<ImagesBookingResponse>? images;
+  @JsonKey(name: 'end_date')
+  String? endDate;
 
 
   BookingResponse(
@@ -55,6 +61,7 @@ class BookingResponse{
       this.startDate,
       this.price,
       this.groupSize,
+      this.rate,
       this.groupType,
       this.tourRoute,
       this.departure,
@@ -63,11 +70,14 @@ class BookingResponse{
       this.priceIncludes,
       this.isFav,
       this.bookingId,
+      this.note,
       this.discountAmount,
       this.newPrice,
       this.discountPercentage,
       this.mainImage,
-      this.images); // ProgramResponse(
+      this.images,
+      this.endDate,
+      ); // ProgramResponse(
 
   factory BookingResponse.fromJson(Map<String, dynamic> json) =>
       _$BookingResponseFromJson(json);

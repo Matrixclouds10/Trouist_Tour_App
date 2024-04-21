@@ -29,7 +29,7 @@ class TouristPlacesScreen extends StatelessWidget {
                      CustomGridViewWidget(
                        isPlaces: true,
                        imageHeight: 170,
-                       titles: cubit.touristPlacesResponseModel!.map((e) => e.region!).toList(),
+                       titles: cubit.touristPlacesResponseModel!.map((e) => e.title!).toList(),
                        images: cubit.touristPlacesResponseModel!.map((e) => e.images![0].image!).toList(),
                        mainAxisSpacing: 10,
                        crossAxisSpacing: 5,

@@ -22,21 +22,15 @@ class AppRouter {
         );
       case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<LoginCubit>(),
-            child: const LoginScreen(),
-          ),
+          builder: (_) => const LoginScreen(),
         );
       case Routes.signUpScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<SignupCubit>(),
-            child: const RegisterScreen(),
-          ),
+          builder: (_) => const RegisterScreen(),
         );
       case Routes.rootScreen:
         return MaterialPageRoute(
-          builder: (_) =>  RootPages(),
+          builder: (_) =>  const RootPages(),
         );
         case Routes.splashScreen:
         return MaterialPageRoute(

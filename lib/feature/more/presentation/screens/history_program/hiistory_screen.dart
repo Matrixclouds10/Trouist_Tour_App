@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,8 +24,8 @@ class HistoryScreen extends StatelessWidget {
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: Size(double.infinity, 62.h),
-            child: const CustomAppBar(
-              title: 'Your Program History', hasBackButton: true,)),
+            child:  CustomAppBar(
+              title: 'program_history2'.tr(), hasBackButton: true,)),
         body: Padding(
           padding: EdgeInsets.only(left: 16.w, right: 16.w),
           child: BlocConsumer<MoreCubit, DataState>(
@@ -42,7 +43,7 @@ class HistoryScreen extends StatelessWidget {
                              child: Image.asset(AppImages.history)),
                        ),
                        verticalSpace(20),
-                       Text('your Program History Will Show Here',
+                       Text('program_history3'.tr(),
                          style: TextStyles.font14CustomWight700wLato.copyWith(
                              color: AppColorLight.customBlack
                          ),),

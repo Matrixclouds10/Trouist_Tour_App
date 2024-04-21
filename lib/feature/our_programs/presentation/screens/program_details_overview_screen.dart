@@ -58,7 +58,7 @@ class _ProgramDetailsOverViewScreenState extends State<ProgramDetailsOverViewScr
                         children: [
                           Padding(
                             padding: EdgeInsets.only(left:16.w,right: 16.w),
-                            child: const CustomDescriptionWidget(text: 'Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum . Lorem ipsum dolor sit amet consectetur. Facilisi nam quam tellus etiam non ut vel at magna. Felis porta fermentum', maxLines: 10,),),
+                            child:  CustomDescriptionWidget(text:  widget.programResponse!.overview!, maxLines: 10,),),
                           CustomTripDetailsWidget(
                           programResponse: widget.programResponse,color:Colors.white),
                           CustomProgramIncludesWidget(programResponse: widget.programResponse,color:Colors.white),

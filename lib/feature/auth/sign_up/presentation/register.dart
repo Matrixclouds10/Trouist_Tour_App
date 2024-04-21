@@ -10,15 +10,16 @@ import 'package:tourist_tour_app/core/helpers/bloc/help_cubit.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:tourist_tour_app/feature/auth/sign_up/presentation/widget/custom_sign_up_body.dart';
+import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
+
+
   @override
   Widget build(BuildContext context) {
     var cubit =context.read<SignupCubit>();
-    cubit.getCountryCode(context.locale.toString());
-    cubit.getTerms(context.locale.toString());
     return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0,),
     child:
       Scaffold(

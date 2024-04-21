@@ -34,7 +34,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 // cubit.changeRadio(value!);
                 setState(() {
                   currentMethod3 = value!;
-                  cubit.typeOfStaying='Resorts';
+                  cubit.typeOfStaying='resorts'.tr();
                   cubit.typeOfStayingPlace=null;
                 });
               },
@@ -46,7 +46,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
             ),
           ],
         ),
-       currentMethod3==1?  CustomDrpDownWidget(hotelsResponseList: widget.getPlacesResponse.resorts!, title: 'Resorts',):const SizedBox.shrink(),
+       currentMethod3==1?  CustomDrpDownWidget(hotelsResponseList: widget.getPlacesResponse.resorts!, title: '${widget.getPlacesResponse.resorts![0].name}',):const SizedBox.shrink(),
 
         Row(
           children: [
@@ -58,7 +58,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 // cubit.changeRadio(value!);
                 setState(() {
                   currentMethod3 = value!;
-                  cubit.typeOfStaying='Hotels';
+                  cubit.typeOfStaying='hotels'.tr();
                   cubit.typeOfStayingPlace=null;
 
                 });
@@ -71,7 +71,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
             ),
           ],
         ),
-        currentMethod3==2?  CustomDrpDownWidget(hotelsResponseList: widget.getPlacesResponse.hotels!, title: 'Hotels'):const SizedBox.shrink(),
+        currentMethod3==2?  CustomDrpDownWidget(hotelsResponseList: widget.getPlacesResponse.hotels!, title:  '${widget.getPlacesResponse.hotels![0].name}'):const SizedBox.shrink(),
 
         Row(
           children: [
@@ -83,10 +83,8 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
                 // cubit.changeRadio(value!);
                 setState(() {
                   currentMethod3 = value!;
-                  cubit.typeOfStaying='A Rural place';
+                  cubit.typeOfStaying='rural_place'.tr();
                   cubit.typeOfStayingPlace=null;
-
-
                 });
               },
             ),
@@ -97,7 +95,7 @@ class _CustomTypeOfStayWidgetState extends State<CustomTypeOfStayWidget> {
             ),
           ],
         ),
-        currentMethod3==3?  CustomDrpDownWidget(hotelsResponseList: widget.getPlacesResponse.inns!, title: 'Inns'):const SizedBox.shrink(),
+        currentMethod3==3?  CustomDrpDownWidget(hotelsResponseList: widget.getPlacesResponse.inns!, title:  '${widget.getPlacesResponse.inns![0].name}'):const SizedBox.shrink(),
 
         Row(
           children: [

@@ -11,8 +11,9 @@ class CustomAppBar extends StatelessWidget {
   final bool? hasBackButton;
   final bool? hasCartButton;
   final Color? backGround;
+  final IconData? icon;
  final void Function()? onTap;
- const CustomAppBar({super.key, required this.title, this.hasBackButton,this.onTap, this.hasCartButton, this.backGround});
+ const CustomAppBar({super.key, required this.title, this.hasBackButton,this.onTap, this.hasCartButton, this.backGround, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class CustomAppBar extends StatelessWidget {
                   onTap: onTap??(){
                     Navigator.pop(context);
                   },
-                  child: const Icon(Icons.arrow_back_ios_rounded,
+                  child:  Icon(icon??Icons.arrow_back_ios_rounded,
                   color: AppColorLight.gray2,
                   )
                   // SvgPicture.asset(IconsManager.backIcon),

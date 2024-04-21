@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 
 class ApiConstants {
-  static const String apiBaseUrl = "https://dev05.matrix-clouds.com/Tourist_Tour/public/api/";
+  // static const String apiBaseUrl = "https://dev05.matrix-clouds.com/Tourist_Tour/public/api/";
+  static const String apiBaseUrl = "https://tourist-t.com/api/";
 
   static const String login = "auth/login";
   static const String signup = "auth/register";
@@ -26,6 +27,7 @@ class ApiConstants {
   static const String notification = "notifacations";
   static const String history = "getProgramsHistory";
   static const String payment = "SavePayment";
+  static const String rating = "rating";
 
   //More
   static const String getAbout = "about-us";

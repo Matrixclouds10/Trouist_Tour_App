@@ -46,17 +46,13 @@ class CustomTripDetailsWidget extends StatelessWidget {
                       width:mq.width*0.18,
                       child: Text('${programResponse!.tourRoute![index].key}',
                                   textScaleFactor: ScaleSize.textScaleFactor(context),
-                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyles.font12CustomGray400WeightLato.copyWith(color: AppColorLight.customBlack),
-                                   maxLines: 3,
                                 ),),
                       const CustomDot(),
                       SizedBox(width: 10.w,),
                       Expanded(
                         child: Text('${programResponse!.tourRoute![index].value}',
                                 textScaleFactor: ScaleSize.textScaleFactor(context),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
                                 style: TextStyles.font17Black400WightLato.copyWith(
                                     color: AppColorLight.customBlack
                                 ),

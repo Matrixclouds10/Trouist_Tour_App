@@ -20,6 +20,7 @@ class CustomBottomSheet extends StatelessWidget {
   final int id;
   @override
   Widget build(BuildContext context) {
+    BookingCubit cubit= BookingCubit.get(context);
     return Container(
       decoration: const BoxDecoration(
           color: Colors.white,
@@ -75,11 +76,11 @@ class CustomBottomSheet extends StatelessWidget {
                     context: context,
                     title:'cancel'.tr(),des: 'sure_cancel'.tr(),bt1:  'yes'.tr(),bt2: 'no'.tr(),
                     onPressed1: (){
-                      CanceledRequest canceledRequest=CanceledRequest(id: id, notes: note);
-                      BookingCubit.get(context).cancelingProgram(canceledRequest,context);
+                      CanceledRequest canceledRequest=CanceledRequest(id: id, notes: '${cubit.valueCanceled} ${cubit.noteControllerCanceled.text}');
+                      cubit.cancelingProgram(canceledRequest,context);
                       Navigator.of(context).pop();
+                      cubit.valueCanceled='button_sheet_body1'.tr();
                     });
-
            }),
             verticalSpace(40),
 

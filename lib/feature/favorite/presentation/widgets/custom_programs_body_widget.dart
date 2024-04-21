@@ -20,104 +20,108 @@ class CustomProgramsBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FavoriteCubit cubit =FavoriteCubit.get(context);
-    return BlocConsumer<FavoriteCubit, DataState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        if(cubit.getFavoriteList!=null){
-            if(cubit.getFavoriteList!.isNotEmpty){
-              return Padding(
-                  padding:  EdgeInsets.only(left: 16.w,right: 16.w,bottom: 60.h),
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: cubit.getFavoriteList!.length,
-                      itemBuilder: (context,index){
-                        return
-                          Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
-                          child: InkWell(
-                            onTap: (){
-                              NavigatePages.pushToPage( ProgramDetailsScreen(
-                                programResponse: cubit.getFavoriteList![index],
-                              ), context);
-                            },
-                            child: Container(
-                              height: 430.h,
-                              width: 343.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.grey.shade200,
-                                  boxShadow: const [BoxShadow(color: Colors.black,blurRadius: 2)]
-                              ),
-                              child:  Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: const BorderRadius.only(topRight: Radius.circular(10),topLeft:  Radius.circular(10)),
-                                        child: CustomSliderWidget(
-                                          height: 235.h,
-                                          image: cubit.getFavoriteList![index].images!.map((e) => e.image!).toList()),
-                                      ),
-                                      Positioned(
-                                        top: 10.h,
-                                        right: 10.w,
-                                        child:
-                                        StatefulBuilder(builder: (context,setState){
-                                          return IconButton(onPressed: (){
-                                            setState(() {
-                                              cubit.getFavoriteList![index].isFav=!cubit.getFavoriteList![index].isFav!;
-                                            });
-                                            FavoriteCubit.get(context).addFavoriteProgram(cubit.getFavoriteList![index].id!,HomeCubit.get(context).token!,context.locale.toString(), context);
-                                          }, icon:  Icon(
-                                            cubit.getFavoriteList![index].isFav==false?
-                                            Icons.favorite_border_rounded:Icons.favorite,color:cubit.getFavoriteList![index].isFav==false?  Colors.white:Colors.red,));
-                                        }),
-                                      ),
-                                      Positioned(
-                                          bottom: 50.h,
-                                          left: 0,
-                                          right: 50,
-                                          child:Container(
-                                            decoration: const BoxDecoration(
-                                                color: AppColorLight.customBlack,
-                                                borderRadius: BorderRadius.only(topRight: Radius.circular(8),bottomRight: Radius.circular(8))
-                                            ),
-                                            width: 300.w,
-                                            height: 52.h,
-                                            child: Center(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(left: 15.0,),
-                                                child: Text(
-                                                  '3 Days       25 Dec 23 - 28 Dec 23 ',
-                                                  textScaleFactor: ScaleSize.textScaleFactor(context),
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: TextStyles.font17Black400WightLato.copyWith(color: Colors.white),
+    return RefreshIndicator(
+      onRefresh: ()async{
+        await Future.delayed(const Duration(seconds: 1)).then((value) {
+          FavoriteCubit.get(context).getFavoriteProgram(HomeCubit.get(context).token!,context.locale.toString(),context);
+        });
+      },
+      child: BlocConsumer<FavoriteCubit, DataState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if(cubit.getFavoriteList!=null){
+              if(cubit.getFavoriteList!.isNotEmpty){
+                return Padding(
+                    padding:  EdgeInsets.only(left: 16.w,right: 16.w,bottom: 60.h),
+                    child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: cubit.getFavoriteList!.length,
+                        itemBuilder: (context,index){
+                          return
+                            Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: InkWell(
+                              onTap: (){
+                                NavigatePages.pushToPage( ProgramDetailsScreen(
+                                  programResponse: cubit.getFavoriteList![index],
+                                ), context);
+                              },
+                              child: Container(
+                                height: 430.h,
+                                width: 343.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.grey.shade200,
+                                    boxShadow: const [BoxShadow(color: Colors.black,blurRadius: 2)]
+                                ),
+                                child:  Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: const BorderRadius.only(topRight: Radius.circular(10),topLeft:  Radius.circular(10)),
+                                          child: CustomSliderWidget(
+                                            height: 235.h,
+                                            image: cubit.getFavoriteList![index].images!.map((e) => e.image!).toList()),
+                                        ),
+                                        Positioned(
+                                          top: 10.h,
+                                          right: 10.w,
+                                          child:
+                                          StatefulBuilder(builder: (context,setState){
+                                            return IconButton(onPressed: (){
+                                              setState(() {
+                                                cubit.getFavoriteList![index].isFav=!cubit.getFavoriteList![index].isFav!;
+                                              });
+                                              FavoriteCubit.get(context).addFavoriteProgram(cubit.getFavoriteList![index].id!,HomeCubit.get(context).token!,context.locale.toString(), context);
+                                            }, icon:  Icon(
+                                              cubit.getFavoriteList![index].isFav==false?
+                                              Icons.favorite_border_rounded:Icons.favorite,color:cubit.getFavoriteList![index].isFav==false?  Colors.white:Colors.red,));
+                                          }),
+                                        ),
+                                        Positioned(
+                                            bottom: 50.h,
+                                            left: 0,
+                                            child:Container(
+                                              decoration: const BoxDecoration(
+                                                  color: AppColorLight.customBlack,
+                                                  borderRadius: BorderRadius.only(topRight: Radius.circular(8),bottomRight: Radius.circular(8))
+                                              ),
+                                              child: Center(
+                                                child: Padding(
+                                                  padding:  EdgeInsets.symmetric(horizontal: 16.w,vertical: 12.h),
+                                                  child: Text(
+                                                    '${cubit.getFavoriteList![index].duration} ${'days'.tr()} ${cubit.getFavoriteList![index].startDate} ',
+                                                    textScaleFactor: ScaleSize.textScaleFactor(context),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: TextStyles.font17Black400WightLato.copyWith(color: Colors.white),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          )
-                                      ),
-                                    ],
-                                  ),
-                                    CustomReligiousProgramWidget(
-                                     programResponse:cubit.getFavoriteList![index],
-                                     isHasDes: false,),
-                                ],
+                                            )
+                                        ),
+                                      ],
+                                    ),
+                                      CustomReligiousProgramWidget(
+                                       programResponse:cubit.getFavoriteList![index],
+                                       isHasDes: false,),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      })
-              );
-            }else{
-              return Center(child: Text('no_data_currently'.tr()),);
-            }
-        }else{
-          return const Center(child: CircularProgressIndicator(),);
-        }
-      },
+                          );
+                        })
+                );
+              }else{
+                return Center(child: Text('no_data_currently'.tr()),);
+              }
+          }else{
+            return const Center(child: CircularProgressIndicator(),);
+          }
+        },
+      ),
     );
   }
 }

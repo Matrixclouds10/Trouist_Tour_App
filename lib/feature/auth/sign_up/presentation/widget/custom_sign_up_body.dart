@@ -66,6 +66,7 @@ class CustomSignUpBodyWidget extends StatelessWidget {
         ),
         verticalSpace(5),
         CustomTextField(
+          textInputType: TextInputType.emailAddress,
           validationFunc: (value) {
             if (value == null ||
                 value.isEmpty ||

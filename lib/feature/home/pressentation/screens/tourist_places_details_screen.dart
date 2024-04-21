@@ -102,12 +102,22 @@ class TouristPlaceDetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  verticalSpace(5),
+
                   Text(touristPlaceResponse!.region!,
                     style: TextStyles.font17CustomBlack700WeightPoppins,
                     textScaleFactor: ScaleSize.textScaleFactor(context),
 
                   ),
-                  verticalSpace(8),
+                  verticalSpace(2),
+                  Text(touristPlaceResponse!.title!,
+                    style: TextStyles.font17CustomBlack700WeightPoppins.copyWith(
+                      fontSize: 16,
+                      color: AppColorLight.customBlack.withOpacity(0.8)
+                    ),
+                    textScaleFactor: ScaleSize.textScaleFactor(context),
+
+                  ),
                   Text(touristPlaceResponse!.information!,
                     style: TextStyles.font17CustomGray400WightLato,
                     textScaleFactor: ScaleSize.textScaleFactor(context),

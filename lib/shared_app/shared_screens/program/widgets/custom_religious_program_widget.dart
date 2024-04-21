@@ -46,7 +46,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               style: TextStyles.font17CustomBlack500WeightPoppins.copyWith(
                 fontWeight: FontWeight.w400,
-                color: type=='Up Coming'?const Color(0xffF59F01):type=='Completed'?AppColorLight.primaryColor:type=='Canceled'?const Color(0xffFF3A3A):null,
+                color: type=='up_coming'.tr()?const Color(0xffF59F01):type=='completed'.tr()?AppColorLight.primaryColor:type=='canceled'.tr()?const Color(0xffFF3A3A):null,
               ),
               ),
               // type=='Canceled'?Icon(Icons.lo):const SizedBox.shrink(),
@@ -57,11 +57,11 @@ class CustomReligiousProgramWidget extends StatelessWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 170.w,
+                  // width: 170.w,
                   child: Text(programResponse!.name!,
                     textScaleFactor: ScaleSize.textScaleFactor(context),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    // maxLines: 1,
+                    // overflow: TextOverflow.ellipsis,
                     style: TextStyles.font17CustomBlack700WeightPoppins,
                   ),
                 ),
@@ -97,7 +97,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style:
-                  programResponse!.newPrice!=null?
+                  programResponse!.newPrice!=null && programResponse!.newPrice!=0 ?
                   TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                       decoration: TextDecoration.lineThrough,
                       decorationColor: AppColorLight.redColor,
@@ -106,7 +106,7 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   )
                 ),
                 horizontalSpace(5),
-                programResponse!.newPrice!=null?
+                programResponse!.newPrice!=null && programResponse!.newPrice!=0 ?
                 Text('${programResponse!.newPrice} ${'rs'.tr()}',
                   textScaleFactor: ScaleSize.textScaleFactor(context),
                   maxLines: 1,
@@ -128,12 +128,15 @@ class CustomReligiousProgramWidget extends StatelessWidget {
                   children: [
                     Image.asset(AppImages.returnCloc),
                     horizontalSpace(5),
-                    Text('${programResponse!.duration} ${'days'.tr()}',
-                      textScaleFactor: ScaleSize.textScaleFactor(context),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyles.font17Black400WightLato.copyWith(
-                        color: AppColorLight.black,
+                    SizedBox(
+                      width: 100.w,
+                      child: Text('${programResponse!.duration} ${'days'.tr()}',
+                        textScaleFactor: ScaleSize.textScaleFactor(context),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyles.font17Black400WightLato.copyWith(
+                          color: AppColorLight.black,
+                        ),
                       ),
                     ),
                   ],

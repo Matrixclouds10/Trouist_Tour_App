@@ -46,11 +46,8 @@
         	<string>en</string>
         	<string>ar</string>
         </array>
-        <key>NSLocationWhenInUseUsageDescription</key>
-        <string>لجلب موقع العميل نستخدم تحديد الموقع</string>
-		<key>CADisableMinimumFrameDurationOnPhone</key>
      	<key>NSPhotoLibraryUsageDescription</key>
-       	<string>يحتاج التطبيق الى اخذ الصور</string>
+       	<string>App needs access to your camera to capture photos</string>
        	<key>NSAppTransportSecurity</key>
         <dict>
         <key>NSAllowsArbitraryLoads</key> <true/>

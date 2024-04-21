@@ -66,19 +66,17 @@ class CustomTopDetailsStackWidget extends StatelessWidget {
         Positioned(
             bottom: 50.h,
             left: 0,
-            right: 90,
             child:Container(
               decoration: const BoxDecoration(
                   color: AppColorLight.customBlack,
                   borderRadius: BorderRadius.only(topRight: Radius.circular(8),bottomRight: Radius.circular(8))
               ),
-              width: 300.w,
-              height: 52.h,
-              child: Center(
+              child:
+              Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0,),
+                  padding:  EdgeInsets.symmetric(horizontal: 16.w,vertical: 12.h),
                   child: Text(
-                    '${day??'3'} ${'days'.tr()}   ${startDate??'25 Dec 23'}/ ${startDate??'25 Dec 23'}',
+                    '${day??'3'} ${'days'.tr()}   ${startDate??'25 Dec 23'}',
                     textScaleFactor: ScaleSize.textScaleFactor(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

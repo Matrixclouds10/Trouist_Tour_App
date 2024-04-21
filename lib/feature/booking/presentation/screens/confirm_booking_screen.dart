@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
@@ -18,6 +19,8 @@ import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_material_button.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_field.dart';
+
+import '../../../root_pages/root_page.dart';
 
 class ConfirmBookingScreen extends StatefulWidget {
   const ConfirmBookingScreen({super.key, this.programResponse});
@@ -72,7 +75,7 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style:
-                          widget.programResponse!.newPrice!=null?
+                          widget.programResponse!.newPrice!=null &&widget.programResponse!.newPrice!=0?
                           TextStyles.font17CustomBlack700WeightPoppins.copyWith(
                               decoration: TextDecoration.lineThrough,
                               decorationColor: AppColorLight.redColor,
@@ -81,7 +84,7 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                               color: AppColorLight.redColor),
                         ),
                         horizontalSpace(5),
-                        widget.programResponse!.newPrice!=null?
+                        widget.programResponse!.newPrice!=null&&widget.programResponse!.newPrice!=0?
                         Text('${widget.programResponse!.newPrice!.toString()} ${'rs'.tr()}',
                           textScaleFactor: ScaleSize.textScaleFactor(context),
                           maxLines: 1,
@@ -134,7 +137,7 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                       children: [
                         const Icon(Icons.calendar_month_outlined,color: AppColorLight.gray2,),
                         horizontalSpace(5),
-                        Text(' ${'from'.tr()} ${widget.programResponse!.startDate} ${'to'.tr()} ${widget.programResponse!.startDate}',
+                        Text(' ${'from'.tr()} ${widget.programResponse!.startDate} ${'to'.tr()} ${widget.programResponse!.endDate}',
                           textScaleFactor: ScaleSize.textScaleFactor(context),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -248,34 +251,78 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
               ),
             ),
             verticalSpace(40),
-            CustomMaterialButtonWidget(
-                text: 'confirm'.tr(),
-                onPressed: (){
-                  if(HomeCubit.get(context).token!=null){
-                    if(currentMethod==0){
-                      bookingCubit.makePayment(id: widget.programResponse!.id.toString(),
-                          amount: '${widget.programResponse!.newPrice!=null?widget.programResponse!.newPrice!:widget.programResponse!.price}', context: context);
-                    }else{
-                      BookingRequest bookingRequest =BookingRequest(
-                        id: widget.programResponse!.id,
-                        notes: bookingCubit.noteControllerBooking.text.isNotEmpty?
-                        bookingCubit.noteControllerBooking.text:"note",
-                        payment:  'Cash', total:  widget.programResponse!.newPrice!=null?
-                        double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
-                        bookingCubit.bookingPrograms(bookingRequest, context);
-                    }
-                    }else{
-                    showCustomDialog2(
-                        title:'success'.tr(),
-                        des:'Log_in_first'.tr(),
-                        bt1:  AppImages.logMessage,
-                        bt2:  'sign_up2'.tr(),
-                        onPressed1: (){
-                          NavigatePages.pushReplacePage(const LogAs(), context);
-                        },
-                        context: context);
-                  }
-                }),
+
+            BlocConsumer<BookingCubit, BookingState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    return Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: 16.w),
+                      child:
+                      widget.programResponse!.isBooked==false?
+                      CustomMaterialButtonWidget(
+                                  isLoading: state is BookingLoadingState,
+                                  text: 'confirm'.tr(),
+                                  onPressed: (){
+                                    if(HomeCubit.get(context).token!=null){
+
+                                      if(currentMethod==0){
+                                        BookingRequest bookingRequest =BookingRequest(
+                                          id: widget.programResponse!.id,
+                                          notes: bookingCubit.noteControllerBooking.text.isNotEmpty?
+                                          bookingCubit.noteControllerBooking.text:"note",
+                                          payment:  'Credit Card', total:  widget.programResponse!.newPrice!=null?
+                                        double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
+
+                                        bookingCubit.bookingPrograms(bookingRequest, context,'Credit Card');
+
+                                        // bookingCubit.makePayment(id: widget.programResponse!.id.toString(),
+                                        //     amount: '${widget.programResponse!.newPrice!=null?widget.programResponse!.newPrice!:widget.programResponse!.price}', context: context);
+                                      }
+                                      else{
+                                        BookingRequest bookingRequest =BookingRequest(
+                                          id: widget.programResponse!.id,
+                                          notes: bookingCubit.noteControllerBooking.text.isNotEmpty?
+                                          bookingCubit.noteControllerBooking.text:"note",
+                                          payment:  'Cash', total:  widget.programResponse!.newPrice!=null?
+                                        double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
+
+                                        bookingCubit.bookingPrograms(bookingRequest, context,'Cash');
+                                      }
+                                      }else{
+                                      showCustomDialog2(
+                                          title:'success'.tr(),
+                                          des:'Log_in_first'.tr(),
+                                          bt1:  AppImages.logMessage,
+                                          bt2:  'sign_up2'.tr(),
+                                          onPressed1: (){
+                                            NavigatePages.pushReplacePage(const LogAs(), context);
+                                          },
+                                          context: context);
+                                    }
+                                  }):
+                      CustomMaterialButtonWidget(
+                          backgroundColor: AppColorLight.redColor,
+                          text: 'confirm2'.tr(),
+                          onPressed: (){
+                            if(HomeCubit.get(context).token!=null){
+                              bookingCubit.getBookingPrograms(HomeCubit.get(context).token!,context,context.locale.toString());
+                              NavigatePages.pushReplacePage(const RootPages(check: '3',), context);
+                            }else{
+                              showCustomDialog2(
+                                  title:'success'.tr(),
+                                  des:'Log_in_first'.tr(),
+                                  bt1:  AppImages.logMessage,
+                                  bt2:  'sign_up2'.tr(),
+                                  onPressed1: (){
+                                    NavigatePages.pushReplacePage(const LogAs(), context);
+                                  },
+                                  context: context);
+                            }
+                          })
+                      ,
+                    );
+                  },
+                ),
             verticalSpace(50),
           ],
         ),

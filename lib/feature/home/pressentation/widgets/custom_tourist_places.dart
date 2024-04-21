@@ -43,7 +43,7 @@ class CustomTouristPlaces extends StatelessWidget {
                   ),
                 ),
                 verticalSpace(8),
-                 Text( cubit.touristPlacesResponseModel![index].region!,
+                 Text( cubit.touristPlacesResponseModel![index].title!,
                   // textScaleFactor: ScaleSize.textScaleFactor(context),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

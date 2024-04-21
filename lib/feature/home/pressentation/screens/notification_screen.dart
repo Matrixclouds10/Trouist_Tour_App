@@ -2,17 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
-import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
-import 'package:tourist_tour_app/core/global/themeing/app_fonts/app_fonts.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
-import 'package:tourist_tour_app/core/helpers/scale_size.dart';
-import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/feature/home/logic/home_cubit.dart';
 import 'package:tourist_tour_app/feature/home/pressentation/widgets/custom_notification_item.dart';
-import 'package:tourist_tour_app/feature/home/pressentation/widgets/notification_shimmer.dart';
-import 'package:tourist_tour_app/feature/home/pressentation/widgets/shimmer_places_search.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_app_bar.dart';
 
 class NotificationScreen extends StatelessWidget {

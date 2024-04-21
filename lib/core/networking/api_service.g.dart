@@ -13,7 +13,7 @@ class _ApiService implements ApiService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://dev05.matrix-clouds.com/Tourist_Tour/public/api/';
+    baseUrl ??= 'https://tourist-t.com/api/';
   }
 
   final Dio _dio;
@@ -171,41 +171,6 @@ class _ApiService implements ApiService {
     final value = ApiResponse<ProfileResponse>.fromJson(
       _result.data!,
       (json) => ProfileResponse.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
-  }
-
-  @override
-  Future<ApiResponse<dynamic>> updateProfile(
-    String token,
-    UpdateProfileRequest updateProfileRequest,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(updateProfileRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<dynamic>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'updateProfile',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ApiResponse<dynamic>.fromJson(
-      _result.data!,
-      (json) => json as dynamic,
     );
     return value;
   }
@@ -437,10 +402,15 @@ class _ApiService implements ApiService {
 
   @override
   Future<ApiResponse<List<NotificationResponse>>> getNotification(
-      String token) async {
+    String acceptLanguage,
+    String token,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Accept-Language': acceptLanguage,
+      r'Authorization': token,
+    };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -473,10 +443,16 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ApiResponse<List<HistoryResponse>>> getHistory(String token) async {
+  Future<ApiResponse<List<HistoryResponse>>> getHistory(
+    String acceptLanguage,
+    String token,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Accept-Language': acceptLanguage,
+      r'Authorization': token,
+    };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -588,11 +564,15 @@ class _ApiService implements ApiService {
   @override
   Future<ApiResponse<dynamic>> addFavoriteProgram(
     int id,
+    String acceptLanguage,
     String token,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Accept-Language': acceptLanguage,
+      r'Authorization': token,
+    };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -603,7 +583,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'https://dev05.matrix-clouds.com/Tourist_Tour/public/api/add_remove_wishlist/${id}',
+              'https://tourist-t.com/api/add_remove_wishlist/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -664,11 +644,15 @@ class _ApiService implements ApiService {
   @override
   Future<ApiResponse<dynamic>> addFavoritePlaces(
     int id,
+    String acceptLanguage,
     String token,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Accept-Language': acceptLanguage,
+      r'Authorization': token,
+    };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -679,7 +663,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'https://dev05.matrix-clouds.com/Tourist_Tour/public/api/add_remove_favorite_places/${id}',
+              'https://tourist-t.com/api/add_remove_favorite_places/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -824,11 +808,15 @@ class _ApiService implements ApiService {
   @override
   Future<ApiResponse<dynamic>> bookingPrograms(
     String token,
+    String acceptLanguage,
     BookingRequest bookingRequest,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Authorization': token,
+      r'Accept-Language': acceptLanguage,
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(bookingRequest.toJson());
@@ -911,6 +899,41 @@ class _ApiService implements ApiService {
             .compose(
               _dio.options,
               'finishProgram',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponse<dynamic>.fromJson(
+      _result.data!,
+      (json) => json as dynamic,
+    );
+    return value;
+  }
+
+  @override
+  Future<ApiResponse<dynamic>> ratingProgram(
+    String token,
+    RatingRequest ratingRequest,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(ratingRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<dynamic>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'rating',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1056,10 +1079,16 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ApiResponse<GetPlacesResponse>> places(String token) async {
+  Future<ApiResponse<GetPlacesResponse>> places(
+    String acceptLanguage,
+    String token,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Accept-Language': acceptLanguage,
+      r'Authorization': token,
+    };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -1088,12 +1117,16 @@ class _ApiService implements ApiService {
 
   @override
   Future<ApiResponse<dynamic>> makeProgram(
+    String acceptLanguage,
     String token,
     MakeProgramRequest makeProgramRequest,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
+    final _headers = <String, dynamic>{
+      r'Accept-Language': acceptLanguage,
+      r'Authorization': token,
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(makeProgramRequest.toJson());

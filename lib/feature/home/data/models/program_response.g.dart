@@ -14,7 +14,7 @@ ProgramResponse _$ProgramResponseFromJson(Map<String, dynamic> json) =>
       json['description'] as String?,
       json['duration'] as String?,
       json['start_date'] as String?,
-      json['price'] as int?,
+      (json['price'] as num?)?.toDouble(),
       json['group_size'] as int?,
       json['group_type'] as String?,
       (json['tour_route'] as List<dynamic>?)
@@ -28,12 +28,15 @@ ProgramResponse _$ProgramResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
       json['is_favourite'] as bool?,
       json['discount_amount'] as String?,
-      json['new_price'] as int?,
+      (json['new_price'] as num?)?.toDouble(),
       json['discount_percentage'] as String?,
       json['main_image'] as String?,
       (json['images'] as List<dynamic>?)
           ?.map((e) => ImagesResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
+      json['is_booked'] as bool?,
+      json['end_date'] as String?,
+      json['overview'] as String?,
     );
 
 Map<String, dynamic> _$ProgramResponseToJson(ProgramResponse instance) =>
@@ -49,6 +52,7 @@ Map<String, dynamic> _$ProgramResponseToJson(ProgramResponse instance) =>
       'group_type': instance.groupType,
       'tour_route': instance.tourRoute,
       'departure': instance.departure,
+      'overview': instance.overview,
       'departure_time': instance.departureTime,
       'return_time': instance.returnTime,
       'price_includes': instance.priceIncludes,
@@ -58,6 +62,8 @@ Map<String, dynamic> _$ProgramResponseToJson(ProgramResponse instance) =>
       'is_favourite': instance.isFav,
       'new_price': instance.newPrice,
       'images': instance.images,
+      'is_booked': instance.isBooked,
+      'end_date': instance.endDate,
     };
 
 ImagesResponse _$ImagesResponseFromJson(Map<String, dynamic> json) =>

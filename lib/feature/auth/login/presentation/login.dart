@@ -150,23 +150,20 @@ class LoginScreen extends StatelessWidget {
                                       controller: cubit.passwordController,
                                     );
                                   }),
-                                  verticalSpace(10),
-                                  Align(
-                                    alignment: AlignmentDirectional.centerEnd,
-                                    child: Text(
-                                      'forget_pass'.tr(),
-                                      style: TextStyles
-                                          .font12CustomGray400WeightLato,
-                                    ),
-                                  ),
+                                  // verticalSpace(10),
+                                  // Align(
+                                  //   alignment: AlignmentDirectional.centerEnd,
+                                  //   child: Text(
+                                  //     'forget_pass'.tr(),
+                                  //     style: TextStyles
+                                  //         .font12CustomGray400WeightLato,
+                                  //   ),
+                                  // ),
                                   verticalSpace(20),
                                   CustomMaterialButtonWidget(
                                       text: 'sign_in'.tr(),
                                       onPressed: () {
-                                        if (context
-                                            .read<LoginCubit>()
-                                            .formKey
-                                            .currentState!
+                                        if (context.read<LoginCubit>().formKey.currentState!
                                             .validate()) {
                                           cubit.emitLoginStates(context);
                                         }
