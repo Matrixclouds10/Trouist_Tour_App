@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourist_tour_app/core/global/images/app_images.dart';
+import 'package:tourist_tour_app/core/global/localization/appLocale.dart';
 import 'package:tourist_tour_app/core/global/themeing/app_color/app_color_light.dart';
 import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
@@ -14,6 +15,7 @@ import 'package:tourist_tour_app/feature/home/data/models/program_response.dart'
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_dialog.dart';
 import 'package:tourist_tour_app/shared_app/shared_widgets/custom_text_button.dart';
 
+import '../../data/models/booking_request.dart';
 import '../screens/rate_screen.dart';
 
 class CustomProgramItem extends StatelessWidget {
@@ -168,7 +170,19 @@ class CustomProgramItem extends StatelessWidget {
                      width:311.w ,
                      child: CustomTextButton(text: textButtonText, onPressed: onPressed,)):
                  // const SizedBox.shrink():
-                 Row(
+              programResponse!.paymentStatus=='unpaid'?
+              SizedBox(
+                  height: 40.h,
+                  width:MediaQuery.of(context).size.width*0.8,
+                  child: CustomTextButton(text: 'try_pay'.tr(), onPressed: (){
+                    BookingRequest bookingRequest =BookingRequest(
+                      id: programResponse!.id,
+                      notes:"note",
+                      payment:  'Credit Card', total:  programResponse!.newPrice!=null?
+                    double.parse(programResponse!.newPrice.toString()):double.parse(programResponse!.price.toString()),);
+                    BookingCubit.get(context).bookingPrograms(bookingRequest, context,'Credit Card');
+                  },)):
+              Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween ,
                    children: [
                      SizedBox(

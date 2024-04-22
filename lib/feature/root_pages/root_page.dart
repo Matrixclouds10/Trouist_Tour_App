@@ -32,6 +32,7 @@ class _RootPagesState extends State<RootPages> {
   ];
   @override
   void initState() {
+    HomeCubit.get(context).showPayment();
     HomeCubit.get(context).getToken(context);
     HomeCubit.get(context).initRoot(check: widget.check);
     super.initState();

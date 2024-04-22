@@ -12,6 +12,7 @@ class ApiConstants {
   static const String getCountryCode = "countries";
   static const String getTerms = "terms-and-conditions";
   static const String getSliders = "getSliders";
+  static const String showPayment = "showPayment";
   static const String getPrograms = "getProgramsPaginate";
   static const String getOffers = "getOffers";
   static const String getPlaces = "getDestinationPaginate";

@@ -22,3 +22,12 @@ class ChangeLoadingState extends HomeState {}
 class NotificationLoadingState extends HomeState {}
 class NotificationSuccessState extends HomeState {}
 class NotificationErrorState extends HomeState {}
+class ShowPaymentLoadingState extends HomeState {}
+class ShowPaymentSuccessState extends HomeState {
+  final String payment;
+  ShowPaymentSuccessState({required this.payment});
+}
+class ShowPaymentErrorState extends HomeState {
+  final String error;
+  ShowPaymentErrorState({required this.error});
+}

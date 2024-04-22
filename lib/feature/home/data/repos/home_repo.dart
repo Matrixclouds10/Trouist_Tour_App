@@ -11,10 +11,20 @@ import 'package:tourist_tour_app/feature/home/data/models/sliders_response.dart'
 import 'package:tourist_tour_app/feature/home/data/models/tourist_places_response.dart';
 import 'package:tourist_tour_app/core/services/logger.dart';
 
+import '../models/show_payment_response.dart';
+
 class HomeRepo{
   final ApiService _apiService;
 
   HomeRepo(this._apiService);
+  Future<ApiResult<ApiResponse<ShowPaymentResponse>>> showPayment()async{
+    try {
+      final response = await _apiService.showPayment();
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
   Future<ApiResponse<List<SlidersResponse>>?> getSliders()async{
     try {
       final response = await _apiService.getSliders();

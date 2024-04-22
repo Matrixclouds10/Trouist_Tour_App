@@ -242,6 +242,36 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<ApiResponse<ShowPaymentResponse>> showPayment() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<ShowPaymentResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'showPayment',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponse<ShowPaymentResponse>.fromJson(
+      _result.data!,
+      (json) => ShowPaymentResponse.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<ApiResponse<List<ProgramResponse>>> getPrograms(
     String token,
     String acceptLanguage,

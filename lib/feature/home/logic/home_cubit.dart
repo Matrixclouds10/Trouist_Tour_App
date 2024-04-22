@@ -37,8 +37,8 @@ class HomeCubit extends Cubit<HomeState> {
 
     token!=null?
     Future.delayed(const Duration(microseconds: 0)).then((value) {
-      HomeCubit.get(context).getPrograms(token!,context.locale.toString());
-      HomeCubit.get(context).getTouristPlaces(token!,context.locale.toString());
+      getPrograms(token!,context.locale.toString());
+      getTouristPlaces(token!,context.locale.toString());
       MoreCubit.get(context).getProfile(token!, context);
       FavoriteCubit.get(context).getFavoriteProgram(token!,context.locale.toString(),context);
       FavoriteCubit.get(context).getFavoritePlaces(token!,context.locale.toString(),context);
@@ -47,14 +47,14 @@ class HomeCubit extends Cubit<HomeState> {
       BookingCubit.get(context).getCompletedPrograms(token!, context,context.locale.toString());
     }):
     Future.delayed(const Duration(microseconds: 0)).then((value) {
-      HomeCubit.get(context).getPrograms('123',context.locale.toString());
-      HomeCubit.get(context).getTouristPlaces('123',context.locale.toString());
+      getPrograms('123',context.locale.toString());
+      getTouristPlaces('123',context.locale.toString());
     });
     Future.delayed(const Duration(microseconds: 0)).then((value) {
       // getLoc();
       MakeProgramCubit.get(context).getPlaces(context);
-      HomeCubit.get(context).getSliderCubit(context);
-      HomeCubit.get(context).getOffers(context.locale.toString());
+      getSliderCubit(context);
+      getOffers(context.locale.toString());
       context.read<SignupCubit>().getCountryCode(context.locale.toString());
     });
     emit(LoadingTokenState());
@@ -75,9 +75,9 @@ class HomeCubit extends Cubit<HomeState> {
   void initHome({String? check, required BuildContext context}){
     // getLoc();
     MakeProgramCubit.get(context).getPlaces(context);
-    HomeCubit.get(context).getToken(context);
-    HomeCubit.get(context).getSliderCubit(context);
-    HomeCubit.get(context).getOffers(context.locale.toString());
+    getToken(context);
+    getSliderCubit(context);
+    getOffers(context.locale.toString());
     context.read<SignupCubit>().getCountryCode(context.locale.toString());
     emit(SuccessInitHomeState());
   }
@@ -157,6 +157,17 @@ class HomeCubit extends Cubit<HomeState> {
         emit(NotificationSuccessState());
       }, failure: (error) {
         emit(NotificationErrorState());
+      });
+  }
+ String? showPaymentValue;
+  Future<dynamic> showPayment() async {
+    emit(ShowPaymentLoadingState());
+    final response = await _homeRepo.showPayment();
+      response.when(success: (notificationResponseData) {
+        showPaymentValue=notificationResponseData.data!.payment!;
+        emit(ShowPaymentSuccessState(payment: notificationResponseData.data!.payment!));
+      }, failure: (error) {
+        emit(ShowPaymentErrorState(error: error.toString()));
       });
   }
 }

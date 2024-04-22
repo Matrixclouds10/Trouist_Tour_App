@@ -190,62 +190,80 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                           fontSize: 18.sp
                       ),),
                     verticalSpace(16),
+                    Row(
+                      children: [
+                        Radio(
+                          activeColor:AppColorLight.primaryColor,
+                          value: 0,
+                          groupValue: currentMethod,
+                          onChanged: (value) {
+                            // cubit.changeRadio(value!);
+                            setState(() {
+                              currentMethod = value!;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                            height: 23.h,
+                            width: 32.w,
+                            child: Image.asset(AppImages.cash,fit: BoxFit.cover,color: Colors.grey,)),
+                        horizontalSpace(10),
+                        Text('cash'.tr(),
+                          textScaleFactor: ScaleSize.textScaleFactor(context),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyles.font17CustomBlack500WeightPoppins.copyWith(
+                            fontWeight: FontWeight.w600,
 
-                   Row(
-                     children: [
-                       Radio(
-                         activeColor:AppColorLight.primaryColor,
-                         value: 0,
-                         groupValue: currentMethod,
-                         onChanged: (value) {
-                           // cubit.changeRadio(value!);
-                           setState(() {
-                             currentMethod = value!;
-                           });
-                         },
-                       ),
-                       SizedBox(
-                           height: 23.h,
-                           width: 32.w,
-                           child: Image.asset(AppImages.card,fit: BoxFit.cover,)),
-                       horizontalSpace(10),
-                       Text('visa'.tr(),
-                         textScaleFactor: ScaleSize.textScaleFactor(context),
-                         overflow: TextOverflow.ellipsis,
-                         style: TextStyles.font17CustomBlack500WeightPoppins.copyWith(
-                           fontWeight: FontWeight.w600,
+                          ),),
+                      ],
+                    ),
+                    
+                    BlocBuilder<HomeCubit, HomeState>(
+                              builder: (context, state) {
+                                HomeCubit homeCubit= HomeCubit.get(context);
+                                if(homeCubit.showPaymentValue!=null&&homeCubit.showPaymentValue!.isNotEmpty){
+                                  if(homeCubit.showPaymentValue=='true'){
+                                    return Row(
+                                      children: [
+                                        Radio(
+                                          activeColor:AppColorLight.primaryColor,
+                                          value: 1,
+                                          groupValue: currentMethod,
+                                          onChanged: (value) {
+                                            // cubit.changeRadio(value!);
+                                            setState(() {
+                                              currentMethod = value!;
+                                            });
+                                          },
+                                        ),
+                                        SizedBox(
+                                            height: 23.h,
+                                            width: 32.w,
+                                            child: Image.asset(AppImages.card,fit: BoxFit.cover,)),
+                                        horizontalSpace(10),
+                                        Text('visa'.tr(),
+                                          textScaleFactor: ScaleSize.textScaleFactor(context),
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyles.font17CustomBlack500WeightPoppins.copyWith(
+                                            fontWeight: FontWeight.w600,
 
-                         ),),
+                                          ),),
 
-                     ],
-                   ),
-                   Row(
-                     children: [
-                       Radio(
-                         activeColor:AppColorLight.primaryColor,
-                         value: 1,
-                         groupValue: currentMethod,
-                         onChanged: (value) {
-                           // cubit.changeRadio(value!);
-                           setState(() {
-                             currentMethod = value!;
-                           });
-                         },
-                       ),
-                       SizedBox(
-                           height: 23.h,
-                           width: 32.w,
-                           child: Image.asset(AppImages.cash,fit: BoxFit.cover,color: Colors.grey,)),
-                       horizontalSpace(10),
-                       Text('cash'.tr(),
-                         textScaleFactor: ScaleSize.textScaleFactor(context),
-                         overflow: TextOverflow.ellipsis,
-                         style: TextStyles.font17CustomBlack500WeightPoppins.copyWith(
-                           fontWeight: FontWeight.w600,
+                                      ],
+                                    );
+                                  }
+                                  else{
+                                    return const SizedBox.shrink();
 
-                         ),),
-                     ],
-                   )
+                                  }
+
+                                }else{
+                                  return const SizedBox.shrink();
+                                }
+
+
+                              },
+                            ),
                   ],
                 ),
               ),
@@ -264,17 +282,14 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                                   text: 'confirm'.tr(),
                                   onPressed: (){
                                     if(HomeCubit.get(context).token!=null){
-
-                                      if(currentMethod==0){
+                                      if(currentMethod==1){
                                         BookingRequest bookingRequest =BookingRequest(
                                           id: widget.programResponse!.id,
                                           notes: bookingCubit.noteControllerBooking.text.isNotEmpty?
                                           bookingCubit.noteControllerBooking.text:"note",
                                           payment:  'Credit Card', total:  widget.programResponse!.newPrice!=null?
                                         double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
-
                                         bookingCubit.bookingPrograms(bookingRequest, context,'Credit Card');
-
                                         // bookingCubit.makePayment(id: widget.programResponse!.id.toString(),
                                         //     amount: '${widget.programResponse!.newPrice!=null?widget.programResponse!.newPrice!:widget.programResponse!.price}', context: context);
                                       }
@@ -283,10 +298,9 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                                           id: widget.programResponse!.id,
                                           notes: bookingCubit.noteControllerBooking.text.isNotEmpty?
                                           bookingCubit.noteControllerBooking.text:"note",
-                                          payment:  'Cash', total:  widget.programResponse!.newPrice!=null?
-                                        double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
-
-                                        bookingCubit.bookingPrograms(bookingRequest, context,'Cash');
+                                          payment:'Cash', total:  widget.programResponse!.newPrice!=null?
+                                          double.parse(widget.programResponse!.newPrice.toString()):double.parse(widget.programResponse!.price.toString()),);
+                                          bookingCubit.bookingPrograms(bookingRequest, context,'Cash');
                                       }
                                       }else{
                                       showCustomDialog2(

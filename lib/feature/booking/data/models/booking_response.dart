@@ -50,6 +50,8 @@ class BookingResponse{
   List<ImagesBookingResponse>? images;
   @JsonKey(name: 'end_date')
   String? endDate;
+  @JsonKey(name: 'payment_status')
+  String? paymentStatus;
 
 
   BookingResponse(
@@ -77,6 +79,7 @@ class BookingResponse{
       this.mainImage,
       this.images,
       this.endDate,
+      this.paymentStatus,
       ); // ProgramResponse(
 
   factory BookingResponse.fromJson(Map<String, dynamic> json) =>

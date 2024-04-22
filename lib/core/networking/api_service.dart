@@ -29,6 +29,7 @@ import 'package:tourist_tour_app/feature/more/data/models/profile_response.dart'
 import 'package:tourist_tour_app/feature/more/data/models/update_profile_request.dart';
 
 import '../../feature/booking/data/models/rating_request.dart';
+import '../../feature/home/data/models/show_payment_response.dart';
 
 
 part 'api_service.g.dart';
@@ -81,6 +82,10 @@ abstract class ApiService {
   //Home
   @GET(ApiConstants.getSliders)
   Future<ApiResponse<List<SlidersResponse>>> getSliders();
+
+ //Show Payment
+  @GET(ApiConstants.showPayment)
+  Future<ApiResponse<ShowPaymentResponse>> showPayment();
 
   @GET(ApiConstants.getPrograms)
   Future<ApiResponse<List<ProgramResponse>>> getPrograms(
