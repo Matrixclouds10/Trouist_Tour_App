@@ -58,6 +58,7 @@ class Home extends StatelessWidget {
           onRefresh: ()async{
             HomeCubit.get(context).getSliderCubit(context);
             await Future.delayed(const Duration(seconds: 1)).then((value) {
+              cubit.showPayment();
               cubit.getSliderCubit(context);
               cubit.getPrograms(cubit.token!,context.locale.toString());
               cubit.getOffers(context.locale.toString());

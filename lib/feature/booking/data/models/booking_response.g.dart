@@ -41,6 +41,7 @@ BookingResponse _$BookingResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
       json['end_date'] as String?,
       json['payment_status'] as String?,
+      json['payment_method'] as String?,
     );
 
 Map<String, dynamic> _$BookingResponseToJson(BookingResponse instance) =>
@@ -70,6 +71,7 @@ Map<String, dynamic> _$BookingResponseToJson(BookingResponse instance) =>
       'images': instance.images,
       'end_date': instance.endDate,
       'payment_status': instance.paymentStatus,
+      'payment_method': instance.paymentMethod,
     };
 
 ImagesBookingResponse _$ImagesBookingResponseFromJson(

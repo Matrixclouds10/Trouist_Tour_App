@@ -170,7 +170,7 @@ class CustomProgramItem extends StatelessWidget {
                      width:311.w ,
                      child: CustomTextButton(text: textButtonText, onPressed: onPressed,)):
                  // const SizedBox.shrink():
-              programResponse!.paymentStatus=='unpaid'?
+              programResponse!.paymentStatus=='unpaid'&&programResponse!.paymentMethod!='Cash'?
               SizedBox(
                   height: 40.h,
                   width:MediaQuery.of(context).size.width*0.8,

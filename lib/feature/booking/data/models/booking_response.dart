@@ -52,6 +52,8 @@ class BookingResponse{
   String? endDate;
   @JsonKey(name: 'payment_status')
   String? paymentStatus;
+  @JsonKey(name: 'payment_method')
+  String? paymentMethod;
 
 
   BookingResponse(
@@ -80,6 +82,7 @@ class BookingResponse{
       this.images,
       this.endDate,
       this.paymentStatus,
+      this.paymentMethod,
       ); // ProgramResponse(
 
   factory BookingResponse.fromJson(Map<String, dynamic> json) =>
