@@ -7,7 +7,8 @@ class CustomAvatarGrowWidget extends StatelessWidget {
   final IconData icon;
   @override
   Widget build(BuildContext context) {
-    return AvatarGlow(
+    return
+      AvatarGlow(
       startDelay: const Duration(milliseconds: 1000),
       glowColor: glowColor,
       glowShape: BoxShape.circle,

@@ -6,7 +6,7 @@ import 'package:tourist_tour_app/core/global/themeing/styles/styles.dart';
 import 'package:tourist_tour_app/core/helpers/scale_size.dart';
 import 'package:tourist_tour_app/core/helpers/spacing.dart';
 import 'package:tourist_tour_app/feature/home/data/models/program_response.dart';
-import 'package:tourist_tour_app/shared_app/shared_screens/program/widgets/custom_dot.dart';
+import 'custom_dot.dart';
 
 class CustomTripDetailsWidget extends StatelessWidget {
   const CustomTripDetailsWidget({super.key, this.color, this.programResponse});

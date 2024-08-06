@@ -23,7 +23,8 @@ class RegisterScreen extends StatelessWidget {
     return MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0,),
     child:
       Scaffold(
-      body: SingleChildScrollView(
+      body:
+      SingleChildScrollView(
         child: Column(
           key: cubit.formKey2,
           children: [

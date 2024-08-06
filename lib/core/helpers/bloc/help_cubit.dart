@@ -7,13 +7,13 @@ part 'help_state.dart';
 class HelpCubit extends Cubit<HelpState> {
   HelpCubit() : super(HelpInitial());
   bool isCheckColor=false;
-  bool isChecked=false;
   Color color=AppColorLight.customGray;
   Color color2=AppColorLight.customBlue;
   void changeColor(Color x){
     color=x;
     emit(ChangeColorState());
   }
+  bool isChecked=false;
   void changeCheck(bool x){
     isChecked=x;
     emit(ChangeColorState());
